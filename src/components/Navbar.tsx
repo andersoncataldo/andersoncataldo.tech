@@ -13,7 +13,14 @@ const Navbar = () => {
     return () => window.removeEventListener('scroll', handleScroll);
   }, []);
 
+  const scrollToTop = (e: React.MouseEvent) => {
+    e.preventDefault();
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+    setMobileMenuOpen(false);
+  };
+
   const navLinks = [
+    { name: 'Início', href: '#', onClick: scrollToTop },
     { name: 'Sobre', href: '#sobre' },
     { name: 'Experiência', href: '#experiencia' },
     { name: 'Habilidades', href: '#habilidades' },
@@ -27,14 +34,18 @@ const Navbar = () => {
     }`}>
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex justify-between items-center">
-          <div className="flex items-center gap-2 group cursor-pointer">
+          <a 
+            href="#" 
+            onClick={scrollToTop}
+            className="flex items-center gap-2 group cursor-pointer"
+          >
             <div className="bg-primary-500 p-1.5 rounded-lg group-hover:rotate-12 transition-transform">
               <Code2 className="w-5 h-5 text-white" />
             </div>
             <span className="text-xl font-bold tracking-tight bg-clip-text text-transparent bg-gradient-to-r from-white to-zinc-400">
               Anderson Cataldo
             </span>
-          </div>
+          </a>
 
           {/* Desktop Nav */}
           <div className="hidden md:flex items-center space-x-8">
@@ -42,6 +53,7 @@ const Navbar = () => {
               <a
                 key={link.name}
                 href={link.href}
+                onClick={link.onClick}
                 className="text-sm font-medium text-zinc-400 hover:text-white transition-colors"
               >
                 {link.name}
@@ -78,8 +90,8 @@ const Navbar = () => {
               <a
                 key={link.name}
                 href={link.href}
+                onClick={link.onClick ? link.onClick : () => setMobileMenuOpen(false)}
                 className="block px-3 py-2 text-base font-medium text-zinc-400 hover:text-white"
-                onClick={() => setMobileMenuOpen(false)}
               >
                 {link.name}
               </a>
