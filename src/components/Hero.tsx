@@ -1,12 +1,5 @@
 import { motion } from 'framer-motion';
-import { Sparkles, ArrowRight} from 'lucide-react';
-import 'tailwindcss/tailwind.css';
-import '../styles/globals.css';
-import '../styles/projects.css';  
-import '../styles/scrollbar.css';
-import '../styles/animations.css';
-import '../styles/hoverEffects.css';
-import '../styles/responsive.css';
+import { Sparkles, ArrowRight } from 'lucide-react';
 
 const Hero = () => {
   return (

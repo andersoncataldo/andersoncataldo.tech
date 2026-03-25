@@ -1,13 +1,6 @@
-import { Linkedin, Github, FileText, ExternalLink, Download } from 'lucide-react';
+import { Linkedin, Github, FileText, ExternalLink } from 'lucide-react';
 import CopyEmail from './CopyEmail';
 import resumeFile from '../assets/currículo Anderson Cataldo.pdf';
-import 'tailwindcss/tailwind.css';
-import '../styles/globals.css';
-import '../styles/projects.css';
-import '../styles/scrollbar.css';
-import '../styles/animations.css';
-import '../styles/hoverEffects.css';
-import '../styles/responsive.css';
 
 const Contact = () => {
   return (
@@ -24,14 +17,6 @@ const Contact = () => {
             </p>
 
             <div className="flex flex-wrap gap-4">
-              <a
-                href={resumeFile}
-                download="Currículo_Anderson_Cataldo.pdf"
-                className="inline-flex items-center gap-2 bg-white text-black px-8 py-4 rounded-2xl font-bold transition-all hover:bg-zinc-200"
-              >
-                <Download className="w-5 h-5" />
-                Baixar Currículo
-              </a>
               <div className="flex items-center gap-2 px-6 py-4 bg-zinc-900 border border-zinc-800 rounded-2xl">
                  <a href="https://linkedin.com/in/andersonnviana" target="_blank" rel="noopener noreferrer" className="p-2 text-zinc-400 hover:text-white transition-colors">
                   <Linkedin className="w-6 h-6" />

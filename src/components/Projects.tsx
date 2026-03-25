@@ -1,12 +1,5 @@
 import { motion } from 'framer-motion';
 import { Github, ExternalLink, Bot, BookOpen, ArrowRight } from 'lucide-react';
-import 'tailwindcss/tailwind.css';
-import '../styles/globals.css';
-import '../styles/projects.css';
-import '../styles/scrollbar.css';
-import '../styles/animations.css';
-import '../styles/hoverEffects.css';
-import '../styles/responsive.css';
 
 const Projects = () => {
   const projects = [
