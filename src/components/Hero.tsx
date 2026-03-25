@@ -1,9 +1,8 @@
 import { motion } from 'framer-motion';
-import { Sparkles, ArrowRight, Download } from 'lucide-react';
-import resumeFile from '../assets/currículo Anderson Cataldo.pdf';
+import { Sparkles, ArrowRight} from 'lucide-react';
 import 'tailwindcss/tailwind.css';
 import '../styles/globals.css';
-import '../styles/projects.css';
+import '../styles/projects.css';  
 import '../styles/scrollbar.css';
 import '../styles/animations.css';
 import '../styles/hoverEffects.css';
