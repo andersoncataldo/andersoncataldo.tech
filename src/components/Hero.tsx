@@ -1,6 +1,13 @@
 import { motion } from 'framer-motion';
 import { Sparkles, ArrowRight, Download } from 'lucide-react';
 import resumeFile from '../assets/currículo Anderson Cataldo.pdf';
+import 'tailwindcss/tailwind.css';
+import '../styles/globals.css';
+import '../styles/projects.css';
+import '../styles/scrollbar.css';
+import '../styles/animations.css';
+import '../styles/hoverEffects.css';
+import '../styles/responsive.css';
 
 const Hero = () => {
   return (
@@ -8,7 +15,7 @@ const Hero = () => {
       {/* Background elements */}
       <div className="absolute top-0 left-0 w-full h-full -z-10">
         <div className="absolute top-1/4 left-1/4 w-96 h-96 bg-primary-500/10 rounded-full blur-[120px]" />
-        <div className="absolute bottom-1/4 right-1/4 w-96 h-96 bg-indigo-500/10 rounded-full blur-[120px]" />
+        <div className="absolute bottom-1/4 right-1/4 w-96 h-96 bg-primary-500/10 rounded-full blur-[120px]" />
         <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-full h-full bg-[radial-gradient(#18181b_1px,transparent_1px)] [background-size:32px_32px] [mask-image:radial-gradient(ellipse_50%_50%_at_50%_50%,#000_70%,transparent_100%)] opacity-20" />
       </div>
 
@@ -57,15 +64,6 @@ const Hero = () => {
             >
               Ver Projetos
               <ArrowRight className="w-6 h-6 transition-transform group-hover:translate-x-1" />
-            </a>
-            
-            <a
-              href={resumeFile}
-              download="Currículo_Anderson_Cataldo.pdf"
-              className="inline-flex items-center gap-3 bg-zinc-900 border border-zinc-800 text-white px-10 py-5 rounded-[2rem] font-bold uppercase tracking-tight text-lg transition-all hover:bg-zinc-800 hover:border-zinc-700 active:scale-95 shadow-xl"
-            >
-              <Download className="w-5 h-5 text-primary-400" />
-              Download CV
             </a>
           </motion.div>
         </div>

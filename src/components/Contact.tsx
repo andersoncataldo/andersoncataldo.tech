@@ -1,6 +1,13 @@
 import { Linkedin, Github, FileText, ExternalLink, Download } from 'lucide-react';
 import CopyEmail from './CopyEmail';
 import resumeFile from '../assets/currículo Anderson Cataldo.pdf';
+import 'tailwindcss/tailwind.css';
+import '../styles/globals.css';
+import '../styles/projects.css';
+import '../styles/scrollbar.css';
+import '../styles/animations.css';
+import '../styles/hoverEffects.css';
+import '../styles/responsive.css';
 
 const Contact = () => {
   return (

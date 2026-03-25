@@ -10,7 +10,7 @@ const Skills = () => {
     },
     {
       title: 'Front-end & UI/UX',
-      icon: <Layout className="w-6 h-6 text-indigo-500" />,
+      icon: <Layout className="w-6 h-6 text-primary-500" />,
       skills: ['React.js', 'TypeScript', 'Tailwind CSS', 'Figma', 'HTML5/CSS3'],
     },
     {
@@ -66,7 +66,7 @@ const Skills = () => {
           ))}
         </div>
 
-        <div className="bg-gradient-to-r from-primary-500/10 to-indigo-500/10 border border-zinc-800 p-8 rounded-3xl">
+        <div className="bg-gradient-to-r from-primary-500/10 to-primary-500/10 border border-zinc-800 p-8 rounded-3xl">
           <div className="flex flex-col md:flex-row items-center justify-between gap-8">
             <div className="flex items-center gap-4">
               <div className="bg-zinc-900 p-3 rounded-2xl border border-zinc-800">

@@ -1,5 +1,12 @@
 import { motion } from 'framer-motion';
 import { Github, ExternalLink, Bot, BookOpen, ArrowRight } from 'lucide-react';
+import 'tailwindcss/tailwind.css';
+import '../styles/globals.css';
+import '../styles/projects.css';
+import '../styles/scrollbar.css';
+import '../styles/animations.css';
+import '../styles/hoverEffects.css';
+import '../styles/responsive.css';
 
 const Projects = () => {
   const projects = [
@@ -15,7 +22,7 @@ const Projects = () => {
       title: 'Plataforma Clube do Livro',
       description: 'Interface interativa desenvolvida para o projeto de extensão da Unifor, focada em usabilidade e organização de acervo.',
       tech: ['React.js', 'TypeScript', 'Tailwind CSS', 'Framer Motion'],
-      icon: <BookOpen className="w-10 h-10 text-indigo-500" />,
+      icon: <BookOpen className="w-10 h-10 text-primary-500" />,
       github: '#',
       link: '#',
     },
