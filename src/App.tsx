@@ -32,12 +32,12 @@ function App() {
                 <h2 className="text-4xl md:text-6xl font-black mb-8 tracking-tighter uppercase leading-none italic">
                   Criando o <span className="text-zinc-500 group-hover:text-white transition-colors underline decoration-primary-500 underline-offset-8">futuro</span> através do código.
                 </h2>
-                <div className="space-y-6 text-zinc-400 text-lg leading-relaxed max-w-xl mb-12">
+                <div className="space-y-6 text-zinc-400 text-lg leading-relaxed max-w-xl mb-12 text-justify sm:text-left">
                   <p>
-                    Sou estudante de Ciência da Computação na Unifor, apaixonado por identificar gargalos operacionais e criar soluções tecnológicas que otimizam o tempo e a eficiência.
+                    Desenvolvedor Full Stack e especialista em Automação (RPA) movido pela criação de soluções que geram impacto mensurável. Combino o desenvolvimento web de ponta a ponta (React, TypeScript e Java/Spring Boot) com a construção de pipelines de dados em Python.
                   </p>
                   <p>
-                    Minha jornada tem sido marcada por projetos desafiadores, desde a criação de sistemas de automação que reduzem horas de trabalho manual a minutos, até o desenvolvimento de interfaces modernas e intuitivas que encantam os usuários.
+                    Possuo histórico comprovado na otimização de fluxos corporativos, reduzindo em mais de 85% o tempo de tarefas operacionais, e na entrega de plataformas escaláveis. Busco transformar gargalos em eficiência e regras de negócio em experiências intuitivas.
                   </p>
                 </div>
 
@@ -57,7 +57,7 @@ function App() {
                     </div>
                     <div>
                       <p className="text-white font-bold tracking-tight">Fortaleza-CE, Brasil</p>
-                      <p className="text-zinc-500 text-sm">Disponível para trabalho remoto ou híbrido</p>
+                      <p className="text-zinc-500 text-sm">Disponível para trabalho presencial, remoto ou híbrido</p>
                     </div>
                   </div>
                   <div className="flex items-start gap-4">
@@ -65,8 +65,8 @@ function App() {
                       <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="m5 8 6 6 6-6"/><path d="m5 14 6 6 6-6"/></svg>
                     </div>
                     <div>
-                      <p className="text-white font-bold tracking-tight">Português (Nativo) • Inglês (Intermediário)</p>
-                      <p className="text-zinc-500 text-sm">Espanhol (Básico)</p>
+                      <p className="text-white font-bold tracking-tight">Idiomas</p>
+                      <p className="text-zinc-500 text-sm">Português (Nativo) • Inglês (Avançado) • Espanhol (Iniciante)</p>
                     </div>
                   </div>
                 </div>

@@ -1,5 +1,5 @@
 import { useState, useEffect } from 'react';
-import { Menu, X, Code2, Github } from 'lucide-react';
+import { Menu, X, Terminal, Github } from 'lucide-react';
 
 const Navbar = () => {
   const [isScrolled, setIsScrolled] = useState(false);
@@ -37,10 +37,10 @@ const Navbar = () => {
           <a 
             href="#" 
             onClick={scrollToTop}
-            className="flex items-center gap-2 group cursor-pointer"
+            className="flex items-center gap-3 group cursor-pointer"
           >
-            <div className="bg-primary-500 p-1.5 rounded-lg group-hover:rotate-12 transition-transform">
-              <Code2 className="w-5 h-5 text-white" />
+            <div className="bg-primary-500 p-2 rounded-xl group-hover:rotate-12 transition-all duration-500 shadow-lg shadow-primary-500/20">
+              <Terminal className="w-5 h-5 text-white" />
             </div>
             <span className="text-xl font-bold tracking-tight bg-clip-text text-transparent bg-gradient-to-r from-white to-zinc-400">
               Anderson Cataldo

@@ -4,27 +4,27 @@ import { Terminal, Layout, Wrench, ShieldCheck } from 'lucide-react';
 const Skills = () => {
   const skillGroups = [
     {
-      title: 'Back-end & RPA',
-      icon: <Terminal className="w-6 h-6 text-primary-500" />,
-      skills: ['Python (Playwright, Pandas)', 'Java (Spring Boot)', 'SQL', 'Node.js'],
-    },
-    {
-      title: 'Front-end & UI/UX',
+      title: 'Front-End',
       icon: <Layout className="w-6 h-6 text-primary-500" />,
-      skills: ['React.js', 'TypeScript', 'Tailwind CSS', 'Figma', 'HTML5/CSS3'],
+      skills: ['React.js', 'TypeScript', 'JavaScript', 'HTML5', 'CSS3', 'Tailwind CSS', 'Figma'],
     },
     {
-      title: 'Ferramentas & Infra',
+      title: 'Back-End & RPA',
+      icon: <Terminal className="w-6 h-6 text-primary-500" />,
+      skills: ['Python (Playwright, Pyautogui, Pandas, shutil, os)', 'Java (Spring Boot)', 'javaScript (Node.js)'],
+    },
+    {
+      title: 'Ferramentas & DB',
       icon: <Wrench className="w-6 h-6 text-emerald-500" />,
-      skills: ['Git & GitHub', 'PostgreSQL', 'Docker', 'Vite', 'Postman'],
+      skills: ['Git & GitHub', 'SQL', 'PostgreSQL', 'Postman'],
     },
   ];
 
   const softSkills = [
-    'Adaptabilidade Técnica',
+    'Adaptabilidade',
     'Comunicação Assertiva',
     'Trabalho em Equipe',
-    'Resolução de Problemas',
+    'Aprendizado Contínuo',
     'Pensamento Analítico',
   ];
 
