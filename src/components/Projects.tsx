@@ -45,7 +45,7 @@ const Projects = () => {
               whileInView={{ opacity: 1, scale: 1 }}
               viewport={{ once: true }}
               transition={{ duration: 0.5, delay: index * 0.1 }}
-              className="group relative bg-zinc-900 border border-zinc-800 rounded-[2rem] overflow-hidden hover:border-zinc-700 transition-all"
+              className="group relative bg-zinc-900 border border-zinc-800 rounded-4xl overflow-hidden hover:border-zinc-700 transition-all"
             >
               <div className="p-8 md:p-10 h-full flex flex-col">
                 <div className="mb-8 flex justify-between items-start">

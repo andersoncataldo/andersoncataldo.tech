@@ -66,7 +66,7 @@ const Skills = () => {
           ))}
         </div>
 
-        <div className="bg-gradient-to-r from-primary-500/10 to-primary-500/10 border border-zinc-800 p-8 rounded-3xl">
+        <div className="bg-linear-to-r from-primary-500/10 to-primary-500/10 border border-zinc-800 p-8 rounded-3xl">
           <div className="flex flex-col md:flex-row items-center justify-between gap-8">
             <div className="flex items-center gap-4">
               <div className="bg-zinc-900 p-3 rounded-2xl border border-zinc-800">

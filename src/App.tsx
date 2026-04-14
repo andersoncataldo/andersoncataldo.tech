@@ -17,13 +17,13 @@ function App() {
           <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <div className="grid lg:grid-cols-2 gap-16 items-center">
               <div className="relative group">
-                <div className="aspect-[4/5] rounded-[2rem] overflow-hidden bg-zinc-800 border-2 border-zinc-800/50 relative shadow-2xl transition-transform duration-700 group-hover:scale-[1.02]">
+                <div className="aspect-4/5 rounded-4xl overflow-hidden bg-zinc-800 border-2 border-zinc-800/50 relative shadow-2xl transition-transform duration-700 group-hover:scale-[1.02]">
                   <img 
                     src={andersonImg} 
                     alt="Anderson Cataldo" 
                     className="w-full h-full object-cover"
                   />
-                  <div className="absolute inset-0 bg-gradient-to-t from-zinc-950/80 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
+                  <div className="absolute inset-0 bg-linear-to-t from-zinc-950/80 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
                 </div>
               </div>
 

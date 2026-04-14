@@ -42,7 +42,7 @@ const Navbar = () => {
             <div className="bg-primary-500 p-2 rounded-xl group-hover:rotate-12 transition-all duration-500 shadow-lg shadow-primary-500/20">
               <Terminal className="w-5 h-5 text-white" />
             </div>
-            <span className="text-xl font-bold tracking-tight bg-clip-text text-transparent bg-gradient-to-r from-white to-zinc-400">
+            <span className="text-xl font-bold tracking-tight bg-clip-text text-transparent bg-linear-to-r from-white to-zinc-400">
               Anderson Cataldo
             </span>
           </a>

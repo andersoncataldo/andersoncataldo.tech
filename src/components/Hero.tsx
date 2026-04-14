@@ -8,7 +8,7 @@ const Hero = () => {
       <div className="absolute top-0 left-0 w-full h-full -z-10">
         <div className="absolute top-1/4 left-1/4 w-96 h-96 bg-primary-500/10 rounded-full blur-[120px]" />
         <div className="absolute bottom-1/4 right-1/4 w-96 h-96 bg-primary-500/10 rounded-full blur-[120px]" />
-        <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-full h-full bg-[radial-gradient(#18181b_1px,transparent_1px)] [background-size:32px_32px] [mask-image:radial-gradient(ellipse_50%_50%_at_50%_50%,#000_70%,transparent_100%)] opacity-20" />
+        <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-full h-full bg-[radial-gradient(#18181b_1px,transparent_1px)] bg-size-[32px_32px] mask-[radial-gradient(ellipse_50%_50%_at_50%_50%,#000_70%,transparent_100%)] opacity-20" />
       </div>
 
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative">
@@ -78,7 +78,7 @@ const Hero = () => {
         className="absolute bottom-6 left-1/2 -translate-x-1/2 flex flex-col items-center gap-3 pointer-events-none"
       >
         <span className="text-[10px] uppercase tracking-[0.3em] font-black text-zinc-600">Explore</span>
-        <div className="w-px h-8 bg-gradient-to-b from-primary-500 to-transparent opacity-50" />
+        <div className="w-px h-8 bg-linear-to-b from-primary-500 to-transparent opacity-50" />
       </motion.div>
     </section>
   );

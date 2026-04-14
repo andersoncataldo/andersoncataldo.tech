@@ -73,7 +73,7 @@ const Experience = () => {
 
                 {/* Timeline Line */}
                 <div className="absolute left-0 top-0 bottom-0 w-px bg-zinc-800 md:relative md:left-auto">
-                  <div className="absolute top-2 -left-[5px] w-2.5 h-2.5 rounded-full bg-primary-500 ring-4 ring-zinc-950" />
+                  <div className="absolute top-2 -left-1.25 w-2.5 h-2.5 rounded-full bg-primary-500 ring-4 ring-zinc-950" />
                 </div>
 
                 {/* Content */}

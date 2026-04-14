@@ -48,7 +48,7 @@ const Contact = () => {
               <ExternalLink className="w-4 h-4 text-zinc-600" />
             </a>
 
-            <div className="p-8 bg-gradient-to-br from-zinc-900 to-zinc-950 border border-zinc-800 rounded-[2rem] relative overflow-hidden group">
+            <div className="p-8 bg-linear-to-br from-zinc-900 to-zinc-950 border border-zinc-800 rounded-4xl relative overflow-hidden group">
               <div className="absolute -top-4 -right-4 w-24 h-24 bg-primary-500/5 rounded-full blur-3xl group-hover:bg-primary-500/10 transition-all" />
               <div className="flex items-center gap-4 mb-4">
                 <FileText className="w-6 h-6 text-primary-400" />
