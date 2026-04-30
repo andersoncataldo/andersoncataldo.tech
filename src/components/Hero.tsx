@@ -3,9 +3,9 @@ import { Sparkles, ArrowRight, Linkedin } from 'lucide-react';
 
 const Hero = () => {
   return (
-    <section className="relative min-h-[90vh] flex items-center justify-center overflow-hidden pt-20">
+    <section className="relative min-h-[90vh] flex items-center justify-center overflow-hidden pt-20" aria-label="Introdução">
       {/* Background elements */}
-      <div className="absolute top-0 left-0 w-full h-full -z-10">
+      <div className="absolute top-0 left-0 w-full h-full -z-10" aria-hidden="true">
         <div className="absolute top-1/4 left-1/4 w-96 h-96 bg-primary-500/10 rounded-full blur-[120px]" />
         <div className="absolute bottom-1/4 right-1/4 w-96 h-96 bg-primary-500/10 rounded-full blur-[120px]" />
         <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-full h-full bg-[radial-gradient(#18181b_1px,transparent_1px)] bg-size-[32px_32px] mask-[radial-gradient(ellipse_50%_50%_at_50%_50%,#000_70%,transparent_100%)] opacity-20" />
@@ -20,7 +20,7 @@ const Hero = () => {
             className="mb-8 flex justify-center"
           >
             <span className="inline-flex items-center gap-2 px-6 py-2 rounded-full bg-zinc-900 border border-zinc-800 text-zinc-300 text-xs sm:text-sm font-bold tracking-tight">
-              <Sparkles className="w-4 h-4 text-primary-400" />
+              <Sparkles className="w-4 h-4 text-primary-400" aria-hidden="true" />
               Full-Stack Developer | RPA | Web Development
             </span>
           </motion.div>
@@ -55,7 +55,7 @@ const Hero = () => {
               className="w-full sm:w-auto group relative inline-flex items-center justify-center gap-3 bg-white text-black px-8 py-4 rounded-2xl font-black uppercase italic tracking-tighter text-lg transition-all hover:scale-105 active:scale-95 shadow-2xl"
             >
               Ver Projetos
-              <ArrowRight className="w-6 h-6 transition-transform group-hover:translate-x-1" />
+              <ArrowRight className="w-6 h-6 transition-transform group-hover:translate-x-1" aria-hidden="true" />
             </a>
             <div className="flex w-full sm:w-auto gap-4">
               <a
@@ -63,8 +63,9 @@ const Hero = () => {
                 target="_blank"
                 rel="noopener noreferrer"
                 className="flex-1 sm:flex-initial inline-flex items-center justify-center gap-2 bg-zinc-900 border border-zinc-800 text-white px-6 py-4 rounded-2xl font-bold uppercase tracking-tight transition-all hover:bg-zinc-800 hover:border-zinc-700"
+                aria-label="Ver perfil no LinkedIn"
               >
-                <Linkedin className="w-5 h-5 text-zinc-400" />
+                <Linkedin className="w-5 h-5 text-zinc-400" aria-hidden="true" />
                 LinkedIn
               </a>
             </div>
@@ -76,6 +77,7 @@ const Hero = () => {
         animate={{ y: [0, 12, 0] }}
         transition={{ duration: 2.5, repeat: Infinity, ease: "easeInOut" }}
         className="absolute bottom-6 left-1/2 -translate-x-1/2 flex flex-col items-center gap-3 pointer-events-none"
+        aria-hidden="true"
       >
         <span className="text-[10px] uppercase tracking-[0.3em] font-black text-zinc-600">Explore</span>
         <div className="w-px h-8 bg-linear-to-b from-primary-500 to-transparent opacity-50" />
