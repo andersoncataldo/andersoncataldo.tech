@@ -6,23 +6,13 @@ const Experience = () => {
     {
       title: 'Aprendiz – Assistente Administrativo | Sistemas e Projetos',
       company: 'Grupo 3Corações',
-      period: 'Jan/2025 - Atual',
+      period: 'Jan/2025 - Abr/2026',
       description: [
         'Automatizei processos manuais de renovação de certidões de débitos em portais web utilizando Python (Playwright, Pandas, PyPDF2, shutil), reduzindo o tempo de execução em mais de 85%.',
         'Desenvolvi scripts (os, shutil) para extração e roteamento inteligente de 2.000 a 8.000 arquivos XML mensais, mitigando falhas operacionais manuais.',
         'Desenvolvi um pipeline automatizado de extração e consolidação de dados para gestão de serviços, reduzindo o ciclo de conferência de notas de 25 minutos para apenas 5 minutos.',
       ],
       type: 'work',
-    },
-    {
-      title: 'Projeto de Extensão - Clube do Livro',
-      company: 'Universidade de Fortaleza',
-      period: '01/2024 - A frequentar',
-      description: [
-        'Auxiliei no desenvolvimento do Front-End de um projeto de extensão, entregando uma plataforma limpa e funcional que foi testada e aprovada.',
-        'Tecnologias utilizadas: React, TypeScript, Tailwind CSS.',
-      ],
-      type: 'project',
     },
     {
       title: 'Bacharelado em Ciência da Computação',
