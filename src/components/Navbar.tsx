@@ -32,11 +32,11 @@ const Navbar = () => {
   return (
     <nav 
       className={`fixed w-full z-50 transition-all duration-300 ${
-        isScrolled ? 'bg-zinc-950/80 backdrop-blur-md border-b border-zinc-800 py-3' : 'bg-transparent py-5'
+        isScrolled ? 'bg-white/80 backdrop-blur-md border-b border-black/5 py-3' : 'bg-transparent py-5'
       }`}
       aria-label="Navegação principal"
     >
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div className="section-container">
         <div className="flex justify-between items-center">
           <a 
             href="#" 
@@ -44,23 +44,23 @@ const Navbar = () => {
             className="flex items-center gap-3 group cursor-pointer"
             aria-label="Anderson Cataldo - Voltar ao início"
           >
-            <div className="bg-primary-500 p-2 rounded-xl group-hover:rotate-12 transition-all duration-500 shadow-lg shadow-primary-500/20">
+            <div className="bg-[#1d1d1f] p-2 rounded-xl group-hover:scale-110 transition-transform duration-500 shadow-lg shadow-black/10">
               <Terminal className="w-5 h-5 text-white" aria-hidden="true" />
             </div>
-            <span className="text-xl font-bold tracking-tight bg-clip-text text-transparent bg-linear-to-r from-white to-zinc-400">
+            <span className="text-xl font-bold tracking-tight text-[#1d1d1f]">
               Anderson Cataldo
             </span>
           </a>
 
           {/* Desktop Nav */}
-          <div className="hidden md:flex items-center space-x-8">
+          <div className="hidden md:flex items-center space-x-10">
             <ul className="flex items-center space-x-8">
               {navLinks.map((link) => (
                 <li key={link.name}>
                   <a
                     href={link.href}
                     onClick={link.onClick}
-                    className="text-sm font-medium text-zinc-400 hover:text-white transition-colors"
+                    className="text-sm font-bold text-[#86868b] hover:text-[#1d1d1f] transition-colors"
                   >
                     {link.name}
                   </a>
@@ -71,7 +71,7 @@ const Navbar = () => {
               href="https://github.com/andersoncataldo"
               target="_blank"
               rel="noopener noreferrer"
-              className="bg-white text-black p-2.5 rounded-full hover:bg-zinc-200 transition-all active:scale-95 flex items-center justify-center"
+              className="bg-[#1d1d1f] text-white p-2.5 rounded-full hover:bg-[#2d2d2f] transition-all active:scale-95 flex items-center justify-center"
               aria-label="Ver perfil no GitHub"
             >
               <Github className="w-5 h-5" aria-hidden="true" />
@@ -82,7 +82,7 @@ const Navbar = () => {
           <div className="md:hidden">
             <button
               onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
-              className="text-zinc-400 hover:text-white p-2"
+              className="text-[#1d1d1f] p-2"
               aria-expanded={mobileMenuOpen}
               aria-controls="mobile-menu"
               aria-label={mobileMenuOpen ? "Fechar menu" : "Abrir menu"}
@@ -96,18 +96,18 @@ const Navbar = () => {
       {/* Mobile Menu */}
       <div 
         id="mobile-menu"
-        className={`md:hidden bg-zinc-900 border-b border-zinc-800 transition-all duration-300 ${
-          mobileMenuOpen ? 'block' : 'hidden'
+        className={`md:hidden bg-white border-b border-black/5 transition-all duration-300 absolute w-full top-full left-0 overflow-hidden ${
+          mobileMenuOpen ? 'max-h-96 py-4' : 'max-h-0'
         }`}
       >
-        <ul className="px-2 pt-2 pb-3 space-y-1 sm:px-3">
+        <ul className="px-6 space-y-4">
           {navLinks.map((link) => (
             <li key={link.name}>
               <a
                 key={link.name}
                 href={link.href}
                 onClick={link.onClick ? link.onClick : () => setMobileMenuOpen(false)}
-                className="block px-3 py-2 text-base font-medium text-zinc-400 hover:text-white"
+                className="block text-lg font-bold text-[#1d1d1f] hover:text-[#0066cc]"
               >
                 {link.name}
               </a>

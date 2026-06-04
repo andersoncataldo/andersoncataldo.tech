@@ -1,0 +1,245 @@
+<!DOCTYPE html>
+<html lang="pt-PT">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Currículo - Anderson Viana Cataldo</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Font Awesome para os ícones -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;800&display=swap');
+        
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: #f3f4f6;
+            color: #111827;
+        }
+
+        .resume-container {
+            max-width: 900px; /* Tamanho próximo ao A4 */
+            margin: 2rem auto;
+            background-color: white;
+            padding: 40px;
+            box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
+        }
+
+        .section-title {
+            font-size: 1.125rem;
+            font-weight: 800;
+            text-transform: uppercase;
+            border-top: 3px solid #111827;
+            padding-top: 0.5rem;
+            margin-bottom: 1rem;
+            margin-top: 1.5rem;
+        }
+
+        .accent-color {
+            color: #800080; /* Roxo do Canva */
+        }
+
+        .icon-small {
+            font-size: 0.8rem;
+            margin-right: 0.25rem;
+            color: #800080;
+        }
+
+        .text-body {
+            font-size: 0.875rem;
+            line-height: 1.3;
+        }
+        
+        .skill-icon {
+            font-size: 1.2rem;
+            color: #800080;
+            margin-right: 0.75rem;
+            margin-top: 0.2rem;
+        }
+
+        /* Estilo para impressão */
+        @media print {
+            body { background-color: white; }
+            .resume-container { box-shadow: none; margin: 0; padding: 0; max-width: 100%; }
+        }
+    </style>
+</head>
+<body class="antialiased">
+
+    <div class="resume-container">
+        <!-- Cabeçalho -->
+        <header class="mb-6">
+            <h1 class="text-4xl font-extrabold uppercase tracking-tight mb-1">Anderson Viana Cataldo</h1>
+            <h2 class="text-lg font-bold accent-color mb-3">Full-Stack Developer | RPA | UI/UX designer</h2>
+            
+            <div class="flex flex-wrap gap-x-4 gap-y-1 text-xs font-semibold text-gray-800">
+                <span class="flex items-center"><i class="fas fa-phone icon-small"></i> +85 99225-8794</span>
+                <span class="flex items-center"><i class="fas fa-envelope icon-small"></i> andersonvcataldo@gmail.com</span>
+                <span class="flex items-center"><i class="fab fa-linkedin icon-small"></i> linkedin.com/in/andersonnviana</span>
+                <span class="flex items-center"><i class="fab fa-github icon-small"></i> github.com/andersoncataldo</span>
+                <span class="flex items-center"><i class="fas fa-map-marker-alt icon-small"></i> Ceará, Brasil</span>
+            </div>
+        </header>
+
+        <!-- Layout em 2 colunas -->
+        <div class="grid grid-cols-1 md:grid-cols-12 gap-8">
+            
+            <!-- Coluna Esquerda (Maior) -->
+            <div class="md:col-span-8">
+                
+                <!-- Resumo -->
+                <section>
+                    <h3 class="section-title">Resumo</h3>
+                    <p class="text-body text-gray-800 text-justify">
+                    Graduando em Ciência da Computação (5º semestre) na Unifor, especializado no desenvolvimento de aplicações Full-Stack com foco no ecossistema JavaScript/TypeScript (React, Next.js e Node.js). Experiente na criação de soluções escaláveis, integração de bancos de dados relacionais (PostgreSQL/Supabase) e otimização de infraestrutura digital em nuvem (Vercel). Histórico de eficiência operacional através da arquitetura de automações inteligentes e desenvolvimento de softwares de alto impacto.</p>
+                </section>
+
+                <!-- Educação -->
+                <section>
+                    <h3 class="section-title">Educação</h3>
+                    <div class="mb-2">
+                        <h4 class="font-bold text-gray-900 text-sm">Bacharelado em Ciência da Computação</h4>
+                        <p class="font-bold accent-color text-sm">Universidade de Fortaleza (Unifor)</p>
+                        <div class="flex gap-4 text-xs text-gray-600 mt-1">
+                            <span><i class="far fa-calendar-alt mr-1"></i> 01/2024 - Em andamento (5º semestre)</span>
+                            <span><i class="fas fa-map-marker-alt mr-1"></i> Ceará, Brasil</span>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- Experiência -->
+                <section>
+                    <h3 class="section-title">Experiência Profissional</h3>
+
+                    <div class="mb-3">
+                        <h4 class="font-bold text-gray-900 text-sm">Estagiário de T.I</h4>
+                        <p class="font-bold accent-color text-sm">Distribuidora Mais Saúde</p>
+                        <div class="flex gap-4 text-xs text-gray-600 mt-1 mb-2">
+                            <span><i class="far fa-calendar-alt mr-1"></i> 06/2026 - Atual</span>
+                            <span><i class="fas fa-map-marker-alt mr-1"></i> Ceará, Brasil</span>
+                        </div>
+                        <ul class="list-disc pl-5 text-body text-gray-800 space-y-1 text-justify">
+                            <li>Atuação direta no desenvolvimento e manutenção de aplicações internas utilizando React, Next.js e Tailwind CSS, garantindo interfaces modernas, performáticas e responsivas.</li>
+                            <li>Sustentação e criação de serviços em Node.js totalmente integrados a bancos de dados PostgreSQL (Supabase)</li>
+                            <li>Responsável pelo deploy e garantia de estabilidade das ferramentas na plataforma Vercel, aplicando boas práticas de versionamento com Git e GitHub.</li>
+                            <li>Organização do fluxo de desenvolvimento e controle de demandas internas através do Trello.</li>
+                        </ul>
+                    </div>
+
+                    <div class="mb-3">
+                        <h4 class="font-bold text-gray-900 text-sm">Aprendiz – Setor Fiscal | Sistemas e Projetos</h4>
+                        <p class="font-bold accent-color text-sm">Grupo 3corações</p>
+                        <div class="flex gap-4 text-xs text-gray-600 mt-1 mb-2">
+                            <span><i class="far fa-calendar-alt mr-1"></i> 01/2025 - 04/2026</span>
+                            <span><i class="fas fa-map-marker-alt mr-1"></i> Ceará, Brasil</span>
+                        </div>
+                        <ul class="list-disc pl-5 text-body text-gray-800 space-y-1 text-justify">
+                            <li>Engenharia de automações práticas (RPA) para extração em massa de arquivos XML, interação com interfaces Web e preenchimento automatizado de planilhas corporativas.</li>
+                            <li>Responsável por converter demandas manuais críticas em rotinas automatizadas rápidas e de fácil execução, gerando um ganho expressivo de produtividade para o setor.</li>
+                            <li>Estruturação de dashboards analíticos, controle de chamados e criação/escrituração de documentações técnicas de sistemas.</li>
+                        </ul>
+                    </div>
+                </section>
+
+                <!-- Projetos -->
+                <section>
+                    <h3 class="section-title">Projetos</h3>
+
+                    <div class="mb-3">
+                        <h4 class="font-bold text-gray-900 text-sm">Plataforma Gamificada de São Carlo Acutis - Pessoal</h4>
+                        <p class="text-body text-gray-800 text-justify mt-1">Desenvolvimento de uma plataforma gamificada sobre um santo da Igreja Católica. Aplicando práticas de desenvolvimento Full-Stack. Arquitetura focada em performance e escalabilidade.</p>
+                        <p class="text-xs mt-1 text-gray-700"><strong>Tecnologias:</strong> Front-End: React, TypeScript, Tailwind CSS | Back-End: Java + Spring Boot | Banco de Dados: PostgreSQL (Neon) | Versionamento: Git, GitHub | Hospedagem: Vercel.</p>
+                        <p class="text-xs text-gray-700"><strong>Link:</strong> <a href="#" class="hover:underline">https://github.com/andersoncataldo/CarloAcutis</a></p>
+                        <p class="text-xs text-gray-700"><strong>Deploy:</strong> <a href="#" class="hover:underline">https://carlo-acutis-virid.vercel.app</a></p>
+                    </div>
+
+                    <div>
+                        <h4 class="font-bold text-gray-900 text-sm">Portfólio Web - Pessoal</h4>
+                        <p class="text-body text-gray-800 text-justify mt-1">Desenvolvimento de um portfólio web com design moderno e responsivo criado do zero para destacar meus projetos e experiências, aplicando boas práticas de UI/UX.</p>
+                        <p class="text-xs mt-1 text-gray-700"><strong>Tecnologias:</strong> Front-End: React, TypeScript, Tailwind CSS. | Versionamento: Git, GitHub | Hospedagem: Vercel.</p>
+                        <p class="text-xs text-gray-700"><strong>Link:</strong> <a href="#" class="hover:underline">https://github.com/andersoncataldo/andersoncataldo.tech</a></p>
+                        <p class="text-xs text-gray-700"><strong>Deploy:</strong> <a href="#" class="hover:underline">https://andersoncataldotech.vercel.app</a></p>
+                    </div>
+                </section>
+            </div>
+
+            <!-- Coluna Direita (Menor) -->
+            <div class="md:col-span-4">
+                
+                <!-- Tecnologias -->
+                <section>
+                    <h3 class="section-title">Tecnologias</h3>
+                    
+                    <div class="mb-3">
+                        <h4 class="font-bold text-gray-900 text-sm">Front-End</h4>
+                        <p class="text-xs text-gray-800 mt-1 pb-2 border-b border-gray-200 border-dashed">React, Next.js, Vue.js, TypeScript, Tailwind CSS, HTML5, CSS3</p>
+                    </div>
+
+                    <div class="mb-3">
+                        <h4 class="font-bold text-gray-900 text-sm">Back-End</h4>
+                        <p class="text-xs text-gray-800 mt-1 pb-2 border-b border-gray-200 border-dashed">Python (Django), Java (Spring Boot) e Node.js (Express).</p>
+                    </div>
+
+                    <div class="mb-3">
+                        <h4 class="font-bold text-gray-900 text-sm">Banco de Dados</h4>
+                        <p class="text-xs text-gray-800 mt-1 pb-2 border-b border-gray-200 border-dashed">SQL, PostgreSQL (Neon e Supabase) e MongoDB.</p>
+                    </div>
+
+                    <div class="mb-3">
+                        <h4 class="font-bold text-gray-900 text-sm">Versionamento, hospedagem e outras ferramentas</h4>
+                        <p class="text-xs text-gray-800 mt-1 pb-2 border-b border-gray-200 border-dashed">Git, GitHub, Vercel, Figma, Trello.</p>
+                    </div>
+                </section>  
+
+                <!-- Idiomas -->
+                <section>
+                    <h3 class="section-title">Idiomas</h3>
+                    
+                    <div class="mb-3 flex justify-between items-center pb-2 border-b border-gray-200 border-dashed">
+                        <div>
+                            <h4 class="font-bold text-gray-900 text-sm">Português</h4>
+                            <p class="text-xs text-gray-600 mt-1">Nativo</p>
+                        </div>
+                        <div class="flex gap-1.5">
+                            <div class="w-3.5 h-3.5 rounded-full bg-[#800080]"></div>
+                            <div class="w-3.5 h-3.5 rounded-full bg-[#800080]"></div>
+                            <div class="w-3.5 h-3.5 rounded-full bg-[#800080]"></div>
+                            <div class="w-3.5 h-3.5 rounded-full bg-[#800080]"></div>
+                            <div class="w-3.5 h-3.5 rounded-full bg-[#800080]"></div>
+                        </div>
+                    </div>
+
+                    <div class="mb-3 flex justify-between items-center pb-2 border-b border-gray-200 border-dashed">
+                        <div>
+                            <h4 class="font-bold text-gray-900 text-sm">Inglês</h4>
+                            <p class="text-xs text-gray-600 mt-1">Avançado</p>
+                        </div>
+                        <div class="flex gap-1.5">
+                            <div class="w-3.5 h-3.5 rounded-full bg-[#800080]"></div>
+                            <div class="w-3.5 h-3.5 rounded-full bg-[#800080]"></div>
+                            <div class="w-3.5 h-3.5 rounded-full bg-[#800080]"></div>
+                            <div class="w-3.5 h-3.5 rounded-full bg-gray-200"></div>
+                            <div class="w-3.5 h-3.5 rounded-full bg-gray-200"></div>
+                        </div>
+                    </div>
+
+                    <div class="flex justify-between items-center">
+                        <div>
+                            <h4 class="font-bold text-gray-900 text-sm">Espanhol</h4>
+                            <p class="text-xs text-gray-600 mt-1">Iniciante</p>
+                        </div>
+                        <div class="flex gap-1.5">
+                            <div class="w-3.5 h-3.5 rounded-full bg-[#800080]"></div>
+                            <div class="w-3.5 h-3.5 rounded-full bg-gray-200"></div>
+                            <div class="w-3.5 h-3.5 rounded-full bg-gray-200"></div>
+                            <div class="w-3.5 h-3.5 rounded-full bg-gray-200"></div>
+                            <div class="w-3.5 h-3.5 rounded-full bg-gray-200"></div>
+                        </div>
+                    </div>
+                </section>
+
+            </div>
+        </div>
+    </div>
+
+</body>
+</html>

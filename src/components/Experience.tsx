@@ -1,99 +1,118 @@
 import { motion } from 'framer-motion';
-import { Briefcase, GraduationCap, Calendar, Zap } from 'lucide-react';
+import { Calendar, MapPin } from 'lucide-react';
+import { Experience as ExperienceType } from '../types';
+
+const experiences: ExperienceType[] = [
+  {
+    title: 'Estagiário de T.I',
+    company: 'Distribuidora Mais Saúde',
+    period: 'Jun/2026 - Atual',
+    location: 'Ceará, Brasil',
+    results: [
+      'Engenharia de Front-End com Next.js e Tailwind CSS para sistemas de missão crítica, priorizando performance e Core Web Vitals.',
+      'Desenvolvimento de APIs robustas em Node.js com integração nativa ao PostgreSQL via Supabase para gestão em tempo real.',
+      'Implementação de fluxos de CI/CD automatizados na Vercel, reduzindo significativamente o tempo de entrega de novas features.',
+      'Liderança técnica na organização de demandas internas através do Trello, elevando a transparência e agilidade do time.'
+    ],
+    stack: ['Next.js', 'React', 'Node.js', 'PostgreSQL', 'Vercel'],
+    type: 'work',
+  },
+  {
+    title: 'Aprendiz – Setor Fiscal | Sistemas e Projetos',
+    company: 'Grupo 3Corações',
+    period: 'Jan/2025 - Abr/2026',
+    location: 'Ceará, Brasil',
+    results: [
+      'Arquitetura de soluções RPA de alto impacto, automatizando a extração em massa de XMLs e eliminando erros manuais críticos.',
+      'Conversão de fluxos operacionais legados em rotinas automatizadas, gerando um ganho de produtividade superior a 80%.',
+      'Desenvolvimento de dashboards analíticos para monitoramento de KPIs e tomada de decisão baseada em dados reais.',
+      'Estruturação de documentações técnicas de alto nível para garantir a manutenibilidade e escalabilidade dos sistemas.'
+    ],
+    stack: ['Python', 'RPA', 'Excel Automation', 'Dashboards'],
+    type: 'work',
+  },
+  {
+    title: 'Bacharelado em Ciência da Computação',
+    company: 'Universidade de Fortaleza (Unifor)',
+    period: 'Jan/2024 - Atual',
+    location: 'Ceará, Brasil',
+    results: [
+      'Foco em Engenharia de Software, Algoritmos e Desenvolvimento Full-Stack.',
+      'Atualmente no 5º semestre, com sólida base acadêmica e prática.',
+      'Desenvolvimento de projetos focados em performance e escalabilidade.'
+    ],
+    stack: ['Engenharia de Software', 'Algoritmos', 'Full-Stack'],
+    type: 'education',
+  },
+];
 
 const Experience = () => {
-  const experiences = [
-    {
-      title: 'Aprendiz – Assistente Administrativo | Sistemas e Projetos',
-      company: 'Grupo 3Corações',
-      period: 'Jan/2025 - Abr/2026',
-      dateTime: '2025-01/2026-04',
-      description: [
-        'Automatizei processos manuais de renovação de certidões de débitos em portais web utilizando Python (Playwright, Pandas, PyPDF2, shutil), reduzindo o tempo de execução em mais de 85%.',
-        'Desenvolvi scripts (os, shutil) para extração e roteamento inteligente de 2.000 a 8.000 arquivos XML mensais, mitigando falhas operacionais manuais.',
-        'Desenvolvi um pipeline automatizado de extração e consolidação de dados para gestão de serviços, reduzindo o ciclo de conferência de notas de 25 minutos para apenas 5 minutos.',
-      ],
-      type: 'work',
-    },
-    {
-      title: 'Bacharelado em Ciência da Computação',
-      company: 'Universidade de Fortaleza (Unifor)',
-      period: 'Início em 2024.1',
-      dateTime: '2024-01',
-      description: [
-        'Foco em algoritmos, arquitetura de sistemas e desenvolvimento de software.',
-        'Participação ativa em projetos acadêmicos e de extensão.',
-      ],
-      type: 'education',
-    },
-  ];
-
   return (
-    <section id="experiencia" className="py-24 bg-zinc-950" aria-labelledby="experience-title">
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="flex flex-col md:flex-row md:items-center justify-between mb-16 gap-4">
-          <div>
-            <h2 id="experience-title" className="text-3xl md:text-5xl font-bold mb-4">Minha Trajetória</h2>
-            <p className="text-zinc-400 max-w-xl">
-              Experiência profissional e acadêmica focada em resultados mensuráveis e excelência técnica.
-            </p>
-          </div>
-          <div className="flex items-center gap-2 px-4 py-2 bg-primary-500/10 border border-primary-500/20 rounded-xl text-primary-400" role="status">
-            <Zap className="w-4 h-4" aria-hidden="true" />
-            <span className="text-sm font-semibold">+85% de eficiência em automações</span>
-          </div>
+    <section id="experiencia" className="py-fluid-section bg-apple-bg" aria-labelledby="experience-title">
+      <div className="section-container">
+        <div className="mb-16">
+          <motion.p 
+            initial={{ opacity: 0, y: 10 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            className="text-apple-blue font-semibold text-lg mb-2"
+          >
+            Carreira
+          </motion.p>
+          <motion.h2 
+            initial={{ opacity: 0, y: 10 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ delay: 0.1 }}
+            id="experience-title" 
+            className="text-fluid-h2 font-bold tracking-tight text-apple-text leading-tight"
+          >
+            Trajetória Profissional
+          </motion.h2>
         </div>
 
-        <div className="space-y-12">
+        <div className="grid gap-10">
           {experiences.map((exp, index) => (
             <motion.div
               key={index}
-              initial={{ opacity: 0, x: -20 }}
-              whileInView={{ opacity: 1, x: 0 }}
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
-              transition={{ duration: 0.5, delay: index * 0.1 }}
-              className="relative pl-8 md:pl-0"
+              transition={{ duration: 0.6, delay: index * 0.1 }}
+              className="apple-card p-8 md:p-12 flex flex-col md:grid md:grid-cols-[280px_1fr] gap-8 md:gap-16"
             >
-              <div className="md:grid md:grid-cols-[200px_1px_1fr] md:gap-12">
-                {/* Period - Desktop */}
-                <div className="hidden md:flex flex-col items-end pt-1">
-                  <div className="flex items-center gap-2 text-zinc-500 font-medium">
-                    <Calendar className="w-4 h-4" aria-hidden="true" />
-                    <time dateTime={exp.dateTime}>{exp.period}</time>
-                  </div>
+              <div className="flex flex-col space-y-4">
+                <div className="flex items-center gap-2 text-apple-secondary text-sm font-medium">
+                  <Calendar className="w-4 h-4" />
+                  <span>{exp.period}</span>
                 </div>
-
-                {/* Timeline Line */}
-                <div className="absolute left-0 top-0 bottom-0 w-px bg-zinc-800 md:relative md:left-auto" aria-hidden="true">
-                  <div className="absolute top-2 -left-1.25 w-2.5 h-2.5 rounded-full bg-primary-500 ring-4 ring-zinc-950" />
+                <div>
+                  <h3 className="text-2xl font-bold text-apple-text mb-1">{exp.company}</h3>
+                  <p className="text-lg text-apple-blue font-semibold">{exp.title}</p>
                 </div>
+                <div className="flex items-center gap-2 text-apple-secondary text-sm">
+                  <MapPin className="w-4 h-4" />
+                  <span>{exp.location}</span>
+                </div>
+                <div className="flex flex-wrap gap-2 pt-4">
+                  {exp.stack.map((tech, i) => (
+                    <span key={i} className="px-3 py-1 bg-apple-bg text-apple-text text-[11px] font-bold uppercase tracking-wider rounded-full border border-black/5">
+                      {tech}
+                    </span>
+                  ))}
+                </div>
+              </div>
 
-                {/* Content */}
-                <article className="bg-zinc-900/50 border border-zinc-800 p-6 md:p-8 rounded-3xl hover:border-zinc-700 transition-colors">
-                  <div className="flex items-start justify-between mb-4">
-                    <div>
-                      <div className="flex items-center gap-2 text-primary-500 mb-2">
-                        {exp.type === 'work' ? <Briefcase className="w-4 h-4" aria-hidden="true" /> : <GraduationCap className="w-4 h-4" aria-hidden="true" />}
-                        <span className="text-xs font-bold uppercase tracking-wider">{exp.type === 'work' ? 'Profissional' : exp.type === 'education' ? 'Acadêmico' : 'Projeto'}</span>
-                      </div>
-                      <h3 className="text-xl md:text-2xl font-bold">{exp.title}</h3>
-                      <p className="text-zinc-400 font-medium">{exp.company}</p>
-                      {/* Period - Mobile */}
-                      <div className="md:hidden flex items-center gap-2 text-zinc-500 text-sm mt-2">
-                        <Calendar className="w-3 h-3" aria-hidden="true" />
-                        <time dateTime={exp.dateTime}>{exp.period}</time>
-                      </div>
-                    </div>
-                  </div>
-                  <ul className="space-y-3" role="list">
-                    {exp.description.map((item, i) => (
-                      <li key={i} className="flex gap-3 text-zinc-400 leading-relaxed">
-                        <span className="mt-2.5 w-1.5 h-1.5 rounded-full bg-zinc-700 shrink-0" aria-hidden="true" />
-                        {item}
-                      </li>
-                    ))}
-                  </ul>
-                </article>
+              <div className="flex flex-col justify-center">
+                <p className="text-apple-secondary font-medium mb-6 uppercase tracking-widest text-xs">Principais Resultados</p>
+                <ul className="space-y-4" role="list">
+                  {exp.results.map((item, i) => (
+                    <li key={i} className="flex gap-4 text-apple-text leading-relaxed text-base font-medium">
+                      <div className="mt-2.5 w-1.5 h-1.5 rounded-full bg-apple-blue shrink-0" aria-hidden="true" />
+                      {item}
+                    </li>
+                  ))}
+                </ul>
               </div>
             </motion.div>
           ))}

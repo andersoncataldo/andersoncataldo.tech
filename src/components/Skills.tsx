@@ -5,37 +5,51 @@ const Skills = () => {
   const skillGroups = [
     {
       title: 'Front-End',
-      icon: <Layout className="w-6 h-6 text-primary-500" aria-hidden="true" />,
-      skills: ['React.js', 'TypeScript', 'JavaScript', 'HTML5', 'CSS3', 'Tailwind CSS', 'Figma'],
+      icon: <Layout className="w-6 h-6 text-apple-blue" aria-hidden="true" />,
+      skills: ['React', 'Next.js', 'Vue.js', 'TypeScript', 'Tailwind CSS', 'HTML5', 'CSS3'],
     },
     {
-      title: 'Back-End & RPA',
-      icon: <Terminal className="w-6 h-6 text-primary-500" aria-hidden="true" />,
-      skills: ['Python (Playwright, Pyautogui, Pandas, shutil, os)', 'Java (Spring Boot)', 'javaScript (Node.js)'],
+      title: 'Back-End & Automation',
+      icon: <Terminal className="w-6 h-6 text-apple-blue" aria-hidden="true" />,
+      skills: ['Node.js (Express)', 'Java (Spring Boot)', 'Python (Django)', 'RPA'],
     },
     {
-      title: 'Ferramentas & DB',
-      icon: <Wrench className="w-6 h-6 text-emerald-500" aria-hidden="true" />,
-      skills: ['Git & GitHub', 'SQL', 'PostgreSQL', 'Postman'],
+      title: 'Infrastructure & DB',
+      icon: <Wrench className="w-6 h-6 text-apple-blue" aria-hidden="true" />,
+      skills: ['Git & GitHub', 'PostgreSQL', 'Supabase', 'Neon', 'MongoDB', 'Vercel'],
     },
   ];
 
   const softSkills = [
-    'Adaptabilidade',
-    'Comunicação Assertiva',
-    'Trabalho em Equipe',
-    'Aprendizado Contínuo',
     'Pensamento Analítico',
+    'Resolução de Problemas',
+    'Comunicação Técnica',
+    'Aprendizado Autônomo',
+    'Trabalho em Equipe',
   ];
 
   return (
-    <section id="habilidades" className="py-24 bg-zinc-900/30" aria-labelledby="skills-title">
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="text-center mb-16">
-          <h2 id="skills-title" className="text-3xl md:text-5xl font-bold mb-4">Stack Tecnológica</h2>
-          <p className="text-zinc-400 max-w-2xl mx-auto">
-            Combinando ferramentas modernas para criar aplicações robustas e processos automatizados eficientes.
-          </p>
+    <section id="habilidades" className="py-fluid-section bg-white" aria-labelledby="skills-title">
+      <div className="section-container">
+        <div className="text-center mb-20">
+          <motion.p 
+            initial={{ opacity: 0, y: 10 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            className="text-apple-blue font-semibold text-lg mb-2"
+          >
+            Expertise
+          </motion.p>
+          <motion.h2 
+            initial={{ opacity: 0, y: 10 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ delay: 0.1 }}
+            id="skills-title" 
+            className="text-fluid-h2 font-bold tracking-tight text-apple-text leading-tight"
+          >
+            Stack Tecnológica
+          </motion.h2>
         </div>
 
         <ul className="grid md:grid-cols-3 gap-8 mb-16" role="list">
@@ -46,17 +60,17 @@ const Skills = () => {
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
               transition={{ duration: 0.5, delay: index * 0.1 }}
-              className="bg-zinc-900 border border-zinc-800 p-8 rounded-3xl hover:border-zinc-700 transition-all hover:-translate-y-1"
+              className="apple-card p-10 flex flex-col items-start"
             >
-              <div className="bg-zinc-800/50 w-12 h-12 rounded-2xl flex items-center justify-center mb-6" aria-hidden="true">
+              <div className="bg-apple-bg w-14 h-14 rounded-2xl flex items-center justify-center mb-8 border border-black/5" aria-hidden="true">
                 {group.icon}
               </div>
-              <h3 className="text-xl font-bold mb-6" id={`skill-group-${index}`}>{group.title}</h3>
-              <ul className="flex flex-wrap gap-2" aria-labelledby={`skill-group-${index}`}>
+              <h3 className="text-2xl font-bold mb-8 text-apple-text tracking-tight">{group.title}</h3>
+              <ul className="flex flex-wrap gap-3" aria-labelledby={`skill-group-${index}`}>
                 {group.skills.map((skill, i) => (
                   <li
                     key={i}
-                    className="px-3 py-1 bg-zinc-800 text-zinc-300 text-xs font-medium rounded-lg border border-zinc-700"
+                    className="px-4 py-2 bg-white text-apple-text text-sm font-semibold rounded-xl border border-black/5"
                   >
                     {skill}
                   </li>
@@ -66,26 +80,31 @@ const Skills = () => {
           ))}
         </ul>
 
-        <div className="bg-linear-to-r from-primary-500/10 to-primary-500/10 border border-zinc-800 p-8 rounded-3xl">
-          <div className="flex flex-col md:flex-row items-center justify-between gap-8">
-            <div className="flex items-center gap-4">
-              <div className="bg-zinc-900 p-3 rounded-2xl border border-zinc-800" aria-hidden="true">
-                <ShieldCheck className="w-8 h-8 text-primary-500" />
+        <motion.div 
+          initial={{ opacity: 0, y: 20 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+          className="apple-card p-10 bg-apple-bg/50"
+        >
+          <div className="flex flex-col lg:flex-row items-center justify-between gap-12">
+            <div className="flex items-center gap-6">
+              <div className="bg-white p-5 rounded-2xl shadow-sm border border-black/5" aria-hidden="true">
+                <ShieldCheck className="w-10 h-10 text-apple-blue" />
               </div>
               <div>
-                <h4 className="text-lg font-bold" id="soft-skills-title">Habilidades Comportamentais</h4>
-                <p className="text-sm text-zinc-400">Diferenciais que potencializam o trabalho técnico.</p>
+                <h4 className="text-2xl font-bold text-apple-text">Mindset Profissional</h4>
+                <p className="text-apple-secondary text-lg">Habilidades que impulsionam o valor técnico.</p>
               </div>
             </div>
-            <ul className="flex flex-wrap justify-center gap-3" aria-labelledby="soft-skills-title">
+            <ul className="flex flex-wrap justify-center gap-4" aria-labelledby="soft-skills-title">
               {softSkills.map((skill, i) => (
-                <li key={i} className="text-sm font-medium text-zinc-300 px-4 py-2 bg-zinc-950/50 rounded-full border border-zinc-800">
+                <li key={i} className="text-sm font-bold text-apple-text px-6 py-3 bg-white rounded-2xl border border-black/5 shadow-sm">
                   {skill}
                 </li>
               ))}
             </ul>
           </div>
-        </div>
+        </motion.div>
       </div>
     </section>
   );
