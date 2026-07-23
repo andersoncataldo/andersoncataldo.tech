@@ -7,7 +7,7 @@ const About = () => {
     <section id="sobre" className="py-fluid-section bg-white" aria-labelledby="about-title">
       <div className="section-container">
         <div className="grid lg:grid-cols-2 gap-16 items-center">
-          <motion.div 
+          <motion.div
             initial={{ opacity: 0, scale: 0.95 }}
             whileInView={{ opacity: 1, scale: 1 }}
             viewport={{ once: true }}
@@ -15,21 +15,21 @@ const About = () => {
             className="relative order-2 lg:order-1"
           >
             <div className="aspect-4/5 rounded-[40px] overflow-hidden bg-apple-bg border border-black/5 shadow-2xl">
-              <img 
-                src={andersonImg} 
-                alt="Anderson Cataldo" 
+              <img
+                src={andersonImg}
+                alt="Anderson Cataldo"
                 className="w-full h-full object-cover"
                 loading="lazy"
               />
             </div>
             <div className="absolute -bottom-6 -right-6 apple-card p-6 bg-white/80 backdrop-blur-md">
-              <p className="text-3xl font-bold text-apple-text">5º</p>
+              <p className="text-3xl font-bold text-apple-text">6º</p>
               <p className="text-[10px] font-bold text-apple-secondary uppercase tracking-widest">Semestre C.C</p>
             </div>
           </motion.div>
 
           <article className="order-1 lg:order-2">
-            <motion.p 
+            <motion.p
               initial={{ opacity: 0, y: 10 }}
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
@@ -37,24 +37,24 @@ const About = () => {
             >
               Sobre
             </motion.p>
-            <motion.h2 
+            <motion.h2
               initial={{ opacity: 0, y: 10 }}
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
               transition={{ delay: 0.1 }}
-              id="about-title" 
+              id="about-title"
               className="text-fluid-h2 font-bold tracking-tight text-apple-text mb-8 leading-tight"
             >
-              Transformando código em <br />
-              <span className="text-apple-secondary">experiências de impacto.</span>
+              Tecnologia que reduz trabalho manual <br />
+              e acelera resultados.
             </motion.h2>
-            
+
             <div className="space-y-6 text-apple-text text-fluid-body leading-relaxed font-medium mb-12">
               <p>
-                Como acadêmico de Ciência da Computação na Unifor, minha jornada é movida pela interseção entre <span className="text-apple-blue">design funcional</span> e <span className="text-apple-blue">engenharia robusta</span>.
+                Sou estudante de Ciência da Computação na Unifor com experiência prática em projetos internos e automações de alto impacto. Minha prioridade é entregar soluções que deixam equipes mais produtivas e processos mais confiáveis.
               </p>
               <p>
-                Especializado no ecossistema TypeScript e automações inteligentes, foco em entregar soluções que não apenas resolvem problemas, mas que elevam o padrão de eficiência operacional e experiência do usuário.
+                Trabalho com React, TypeScript e automações em Python para criar sistemas e rotinas que liberam tempo operacional, melhoram a experiência do usuário e suportam decisões mais rápidas.
               </p>
             </div>
 
@@ -62,16 +62,16 @@ const About = () => {
               <div className="p-6 bg-apple-bg rounded-3xl border border-black/5">
                 <div className="flex items-center gap-4 mb-2">
                   <GraduationCap className="w-5 h-5 text-apple-blue" />
-                  <p className="font-bold text-apple-text">Formação Acadêmica</p>
+                  <p className="font-bold text-apple-text">Formação</p>
                 </div>
-                <p className="text-sm text-apple-secondary font-medium leading-relaxed">Bacharelado em Ciência da Computação (Unifor) - 5º Semestre.</p>
+                <p className="text-sm text-apple-secondary font-medium leading-relaxed">Bacharelado em Ciência da Computação (Unifor) - 6º semestre.</p>
               </div>
               <div className="p-6 bg-apple-bg rounded-3xl border border-black/5">
                 <div className="flex items-center gap-4 mb-2">
                   <MapPin className="w-5 h-5 text-apple-blue" />
                   <p className="font-bold text-apple-text">Localização</p>
                 </div>
-                <p className="text-sm text-apple-secondary font-medium leading-relaxed">Baseado em Fortaleza, Ceará. Aberto a projetos globais.</p>
+                <p className="text-sm text-apple-secondary font-medium leading-relaxed">Fortaleza, Ceará — disponível para vagas e projetos remotos.</p>
               </div>
             </div>
           </article>

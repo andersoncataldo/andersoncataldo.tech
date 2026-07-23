@@ -5,6 +5,7 @@ import Hero from './components/Hero';
 // Lazy loading components for better performance
 const About = lazy(() => import('./components/About'));
 const Experience = lazy(() => import('./components/Experience'));
+const Automation = lazy(() => import('./components/Automation'));
 const Skills = lazy(() => import('./components/Skills'));
 const Projects = lazy(() => import('./components/Projects'));
 const Contact = lazy(() => import('./components/Contact'));
@@ -28,6 +29,9 @@ function App() {
         </Suspense>
         <Suspense fallback={<SectionLoader />}>
           <Experience />
+        </Suspense>
+        <Suspense fallback={<SectionLoader />}>
+          <Automation />
         </Suspense>
         <Suspense fallback={<SectionLoader />}>
           <Skills />

@@ -98,18 +98,22 @@ const Projects = () => {
                 </div>
 
                 <h3 className="text-3xl font-bold mb-4 tracking-tight text-apple-text">{project.title}</h3>
-                <p className="text-apple-secondary mb-8 leading-relaxed text-lg font-medium">
+                <p className="text-apple-secondary mb-6 leading-relaxed text-lg font-medium">
                   {project.description}
                 </p>
 
-                <div className="mb-8 p-6 bg-apple-bg rounded-2xl border border-black/5 space-y-4">
+                <div className="mb-8 grid gap-4 p-6 bg-apple-bg rounded-2xl border border-black/5">
                   <div>
-                    <p className="text-[10px] font-bold uppercase tracking-widest text-apple-blue mb-1">Impacto</p>
-                    <p className="text-apple-text font-semibold text-sm">{project.impact}</p>
+                    <p className="text-[10px] font-bold uppercase tracking-widest text-apple-blue mb-1">Problema</p>
+                    <p className="text-apple-text text-sm">{project.challenge}</p>
                   </div>
                   <div>
                     <p className="text-[10px] font-bold uppercase tracking-widest text-apple-secondary mb-1">Solução</p>
                     <p className="text-apple-text text-sm">{project.solution}</p>
+                  </div>
+                  <div>
+                    <p className="text-[10px] font-bold uppercase tracking-widest text-apple-blue mb-1">Resultado</p>
+                    <p className="text-apple-text font-semibold text-sm">{project.result}</p>
                   </div>
                 </div>
 

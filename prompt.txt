@@ -1,16 +1,122 @@
-PS C:\Users\ander\Projetos - Anderson\Projetos Pessoais\andersoncataldo.tech> npm run dev
+# Prompt para IA de Desenvolvimento — Portfólio Anderson Viana Cataldo
 
-> vite-react@0.0.0 dev
-> vite
+> Copie e cole o conteúdo abaixo inteiro na IA que vai desenvolver/refatorar o código (Claude Code, Cursor, v0, etc). Ele já contém contexto, stack, conteúdo real e critérios de aceite.
 
-16:03:03 [vite] warning: `esbuild` option was specified by "vite:react-babel" plugin. This option is deprecated, please use `oxc` instead.
-`optimizeDeps.rollupOptions` / `ssr.optimizeDeps.rollupOptions` is deprecated. Use `optimizeDeps.rolldownOptions` instead. Note that this option may be set by a plugin. Set VITE_DEPRECATION_TRACE=1 to see where it is called.
-[vite:react-babel] We recommend switching to `@vitejs/plugin-react-oxc` for improved performance. More information at https://vite.dev/rolldown
+---
 
-  VITE v8.0.16  ready in 235 ms
+## CONTEXTO
 
-  ➜  Local:   http://localhost:5173/
-  ➜  Network: use --host to expose
-  ➜  press h + enter to show help
-(node:3532) [DEP0205] DeprecationWarning: `module.register()` is deprecated. Use `module.registerHooks()` instead.
-(Use `node --trace-deprecation ...` to show where the warning was created)
+Você vai atuar como um **desenvolvedor front-end sênior + designer de produto**, especialista em portfólios de alta conversão para desenvolvedores. Sua tarefa é evoluir/refatorar meu portfólio pessoal (repositório React já existente) para que ele se torne uma ferramenta de **captação profissional**, capaz de atrair três públicos ao mesmo tempo:
+
+1. **Recrutadores/RH** de empresas de tecnologia (vagas CLT/estágio/júnior).
+2. **Clientes de freelance** (pequenos negócios, agências, empreendedores buscando um dev full-stack).
+3. **Empresas de tecnologia** avaliando contratação direta ou parceria.
+
+O portfólio precisa comunicar, em poucos segundos de leitura, que eu sou um **desenvolvedor full-stack em formação com experiência real de mercado**, especialista em **automação de processos (RPA)** e no **ecossistema React/TypeScript**, com histórico comprovado de gerar ganho de produtividade em ambiente corporativo.
+
+---
+
+## STACK ATUAL (não pode ser descartada, apenas evoluída)
+
+- **React 18** + **TypeScript** + **Vite**
+- **Tailwind CSS v4** (via `@tailwindcss/postcss`)
+- **Framer Motion** para animações
+- **lucide-react** para ícones
+- Estrutura de componentes já existente em `src/components/`: `Navbar`, `Hero`, `About`, `Skills`, `Experience`, `Projects`, `Contact`, `Footer`, `CopyEmail`
+- Design system atual: estética **"Apple-like"** (clean, muito espaço em branco, cantos bem arredondados `rounded-3xl`/`rounded-[40px]`, tipografia fluida `text-fluid-*`, tokens de cor `apple-bg`, `apple-text`, `apple-blue`, `apple-secondary`), com `section-container` e `py-fluid-section` como classes utilitárias padrão.
+- Deploy: **Vercel**
+
+**Regra:** mantenha e refine esse design system — não proponha trocar todo o stack ou a linguagem visual do zero. Evolua com o que já existe, sugerindo melhorias pontuais quando fizer sentido (ex.: dark mode, micro-interações, novos tokens).
+
+---
+
+## MEUS DADOS REAIS (use exatamente estas informações, sem inventar nada)
+
+**Anderson Viana Cataldo** — Fortaleza, Ceará, Brasil
+Graduando em Ciência da Computação (Unifor, 6º semestre) | Contato: +85 99225-8794 | andersonvcataldo@gmail.com
+LinkedIn: linkedin.com/in/andersonnviana | GitHub: github.com/andersoncataldo
+
+### Resumo profissional
+Full-stack com foco em React, Next.js, Node.js e TypeScript. Experiência em integração de bancos relacionais, infraestrutura em nuvem, automações RPA de alto impacto e dashboards analíticos.
+
+### Experiência
+- **Estagiário de T.I — Distribuidora Mais Saúde** (Jun/2026–atual): apps internas em React/Next.js/Tailwind, serviços Node.js integrados a PostgreSQL (Supabase), automações em Python, deploy na Vercel, suporte de infraestrutura (redes, hardware, help desk).
+- **Aprendiz, Setor Fiscal (Sistemas e Projetos) — Grupo 3corações** (Jan/2025–Abr/2026): RPA para extração em massa de XML, interação com interfaces web, preenchimento automatizado de planilhas, dashboards analíticos, controle de chamados.
+
+### Projetos
+- **Plataforma Gamificada São Carlo Acutis** — React, TypeScript, Tailwind, Java/Spring Boot, PostgreSQL (Neon), Vercel. Repo: `github.com/andersoncataldo/CarloAcutis` | Deploy: `carlo-acutis-virid.vercel.app`
+- **Portfólio Web** — React, TypeScript, Tailwind, Vercel. Repo: `github.com/andersoncataldo/andersoncataldo.tech`
+
+### Skills técnicas
+React, Next.js, Vue.js, TypeScript, JavaScript, Tailwind CSS, HTML5, CSS3, Python (Django, Pandas, Selenium, Webdriver, Pyautogui), Java (Spring Boot), Node.js (Express), SQL, PostgreSQL, Neon, Supabase, MongoDB, Git/GitHub, Vercel, Figma, Trello, RPA.
+
+### Idiomas
+Português nativo, Inglês avançado, Espanhol iniciante.
+
+---
+
+## OBJETIVOS DE CONVERSÃO (o que o site precisa fazer)
+
+1. Deixar claro em **menos de 5 segundos** (Hero) quem eu sou, o que faço e para quem eu sirvo.
+2. Ter **prova social/técnica**: projetos com link ao vivo, não só repositório — recrutador e cliente precisam conseguir *ver* o resultado funcionando.
+3. Diferenciar claramente duas frentes de atuação (isso é o meu maior diferencial):
+   - **Desenvolvimento full-stack** (para recrutadores/vagas).
+   - **Automação de processos / RPA** (para empresas/PMEs que querem economizar tempo operacional — ótimo gancho de freelance).
+4. Ter **CTAs específicos por público**: um botão/seção para "quero contratar para vaga" (currículo em PDF + LinkedIn) e outro para "quero um projeto/automação" (WhatsApp/e-mail direto, com resposta rápida esperada).
+5. Passar credibilidade de alguém **em formação, mas já com impacto real de mercado** — sem soar júnior demais nem exagerar experiência que não tenho.
+
+---
+
+## ESTRUTURA DE CONTEÚDO ESPERADA
+
+1. **Navbar** — fixa, com âncoras suaves, CTA de destaque ("Baixar CV" ou "Fale comigo").
+2. **Hero** — headline forte (não genérica tipo "Olá, sou dev"), subheadline explicando as duas frentes (dev full-stack + automação), CTAs duplos (contratar / freelance), foto ou elemento visual, indicadores rápidos (ex.: "6º semestre CC", "2 experiências profissionais", "RPA/automação").
+3. **Sobre** — narrativa curta ligando formação + experiência real + o tipo de problema que gosto de resolver.
+4. **Experiência** — linha do tempo/cards com as duas experiências reais, destacando **resultados e impacto** (produtividade, automação, dashboards), não só lista de tecnologias.
+5. **Projetos** — cards com preview/deploy ao vivo, stack usada, link de código e link de demo, 1 frase de "problema resolvido" por projeto (evite descrição genérica de tech).
+6. **Skills** — agrupadas por categoria (Frontend, Backend, Dados/Infra, Automação/RPA, Ferramentas), com peso visual maior para o que mais me diferencia.
+7. **Seção de automação/RPA em destaque** — algo que a maioria dos portfólios de dev júnior não tem; vender isso como serviço para empresas (ex.: "automatizo tarefas manuais repetitivas e libero seu time para o que importa").
+8. **Contato** — dois caminhos claros (recrutador vs cliente), e-mail com copiar/colar, WhatsApp, link do CV em PDF, redes sociais.
+9. **Footer** — minimalista, com links rápidos e disponibilidade atual (ex.: "Aberto a oportunidades" / "Aceitando projetos freelance").
+
+---
+
+## DIRETRIZES DE COPY (texto)
+
+- Tom: profissional, direto, confiante — sem arrogância e sem clichês genéricos de portfólio ("apaixonado por tecnologia desde criança").
+- Frases curtas, foco em **resultado e impacto**, não em lista de tarefas.
+- Sempre que possível, transformar responsabilidade em resultado (ex.: "criei automações em Python" → "reduzi tempo de tarefas manuais repetitivas, liberando a equipe para atividades estratégicas").
+- Evitar jargão técnico excessivo nas seções voltadas a clientes de freelance (eles não sabem o que é "Supabase"); reservar tecnicalidade para a seção de skills/projetos.
+- Todo o conteúdo em **português do Brasil**, revisado gramaticalmente.
+
+---
+
+## REQUISITOS TÉCNICOS E DE QUALIDADE
+
+- **Responsividade** mobile-first real (não só "funciona", mas bem cuidado em breakpoints intermediários).
+- **Acessibilidade**: contraste adequado, `aria-label`, navegação por teclado, textos alternativos em imagens.
+- **Performance**: lazy loading de imagens, evitar re-renders desnecessários, otimizar animações do Framer Motion para não travar em mobile.
+- **SEO básico**: `title`, `meta description`, Open Graph (para quando o link for compartilhado no LinkedIn/WhatsApp), favicon, `lang="pt-BR"`.
+- **Micro-interações**: hover states, transições suaves já usando Framer Motion existente — sem exagerar a ponto de distrair.
+- Código limpo, tipado, componentizado, sem quebrar a arquitetura atual de pastas.
+- Sugerir (opcional) dark mode, já que o design system usa tokens `apple-*` fáceis de estender.
+
+---
+
+## FORMATO DE ENTREGA ESPERADO
+
+Ao responder:
+
+1. Comece com um **diagnóstico rápido** do que já existe (pontos fortes e gaps do portfólio atual) antes de propor mudanças.
+2. Proponha a **estrutura final de seções** (pode reorganizar a ordem se justificar).
+3. Entregue o código **componente por componente**, respeitando os arquivos existentes (`Hero.tsx`, `About.tsx`, etc.), mantendo o design system atual.
+4. Ao final, liste **melhorias futuras opcionais** (ex.: blog técnico, seção de depoimentos, integração com formulário via e-mail/Resend, analytics).
+
+---
+
+## O QUE EVITAR
+
+- Não inventar experiências, certificações ou projetos que não constam nos meus dados reais.
+- Não usar templates genéricos de "portfólio de dev" (paleta roxo/gradiente, ícones de foguete, textos tipo "Full Stack Developer 🚀").
+- Não remover a estética Apple-like já construída.
+- Não deixar o site parecendo só "para recrutador" nem só "para cliente" — o equilíbrio entre as duas frentes é o diferencial.

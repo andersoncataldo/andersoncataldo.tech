@@ -7,41 +7,41 @@ const experiences: ExperienceType[] = [
     title: 'Estagiário de T.I',
     company: 'Distribuidora Mais Saúde',
     period: 'Jun/2026 - Atual',
-    location: 'Ceará, Brasil',
+    location: 'Fortaleza, Ceará',
     results: [
-      'Engenharia de Front-End com Next.js e Tailwind CSS para sistemas de missão crítica, priorizando performance e Core Web Vitals.',
-      'Desenvolvimento de APIs robustas em Node.js com integração nativa ao PostgreSQL via Supabase para gestão em tempo real.',
-      'Implementação de fluxos de CI/CD automatizados na Vercel, reduzindo significativamente o tempo de entrega de novas features.',
-      'Liderança técnica na organização de demandas internas através do Trello, elevando a transparência e agilidade do time.'
+      'Criação de apps internos com Next.js e Tailwind que simplificaram processos de atendimento e análise de dados.',
+      'Geração de APIs em Node.js com PostgreSQL via Supabase para entregar dados em tempo real a equipes operacionais.',
+      'Automatização de deploys na Vercel e organização de demandas em Trello para acelerar a entrega de novas funcionalidades.',
+      'Suporte técnico e infraestrutura para reduzir interrupções em sistemas internos e manter a rotina do time fluida.'
     ],
-    stack: ['Next.js', 'React', 'Node.js', 'PostgreSQL', 'Vercel'],
+    stack: ['Next.js', 'React', 'Node.js', 'PostgreSQL', 'Supabase', 'Vercel'],
     type: 'work',
   },
   {
     title: 'Aprendiz – Setor Fiscal | Sistemas e Projetos',
     company: 'Grupo 3Corações',
     period: 'Jan/2025 - Abr/2026',
-    location: 'Ceará, Brasil',
+    location: 'Fortaleza, Ceará',
     results: [
-      'Arquitetura de soluções RPA de alto impacto, automatizando a extração em massa de XMLs e eliminando erros manuais críticos.',
-      'Conversão de fluxos operacionais legados em rotinas automatizadas, gerando um ganho de produtividade superior a 80%.',
-      'Desenvolvimento de dashboards analíticos para monitoramento de KPIs e tomada de decisão baseada em dados reais.',
-      'Estruturação de documentações técnicas de alto nível para garantir a manutenibilidade e escalabilidade dos sistemas.'
+      'Desenvolvimento de automações RPA para extração em massa de XMLs, reduzindo checagens manuais e retrabalho.',
+      'Transformação de processos repetitivos em rotinas automatizadas, proporcionando ganho de produtividade e maior confiabilidade.',
+      'Construção de dashboards que reuniram indicadores fiscais e operacionais, facilitando decisões baseadas em dados.',
+      'Documentação técnica estruturada para garantir manutenibilidade e facilitar futuras melhorias nas automações.'
     ],
-    stack: ['Python', 'RPA', 'Excel Automation', 'Dashboards'],
+    stack: ['Python', 'RPA', 'Excel', 'Dashboards', 'Automação'],
     type: 'work',
   },
   {
     title: 'Bacharelado em Ciência da Computação',
     company: 'Universidade de Fortaleza (Unifor)',
     period: 'Jan/2024 - Atual',
-    location: 'Ceará, Brasil',
+    location: 'Fortaleza, Ceará',
     results: [
-      'Foco em Engenharia de Software, Algoritmos e Desenvolvimento Full-Stack.',
-      'Atualmente no 5º semestre, com sólida base acadêmica e prática.',
-      'Desenvolvimento de projetos focados em performance e escalabilidade.'
+      'Foco em engenharia de software, APIs e desenvolvimento full-stack com ênfase em TypeScript.',
+      'Atualmente no 6º semestre com experiência prática em projetos corporativos e automações de fluxo.',
+      'Melhoria contínua na forma de transformar teoria em soluções aplicáveis e confiáveis.'
     ],
-    stack: ['Engenharia de Software', 'Algoritmos', 'Full-Stack'],
+    stack: ['Engenharia de Software', 'Algoritmos', 'TypeScript', 'Full-Stack'],
     type: 'education',
   },
 ];
@@ -51,7 +51,7 @@ const Experience = () => {
     <section id="experiencia" className="py-fluid-section bg-apple-bg" aria-labelledby="experience-title">
       <div className="section-container">
         <div className="mb-16">
-          <motion.p 
+          <motion.p
             initial={{ opacity: 0, y: 10 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
@@ -59,12 +59,12 @@ const Experience = () => {
           >
             Carreira
           </motion.p>
-          <motion.h2 
+          <motion.h2
             initial={{ opacity: 0, y: 10 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
             transition={{ delay: 0.1 }}
-            id="experience-title" 
+            id="experience-title"
             className="text-fluid-h2 font-bold tracking-tight text-apple-text leading-tight"
           >
             Trajetória Profissional
