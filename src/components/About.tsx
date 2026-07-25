@@ -4,7 +4,7 @@ import { MapPin, GraduationCap } from 'lucide-react';
 
 const About = () => {
   return (
-    <section id="sobre" className="py-fluid-section bg-white" aria-labelledby="about-title">
+    <section id="sobre" className="py-fluid-section bg-white dark:bg-slate-950" aria-labelledby="about-title">
       <div className="section-container">
         <div className="grid lg:grid-cols-2 gap-16 items-center">
           <motion.div
@@ -71,7 +71,7 @@ const About = () => {
                   <MapPin className="w-5 h-5 text-apple-blue" />
                   <p className="font-bold text-apple-text">Localização</p>
                 </div>
-                <p className="text-sm text-apple-secondary font-medium leading-relaxed">Fortaleza, Ceará — disponível para vagas e projetos remotos.</p>
+                <p className="text-sm text-apple-secondary font-medium leading-relaxed">Fortaleza, Ceará — disponível para oportunidades em desenvolvimento e automação.</p>
               </div>
             </div>
           </article>

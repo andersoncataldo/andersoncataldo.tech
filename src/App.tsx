@@ -1,5 +1,5 @@
-import { Suspense, lazy } from 'react';
-import Navbar from './components/Navbar';
+import { Suspense, lazy, useEffect, useState } from 'react';
+import Sidebar from './components/Sidebar';
 import Hero from './components/Hero';
 
 // Lazy loading components for better performance
@@ -19,10 +19,32 @@ const SectionLoader = () => (
 );
 
 function App() {
+  const [theme, setTheme] = useState<'light' | 'dark'>(() => {
+    if (typeof window === 'undefined') {
+      return 'light';
+    }
+    const savedTheme = window.localStorage.getItem('portfolio-theme');
+    if (savedTheme === 'light' || savedTheme === 'dark') {
+      return savedTheme;
+    }
+    return window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light';
+  });
+
+  const [collapsed, setCollapsed] = useState(false);
+
+  useEffect(() => {
+    document.documentElement.classList.toggle('dark', theme === 'dark');
+    window.localStorage.setItem('portfolio-theme', theme);
+  }, [theme]);
+
+  const handleThemeToggle = () => {
+    setTheme((current) => (current === 'dark' ? 'light' : 'dark'));
+  };
+
   return (
-    <div className="min-h-screen bg-white selection:bg-apple-blue/10">
-      <Navbar />
-      <main>
+    <div className={`min-h-screen bg-apple-bg text-apple-text selection:bg-apple-blue/10 transition-colors duration-300 ${collapsed ? 'lg:pl-20' : 'lg:pl-72'}`}>
+      <Sidebar theme={theme} onThemeToggle={handleThemeToggle} collapsed={collapsed} setCollapsed={setCollapsed} />
+      <main className="relative">
         <Hero />
         <Suspense fallback={<SectionLoader />}>
           <About />

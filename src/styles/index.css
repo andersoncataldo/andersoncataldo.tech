@@ -5,6 +5,11 @@
   --color-apple-text: #1d1d1f;
   --color-apple-secondary: #86868b;
   --color-apple-blue: #0066cc;
+
+  --color-apple-bg-dark: #071521;
+  --color-apple-text-dark: #f8fafc;
+  --color-apple-secondary-dark: #94a3b8;
+  --color-apple-blue-dark: #60a5fa;
   
   --color-primary-500: #0066cc;
 
@@ -20,27 +25,37 @@
 }
 
 @layer base {
+  html {
+    color-scheme: light;
+    @apply scroll-smooth;
+  }
+
+  html.dark {
+    color-scheme: dark;
+    --color-apple-bg: var(--color-apple-bg-dark);
+    --color-apple-text: var(--color-apple-text-dark);
+    --color-apple-secondary: var(--color-apple-secondary-dark);
+    --color-apple-blue: var(--color-apple-blue-dark);
+  }
+
   body {
-    @apply bg-white text-apple-text antialiased;
+    @apply bg-apple-bg text-apple-text antialiased;
     font-family: var(--font-sans);
   }
 
   ::selection {
     @apply bg-apple-blue/10;
   }
-
-  html {
-    @apply scroll-smooth;
-  }
 }
 
 @layer components {
   .glass {
-    @apply bg-white/70 backdrop-blur-xl border border-white/20;
+    @apply bg-white/70 backdrop-blur-xl border border-white/20 dark:bg-slate-950/70 dark:border-white/10;
   }
 
   .apple-card {
     @apply bg-white rounded-apple shadow-[0_4px_24px_rgba(0,0,0,0.04)] border border-black/5 overflow-hidden transition-all duration-500 hover:shadow-[0_8px_40px_rgba(0,0,0,0.08)];
+    @apply dark:bg-slate-950 dark:border-white/10 dark:text-slate-100;
   }
 
   .section-container {

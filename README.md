@@ -1,27 +1,28 @@
 # Portfólio de Anderson Viana Cataldo
 
 Este repositório contém o portfólio pessoal de **Anderson Viana Cataldo**, desenvolvido com **React 18 + TypeScript + Vite**.
-A aplicação foi construída para ser uma vitrine profissional com foco em recrutadores, clientes de freelance e empresas que buscam automação de processos.
+O site é uma vitrine de carreira, com foco em trajetória profissional, habilidades técnicas e resultados de projetos e automações.
 
 ## O que está incluído
 
 ### Seções do site
-- `src/App.tsx` - ponto de entrada da aplicação e renderização das seções.
-- `src/components/Navbar.tsx` - navegação fixa com âncoras e CTAs claros.
-- `src/components/Hero.tsx` - apresentação imediata com headline, diferenciais e botões para vaga ou automação.
-- `src/components/About.tsx` - resumo profissional e formação.
-- `src/components/Experience.tsx` - experiências reais com resultados, impacto e tecnologias.
-- `src/components/Automation.tsx` - seção de destaque para serviços de automação/RPA.
-- `src/components/Skills.tsx` - categorias de habilidades técnicas e mindset profissional.
-- `src/components/Projects.tsx` - projetos com problema, solução, resultado, stack e links.
-- `src/components/Contact.tsx` - contatos segmentados para recrutador e cliente, com WhatsApp, e-mail, LinkedIn e currículo.
-- `src/components/Footer.tsx` - rodapé simples com links rápidos.
-- `src/components/CopyEmail.tsx` - botão para copiar e-mail com feedback visual.
+- `src/App.tsx` - ponto de entrada da aplicação, layout de página e lógica de tema.
+- `src/components/Sidebar.tsx` - sidebar fixa à esquerda com navegação principal, links externos e toggle de tema.
+- `src/components/Hero.tsx` - apresentação inicial com destaque para diferencial técnico e carreira.
+- `src/components/About.tsx` - perfil profissional, formação e localização.
+- `src/components/Experience.tsx` - experiência profissional e acadêmica com resultados e stack.
+- `src/components/Automation.tsx` - destaque técnico para automação de processos e estabilidade operacional.
+- `src/components/Skills.tsx` - stack técnica, infraestrutura e mindset profissional.
+- `src/components/Projects.tsx` - projetos selecionados com problema, solução, resultado e tecnologies.
+- `src/components/Contact.tsx` - contato neutro e profissional com e-mail, LinkedIn e currículo.
+- `src/components/Footer.tsx` - rodapé simples com links externos.
+- `src/components/CopyEmail.tsx` - botão para copiar e-mail com feedback.
 
 ### Estilo e arquitetura
-- `src/styles/index.css` - tokens de design, tipografia fluida, utilitários e componentes estilo Apple-like.
-- `framer-motion` para micro-interações suaves.
-- `lucide-react` para ícones com boa acessibilidade.
+- `src/styles/index.css` - tokens de design Apple-like, utilitários e dark mode.
+- `framer-motion` para animações suaves e leitura visual.
+- `lucide-react` para ícones consistentes.
+- Dark mode real suportado com persistência de preferência via `localStorage`.
 
 ## Dependências principais
 - `react`
@@ -55,19 +56,19 @@ npm run build
 ```
 
 ## Principais melhorias aplicadas
-- Adição de seção dedicada a **Automação / RPA** para destacar diferencial estratégico.
-- Atualização dos projetos para exibir claramente **problema, solução e resultado**.
-- CTA de contato segmentado entre **vaga** e **projeto/automação**.
-- Melhoria da navegação mobile com `aria-label` mais descritivo.
-- Manutenção do design system Apple-like e da arquitetura existente.
+- Adição de sidebar fixa à esquerda com navegação por seções e menu móvel.
+- Implementação de modo claro/escuro com persistência do tema.
+- Neutralização do tom comercial em favor de foco em carreira e resultados.
+- Remoção de CTAs de contratação/serviços e contato unificado e profissional.
+- Atualização da navegação e do conteúdo para um portfólio de carreira mais claro.
 
 ## Como explorar o repositório
 
-- Verifique `src/App.tsx` para ver a ordem das seções.
-- Abra cada componente em `src/components/` para entender como o conteúdo está organizado.
-- Veja `src/styles/index.css` para os tokens de estilo e utilitários compartilhados.
-- Consulte `public/` para recursos estáticos e `index.html` para metadata básica.
+- Veja `src/App.tsx` para a ordem e o layout das seções.
+- Abra `src/components/Sidebar.tsx` para a implementação da navegação e do tema.
+- Consulte `src/styles/index.css` para os tokens de paleta e o suporte ao modo escuro.
+- Repare em `src/components/Contact.tsx` para o contato neutro e profissional.
 
-## O objetivo do portfólio
+## Objetivo do portfólio
 
-O site foi desenhado para comunicar rapidamente que Anderson é um **desenvolvedor full-stack em formação** com experiência prática, especializado em **automação de processos (RPA)** e **React/TypeScript**, gerando impacto real em ambientes corporativos.
+Este site apresenta Anderson como um desenvolvedor full-stack em formação com foco em **automação de processos**, **React/TypeScript** e entregas que reduzem trabalho manual e melhoram produtividade.

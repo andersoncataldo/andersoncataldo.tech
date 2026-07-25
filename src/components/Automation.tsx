@@ -1,5 +1,5 @@
 import { motion } from 'framer-motion';
-import { Zap, Cpu, FileText, ArrowRight } from 'lucide-react';
+import { Zap, Cpu, FileText } from 'lucide-react';
 
 const Automation = () => {
   return (
@@ -79,20 +79,13 @@ const Automation = () => {
                   <FileText className="w-6 h-6" aria-hidden="true" />
                 </div>
                 <div>
-                  <p className="uppercase text-[10px] tracking-widest text-white/70 mb-1">Proposta</p>
-                  <h3 className="text-xl font-bold">Automação como serviço</h3>
+                  <p className="uppercase text-[10px] tracking-widest text-white/70 mb-1">Resultados</p>
+                  <h3 className="text-xl font-bold">Estabilidade operacional</h3>
                 </div>
               </div>
-              <p className="text-white/80 leading-relaxed font-medium mb-6">
-                Ideal para pequenas empresas e times internos que precisam reduzir retrabalho e ganhar agilidade com automações práticas e fáceis de operar.
+              <p className="text-white/80 leading-relaxed font-medium">
+                Entregas focadas em reduzir retrabalho e garantir rotinas confiáveis em operações que dependem de dados e integração entre sistemas.
               </p>
-              <a
-                href="#contato"
-                className="inline-flex items-center gap-2 font-bold bg-white text-apple-text px-4 py-3 rounded-full hover:bg-white/90 transition-all"
-              >
-                Solicitar proposta
-                <ArrowRight className="w-4 h-4" />
-              </a>
             </article>
           </motion.div>
         </div>

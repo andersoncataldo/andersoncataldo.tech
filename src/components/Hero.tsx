@@ -1,9 +1,8 @@
 import { motion } from 'framer-motion';
-import { ArrowRight } from 'lucide-react';
 
 const Hero = () => {
   return (
-    <section className="relative min-h-[94vh] flex items-center justify-center overflow-hidden bg-white pt-20" aria-label="Introdução">
+    <section className="relative min-h-[94vh] flex items-center justify-center overflow-hidden bg-white dark:bg-slate-950 pt-20" aria-label="Introdução">
       <div className="section-container relative z-10">
         <div className="text-center">
           <motion.div
@@ -45,37 +44,19 @@ const Hero = () => {
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.8, delay: 0.3 }}
-            className="grid gap-4 sm:grid-cols-[1fr_auto] items-center justify-center"
+            className="grid gap-4 sm:grid-cols-2 md:grid-cols-3"
           >
-            <div className="grid gap-4 sm:grid-cols-2 md:grid-cols-3">
-              <div className="apple-card p-6 text-left">
-                <p className="text-apple-secondary uppercase text-[10px] tracking-widest mb-3">Formação</p>
-                <p className="text-lg font-bold text-apple-text">6º semestre em Ciência da Computação</p>
-              </div>
-              <div className="apple-card p-6 text-left">
-                <p className="text-apple-secondary uppercase text-[10px] tracking-widest mb-3">Experiência</p>
-                <p className="text-lg font-bold text-apple-text">Apps internos e automações corporativas</p>
-              </div>
-              <div className="apple-card p-6 text-left">
-                <p className="text-apple-secondary uppercase text-[10px] tracking-widest mb-3">Diferencial</p>
-                <p className="text-lg font-bold text-apple-text">React/TypeScript + RPA</p>
-              </div>
+            <div className="apple-card p-6 text-left">
+              <p className="text-apple-secondary uppercase text-[10px] tracking-widest mb-3">Formação</p>
+              <p className="text-lg font-bold text-apple-text">6º semestre em Ciência da Computação</p>
             </div>
-
-            <div className="flex flex-col sm:flex-row items-center gap-4 justify-center">
-              <a
-                href="#contato"
-                className="w-full sm:w-auto bg-apple-text text-white px-8 py-4 rounded-full font-bold text-lg transition-all hover:bg-zinc-950 active:scale-95 shadow-xl shadow-black/10"
-              >
-                Quero vaga
-              </a>
-              <a
-                href="#rpa"
-                className="w-full sm:w-auto inline-flex items-center justify-center gap-2 bg-apple-bg text-apple-text px-8 py-4 rounded-full font-bold text-lg border border-black/5 transition-all hover:bg-white active:scale-95 shadow-sm"
-              >
-                Preciso de automação
-                <ArrowRight className="w-5 h-5" />
-              </a>
+            <div className="apple-card p-6 text-left">
+              <p className="text-apple-secondary uppercase text-[10px] tracking-widest mb-3">Experiência</p>
+              <p className="text-lg font-bold text-apple-text">Apps internos e automações corporativas</p>
+            </div>
+            <div className="apple-card p-6 text-left">
+              <p className="text-apple-secondary uppercase text-[10px] tracking-widest mb-3">Diferencial</p>
+              <p className="text-lg font-bold text-apple-text">React/TypeScript + RPA</p>
             </div>
           </motion.div>
 

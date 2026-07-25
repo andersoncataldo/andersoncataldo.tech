@@ -25,38 +25,11 @@ const Contact = () => {
               id="contact-title"
               className="text-fluid-h2 font-bold tracking-tight text-apple-text mb-8 leading-tight"
             >
-              Dois caminhos claros: vaga ou projeto.
+              Contato profissional para oportunidades e crescimento técnico.
             </motion.h2>
             <p className="text-apple-secondary text-xl mb-12 leading-relaxed font-medium max-w-xl">
-              Estou à disposição para oportunidades de carreira e parcerias em automação. Escolha o canal que faz mais sentido para sua demanda e receba uma resposta rápida.
+              Prefiro conversas diretas sobre oportunidades, demandas de desenvolvimento e automações que tragam impacto ao time.
             </p>
-
-            <div className="grid gap-4 sm:grid-cols-2">
-              <a
-                href="mailto:andersonvcataldo@gmail.com?subject=Oportunidade de vaga"
-                className="apple-card p-6 border border-black/5 hover:shadow-lg transition-all"
-                aria-label="Contato por e-mail para vaga"
-              >
-                <p className="text-xs uppercase tracking-widest text-apple-secondary mb-2">Recrutadores</p>
-                <h3 className="text-xl font-bold text-apple-text mb-3">Vaga CLT/estágio/júnior</h3>
-                <p className="text-apple-secondary leading-relaxed font-medium">
-                  Receba meu currículo técnico e roadmap de carreira para vagas de front-end, back-end e energia em projetos corporativos.
-                </p>
-              </a>
-              <a
-                href="https://wa.me/5585992258794?text=Olá,%20Anderson.%20Tenho%20interesse%20em%20uma%20automação%20ou%20projeto%20digital."
-                target="_blank"
-                rel="noopener noreferrer"
-                className="apple-card p-6 border border-black/5 hover:shadow-lg transition-all"
-                aria-label="Contato por WhatsApp para projeto ou automação"
-              >
-                <p className="text-xs uppercase tracking-widest text-apple-secondary mb-2">Clientes</p>
-                <h3 className="text-xl font-bold text-apple-text mb-3">Projeto ou automação</h3>
-                <p className="text-apple-secondary leading-relaxed font-medium">
-                  Converse sobre um projeto, rotina a ser automatizada ou solução que reduza horas de trabalho manual no seu negócio.
-                </p>
-              </a>
-            </div>
           </div>
 
           <div className="grid gap-6 w-full">

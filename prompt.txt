@@ -1,122 +1,94 @@
-# Prompt para IA de Desenvolvimento — Portfólio Anderson Viana Cataldo
+# Prompt — Rodada 2 de Melhorias do Portfólio (Auditoria + Sidebar + Ajustes de Escopo)
 
-> Copie e cole o conteúdo abaixo inteiro na IA que vai desenvolver/refatorar o código (Claude Code, Cursor, v0, etc). Ele já contém contexto, stack, conteúdo real e critérios de aceite.
+> Copie e cole o conteúdo abaixo inteiro na IA de desenvolvimento (junto do repomix atualizado do projeto). O prompt é dividido em fases sequenciais — siga a ordem.
 
 ---
 
 ## CONTEXTO
 
-Você vai atuar como um **desenvolvedor front-end sênior + designer de produto**, especialista em portfólios de alta conversão para desenvolvedores. Sua tarefa é evoluir/refatorar meu portfólio pessoal (repositório React já existente) para que ele se torne uma ferramenta de **captação profissional**, capaz de atrair três públicos ao mesmo tempo:
+Este portfólio já passou por uma primeira rodada de melhorias (React + TypeScript + Vite + Tailwind CSS v4 + Framer Motion + lucide-react, com design system "Apple-like": tokens `apple-bg`, `apple-text`, `apple-blue`, `apple-secondary`, `section-container`, `py-fluid-section`). A melhoria anterior trouxe ganhos reais, mas ainda existem gargalos técnicos e de UX/UI que precisam ser corrigidos, além de dois ajustes de direção que mudam o propósito de algumas seções.
 
-1. **Recrutadores/RH** de empresas de tecnologia (vagas CLT/estágio/júnior).
-2. **Clientes de freelance** (pequenos negócios, agências, empreendedores buscando um dev full-stack).
-3. **Empresas de tecnologia** avaliando contratação direta ou parceria.
+**Regra geral inegociável:** este é um **portfólio de carreira**, não uma landing page de vendas. Seu objetivo é mostrar trajetória, habilidades e experiências — **não captar clientes de freelance nem candidatos a vaga por meio de CTAs comerciais**. Qualquer sugestão de "venda de serviço" deve ser descartada.
 
-O portfólio precisa comunicar, em poucos segundos de leitura, que eu sou um **desenvolvedor full-stack em formação com experiência real de mercado**, especialista em **automação de processos (RPA)** e no **ecossistema React/TypeScript**, com histórico comprovado de gerar ganho de produtividade em ambiente corporativo.
+**Regra de escopo:** implemente **exatamente** o que está descrito neste prompt, nas 3 fases abaixo, na ordem indicada. Não crie funcionalidades, seções, páginas ou textos que não foram pedidos aqui. Se identificar algo relevante fora do escopo durante a auditoria, **liste como sugestão na Fase 3**, mas não implemente sem aprovação.
 
 ---
 
-## STACK ATUAL (não pode ser descartada, apenas evoluída)
+## FASE 1 — AUDITORIA COMPLETA (somente diagnóstico, sem alterar código ainda)
 
-- **React 18** + **TypeScript** + **Vite**
-- **Tailwind CSS v4** (via `@tailwindcss/postcss`)
-- **Framer Motion** para animações
-- **lucide-react** para ícones
-- Estrutura de componentes já existente em `src/components/`: `Navbar`, `Hero`, `About`, `Skills`, `Experience`, `Projects`, `Contact`, `Footer`, `CopyEmail`
-- Design system atual: estética **"Apple-like"** (clean, muito espaço em branco, cantos bem arredondados `rounded-3xl`/`rounded-[40px]`, tipografia fluida `text-fluid-*`, tokens de cor `apple-bg`, `apple-text`, `apple-blue`, `apple-secondary`), com `section-container` e `py-fluid-section` como classes utilitárias padrão.
-- Deploy: **Vercel**
+Antes de qualquer alteração, faça uma varredura completa do projeto e produza um relatório cobrindo:
 
-**Regra:** mantenha e refine esse design system — não proponha trocar todo o stack ou a linguagem visual do zero. Evolua com o que já existe, sugerindo melhorias pontuais quando fizer sentido (ex.: dark mode, micro-interações, novos tokens).
+1. **Qualidade de código**
+   - Componentes com lógica confusa, duplicada ou mal organizada.
+   - Funções sem propósito claro, código morto, imports não usados, tipagem fraca ou `any` desnecessário.
+   - Inconsistências de padrão entre componentes (nomenclatura, estrutura de props, organização de pastas).
+2. **UI/UX**
+   - Bugs visuais (quebras de layout, overflow, espaçamentos inconsistentes, contraste ruim).
+   - Problemas de responsividade em mobile/tablet/desktop.
+   - Animações do Framer Motion que travam, são exageradas ou prejudicam performance.
+   - Problemas de acessibilidade (falta de `aria-label`, foco de teclado, textos alternativos).
+3. **Fluxo e arquitetura**
+   - Navegação confusa ou âncoras quebradas.
+   - Seções redundantes ou que não agregam ao objetivo de "portfólio de carreira".
+   - Performance geral (imagens não otimizadas, lazy loading ausente, re-renders desnecessários).
 
----
-
-## MEUS DADOS REAIS (use exatamente estas informações, sem inventar nada)
-
-**Anderson Viana Cataldo** — Fortaleza, Ceará, Brasil
-Graduando em Ciência da Computação (Unifor, 6º semestre) | Contato: +85 99225-8794 | andersonvcataldo@gmail.com
-LinkedIn: linkedin.com/in/andersonnviana | GitHub: github.com/andersoncataldo
-
-### Resumo profissional
-Full-stack com foco em React, Next.js, Node.js e TypeScript. Experiência em integração de bancos relacionais, infraestrutura em nuvem, automações RPA de alto impacto e dashboards analíticos.
-
-### Experiência
-- **Estagiário de T.I — Distribuidora Mais Saúde** (Jun/2026–atual): apps internas em React/Next.js/Tailwind, serviços Node.js integrados a PostgreSQL (Supabase), automações em Python, deploy na Vercel, suporte de infraestrutura (redes, hardware, help desk).
-- **Aprendiz, Setor Fiscal (Sistemas e Projetos) — Grupo 3corações** (Jan/2025–Abr/2026): RPA para extração em massa de XML, interação com interfaces web, preenchimento automatizado de planilhas, dashboards analíticos, controle de chamados.
-
-### Projetos
-- **Plataforma Gamificada São Carlo Acutis** — React, TypeScript, Tailwind, Java/Spring Boot, PostgreSQL (Neon), Vercel. Repo: `github.com/andersoncataldo/CarloAcutis` | Deploy: `carlo-acutis-virid.vercel.app`
-- **Portfólio Web** — React, TypeScript, Tailwind, Vercel. Repo: `github.com/andersoncataldo/andersoncataldo.tech`
-
-### Skills técnicas
-React, Next.js, Vue.js, TypeScript, JavaScript, Tailwind CSS, HTML5, CSS3, Python (Django, Pandas, Selenium, Webdriver, Pyautogui), Java (Spring Boot), Node.js (Express), SQL, PostgreSQL, Neon, Supabase, MongoDB, Git/GitHub, Vercel, Figma, Trello, RPA.
-
-### Idiomas
-Português nativo, Inglês avançado, Espanhol iniciante.
+**Entregável da Fase 1:** um relatório objetivo (lista com item → problema → risco/impacto), sem ainda alterar nada no código. Só avance para a Fase 2 depois de listar isso.
 
 ---
 
-## OBJETIVOS DE CONVERSÃO (o que o site precisa fazer)
+## FASE 2 — IMPLEMENTAÇÕES (mudanças de direção definidas por mim)
 
-1. Deixar claro em **menos de 5 segundos** (Hero) quem eu sou, o que faço e para quem eu sirvo.
-2. Ter **prova social/técnica**: projetos com link ao vivo, não só repositório — recrutador e cliente precisam conseguir *ver* o resultado funcionando.
-3. Diferenciar claramente duas frentes de atuação (isso é o meu maior diferencial):
-   - **Desenvolvimento full-stack** (para recrutadores/vagas).
-   - **Automação de processos / RPA** (para empresas/PMEs que querem economizar tempo operacional — ótimo gancho de freelance).
-4. Ter **CTAs específicos por público**: um botão/seção para "quero contratar para vaga" (currículo em PDF + LinkedIn) e outro para "quero um projeto/automação" (WhatsApp/e-mail direto, com resposta rápida esperada).
-5. Passar credibilidade de alguém **em formação, mas já com impacto real de mercado** — sem soar júnior demais nem exagerar experiência que não tenho.
+### 2.1 Remover CTAs comerciais
+- Remover **todos** os botões e blocos de texto do tipo "Quero contratar/vaga" e "Quero um projeto/automação" (ou qualquer variação de CTA comercial que tenha sido adicionada na rodada anterior).
+- Os links de contato (e-mail, WhatsApp, LinkedIn, CV em PDF) podem continuar existindo, mas de forma **neutra e informativa** — sem linguagem de venda, sem separar visualmente "recrutador" vs "cliente". É uma seção de contato única, direta e profissional.
+- Revisar todo o copy do site em busca de qualquer resquício de tom comercial ("contrate-me para...", "seu projeto...", etc.) e neutralizar para tom de portfólio de carreira.
 
----
+### 2.2 Sidebar lateral esquerda (estilo Claude)
 
-## ESTRUTURA DE CONTEÚDO ESPERADA
+Estou anexando 2 imagens de referência (interface do Claude.ai) que devem servir de **modelo estrutural** — adapte ao conteúdo do meu portfólio, sem copiar textos/nomes do Claude.
 
-1. **Navbar** — fixa, com âncoras suaves, CTA de destaque ("Baixar CV" ou "Fale comigo").
-2. **Hero** — headline forte (não genérica tipo "Olá, sou dev"), subheadline explicando as duas frentes (dev full-stack + automação), CTAs duplos (contratar / freelance), foto ou elemento visual, indicadores rápidos (ex.: "6º semestre CC", "2 experiências profissionais", "RPA/automação").
-3. **Sobre** — narrativa curta ligando formação + experiência real + o tipo de problema que gosto de resolver.
-4. **Experiência** — linha do tempo/cards com as duas experiências reais, destacando **resultados e impacto** (produtividade, automação, dashboards), não só lista de tecnologias.
-5. **Projetos** — cards com preview/deploy ao vivo, stack usada, link de código e link de demo, 1 frase de "problema resolvido" por projeto (evite descrição genérica de tech).
-6. **Skills** — agrupadas por categoria (Frontend, Backend, Dados/Infra, Automação/RPA, Ferramentas), com peso visual maior para o que mais me diferencia.
-7. **Seção de automação/RPA em destaque** — algo que a maioria dos portfólios de dev júnior não tem; vender isso como serviço para empresas (ex.: "automatizo tarefas manuais repetitivas e libero seu time para o que importa").
-8. **Contato** — dois caminhos claros (recrutador vs cliente), e-mail com copiar/colar, WhatsApp, link do CV em PDF, redes sociais.
-9. **Footer** — minimalista, com links rápidos e disponibilidade atual (ex.: "Aberto a oportunidades" / "Aceitando projetos freelance").
+**Imagem 1 — estrutura principal da sidebar:**
+- Barra fixa à esquerda, fundo escuro, ocupando a lateral inteira.
+- Topo: logo/nome + ícone de busca + ícone de toggle (recolher/expandir sidebar).
+- Lista de itens de navegação com ícone + label (no Claude: "Novo bate-papo", "Conversas", "Projetos", "Artefatos", "Código", "Personalizar").
+- Uma seção secundária abaixo, com título de categoria (no Claude: "Produtos" → "Design").
+- Uma lista "Recentes" com itens clicáveis.
+- Rodapé fixo: avatar/inicial do usuário + nome + status (no Claude: "plano Gratuito") + botão de ação à direita.
 
----
+**Imagem 2 — menu do rodapé (dropdown ao clicar no avatar/usuário):**
+- Menu popover com: e-mail do usuário no topo, depois itens com ícone (Configurações, Idioma, Ajuda, Upgrade, Apps, Saiba mais, Sair).
 
-## DIRETRIZES DE COPY (texto)
+**Adaptação para o meu portfólio (mova a navegação atual do topo/Navbar para esta sidebar):**
+- **Topo da sidebar:** meu nome/logo (Anderson Cataldo) + ícone de busca (pode ser um filtro simples de conteúdo do site, ou omitir se não fizer sentido técnico) + botão de recolher/expandir.
+- **Itens de navegação principal** (ícone + label, com scroll suave até a seção), substituindo as âncoras atuais do Navbar: Início, Sobre, Experiência, Projetos, Habilidades, Contato.
+- **Seção secundária** (equivalente ao "Produtos" do Claude): pode ser usada para links externos relevantes, como "GitHub" e "LinkedIn" — com ícone.
+- **Não replicar** a lista "Recentes" do Claude com conversas fictícias — se não houver conteúdo real para preencher esse espaço (ex: últimos projetos adicionados), **omita essa seção** em vez de inventar dados.
+- **Rodapé da sidebar:** meu avatar/inicial + nome ("Anderson") + status real (ex.: "Graduando em C.C." ou "Disponível" — sem tom comercial) + o toggle de tema (ver item 2.3) no lugar do botão de download/upgrade do Claude.
+- Comportamento responsivo: em mobile, a sidebar deve virar um menu retrátil (drawer/hambúrguer), já que uma sidebar fixa lateral não cabe em telas pequenas.
+- Manter a paleta e o design system atual (`apple-*`) na versão clara da sidebar; para o modo escuro, seguir a estética escura de referência das imagens, mas com os tokens de cor do projeto (não copiar as cores exatas do Claude).
 
-- Tom: profissional, direto, confiante — sem arrogância e sem clichês genéricos de portfólio ("apaixonado por tecnologia desde criança").
-- Frases curtas, foco em **resultado e impacto**, não em lista de tarefas.
-- Sempre que possível, transformar responsabilidade em resultado (ex.: "criei automações em Python" → "reduzi tempo de tarefas manuais repetitivas, liberando a equipe para atividades estratégicas").
-- Evitar jargão técnico excessivo nas seções voltadas a clientes de freelance (eles não sabem o que é "Supabase"); reservar tecnicalidade para a seção de skills/projetos.
-- Todo o conteúdo em **português do Brasil**, revisado gramaticalmente.
-
----
-
-## REQUISITOS TÉCNICOS E DE QUALIDADE
-
-- **Responsividade** mobile-first real (não só "funciona", mas bem cuidado em breakpoints intermediários).
-- **Acessibilidade**: contraste adequado, `aria-label`, navegação por teclado, textos alternativos em imagens.
-- **Performance**: lazy loading de imagens, evitar re-renders desnecessários, otimizar animações do Framer Motion para não travar em mobile.
-- **SEO básico**: `title`, `meta description`, Open Graph (para quando o link for compartilhado no LinkedIn/WhatsApp), favicon, `lang="pt-BR"`.
-- **Micro-interações**: hover states, transições suaves já usando Framer Motion existente — sem exagerar a ponto de distrair.
-- Código limpo, tipado, componentizado, sem quebrar a arquitetura atual de pastas.
-- Sugerir (opcional) dark mode, já que o design system usa tokens `apple-*` fáceis de estender.
+### 2.3 Toggle de modo claro/escuro
+- Adicionar um botão de alternância de tema (sol/lua, ícones do `lucide-react`) dentro da sidebar (rodapé ou próximo ao topo — escolha o local mais coerente com o layout de referência).
+- Implementar dark mode real via Tailwind (`dark:` classes ou `class strategy`), com os tokens `apple-*` tendo uma variante escura coerente (não apenas inverter preto/branco sem cuidado com contraste).
+- Persistir a preferência do usuário (ex.: `localStorage` não é permitido em Artifacts do Claude, mas **é permitido normalmente em um projeto React real/Vite fora do ambiente de Artifacts** — use `localStorage` ou `matchMedia('(prefers-color-scheme: dark)')` como fallback inicial).
+- Aplicar o dark mode de forma consistente em **todas** as seções do site, não só na sidebar.
 
 ---
 
-## FORMATO DE ENTREGA ESPERADO
+## FASE 3 — FECHAMENTO (executar somente depois da Fase 2 concluída)
 
-Ao responder:
-
-1. Comece com um **diagnóstico rápido** do que já existe (pontos fortes e gaps do portfólio atual) antes de propor mudanças.
-2. Proponha a **estrutura final de seções** (pode reorganizar a ordem se justificar).
-3. Entregue o código **componente por componente**, respeitando os arquivos existentes (`Hero.tsx`, `About.tsx`, etc.), mantendo o design system atual.
-4. Ao final, liste **melhorias futuras opcionais** (ex.: blog técnico, seção de depoimentos, integração com formulário via e-mail/Resend, analytics).
+1. **Análise geral do que foi alterado** — resumo claro do antes/depois, por arquivo/componente.
+2. **Testes** — validar que: navegação da sidebar funciona (desktop e mobile), dark/light mode aplica em todas as seções, nenhum CTA comercial restante, responsividade sem quebras, sem erros de console/build.
+3. **Atualizar o `README.md`** do projeto, refletindo: stack atual, estrutura de pastas, como rodar o projeto, principais decisões de design (sidebar, dark mode), e remover informações desatualizadas.
+4. **Sugestões de melhorias futuras** (apenas listar, não implementar): itens que podem tornar o portfólio ainda mais robusto (ex.: testes automatizados, CI/CD, melhorias de SEO adicionais, internacionalização, etc.), priorizados por impacto x esforço.
 
 ---
 
-## O QUE EVITAR
+## O QUE NÃO FAZER (reforço de escopo)
 
-- Não inventar experiências, certificações ou projetos que não constam nos meus dados reais.
-- Não usar templates genéricos de "portfólio de dev" (paleta roxo/gradiente, ícones de foguete, textos tipo "Full Stack Developer 🚀").
-- Não remover a estética Apple-like já construída.
-- Não deixar o site parecendo só "para recrutador" nem só "para cliente" — o equilíbrio entre as duas frentes é o diferencial.
+- Não adicionar de volta qualquer CTA comercial ("contrate-me", "quero um projeto", etc.).
+- Não inventar seções, dados, projetos ou textos que não existem no conteúdo real do portfólio.
+- Não copiar textos, marca ou nome "Claude" — as imagens são referência **apenas de layout/estrutura de UI**.
+- Não preencher a sidebar com dados fictícios (ex.: uma lista de "recentes" sem conteúdo real por trás).
+- Não trocar o stack (React/TS/Vite/Tailwind/Framer Motion/lucide-react) nem o design system Apple-like já validado — apenas evoluir com o que foi pedido.
+- Não pular a ordem das fases (Auditoria → Implementação → Fechamento).

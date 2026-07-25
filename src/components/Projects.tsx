@@ -33,7 +33,7 @@ const projects: ProjectType[] = [
 
 const Projects = () => {
   return (
-    <section id="projetos" className="py-fluid-section bg-white" aria-labelledby="projects-title">
+    <section id="projetos" className="py-fluid-section bg-white dark:bg-slate-950" aria-labelledby="projects-title">
       <div className="section-container">
         <div className="flex flex-col md:flex-row md:items-end justify-between mb-20 gap-8">
           <div>
