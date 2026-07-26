@@ -5,17 +5,17 @@ const Skills = () => {
   const skillGroups = [
     {
       title: 'Front-End',
-      icon: <Layout className="w-6 h-6 text-apple-blue" aria-hidden="true" />,
+      icon: <Layout className="w-6 h-6 text-apple-accent" aria-hidden="true" />,
       skills: ['React', 'Next.js', 'Vue.js', 'TypeScript', 'Tailwind CSS', 'HTML5', 'CSS3'],
     },
     {
       title: 'Back-End & Automation',
-      icon: <Terminal className="w-6 h-6 text-apple-blue" aria-hidden="true" />,
+      icon: <Terminal className="w-6 h-6 text-apple-accent" aria-hidden="true" />,
       skills: ['Node.js (Express)', 'Java (Spring Boot)', 'Python (Django)', 'RPA'],
     },
     {
       title: 'Infrastructure & DB',
-      icon: <Wrench className="w-6 h-6 text-apple-blue" aria-hidden="true" />,
+      icon: <Wrench className="w-6 h-6 text-apple-accent" aria-hidden="true" />,
       skills: ['Git & GitHub', 'PostgreSQL', 'Supabase', 'Neon', 'MongoDB', 'Vercel'],
     },
   ];
@@ -29,14 +29,14 @@ const Skills = () => {
   ];
 
   return (
-    <section id="habilidades" className="py-fluid-section bg-white" aria-labelledby="skills-title">
+    <section id="habilidades" className="py-fluid-section bg-apple-bg" aria-labelledby="skills-title">
       <div className="section-container">
         <div className="text-center mb-20">
           <motion.p 
             initial={{ opacity: 0, y: 10 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
-            className="text-apple-blue font-semibold text-lg mb-2"
+            className="text-apple-accent font-semibold text-lg mb-2"
           >
             Expertise
           </motion.p>
@@ -62,7 +62,7 @@ const Skills = () => {
               transition={{ duration: 0.5, delay: index * 0.1 }}
               className="apple-card p-10 flex flex-col items-start"
             >
-              <div className="bg-apple-bg w-14 h-14 rounded-2xl flex items-center justify-center mb-8 border border-black/5" aria-hidden="true">
+              <div className="bg-apple-bg w-14 h-14 rounded-2xl flex items-center justify-center mb-8 border-apple" aria-hidden="true">
                 {group.icon}
               </div>
               <h3 className="text-2xl font-bold mb-8 text-apple-text tracking-tight">{group.title}</h3>
@@ -70,7 +70,7 @@ const Skills = () => {
                 {group.skills.map((skill, i) => (
                   <li
                     key={i}
-                    className="px-4 py-2 bg-white text-apple-text text-sm font-semibold rounded-xl border border-black/5"
+                    className="px-4 py-2 bg-apple-bg text-apple-text text-sm font-semibold rounded-xl border-apple"
                   >
                     {skill}
                   </li>
@@ -88,8 +88,8 @@ const Skills = () => {
         >
           <div className="flex flex-col lg:flex-row items-center justify-between gap-12">
             <div className="flex items-center gap-6">
-              <div className="bg-white p-5 rounded-2xl shadow-sm border border-black/5" aria-hidden="true">
-                <ShieldCheck className="w-10 h-10 text-apple-blue" />
+              <div className="bg-apple-bg p-5 rounded-2xl shadow-sm border-apple" aria-hidden="true">
+                <ShieldCheck className="w-10 h-10 text-apple-accent" />
               </div>
               <div>
                 <h4 className="text-2xl font-bold text-apple-text">Mindset Profissional</h4>
@@ -98,7 +98,7 @@ const Skills = () => {
             </div>
             <ul className="flex flex-wrap justify-center gap-4" aria-labelledby="soft-skills-title">
               {softSkills.map((skill, i) => (
-                <li key={i} className="text-sm font-bold text-apple-text px-6 py-3 bg-white rounded-2xl border border-black/5 shadow-sm">
+                <li key={i} className="text-sm font-bold text-apple-text px-6 py-3 bg-apple-bg rounded-2xl border-apple shadow-sm">
                   {skill}
                 </li>
               ))}

@@ -96,7 +96,7 @@ const Experience = () => {
                 </div>
                 <div className="flex flex-wrap gap-2 pt-4">
                   {exp.stack.map((tech, i) => (
-                    <span key={i} className="px-3 py-1 bg-apple-bg text-apple-text text-[11px] font-bold uppercase tracking-wider rounded-full border border-black/5">
+                    <span key={i} className="px-3 py-1 bg-apple-bg text-apple-text text-[11px] font-bold uppercase tracking-wider rounded-full border border-apple">
                       {tech}
                     </span>
                   ))}

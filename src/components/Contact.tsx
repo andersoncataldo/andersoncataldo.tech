@@ -5,7 +5,7 @@ import CopyEmail from './CopyEmail';
 
 const Contact = () => {
   return (
-    <section id="contato" className="py-fluid-section bg-white" aria-labelledby="contact-title">
+    <section id="contato" className="py-fluid-section bg-apple-bg" aria-labelledby="contact-title">
       <div className="section-container">
         <div className="grid gap-16 lg:grid-cols-[1.05fr_0.95fr] items-start">
           <div>
@@ -13,7 +13,7 @@ const Contact = () => {
               initial={{ opacity: 0, y: 10 }}
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
-              className="text-apple-blue font-semibold text-lg mb-2"
+              className="text-apple-accent font-semibold text-lg mb-2"
             >
               Contato
             </motion.p>
@@ -50,8 +50,8 @@ const Contact = () => {
               className="apple-card p-6 md:p-8 flex flex-col gap-6"
             >
               <div className="flex items-center gap-4">
-                <div className="bg-apple-bg p-4 rounded-2xl shrink-0">
-                  <Linkedin className="w-6 h-6 text-apple-blue" />
+                  <div className="bg-apple-bg p-4 rounded-2xl shrink-0">
+                  <Linkedin className="w-6 h-6 text-apple-accent" />
                 </div>
                 <div>
                   <p className="text-xs font-bold text-apple-secondary uppercase tracking-widest mb-1">Perfil</p>
@@ -62,7 +62,7 @@ const Contact = () => {
                 href="https://linkedin.com/in/andersonnviana"
                 target="_blank"
                 rel="noopener noreferrer"
-                className="text-apple-blue hover:underline font-bold"
+                className="text-apple-accent hover:underline font-bold"
               >
                 Ver perfil no LinkedIn
               </a>
@@ -73,7 +73,7 @@ const Contact = () => {
               whileInView={{ opacity: 1, x: 0 }}
               viewport={{ once: true }}
               transition={{ delay: 0.2 }}
-              className="apple-card p-6 md:p-8 bg-apple-text border-none"
+              className="apple-card p-6 md:p-8 bg-apple-accent border-none"
             >
               <div className="flex items-start gap-4 md:gap-6 mb-8">
                 <div className="bg-white/10 p-4 rounded-2xl shrink-0">
@@ -88,7 +88,7 @@ const Contact = () => {
                 href={resumeFile}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="w-full bg-white text-apple-text py-4 rounded-xl font-bold text-center block transition-all hover:bg-white/90 active:scale-95 min-h-12"
+                className="w-full bg-apple-accent text-white py-4 rounded-xl font-bold text-center block transition-all hover:opacity-95 active:scale-95 min-h-12"
               >
                 Baixar CV
               </a>

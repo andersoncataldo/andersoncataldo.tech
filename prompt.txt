@@ -1,94 +1,83 @@
-# Prompt — Rodada 2 de Melhorias do Portfólio (Auditoria + Sidebar + Ajustes de Escopo)
+# Prompt — Rodada 3 de Correções do Portfólio (Responsividade + Dark/Light Mode + Sidebar)
 
-> Copie e cole o conteúdo abaixo inteiro na IA de desenvolvimento (junto do repomix atualizado do projeto). O prompt é dividido em fases sequenciais — siga a ordem.
+> Copie e cole o conteúdo abaixo inteiro na IA de desenvolvimento, junto do repomix atualizado do projeto (React + TypeScript + Vite + Tailwind CSS v4 + Framer Motion + lucide-react, design system "Apple-like").
 
 ---
 
 ## CONTEXTO
 
-Este portfólio já passou por uma primeira rodada de melhorias (React + TypeScript + Vite + Tailwind CSS v4 + Framer Motion + lucide-react, com design system "Apple-like": tokens `apple-bg`, `apple-text`, `apple-blue`, `apple-secondary`, `section-container`, `py-fluid-section`). A melhoria anterior trouxe ganhos reais, mas ainda existem gargalos técnicos e de UX/UI que precisam ser corrigidos, além de dois ajustes de direção que mudam o propósito de algumas seções.
+As rodadas anteriores já implementaram: remoção dos CTAs comerciais, sidebar lateral estilo Claude (`src/components/Sidebar.tsx`), toggle de tema controlado em `src/App.tsx` (estado `theme` + classe `dark` no `<html>` + `localStorage`), e tokens de cor em `src/styles/index.css` (`--color-apple-bg`, `--color-apple-text`, `--color-apple-secondary`, `--color-apple-blue`, com variantes `-dark`).
 
-**Regra geral inegociável:** este é um **portfólio de carreira**, não uma landing page de vendas. Seu objetivo é mostrar trajetória, habilidades e experiências — **não captar clientes de freelance nem candidatos a vaga por meio de CTAs comerciais**. Qualquer sugestão de "venda de serviço" deve ser descartada.
+Apesar disso, ainda existem **3 problemas concretos e verificáveis** no código atual que precisam ser corrigidos nesta rodada, além de uma auditoria geral. Analise o projeto real antes de alterar qualquer coisa — os pontos abaixo são um guia, não uma lista fechada.
 
-**Regra de escopo:** implemente **exatamente** o que está descrito neste prompt, nas 3 fases abaixo, na ordem indicada. Não crie funcionalidades, seções, páginas ou textos que não foram pedidos aqui. Se identificar algo relevante fora do escopo durante a auditoria, **liste como sugestão na Fase 3**, mas não implemente sem aprovação.
-
----
-
-## FASE 1 — AUDITORIA COMPLETA (somente diagnóstico, sem alterar código ainda)
-
-Antes de qualquer alteração, faça uma varredura completa do projeto e produza um relatório cobrindo:
-
-1. **Qualidade de código**
-   - Componentes com lógica confusa, duplicada ou mal organizada.
-   - Funções sem propósito claro, código morto, imports não usados, tipagem fraca ou `any` desnecessário.
-   - Inconsistências de padrão entre componentes (nomenclatura, estrutura de props, organização de pastas).
-2. **UI/UX**
-   - Bugs visuais (quebras de layout, overflow, espaçamentos inconsistentes, contraste ruim).
-   - Problemas de responsividade em mobile/tablet/desktop.
-   - Animações do Framer Motion que travam, são exageradas ou prejudicam performance.
-   - Problemas de acessibilidade (falta de `aria-label`, foco de teclado, textos alternativos).
-3. **Fluxo e arquitetura**
-   - Navegação confusa ou âncoras quebradas.
-   - Seções redundantes ou que não agregam ao objetivo de "portfólio de carreira".
-   - Performance geral (imagens não otimizadas, lazy loading ausente, re-renders desnecessários).
-
-**Entregável da Fase 1:** um relatório objetivo (lista com item → problema → risco/impacto), sem ainda alterar nada no código. Só avance para a Fase 2 depois de listar isso.
+**Regras de escopo (mantidas das rodadas anteriores):**
+- Não reintroduzir CTAs comerciais ("quero contratar", "quero um projeto", etc.).
+- Não inventar seções, textos ou dados que não existem no conteúdo real do portfólio.
+- Não trocar o stack (React/TS/Vite/Tailwind/Framer Motion/lucide-react) nem descartar o design system Apple-like — apenas corrigir e evoluir.
+- Implemente **exatamente** o que está descrito, na ordem das fases. Se encontrar algo fora do escopo durante a auditoria, **liste como sugestão ao final**, não implemente sem necessidade.
 
 ---
 
-## FASE 2 — IMPLEMENTAÇÕES (mudanças de direção definidas por mim)
+## FASE 1 — AUDITORIA COMPLETA (diagnóstico antes de alterar código)
 
-### 2.1 Remover CTAs comerciais
-- Remover **todos** os botões e blocos de texto do tipo "Quero contratar/vaga" e "Quero um projeto/automação" (ou qualquer variação de CTA comercial que tenha sido adicionada na rodada anterior).
-- Os links de contato (e-mail, WhatsApp, LinkedIn, CV em PDF) podem continuar existindo, mas de forma **neutra e informativa** — sem linguagem de venda, sem separar visualmente "recrutador" vs "cliente". É uma seção de contato única, direta e profissional.
-- Revisar todo o copy do site em busca de qualquer resquício de tom comercial ("contrate-me para...", "seu projeto...", etc.) e neutralizar para tom de portfólio de carreira.
+Revise o projeto inteiro e produza um relatório (item → problema → arquivo → risco/impacto) cobrindo, no mínimo:
 
-### 2.2 Sidebar lateral esquerda (estilo Claude)
+1. **Responsividade desktop/mobile:** todos os componentes (`Hero`, `About`, `Experience`, `Automation`, `Skills`, `Projects`, `Contact`, `Footer`, `CopyEmail`, `Sidebar`) em breakpoints pequenos, médios e grandes — overflow, textos cortados, espaçamentos quebrados, sobreposição de elementos (ex.: botão de menu mobile fixo no canto vs. conteúdo do Hero).
+2. **Consistência de dark/light mode:** localizar **todo** uso de cor "hardcoded" fora dos tokens do design system (`bg-[#0f172a]`, `bg-slate-950`, `text-slate-400`, `bg-white`, `text-white`, `border-white/10`, etc. usados diretamente nos componentes) que impede o tema de mudar corretamente. Mapear componente por componente onde isso ocorre.
+3. **Bugs e inconsistências na Sidebar (`src/components/Sidebar.tsx`):** duplicação de lógica entre a versão desktop (`<aside>`) e a versão mobile (drawer), uso incorreto de tokens semânticos como background (ex.: `bg-apple-text` usado como cor de fundo do drawer mobile, o que inverte errado entre os temas), gerenciamento de foco/acessibilidade do menu de busca e do menu de perfil, e qualquer função/estado incompleto ou não utilizado.
+4. **Outros problemas gerais do projeto:** performance (lazy loading, imagens), SEO básico, código morto, tipagem fraca, inconsistências de padrão entre componentes, ou qualquer erro de build/lint.
 
-Estou anexando 2 imagens de referência (interface do Claude.ai) que devem servir de **modelo estrutural** — adapte ao conteúdo do meu portfólio, sem copiar textos/nomes do Claude.
-
-**Imagem 1 — estrutura principal da sidebar:**
-- Barra fixa à esquerda, fundo escuro, ocupando a lateral inteira.
-- Topo: logo/nome + ícone de busca + ícone de toggle (recolher/expandir sidebar).
-- Lista de itens de navegação com ícone + label (no Claude: "Novo bate-papo", "Conversas", "Projetos", "Artefatos", "Código", "Personalizar").
-- Uma seção secundária abaixo, com título de categoria (no Claude: "Produtos" → "Design").
-- Uma lista "Recentes" com itens clicáveis.
-- Rodapé fixo: avatar/inicial do usuário + nome + status (no Claude: "plano Gratuito") + botão de ação à direita.
-
-**Imagem 2 — menu do rodapé (dropdown ao clicar no avatar/usuário):**
-- Menu popover com: e-mail do usuário no topo, depois itens com ícone (Configurações, Idioma, Ajuda, Upgrade, Apps, Saiba mais, Sair).
-
-**Adaptação para o meu portfólio (mova a navegação atual do topo/Navbar para esta sidebar):**
-- **Topo da sidebar:** meu nome/logo (Anderson Cataldo) + ícone de busca (pode ser um filtro simples de conteúdo do site, ou omitir se não fizer sentido técnico) + botão de recolher/expandir.
-- **Itens de navegação principal** (ícone + label, com scroll suave até a seção), substituindo as âncoras atuais do Navbar: Início, Sobre, Experiência, Projetos, Habilidades, Contato.
-- **Seção secundária** (equivalente ao "Produtos" do Claude): pode ser usada para links externos relevantes, como "GitHub" e "LinkedIn" — com ícone.
-- **Não replicar** a lista "Recentes" do Claude com conversas fictícias — se não houver conteúdo real para preencher esse espaço (ex: últimos projetos adicionados), **omita essa seção** em vez de inventar dados.
-- **Rodapé da sidebar:** meu avatar/inicial + nome ("Anderson") + status real (ex.: "Graduando em C.C." ou "Disponível" — sem tom comercial) + o toggle de tema (ver item 2.3) no lugar do botão de download/upgrade do Claude.
-- Comportamento responsivo: em mobile, a sidebar deve virar um menu retrátil (drawer/hambúrguer), já que uma sidebar fixa lateral não cabe em telas pequenas.
-- Manter a paleta e o design system atual (`apple-*`) na versão clara da sidebar; para o modo escuro, seguir a estética escura de referência das imagens, mas com os tokens de cor do projeto (não copiar as cores exatas do Claude).
-
-### 2.3 Toggle de modo claro/escuro
-- Adicionar um botão de alternância de tema (sol/lua, ícones do `lucide-react`) dentro da sidebar (rodapé ou próximo ao topo — escolha o local mais coerente com o layout de referência).
-- Implementar dark mode real via Tailwind (`dark:` classes ou `class strategy`), com os tokens `apple-*` tendo uma variante escura coerente (não apenas inverter preto/branco sem cuidado com contraste).
-- Persistir a preferência do usuário (ex.: `localStorage` não é permitido em Artifacts do Claude, mas **é permitido normalmente em um projeto React real/Vite fora do ambiente de Artifacts** — use `localStorage` ou `matchMedia('(prefers-color-scheme: dark)')` como fallback inicial).
-- Aplicar o dark mode de forma consistente em **todas** as seções do site, não só na sidebar.
+**Entregável da Fase 1:** relatório listado, sem alterar código ainda. Só avance para a Fase 2 depois disso.
 
 ---
 
-## FASE 3 — FECHAMENTO (executar somente depois da Fase 2 concluída)
+## FASE 2 — IMPLEMENTAÇÕES
 
-1. **Análise geral do que foi alterado** — resumo claro do antes/depois, por arquivo/componente.
-2. **Testes** — validar que: navegação da sidebar funciona (desktop e mobile), dark/light mode aplica em todas as seções, nenhum CTA comercial restante, responsividade sem quebras, sem erros de console/build.
-3. **Atualizar o `README.md`** do projeto, refletindo: stack atual, estrutura de pastas, como rodar o projeto, principais decisões de design (sidebar, dark mode), e remover informações desatualizadas.
-4. **Sugestões de melhorias futuras** (apenas listar, não implementar): itens que podem tornar o portfólio ainda mais robusto (ex.: testes automatizados, CI/CD, melhorias de SEO adicionais, internacionalização, etc.), priorizados por impacto x esforço.
+### 2.1 Responsividade real (desktop + mobile)
+- Garantir que **todos** os componentes funcionem bem em mobile (< 640px), tablet (640–1024px) e desktop (> 1024px) — sem overflow horizontal, sem textos cortados, sem elementos sobrepostos.
+- Unificar a lógica da Sidebar: hoje existe uma versão desktop (`<aside>` fixo) e uma versão mobile (drawer) com código duplicado — refatore para compartilhar o máximo de lógica/estado possível (ex.: um único componente de "conteúdo da sidebar" renderizado dentro de dois containers diferentes, ou um único componente responsivo via classes Tailwind).
+- Corrigir qualquer conflito entre o botão flutuante de abrir menu mobile (`lg:hidden fixed top-4 left-4`) e o conteúdo do Hero/topo da página (z-index, sobreposição, área de toque).
+- Validar que o padding lateral do conteúdo principal (`lg:pl-72` / `lg:pl-20` em `App.tsx`, dependendo do estado `collapsed`) não quebra em telas intermediárias.
+
+### 2.2 Corrigir o modo claro/escuro — paleta de cores obrigatória
+
+**Defina exatamente esta paleta** (ajustar `src/styles/index.css` e todos os tokens `apple-*`):
+
+- **Modo claro:** fundo em **off-white**, **roxo** como cor de destaque/ação (substituindo o azul atual `--color-apple-blue`), **preto** para textos principais.
+- **Modo escuro:** fundo em **preto**, **roxo** como cor de destaque/ação (mesma família de roxo do modo claro, ajustada em brilho/saturação para contraste em fundo escuro), **branco** para textos principais.
+
+Passos técnicos:
+1. Atualizar `@theme` em `src/styles/index.css`: `--color-apple-bg` (off-white), `--color-apple-text` (preto), `--color-apple-blue` → renomear conceitualmente para cor de destaque roxa (pode manter o nome da variável por compatibilidade, mas o valor deve ser roxo) tanto na versão light quanto nas variáveis `-dark` (fundo preto, texto branco, roxo ajustado).
+2. **Eliminar todo uso de cor hardcoded fora dos tokens** identificado na Fase 1 (`bg-[#0f172a]`, `bg-slate-950`, `text-slate-*`, `text-white`, `bg-white` soltos, etc.) e substituir pelos tokens `apple-bg`, `apple-text`, `apple-secondary`, `apple-blue` (ou o nome que a paleta roxa adotar) em **todos** os componentes, incluindo `Sidebar.tsx`, `Hero.tsx`, `About.tsx`, `Automation.tsx`, `Skills.tsx`, `Experience.tsx`, `Projects.tsx`, `Contact.tsx`, `Footer.tsx`, `CopyEmail.tsx`.
+3. Garantir que **cada seção do site** — não só a sidebar — reaja corretamente à troca de tema: cards (`apple-card`), bordas, ícones, placeholders de loading, estados de hover/focus.
+4. Verificar contraste (WCAG AA) entre texto e fundo nos dois temas, especialmente para o roxo em cima de preto/off-white.
+5. Testar a transição entre temas (não deve haver "flash" de cor errada ao trocar, nem elementos que ficam ilegíveis por herdarem cor fixa).
+
+### 2.3 Corrigir e aprimorar a Sidebar
+- Corrigir o(s) bug(s) e função(ões) incompleta(s) identificados na Fase 1.
+- Fazer a Sidebar (desktop e mobile) responder corretamente ao tema claro/escuro com a nova paleta (hoje ela está com fundo fixo escuro independente do tema selecionado — isso deve ser corrigido).
+- Revisar UX: estado ativo do item de navegação atual (indicar visualmente em qual seção o usuário está ao rolar a página — scroll spy), animações de abrir/fechar suaves e sem "jump" de layout, área de toque adequada em mobile, fechamento do drawer mobile ao clicar fora ou pressionar Esc, foco preso (focus trap) dentro do drawer mobile enquanto aberto.
+- Revisar o menu de perfil/rodapé da sidebar (nome, status, dropdown) para garantir que também siga a nova paleta e funcione com teclado (abrir/fechar com Enter/Espaço, fechar com Esc, fechar ao clicar fora).
+- Garantir que o toggle de tema (sol/lua) dentro da sidebar reflita visualmente o estado atual corretamente (ícone certo para o tema ativo).
+
+### 2.4 Demais correções encontradas na auditoria
+- Corrigir os demais itens relevantes listados na Fase 1 (performance, acessibilidade, código morto, tipagem, lint/build) que impactem diretamente a experiência do usuário ou a qualidade do código, mesmo que não estejam listados explicitamente aqui.
 
 ---
 
-## O QUE NÃO FAZER (reforço de escopo)
+## FASE 3 — FECHAMENTO
 
-- Não adicionar de volta qualquer CTA comercial ("contrate-me", "quero um projeto", etc.).
-- Não inventar seções, dados, projetos ou textos que não existem no conteúdo real do portfólio.
-- Não copiar textos, marca ou nome "Claude" — as imagens são referência **apenas de layout/estrutura de UI**.
-- Não preencher a sidebar com dados fictícios (ex.: uma lista de "recentes" sem conteúdo real por trás).
-- Não trocar o stack (React/TS/Vite/Tailwind/Framer Motion/lucide-react) nem o design system Apple-like já validado — apenas evoluir com o que foi pedido.
+1. **Análise geral do que foi alterado** — resumo antes/depois por arquivo/componente.
+2. **Testes** — validar em pelo menos 3 larguras de tela (mobile ~375px, tablet ~768px, desktop ~1440px): troca de tema aplicando a paleta correta em 100% dos elementos, navegação da sidebar (desktop e mobile) sem bugs, sem erros de console/build, sem regressões nas seções já existentes.
+3. **Atualizar `README.md`** com a paleta de cores oficial (light/dark), estrutura da sidebar e instruções de uso do toggle de tema.
+4. **Sugestões de melhorias futuras** (apenas listar, não implementar), priorizadas por impacto x esforço.
+
+---
+
+## O QUE NÃO FAZER
+
+- Não reintroduzir qualquer CTA comercial.
+- Não inventar conteúdo, seções ou dados fora do que já existe no portfólio.
+- Não descartar o design system Apple-like nem o stack atual.
+- Não deixar nenhuma cor "hardcoded" fora dos tokens de tema — esse é o principal motivo do dark/light mode estar incompleto hoje.
 - Não pular a ordem das fases (Auditoria → Implementação → Fechamento).

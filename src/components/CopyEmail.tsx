@@ -17,18 +17,18 @@ const CopyEmail = ({ email }: { email: string }) => {
   return (
     <button
       onClick={handleCopy}
-      className="flex items-center gap-4 p-6 bg-zinc-900 border border-zinc-800 rounded-3xl hover:border-primary-500/50 transition-all group w-full text-left"
+      className="flex items-center gap-4 p-6 apple-card rounded-3xl hover:shadow-lg transition-all group w-full text-left"
       aria-label={`Copiar e-mail: ${email}`}
     >
-      <div className="bg-primary-500/10 p-4 rounded-2xl text-primary-500 group-hover:scale-110 transition-transform" aria-hidden="true">
+      <div className="bg-apple-accent/10 p-4 rounded-2xl text-apple-accent group-hover:scale-110 transition-transform" aria-hidden="true">
         <Mail className="w-6 h-6" />
       </div>
       <div className="flex-1">
-        <p className="text-xs font-bold text-zinc-500 uppercase tracking-widest">E-mail</p>
+        <p className="text-xs font-bold text-apple-secondary uppercase tracking-widest">E-mail</p>
         <p className="text-lg font-medium truncate">{email}</p>
       </div>
       <div 
-        className="bg-zinc-800 p-2 rounded-xl text-zinc-400" 
+        className="bg-apple-bg p-2 rounded-xl text-apple-secondary" 
         role="status" 
         aria-live="polite"
       >

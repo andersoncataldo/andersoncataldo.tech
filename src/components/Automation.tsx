@@ -43,9 +43,9 @@ const Automation = () => {
             transition={{ delay: 0.3 }}
             className="grid gap-6"
           >
-            <article className="apple-card p-8 border border-black/5">
+            <article className="apple-card p-8 border border-apple">
               <div className="flex items-center gap-4 mb-4">
-                <div className="bg-white p-3 rounded-2xl shadow-sm">
+                <div className="bg-apple-bg p-3 rounded-2xl shadow-sm">
                   <Zap className="w-6 h-6 text-apple-blue" aria-hidden="true" />
                 </div>
                 <div>
@@ -58,9 +58,9 @@ const Automation = () => {
               </p>
             </article>
 
-            <article className="apple-card p-8 border border-black/5">
+            <article className="apple-card p-8 border border-apple">
               <div className="flex items-center gap-4 mb-4">
-                <div className="bg-white p-3 rounded-2xl shadow-sm">
+                <div className="bg-apple-bg p-3 rounded-2xl shadow-sm">
                   <Cpu className="w-6 h-6 text-apple-blue" aria-hidden="true" />
                 </div>
                 <div>
@@ -73,9 +73,9 @@ const Automation = () => {
               </p>
             </article>
 
-            <article className="apple-card p-8 border border-black/5 bg-apple-text text-white">
+            <article className="apple-card p-8 border border-apple bg-apple-text text-white">
               <div className="flex items-center gap-4 mb-4">
-                <div className="bg-white/10 p-3 rounded-2xl">
+                <div className="bg-apple-bg/10 p-3 rounded-2xl">
                   <FileText className="w-6 h-6" aria-hidden="true" />
                 </div>
                 <div>

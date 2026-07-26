@@ -4,7 +4,7 @@ import { MapPin, GraduationCap } from 'lucide-react';
 
 const About = () => {
   return (
-    <section id="sobre" className="py-fluid-section bg-white dark:bg-slate-950" aria-labelledby="about-title">
+    <section id="sobre" className="py-fluid-section bg-apple-bg dark:bg-slate-950" aria-labelledby="about-title">
       <div className="section-container">
         <div className="grid lg:grid-cols-2 gap-16 items-center">
           <motion.div
@@ -14,7 +14,7 @@ const About = () => {
             transition={{ duration: 0.8 }}
             className="relative order-2 lg:order-1"
           >
-            <div className="aspect-4/5 rounded-[40px] overflow-hidden bg-apple-bg border border-black/5 shadow-2xl">
+            <div className="aspect-4/5 rounded-[40px] overflow-hidden bg-apple-bg border-apple shadow-2xl">
               <img
                 src={andersonImg}
                 alt="Anderson Cataldo"
@@ -22,7 +22,7 @@ const About = () => {
                 loading="lazy"
               />
             </div>
-            <div className="absolute -bottom-6 -right-6 apple-card p-6 bg-white/80 backdrop-blur-md">
+            <div className="absolute -bottom-6 -right-6 apple-card p-6 bg-apple-bg/80 backdrop-blur-md">
               <p className="text-3xl font-bold text-apple-text">6º</p>
               <p className="text-[10px] font-bold text-apple-secondary uppercase tracking-widest">Semestre C.C</p>
             </div>
@@ -33,7 +33,7 @@ const About = () => {
               initial={{ opacity: 0, y: 10 }}
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
-              className="text-apple-blue font-semibold text-lg mb-2"
+              className="text-apple-accent font-semibold text-lg mb-2"
             >
               Sobre
             </motion.p>
@@ -59,16 +59,16 @@ const About = () => {
             </div>
 
             <div className="grid grid-cols-1 md:grid-cols-2 gap-4 mb-12">
-              <div className="p-6 bg-apple-bg rounded-3xl border border-black/5">
+              <div className="p-6 bg-apple-bg rounded-3xl border border-apple">
                 <div className="flex items-center gap-4 mb-2">
-                  <GraduationCap className="w-5 h-5 text-apple-blue" />
+                  <GraduationCap className="w-5 h-5 text-apple-accent" />
                   <p className="font-bold text-apple-text">Formação</p>
                 </div>
                 <p className="text-sm text-apple-secondary font-medium leading-relaxed">Bacharelado em Ciência da Computação (Unifor) - 6º semestre.</p>
               </div>
-              <div className="p-6 bg-apple-bg rounded-3xl border border-black/5">
+              <div className="p-6 bg-apple-bg rounded-3xl border border-apple">
                 <div className="flex items-center gap-4 mb-2">
-                  <MapPin className="w-5 h-5 text-apple-blue" />
+                  <MapPin className="w-5 h-5 text-apple-accent" />
                   <p className="font-bold text-apple-text">Localização</p>
                 </div>
                 <p className="text-sm text-apple-secondary font-medium leading-relaxed">Fortaleza, Ceará — disponível para oportunidades em desenvolvimento e automação.</p>

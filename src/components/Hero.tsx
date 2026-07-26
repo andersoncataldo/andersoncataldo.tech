@@ -2,7 +2,7 @@ import { motion } from 'framer-motion';
 
 const Hero = () => {
   return (
-    <section className="relative min-h-[94vh] flex items-center justify-center overflow-hidden bg-white dark:bg-slate-950 pt-20" aria-label="Introdução">
+    <section className="relative min-h-[94vh] flex items-center justify-center overflow-hidden bg-apple-bg dark:bg-slate-950 pt-20" aria-label="Introdução">
       <div className="section-container relative z-10">
         <div className="text-center">
           <motion.div
@@ -11,22 +11,22 @@ const Hero = () => {
             transition={{ duration: 0.8, ease: [0.16, 1, 0.3, 1] }}
             className="mb-8 flex flex-wrap justify-center gap-3"
           >
-            <span className="px-4 py-1.5 rounded-full bg-apple-bg border border-black/5 text-apple-secondary text-xs font-bold tracking-widest uppercase">
+            <span className="px-4 py-1.5 rounded-full bg-apple-bg border border-apple text-apple-secondary text-xs font-bold tracking-widest uppercase">
               Desenvolvedor Full-Stack
             </span>
-            <span className="px-4 py-1.5 rounded-full bg-apple-bg border border-black/5 text-apple-secondary text-xs font-bold tracking-widest uppercase">
+            <span className="px-4 py-1.5 rounded-full bg-apple-bg border border-apple text-apple-secondary text-xs font-bold tracking-widest uppercase">
               Automação de Processos
             </span>
           </motion.div>
 
-          <motion.h1
+            <motion.h1
             initial={{ opacity: 0, y: 30 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 1, delay: 0.1, ease: [0.16, 1, 0.3, 1] }}
             className="text-fluid-h1 font-bold tracking-tight mb-10 text-apple-text leading-[0.9]"
           >
             Full-stack em formação com <br />
-            <span className="text-apple-blue">impacto real em React e RPA.</span>
+            <span className="text-apple-accent">impacto real em React e RPA.</span>
           </motion.h1>
 
           <motion.div
@@ -67,7 +67,7 @@ const Hero = () => {
             className="mt-12 flex flex-col sm:flex-row items-center justify-center gap-4 max-w-4xl mx-auto"
           >
             {['6º semestre', '2 experiências profissionais', 'Automações RPA'].map((label) => (
-              <div key={label} className="px-5 py-4 bg-apple-bg rounded-full border border-black/5 text-sm font-semibold text-apple-text">
+              <div key={label} className="px-5 py-4 bg-apple-bg rounded-full border border-apple text-sm font-semibold text-apple-text">
                 {label}
               </div>
             ))}
