@@ -1,3 +1,5 @@
+import { GITHUB_URL, LINKEDIN_URL } from '../config/links';
+
 const Footer = () => {
   const currentYear = new Date().getFullYear();
   
@@ -9,8 +11,8 @@ const Footer = () => {
             <p>© {currentYear} Anderson Cataldo. Todos os direitos reservados.</p>
           </div>
           <div className="flex gap-8">
-            <a href="https://linkedin.com/in/andersonnviana" target="_blank" rel="noopener noreferrer" className="text-apple-secondary hover:text-apple-text text-sm font-bold transition-colors">LinkedIn</a>
-            <a href="https://github.com/andersoncataldo" target="_blank" rel="noopener noreferrer" className="text-apple-secondary hover:text-apple-text text-sm font-bold transition-colors">GitHub</a>
+            <a href={LINKEDIN_URL} target="_blank" rel="noopener noreferrer" className="text-apple-secondary hover:text-apple-text text-sm font-bold transition-colors">LinkedIn</a>
+            <a href={GITHUB_URL} target="_blank" rel="noopener noreferrer" className="text-apple-secondary hover:text-apple-text text-sm font-bold transition-colors">GitHub</a>
           </div>
         </div>
       </div>

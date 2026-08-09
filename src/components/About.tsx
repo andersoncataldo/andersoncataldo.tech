@@ -1,17 +1,19 @@
-import { motion } from 'framer-motion';
-import andersonImg from '../assets/anderson cataldo.jpeg';
+import { motion, useReducedMotion } from 'framer-motion';
+import andersonImg from '../assets/anderson-cataldo.jpeg';
 import { MapPin, GraduationCap } from 'lucide-react';
 
 const About = () => {
+  const shouldReduceMotion = useReducedMotion();
+
   return (
-    <section id="sobre" className="py-fluid-section bg-apple-bg dark:bg-slate-950" aria-labelledby="about-title">
+    <section id="sobre" className="py-fluid-section bg-apple-bg dark:bg-slate-950 scroll-mt-24 lg:scroll-mt-28" aria-labelledby="about-title">
       <div className="section-container">
         <div className="grid lg:grid-cols-2 gap-16 items-center">
           <motion.div
-            initial={{ opacity: 0, scale: 0.95 }}
+            initial={shouldReduceMotion ? { opacity: 1, scale: 1 } : { opacity: 0, scale: 0.95 }}
             whileInView={{ opacity: 1, scale: 1 }}
             viewport={{ once: true }}
-            transition={{ duration: 0.8 }}
+            transition={shouldReduceMotion ? { duration: 0 } : { duration: 0.8 }}
             className="relative order-2 lg:order-1"
           >
             <div className="aspect-4/5 rounded-[40px] overflow-hidden bg-apple-bg border-apple shadow-2xl">
@@ -20,6 +22,8 @@ const About = () => {
                 alt="Anderson Cataldo"
                 className="w-full h-full object-cover"
                 loading="lazy"
+                width={400}
+                height={500}
               />
             </div>
             <div className="absolute -bottom-6 -right-6 apple-card p-6 bg-apple-bg/80 backdrop-blur-md">
@@ -30,7 +34,7 @@ const About = () => {
 
           <article className="order-1 lg:order-2">
             <motion.p
-              initial={{ opacity: 0, y: 10 }}
+              initial={shouldReduceMotion ? { opacity: 1, y: 0 } : { opacity: 0, y: 10 }}
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
               className="text-apple-accent font-semibold text-lg mb-2"
@@ -38,10 +42,10 @@ const About = () => {
               Sobre
             </motion.p>
             <motion.h2
-              initial={{ opacity: 0, y: 10 }}
+              initial={shouldReduceMotion ? { opacity: 1, y: 0 } : { opacity: 0, y: 10 }}
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
-              transition={{ delay: 0.1 }}
+              transition={shouldReduceMotion ? { duration: 0 } : { delay: 0.1 }}
               id="about-title"
               className="text-fluid-h2 font-bold tracking-tight text-apple-text mb-8 leading-tight"
             >

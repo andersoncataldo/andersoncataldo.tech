@@ -2,10 +2,46 @@
 <html lang="pt-BR" class="scroll-smooth">
   <head>
     <meta charset="UTF-8" />
-    <link rel="icon" type="image/png" href="/src/assets/react.svg" />
+    <script>
+      (function () {
+        try {
+          const storedTheme = window.localStorage.getItem('portfolio-theme');
+          const initialTheme = storedTheme === 'light' || storedTheme === 'dark'
+            ? storedTheme
+            : window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light';
+          document.documentElement.classList.toggle('dark', initialTheme === 'dark');
+          document.documentElement.style.colorScheme = initialTheme === 'dark' ? 'dark' : 'light';
+        } catch (error) {
+          console.error('Unable to initialize theme', error);
+        }
+      })();
+    </script>
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Anderson Cataldo | Full-Stack Developer, RPA & UI/UX Designer</title>
     <meta name="description" content="Portfolio de Anderson Cataldo, Desenvolvedor Full-Stack e especialista em RPA focado em automação e eficiência." />
+    <meta property="og:title" content="Anderson Cataldo | Full-Stack Developer & RPA" />
+    <meta property="og:description" content="Portfólio de Anderson Cataldo, com foco em desenvolvimento full-stack e automação de processos." />
+    <meta property="og:image" content="/favicon.svg" />
+    <meta property="og:type" content="website" />
+    <meta property="og:url" content="https://andersoncataldotech.vercel.app" />
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content="Anderson Cataldo | Full-Stack Developer & RPA" />
+    <meta name="twitter:description" content="Portfólio de Anderson Cataldo, com foco em desenvolvimento full-stack e automação de processos." />
+    <meta name="twitter:image" content="/favicon.svg" />
+    <script type="application/ld+json">
+      {
+        "@context": "https://schema.org",
+        "@type": "Person",
+        "name": "Anderson Cataldo",
+        "jobTitle": "Full-Stack Developer & RPA",
+        "url": "https://andersoncataldotech.vercel.app",
+        "sameAs": [
+          "https://github.com/andersoncataldo",
+          "https://linkedin.com/in/andersonnviana"
+        ]
+      }
+    </script>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">

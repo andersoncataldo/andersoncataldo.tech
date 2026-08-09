@@ -1,4 +1,4 @@
-import { motion } from 'framer-motion';
+import { motion, useReducedMotion } from 'framer-motion';
 import { Github, ExternalLink, BookOpen, Layout, ArrowRight } from 'lucide-react';
 import { Project as ProjectType } from '../types';
 
@@ -32,13 +32,15 @@ const projects: ProjectType[] = [
 ];
 
 const Projects = () => {
+  const shouldReduceMotion = useReducedMotion();
+
   return (
-    <section id="projetos" className="py-fluid-section bg-apple-bg dark:bg-slate-950" aria-labelledby="projects-title">
+    <section id="projetos" className="py-fluid-section bg-apple-bg dark:bg-slate-950 scroll-mt-24 lg:scroll-mt-28" aria-labelledby="projects-title">
       <div className="section-container">
         <div className="flex flex-col md:flex-row md:items-end justify-between mb-20 gap-8">
           <div>
             <motion.p 
-              initial={{ opacity: 0, y: 10 }}
+              initial={shouldReduceMotion ? { opacity: 1, y: 0 } : { opacity: 0, y: 10 }}
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
               className="text-apple-accent font-semibold text-lg mb-2"
@@ -46,10 +48,10 @@ const Projects = () => {
               Portfolio
             </motion.p>
             <motion.h2 
-              initial={{ opacity: 0, y: 10 }}
+              initial={shouldReduceMotion ? { opacity: 1, y: 0 } : { opacity: 0, y: 10 }}
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
-              transition={{ delay: 0.1 }}
+              transition={shouldReduceMotion ? { duration: 0 } : { delay: 0.1 }}
               id="projects-title" 
               className="text-fluid-h2 font-bold tracking-tight text-apple-text leading-tight"
             >
@@ -71,10 +73,10 @@ const Projects = () => {
           {projects.map((project, index) => (
             <motion.article
               key={index}
-              initial={{ opacity: 0, y: 20 }}
+              initial={shouldReduceMotion ? { opacity: 1, y: 0 } : { opacity: 0, y: 20 }}
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
-              transition={{ duration: 0.6, delay: index * 0.1 }}
+              transition={shouldReduceMotion ? { duration: 0 } : { duration: 0.6, delay: index * 0.1 }}
               className="apple-card group flex flex-col"
             >
               <div className="p-10 md:p-12 h-full flex flex-col">
@@ -98,6 +100,11 @@ const Projects = () => {
                 </div>
 
                 <h3 className="text-3xl font-bold mb-4 tracking-tight text-apple-text">{project.title}</h3>
+                {project.role && (
+                  <span className="inline-flex items-center rounded-full bg-apple-accent/10 px-3 py-1 text-xs font-bold uppercase tracking-[0.24em] text-apple-accent mb-4">
+                    {project.role}
+                  </span>
+                )}
                 <p className="text-apple-secondary mb-6 leading-relaxed text-lg font-medium">
                   {project.description}
                 </p>
@@ -115,6 +122,12 @@ const Projects = () => {
                     <p className="text-[10px] font-bold uppercase tracking-widest text-apple-accent mb-1">Resultado</p>
                     <p className="text-apple-text font-semibold text-sm">{project.result}</p>
                   </div>
+                  {project.impact && (
+                    <div>
+                      <p className="text-[10px] font-bold uppercase tracking-widest text-apple-accent mb-1">Impacto</p>
+                      <p className="text-apple-text text-sm">{project.impact}</p>
+                    </div>
+                  )}
                 </div>
 
                 <ul className="flex flex-wrap gap-2 mb-10 mt-auto">

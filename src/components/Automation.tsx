@@ -1,52 +1,55 @@
-import { motion } from 'framer-motion';
+import { motion, useReducedMotion } from 'framer-motion';
 import { Zap, Cpu, FileText } from 'lucide-react';
 
 const Automation = () => {
+  const shouldReduceMotion = useReducedMotion();
+
   return (
-    <section id="rpa" className="py-fluid-section bg-apple-bg" aria-labelledby="automation-title">
+    <section id="rpa" className="py-fluid-section bg-apple-bg scroll-mt-24 lg:scroll-mt-28" aria-labelledby="automation-title">
       <div className="section-container">
         <div className="grid gap-12 lg:grid-cols-[1.1fr_0.9fr] items-center">
           <div>
             <motion.p
-              initial={{ opacity: 0, y: 10 }}
+              initial={shouldReduceMotion ? { opacity: 1, y: 0 } : { opacity: 0, y: 10 }}
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
-              className="text-apple-blue font-semibold text-lg mb-2"
+              transition={shouldReduceMotion ? { duration: 0 } : { duration: 0.45 }}
+              className="text-apple-accent font-semibold text-lg mb-2"
             >
               Automação
             </motion.p>
             <motion.h2
-              initial={{ opacity: 0, y: 10 }}
+              initial={shouldReduceMotion ? { opacity: 1, y: 0 } : { opacity: 0, y: 10 }}
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
-              transition={{ delay: 0.1 }}
+              transition={shouldReduceMotion ? { duration: 0 } : { delay: 0.1, duration: 0.45 }}
               id="automation-title"
               className="text-fluid-h2 font-bold tracking-tight text-apple-text leading-tight mb-8"
             >
               Automação de processos repetitivos para resultados rápidos.
             </motion.h2>
             <motion.p
-              initial={{ opacity: 0, y: 10 }}
+              initial={shouldReduceMotion ? { opacity: 1, y: 0 } : { opacity: 0, y: 10 }}
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
-              transition={{ delay: 0.2 }}
+              transition={shouldReduceMotion ? { duration: 0 } : { delay: 0.2, duration: 0.45 }}
               className="text-apple-secondary text-lg leading-relaxed font-medium max-w-2xl"
             >
-              Ajudo empresas e equipes a reduzir tarefas manuais com automações orientadas por dados. Do processamento fiscal à integração de sistemas, entrego rotinas confiáveis que liberam tempo operacional.
+              Atuação focada em automatizar processos que reduzem tarefas manuais, aumentam a confiabilidade de rotinas operacionais e aceleram a entrega de resultados.
             </motion.p>
           </div>
 
           <motion.div
-            initial={{ opacity: 0, y: 20 }}
+            initial={shouldReduceMotion ? { opacity: 1, y: 0 } : { opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
-            transition={{ delay: 0.3 }}
+            transition={shouldReduceMotion ? { duration: 0 } : { delay: 0.3, duration: 0.45 }}
             className="grid gap-6"
           >
             <article className="apple-card p-8 border border-apple">
               <div className="flex items-center gap-4 mb-4">
                 <div className="bg-apple-bg p-3 rounded-2xl shadow-sm">
-                  <Zap className="w-6 h-6 text-apple-blue" aria-hidden="true" />
+                  <Zap className="w-6 h-6 text-apple-accent" aria-hidden="true" />
                 </div>
                 <div>
                   <p className="text-apple-secondary uppercase text-[10px] tracking-widest mb-1">O que entrego</p>
@@ -61,7 +64,7 @@ const Automation = () => {
             <article className="apple-card p-8 border border-apple">
               <div className="flex items-center gap-4 mb-4">
                 <div className="bg-apple-bg p-3 rounded-2xl shadow-sm">
-                  <Cpu className="w-6 h-6 text-apple-blue" aria-hidden="true" />
+                  <Cpu className="w-6 h-6 text-apple-accent" aria-hidden="true" />
                 </div>
                 <div>
                   <p className="text-apple-secondary uppercase text-[10px] tracking-widest mb-1">Como trabalho</p>
@@ -73,7 +76,7 @@ const Automation = () => {
               </p>
             </article>
 
-            <article className="apple-card p-8 border border-apple bg-apple-text text-white">
+            <article className="apple-card p-8 border border-apple bg-apple-accent text-white">
               <div className="flex items-center gap-4 mb-4">
                 <div className="bg-apple-bg/10 p-3 rounded-2xl">
                   <FileText className="w-6 h-6" aria-hidden="true" />

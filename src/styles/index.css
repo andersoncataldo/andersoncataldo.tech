@@ -54,7 +54,7 @@
   .glass {
     background-color: rgba(255,255,255,0.7);
     backdrop-filter: blur(8px);
-    border: 1px solid rgba(255,255,255,0.2);
+    border: 1px solid rgba(255,255,255,0.16);
     color: var(--color-apple-text);
     @apply dark:bg-slate-950/70 dark:border-white/10;
   }
@@ -63,7 +63,7 @@
     background-color: var(--color-apple-bg);
     color: var(--color-apple-text);
     border-radius: var(--radius-apple);
-    box-shadow: 0 4px 24px rgba(0,0,0,0.04);
+    box-shadow: 0 10px 30px rgba(15, 23, 42, 0.06);
     border: 1px solid rgba(0,0,0,0.05);
     overflow: hidden;
     transition: all 0.5s ease;
@@ -73,7 +73,7 @@
     background-color: var(--color-apple-bg);
     color: var(--color-apple-text);
     border: 1px solid rgba(255,255,255,0.08);
-    box-shadow: none;
+    box-shadow: 0 10px 24px rgba(0, 0, 0, 0.24);
   }
 
   /* Utility classes to map token names used across components */

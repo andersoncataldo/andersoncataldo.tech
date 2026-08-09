@@ -1,14 +1,16 @@
-import { motion } from 'framer-motion';
+import { motion, useReducedMotion } from 'framer-motion';
 
 const Hero = () => {
+  const shouldReduceMotion = useReducedMotion();
+
   return (
-    <section className="relative min-h-[94vh] flex items-center justify-center overflow-hidden bg-apple-bg dark:bg-slate-950 pt-20" aria-label="Introdução">
+    <section id="inicio" className="relative min-h-[94vh] flex items-center justify-center overflow-hidden bg-apple-bg dark:bg-slate-950 scroll-mt-24 lg:scroll-mt-28" aria-label="Introdução">
       <div className="section-container relative z-10">
         <div className="text-center">
           <motion.div
-            initial={{ opacity: 0, y: 20 }}
+            initial={shouldReduceMotion ? { opacity: 1, y: 0 } : { opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.8, ease: [0.16, 1, 0.3, 1] }}
+            transition={shouldReduceMotion ? { duration: 0 } : { duration: 0.8, ease: [0.16, 1, 0.3, 1] }}
             className="mb-8 flex flex-wrap justify-center gap-3"
           >
             <span className="px-4 py-1.5 rounded-full bg-apple-bg border border-apple text-apple-secondary text-xs font-bold tracking-widest uppercase">
@@ -19,10 +21,10 @@ const Hero = () => {
             </span>
           </motion.div>
 
-            <motion.h1
-            initial={{ opacity: 0, y: 30 }}
+          <motion.h1
+            initial={shouldReduceMotion ? { opacity: 1, y: 0 } : { opacity: 0, y: 30 }}
             animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 1, delay: 0.1, ease: [0.16, 1, 0.3, 1] }}
+            transition={shouldReduceMotion ? { duration: 0 } : { duration: 1, delay: 0.1, ease: [0.16, 1, 0.3, 1] }}
             className="text-fluid-h1 font-bold tracking-tight mb-10 text-apple-text leading-[0.9]"
           >
             Full-stack em formação com <br />
@@ -30,9 +32,9 @@ const Hero = () => {
           </motion.h1>
 
           <motion.div
-            initial={{ opacity: 0, y: 20 }}
+            initial={shouldReduceMotion ? { opacity: 1, y: 0 } : { opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.8, delay: 0.2 }}
+            transition={shouldReduceMotion ? { duration: 0 } : { duration: 0.8, delay: 0.2 }}
             className="max-w-2xl mx-auto mb-14"
           >
             <p className="text-xl md:text-2xl text-apple-secondary leading-relaxed font-medium">
@@ -41,9 +43,9 @@ const Hero = () => {
           </motion.div>
 
           <motion.div
-            initial={{ opacity: 0, y: 20 }}
+            initial={shouldReduceMotion ? { opacity: 1, y: 0 } : { opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.8, delay: 0.3 }}
+            transition={shouldReduceMotion ? { duration: 0 } : { duration: 0.8, delay: 0.3 }}
             className="grid gap-4 sm:grid-cols-2 md:grid-cols-3"
           >
             <div className="apple-card p-6 text-left">
@@ -61,9 +63,9 @@ const Hero = () => {
           </motion.div>
 
           <motion.div
-            initial={{ opacity: 0, y: 20 }}
+            initial={shouldReduceMotion ? { opacity: 1, y: 0 } : { opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.8, delay: 0.4 }}
+            transition={shouldReduceMotion ? { duration: 0 } : { duration: 0.8, delay: 0.4 }}
             className="mt-12 flex flex-col sm:flex-row items-center justify-center gap-4 max-w-4xl mx-auto"
           >
             {['6º semestre', '2 experiências profissionais', 'Automações RPA'].map((label) => (

@@ -1,83 +1,202 @@
-# Prompt — Rodada 3 de Correções do Portfólio (Responsividade + Dark/Light Mode + Sidebar)
+PROMPT: AUDITORIA COMPLETA PÓS-CORREÇÃO (Portfólio Anderson Viana Cataldo)
 
-> Copie e cole o conteúdo abaixo inteiro na IA de desenvolvimento, junto do repomix atualizado do projeto (React + TypeScript + Vite + Tailwind CSS v4 + Framer Motion + lucide-react, design system "Apple-like").
+CONTEXTO
+Este é um portfólio pessoal em React 18 + TypeScript + Vite + Tailwind v4, com
+sidebar fixa à esquerda como navegação principal. Um conjunto de correções já
+foi aplicado anteriormente (bug de contraste no dark mode, link de navegação
+faltando, remoção de código morto, etc.).
 
----
+Sua tarefa agora NÃO é aplicar aquele prompt de novo. É fazer uma auditoria
+NOVA, completa e cética, como se o código nunca tivesse sido revisado antes:
+assuma que as correções anteriores podem ter sido parciais, ter introduzido
+efeitos colaterais, ou que existam problemas que não foram cobertos da
+primeira vez. Verifique também se cada item do prompt anterior foi realmente
+resolvido (não confie apenas na existência de um commit dizendo que foi
+resolvido — confirme lendo o código).
 
-## CONTEXTO
+Percorra literalmente TODOS os arquivos do projeto (componentes, estilos,
+configs, tipos, HTML, scripts) antes de concluir. Não pule arquivos pequenos
+ou de config assumindo que "não têm erro".
 
-As rodadas anteriores já implementaram: remoção dos CTAs comerciais, sidebar lateral estilo Claude (`src/components/Sidebar.tsx`), toggle de tema controlado em `src/App.tsx` (estado `theme` + classe `dark` no `<html>` + `localStorage`), e tokens de cor em `src/styles/index.css` (`--color-apple-bg`, `--color-apple-text`, `--color-apple-secondary`, `--color-apple-blue`, com variantes `-dark`).
+Produza um relatório estruturado (não apenas uma lista solta) com, para cada
+problema encontrado: arquivo + linha (ou trecho), descrição do problema,
+causa raiz, severidade (Crítico / Alto / Médio / Baixo) e uma sugestão de
+correção. Ao final, um resumo com contagem de problemas por categoria e por
+severidade.
 
-Apesar disso, ainda existem **3 problemas concretos e verificáveis** no código atual que precisam ser corrigidos nesta rodada, além de uma auditoria geral. Analise o projeto real antes de alterar qualquer coisa — os pontos abaixo são um guia, não uma lista fechada.
+============================================================
+MÉTODO DE AUDITORIA (siga nesta ordem)
+============================================================
 
-**Regras de escopo (mantidas das rodadas anteriores):**
-- Não reintroduzir CTAs comerciais ("quero contratar", "quero um projeto", etc.).
-- Não inventar seções, textos ou dados que não existem no conteúdo real do portfólio.
-- Não trocar o stack (React/TS/Vite/Tailwind/Framer Motion/lucide-react) nem descartar o design system Apple-like — apenas corrigir e evoluir.
-- Implemente **exatamente** o que está descrito, na ordem das fases. Se encontrar algo fora do escopo durante a auditoria, **liste como sugestão ao final**, não implemente sem necessidade.
+PASSO 1 — Build e verificação estática
+- Rode `npm run build` (tsc -b && vite build) e `npm run lint`. Reporte
+  qualquer erro/warning literal, mesmo que pareça inofensivo.
+- Procure por: tipos "any" implícitos, imports não usados, variáveis não
+  usadas, componentes/funções declarados e nunca chamados, props declaradas
+  na interface mas nunca usadas no componente.
+- Verifique se existem arquivos órfãos: componentes, hooks, utils ou assets
+  que não são importados por nenhum outro arquivo do projeto.
 
----
+PASSO 2 — Navegação e roteamento interno
+- Para cada seção renderizada em src/App.tsx (com seu `id`), confirme que
+  existe um link correspondente na sidebar (src/components/Sidebar.tsx) e
+  que o href bate exatamente com o id da seção (ex: `#sobre` -> `id="sobre"`).
+- Para cada link da sidebar, confirme que o destino (`#algumId`) existe de
+  fato em algum elemento do DOM renderizado.
+- Verifique se o estado "ativo" (scroll-spy) muda corretamente ao rolar por
+  todas as seções, inclusive a primeira e a última, e não trava em um estado
+  incorreto quando a página é redimensionada ou quando o usuário clica um
+  link e a página ainda está animando o scroll suave.
+- Verifique o comportamento em três contextos: sidebar fixa em desktop,
+  drawer mobile, e o botão de colapsar/expandir — clique tudo mentalmente
+  (ou simule) e veja se algum estado fica inconsistente (ex: menu mobile
+  aberto ao redimensionar para desktop, foco perdido ao fechar o drawer).
 
-## FASE 1 — AUDITORIA COMPLETA (diagnóstico antes de alterar código)
+PASSO 3 — Consistência visual entre temas (claro/escuro)
+- Para CADA componente que define cor de fundo, cor de texto ou borda,
+  verifique manualmente a combinação resultante em light mode E em dark mode
+  usando os valores reais de src/styles/index.css. Procure especificamente
+  por:
+  - texto e fundo que resolvem para a mesma cor (ou cores muito próximas) em
+    qualquer um dos dois temas;
+  - classes que misturam tokens dinâmicos (ex: bg-apple-text, que muda com o
+    tema) com cores fixas (ex: text-white, text-black) sem tratar o caso em
+    que o token muda de lado;
+  - elementos com fundo definido mas sem cor de texto explícita, herdando
+    uma cor que pode não ter contraste suficiente.
+- Verifique se a transição entre temas (toggle) é suave em todos os
+  componentes, inclusive nos que são carregados via lazy/Suspense (podem não
+  ter recebido o className correto na primeira renderização).
 
-Revise o projeto inteiro e produza um relatório (item → problema → arquivo → risco/impacto) cobrindo, no mínimo:
+PASSO 4 — Dados e conteúdo
+- Compare cada interface em src/types/index.ts com os dados reais
+  (src/components/Experience.tsx, Projects.tsx) e com o que é efetivamente
+  renderizado em tela. Aponte qualquer campo que exista nos dados mas nunca
+  seja exibido, e qualquer campo usado no JSX que não exista no tipo.
+- Verifique datas e períodos de experiência (ex: "Jun/2026 - Atual") quanto a
+  consistência cronológica (datas de início antes de fim, não sobreposição
+  ilógica, ano coerente com a data atual do sistema).
+- Verifique se todos os links externos (GitHub, LinkedIn, demos, PDF do
+  currículo) apontam para URLs válidas em formato (https://, sem espaços,
+  sem barra dupla) e se têm `target="_blank"` acompanhado de
+  `rel="noopener noreferrer"`.
+- Verifique se e-mail, GitHub e LinkedIn aparecem com o mesmo valor em todos
+  os lugares onde são citados (sidebar, contato, rodapé, meta tags) — sinal
+  de que a centralização de constantes (se foi feita) está sendo usada de
+  fato em todos os pontos, e não apenas em parte deles.
 
-1. **Responsividade desktop/mobile:** todos os componentes (`Hero`, `About`, `Experience`, `Automation`, `Skills`, `Projects`, `Contact`, `Footer`, `CopyEmail`, `Sidebar`) em breakpoints pequenos, médios e grandes — overflow, textos cortados, espaçamentos quebrados, sobreposição de elementos (ex.: botão de menu mobile fixo no canto vs. conteúdo do Hero).
-2. **Consistência de dark/light mode:** localizar **todo** uso de cor "hardcoded" fora dos tokens do design system (`bg-[#0f172a]`, `bg-slate-950`, `text-slate-400`, `bg-white`, `text-white`, `border-white/10`, etc. usados diretamente nos componentes) que impede o tema de mudar corretamente. Mapear componente por componente onde isso ocorre.
-3. **Bugs e inconsistências na Sidebar (`src/components/Sidebar.tsx`):** duplicação de lógica entre a versão desktop (`<aside>`) e a versão mobile (drawer), uso incorreto de tokens semânticos como background (ex.: `bg-apple-text` usado como cor de fundo do drawer mobile, o que inverte errado entre os temas), gerenciamento de foco/acessibilidade do menu de busca e do menu de perfil, e qualquer função/estado incompleto ou não utilizado.
-4. **Outros problemas gerais do projeto:** performance (lazy loading, imagens), SEO básico, código morto, tipagem fraca, inconsistências de padrão entre componentes, ou qualquer erro de build/lint.
+PASSO 5 — Componentes interativos (funcionalidade real)
+- CopyEmail.tsx: confirme que o estado "copiado" volta ao normal depois do
+  timeout, que falhas de clipboard (navigator.clipboard indisponível, ex.
+  contexto não-HTTPS) são tratadas sem quebrar a UI, e que o botão continua
+  acessível por teclado (Enter/Espaço).
+- Toggle de tema: confirme que o valor salvo no localStorage é respeitado no
+  carregamento inicial sem "flash" de tema errado (FOUC), e que alternar o
+  tema não reseta outros estados da sidebar (ex: menu mobile aberto,
+  scroll-spy).
+- Sidebar mobile (drawer): confirme que o focus trap continua funcionando,
+  que Esc fecha o menu, que o scroll do body é restaurado ao fechar, e que
+  não há como tabular para elementos "atrás" do overlay enquanto ele está
+  aberto.
+- Botão de colapsar sidebar (desktop): confirme que nenhum conteúdo fica
+  cortado, sobreposto ou ilegível no estado colapsado, e que o aria-label do
+  botão muda corretamente entre "Expandir" e "Recolher" conforme o estado.
 
-**Entregável da Fase 1:** relatório listado, sem alterar código ainda. Só avance para a Fase 2 depois disso.
+PASSO 6 — Responsividade
+- Avalie o layout nos breakpoints usados pelo projeto (mobile ~375px,
+  tablet ~768px, desktop ~1024px+, e o breakpoint `lg` do Tailwind onde a
+  sidebar deixa de ser drawer). Procure por:
+  - texto cortado, sobreposição de elementos, scroll horizontal indesejado;
+  - áreas clicáveis menores que 44x44px em botões/links importantes;
+  - grids que quebram mal em telas intermediárias (ex: 2 colunas viram 1
+    coluna larga demais, ou ficam apertadas antes da hora).
+- Verifique se o `main` sempre recebe o padding-left correto correspondente
+  ao estado da sidebar (aberta/colapsada) em cada breakpoint, sem sobra de
+  espaço em branco nem conteúdo escondido atrás da sidebar fixa.
 
----
+PASSO 7 — Acessibilidade (a11y)
+- Verifique se todo elemento interativo (botão, link, input) tem nome
+  acessível (texto visível, aria-label ou aria-labelledby).
+- Verifique a ordem de tabulação (tab order) da página inteira, incluindo
+  sidebar, conteúdo principal e footer — deve seguir uma ordem lógica visual.
+- Verifique se há pelo menos um heading `<h1>` por página e se a hierarquia
+  de headings (h1 > h2 > h3) é sequencial, sem pular níveis.
+- Verifique se `aria-current`, `aria-expanded`, `aria-hidden` e `role` são
+  usados corretamente e refletem o estado real do componente (não estáticos
+  quando deveriam mudar dinamicamente).
+- Verifique se `prefers-reduced-motion` é respeitado nas animações do
+  framer-motion, caso a correção correspondente tenha sido implementada —
+  confirme que ela realmente desativa/reduz o movimento e não é apenas
+  cosmética.
 
-## FASE 2 — IMPLEMENTAÇÕES
+PASSO 8 — Performance e carregamento
+- Verifique se os componentes lazy-loaded (About, Experience, Automation,
+  Skills, Projects, Contact, Footer) não causam layout shift perceptível
+  quando entram (compare com e sem o fallback do Suspense).
+- Verifique se imagens têm dimensões explícitas (width/height ou
+  aspect-ratio) para evitar CLS, e se usam `loading="lazy"` apenas quando
+  fora da primeira dobra.
+- Verifique o tamanho e formato dos assets (imagem de perfil, PDF do
+  currículo) e se há algum asset não utilizado ainda incluso no bundle.
+- Verifique se não há chamadas, listeners ou observers (scroll, resize,
+  IntersectionObserver) criados sem a devida limpeza (cleanup) no
+  useEffect, o que causaria vazamento de memória ou comportamento
+  duplicado ao navegar/re-renderizar.
 
-### 2.1 Responsividade real (desktop + mobile)
-- Garantir que **todos** os componentes funcionem bem em mobile (< 640px), tablet (640–1024px) e desktop (> 1024px) — sem overflow horizontal, sem textos cortados, sem elementos sobrepostos.
-- Unificar a lógica da Sidebar: hoje existe uma versão desktop (`<aside>` fixo) e uma versão mobile (drawer) com código duplicado — refatore para compartilhar o máximo de lógica/estado possível (ex.: um único componente de "conteúdo da sidebar" renderizado dentro de dois containers diferentes, ou um único componente responsivo via classes Tailwind).
-- Corrigir qualquer conflito entre o botão flutuante de abrir menu mobile (`lg:hidden fixed top-4 left-4`) e o conteúdo do Hero/topo da página (z-index, sobreposição, área de toque).
-- Validar que o padding lateral do conteúdo principal (`lg:pl-72` / `lg:pl-20` em `App.tsx`, dependendo do estado `collapsed`) não quebra em telas intermediárias.
+PASSO 9 — SEO e metadados
+- Verifique se index.html tem title, description, canonical, Open Graph e
+  Twitter Card preenchidos corretamente e com valores plausíveis (não
+  genéricos/placeholder).
+- Verifique se o favicon carrega corretamente e não é mais o ícone padrão do
+  Vite/React.
+- Verifique se public/robots.txt e public/sitemap.xml (caso existam) estão
+  com sintaxe válida e URLs corretas.
+- Verifique se algum dado estruturado (JSON-LD), se implementado, é um JSON
+  válido e reflete os dados reais do site (nome, links).
 
-### 2.2 Corrigir o modo claro/escuro — paleta de cores obrigatória
+PASSO 10 — Higiene de repositório
+- Verifique .gitignore quanto a arquivos de build que não deveriam ser
+  versionados (*.tsbuildinfo, dist, node_modules, .env).
+- Verifique se ainda existem arquivos mortos, duplicados ou renomeações
+  pendentes (ex: assets com espaço no nome, componentes não referenciados).
+- Verifique se README.md está atualizado e reflete o estado real do projeto
+  (seções existentes, scripts, notas de design) — aponte qualquer
+  divergência entre o que o README descreve e o que o código realmente faz.
 
-**Defina exatamente esta paleta** (ajustar `src/styles/index.css` e todos os tokens `apple-*`):
+============================================================
+FORMATO DE SAÍDA ESPERADO
+============================================================
 
-- **Modo claro:** fundo em **off-white**, **roxo** como cor de destaque/ação (substituindo o azul atual `--color-apple-blue`), **preto** para textos principais.
-- **Modo escuro:** fundo em **preto**, **roxo** como cor de destaque/ação (mesma família de roxo do modo claro, ajustada em brilho/saturação para contraste em fundo escuro), **branco** para textos principais.
+1. Resumo executivo (3-5 linhas): estado geral do projeto, se está pronto
+   para produção ou não, e os problemas mais urgentes.
 
-Passos técnicos:
-1. Atualizar `@theme` em `src/styles/index.css`: `--color-apple-bg` (off-white), `--color-apple-text` (preto), `--color-apple-blue` → renomear conceitualmente para cor de destaque roxa (pode manter o nome da variável por compatibilidade, mas o valor deve ser roxo) tanto na versão light quanto nas variáveis `-dark` (fundo preto, texto branco, roxo ajustado).
-2. **Eliminar todo uso de cor hardcoded fora dos tokens** identificado na Fase 1 (`bg-[#0f172a]`, `bg-slate-950`, `text-slate-*`, `text-white`, `bg-white` soltos, etc.) e substituir pelos tokens `apple-bg`, `apple-text`, `apple-secondary`, `apple-blue` (ou o nome que a paleta roxa adotar) em **todos** os componentes, incluindo `Sidebar.tsx`, `Hero.tsx`, `About.tsx`, `Automation.tsx`, `Skills.tsx`, `Experience.tsx`, `Projects.tsx`, `Contact.tsx`, `Footer.tsx`, `CopyEmail.tsx`.
-3. Garantir que **cada seção do site** — não só a sidebar — reaja corretamente à troca de tema: cards (`apple-card`), bordas, ícones, placeholders de loading, estados de hover/focus.
-4. Verificar contraste (WCAG AA) entre texto e fundo nos dois temas, especialmente para o roxo em cima de preto/off-white.
-5. Testar a transição entre temas (não deve haver "flash" de cor errada ao trocar, nem elementos que ficam ilegíveis por herdarem cor fixa).
+2. Tabela ou lista de problemas encontrados, agrupados por categoria (Build/
+   Tipagem, Navegação, Temas/Contraste, Dados/Conteúdo, Interatividade,
+   Responsividade, Acessibilidade, Performance, SEO, Repositório), cada um
+   com:
+   - Arquivo e localização
+   - Descrição do problema
+   - Severidade (Crítico / Alto / Médio / Baixo)
+   - Sugestão objetiva de correção
 
-### 2.3 Corrigir e aprimorar a Sidebar
-- Corrigir o(s) bug(s) e função(ões) incompleta(s) identificados na Fase 1.
-- Fazer a Sidebar (desktop e mobile) responder corretamente ao tema claro/escuro com a nova paleta (hoje ela está com fundo fixo escuro independente do tema selecionado — isso deve ser corrigido).
-- Revisar UX: estado ativo do item de navegação atual (indicar visualmente em qual seção o usuário está ao rolar a página — scroll spy), animações de abrir/fechar suaves e sem "jump" de layout, área de toque adequada em mobile, fechamento do drawer mobile ao clicar fora ou pressionar Esc, foco preso (focus trap) dentro do drawer mobile enquanto aberto.
-- Revisar o menu de perfil/rodapé da sidebar (nome, status, dropdown) para garantir que também siga a nova paleta e funcione com teclado (abrir/fechar com Enter/Espaço, fechar com Esc, fechar ao clicar fora).
-- Garantir que o toggle de tema (sol/lua) dentro da sidebar reflita visualmente o estado atual corretamente (ícone certo para o tema ativo).
+3. Checklist de confirmação dos itens do prompt de correção anterior,
+   indicando para cada um: Resolvido / Parcialmente resolvido / Não
+   resolvido / Não verificável, com justificativa curta.
 
-### 2.4 Demais correções encontradas na auditoria
-- Corrigir os demais itens relevantes listados na Fase 1 (performance, acessibilidade, código morto, tipagem, lint/build) que impactem diretamente a experiência do usuário ou a qualidade do código, mesmo que não estejam listados explicitamente aqui.
+4. Contagem final de problemas por severidade e recomendação de próximos
+   passos priorizados.
 
----
-
-## FASE 3 — FECHAMENTO
-
-1. **Análise geral do que foi alterado** — resumo antes/depois por arquivo/componente.
-2. **Testes** — validar em pelo menos 3 larguras de tela (mobile ~375px, tablet ~768px, desktop ~1440px): troca de tema aplicando a paleta correta em 100% dos elementos, navegação da sidebar (desktop e mobile) sem bugs, sem erros de console/build, sem regressões nas seções já existentes.
-3. **Atualizar `README.md`** com a paleta de cores oficial (light/dark), estrutura da sidebar e instruções de uso do toggle de tema.
-4. **Sugestões de melhorias futuras** (apenas listar, não implementar), priorizadas por impacto x esforço.
-
----
-
-## O QUE NÃO FAZER
-
-- Não reintroduzir qualquer CTA comercial.
-- Não inventar conteúdo, seções ou dados fora do que já existe no portfólio.
-- Não descartar o design system Apple-like nem o stack atual.
-- Não deixar nenhuma cor "hardcoded" fora dos tokens de tema — esse é o principal motivo do dark/light mode estar incompleto hoje.
-- Não pular a ordem das fases (Auditoria → Implementação → Fechamento).
+============================================================
+REGRAS IMPORTANTES
+============================================================
+- Não presuma que algo está correto só porque "parece" ter sido corrigido —
+  leia o código-fonte atual antes de concluir qualquer item.
+- Não ignore arquivos de configuração (tsconfig*, vite.config.ts,
+  eslint.config.js, postcss.config.js, package.json) — erros de configuração
+  também são bugs.
+- Se um problema já havia sido listado na auditoria anterior e ainda existir,
+  reporte de novo (não assuma que "já foi visto, não precisa repetir").
+- Se encontrar um problema novo, não coberto por nenhuma auditoria anterior,
+  destaque isso explicitamente no relatório.
+- Não aplique correções nesta etapa — apenas audite e relate. A aplicação
+  das correções deve ser um passo separado, após revisão do relatório.

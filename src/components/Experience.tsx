@@ -1,4 +1,4 @@
-import { motion } from 'framer-motion';
+import { motion, useReducedMotion } from 'framer-motion';
 import { Calendar, MapPin } from 'lucide-react';
 import { Experience as ExperienceType } from '../types';
 
@@ -47,23 +47,25 @@ const experiences: ExperienceType[] = [
 ];
 
 const Experience = () => {
+  const shouldReduceMotion = useReducedMotion();
+
   return (
-    <section id="experiencia" className="py-fluid-section bg-apple-bg" aria-labelledby="experience-title">
+    <section id="experiencia" className="py-fluid-section bg-apple-bg scroll-mt-24 lg:scroll-mt-28" aria-labelledby="experience-title">
       <div className="section-container">
         <div className="mb-16">
           <motion.p
-            initial={{ opacity: 0, y: 10 }}
+            initial={shouldReduceMotion ? { opacity: 1, y: 0 } : { opacity: 0, y: 10 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
-            className="text-apple-blue font-semibold text-lg mb-2"
+            className="text-apple-accent font-semibold text-lg mb-2"
           >
             Carreira
           </motion.p>
           <motion.h2
-            initial={{ opacity: 0, y: 10 }}
+            initial={shouldReduceMotion ? { opacity: 1, y: 0 } : { opacity: 0, y: 10 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
-            transition={{ delay: 0.1 }}
+            transition={shouldReduceMotion ? { duration: 0 } : { delay: 0.1 }}
             id="experience-title"
             className="text-fluid-h2 font-bold tracking-tight text-apple-text leading-tight"
           >
@@ -75,10 +77,10 @@ const Experience = () => {
           {experiences.map((exp, index) => (
             <motion.div
               key={index}
-              initial={{ opacity: 0, y: 20 }}
+              initial={shouldReduceMotion ? { opacity: 1, y: 0 } : { opacity: 0, y: 20 }}
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
-              transition={{ duration: 0.6, delay: index * 0.1 }}
+              transition={shouldReduceMotion ? { duration: 0 } : { duration: 0.6, delay: index * 0.1 }}
               className="apple-card p-8 md:p-12 flex flex-col md:grid md:grid-cols-[280px_1fr] gap-8 md:gap-16"
             >
               <div className="flex flex-col space-y-4">
@@ -88,7 +90,7 @@ const Experience = () => {
                 </div>
                 <div>
                   <h3 className="text-2xl font-bold text-apple-text mb-1">{exp.company}</h3>
-                  <p className="text-lg text-apple-blue font-semibold">{exp.title}</p>
+                  <p className="text-lg text-apple-accent font-semibold">{exp.title}</p>
                 </div>
                 <div className="flex items-center gap-2 text-apple-secondary text-sm">
                   <MapPin className="w-4 h-4" />
@@ -108,7 +110,7 @@ const Experience = () => {
                 <ul className="space-y-4" role="list">
                   {exp.results.map((item, i) => (
                     <li key={i} className="flex gap-4 text-apple-text leading-relaxed text-base font-medium">
-                      <div className="mt-2.5 w-1.5 h-1.5 rounded-full bg-apple-blue shrink-0" aria-hidden="true" />
+                      <div className="mt-2.5 w-1.5 h-1.5 rounded-full bg-apple-accent shrink-0" aria-hidden="true" />
                       {item}
                     </li>
                   ))}

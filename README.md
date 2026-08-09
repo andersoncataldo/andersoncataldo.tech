@@ -1,37 +1,45 @@
-# Portfólio de Anderson Viana Cataldo
+# Portfólio de Anderson Cataldo
 
-Este repositório contém o portfólio pessoal de **Anderson Viana Cataldo**, desenvolvido com **React 18 + TypeScript + Vite**.
-O site é uma vitrine de carreira, com foco em trajetória profissional, habilidades técnicas e resultados de projetos e automações.
+Este repositório contém o portfólio pessoal de Anderson Cataldo, uma landing page desenvolvida com React, TypeScript e Vite para apresentar sua trajetória profissional, habilidades técnicas e projetos com foco em desenvolvimento full-stack, automação de processos e produtos digitais.
 
-## O que está incluído
+## Sobre o portfólio
 
-### Seções do site
-- `src/App.tsx` - ponto de entrada da aplicação, layout de página e lógica de tema.
-- `src/components/Sidebar.tsx` - sidebar fixa à esquerda com navegação principal, links externos e toggle de tema.
-- `src/components/Hero.tsx` - apresentação inicial com destaque para diferencial técnico e carreira.
-- `src/components/About.tsx` - perfil profissional, formação e localização.
-- `src/components/Experience.tsx` - experiência profissional e acadêmica com resultados e stack.
-- `src/components/Automation.tsx` - destaque técnico para automação de processos e estabilidade operacional.
-- `src/components/Skills.tsx` - stack técnica, infraestrutura e mindset profissional.
-- `src/components/Projects.tsx` - projetos selecionados com problema, solução, resultado e tecnologies.
-- `src/components/Contact.tsx` - contato neutro e profissional com e-mail, LinkedIn e currículo.
-- `src/components/Footer.tsx` - rodapé simples com links externos.
-- `src/components/CopyEmail.tsx` - botão para copiar e-mail com feedback.
+O objetivo deste projeto é funcionar como uma vitrine profissional moderna, clara e objetiva. A interface foi pensada para mostrar:
 
-### Estilo e arquitetura
-- `src/styles/index.css` - tokens de design Apple-like, utilitários e dark mode.
-- `framer-motion` para animações suaves e leitura visual.
-- `lucide-react` para ícones consistentes.
-- Dark mode real suportado com persistência de preferência via `localStorage`.
+- formação e experiência em desenvolvimento e automação;
+- projetos com contexto, solução e impacto;
+- stack tecnológica e mindset profissional;
+- canais de contato e links externos de forma organizada.
 
-## Dependências principais
-- `react`
-- `react-dom`
-- `typescript`
-- `vite`
-- `framer-motion`
-- `lucide-react`
-- `tailwindcss`
+A estrutura foi construída em uma única página, com navegação por seções e um layout responsivo que adapta o conteúdo para desktop e mobile.
+
+## Principais seções
+
+- Hero: apresentação inicial com destaque para perfil e diferencial técnico.
+- Sobre: visão geral profissional, formação e localização.
+- Experiência: trajetória acadêmica e profissional com resultados concretos.
+- Automação: foco em processos automatizados e eficiência operacional.
+- Habilidades: stack técnica e competências profissionais.
+- Projetos: exemplos de soluções desenvolvidas com contexto e impacto.
+- Contato: e-mail, LinkedIn e currículo em PDF.
+
+## Recursos principais
+
+- Tema claro/escuro com persistência via localStorage.
+- Sidebar fixa no desktop e drawer móvel no mobile.
+- Navegação por âncoras com scroll suave e offset para evitar sobreposição com a sidebar.
+- Botão de copiar e-mail com feedback visual.
+- Animações leves com Framer Motion e ícones consistentes com Lucide React.
+- Design responsivo com foco em legibilidade e acessibilidade.
+
+## Tecnologias utilizadas
+
+- React 18
+- TypeScript
+- Vite
+- Tailwind CSS
+- Framer Motion
+- Lucide React
 
 ## Como executar localmente
 
@@ -41,71 +49,34 @@ O site é uma vitrine de carreira, com foco em trajetória profissional, habilid
 npm install
 ```
 
-2. Execute a aplicação em desenvolvimento:
+2. Inicie o projeto em modo de desenvolvimento:
 
 ```bash
 npm run dev
 ```
 
-3. Abra `http://localhost:5173` no navegador.
+3. Abra o endereço exibido no terminal no navegador.
 
-## Como buildar para produção
+## Como gerar a build
 
 ```bash
 npm run build
 ```
 
-### Servir a build localmente (preview)
-
-Após `npm run build` você pode servir a versão gerada com o preview do Vite:
+## Como visualizar a build localmente
 
 ```bash
 npm run preview
 ```
 
-Por padrão o servidor roda em `http://localhost:4173/`.
+## Estrutura do projeto
 
-## Principais melhorias aplicadas
-- Adição de sidebar fixa à esquerda com navegação por seções e menu móvel.
-- Implementação de modo claro/escuro com persistência do tema.
-- Neutralização do tom comercial em favor de foco em carreira e resultados.
-- Remoção de CTAs de contratação/serviços e contato unificado e profissional.
-- Atualização da navegação e do conteúdo para um portfólio de carreira mais claro.
+- `src/App.tsx`: composição das seções e lógica de tema.
+- `src/components/`: componentes da interface, como sidebar, hero, projetos e contato.
+- `src/styles/index.css`: tokens de tema, utilitários e estilos globais.
+- `src/config/links.ts`: centralização de links e informações de contato.
+- `public/`: arquivos estáticos como favicon, robots.txt e sitemap.
 
-## Notas de design e acessibilidade
+## Objetivo do projeto
 
-- Paleta: tokenizada em `src/styles/index.css` com as variáveis principais:
-	- `--color-apple-bg` — fundo (light: `#fbf8ff`, dark: `#000000`)
-	- `--color-apple-text` — texto (light: `#0b0b0b`, dark: `#ffffff`)
-	- `--color-apple-blue` — acento (light: `#7c3aed`)
-	- `--color-apple-blue-dark` — acento (dark: `#5b21a9`) — ajustado para passar contraste com texto branco
-
-- A aplicação removeu hard-coded colors e passou a usar utilitários como `bg-apple-bg`, `bg-apple-accent`, `text-apple-accent` e `border-apple` para manter consistência entre modos claro/escuro.
-
-- Contraste: foi executado um script (`scripts/contrast.js`) que valida as razões de contraste entre tokens. Resultado resumido:
-	- `text` sobre `bg` (light/dark): passa (>= 4.5)
-	- `white` sobre `--color-apple-blue-dark` (`#5b21a9`): passa (9.39)
-	- `black` sobre `--color-apple-blue` (`#7c3aed`): ~3.45 (AA Large) — evite texto pequeno preto sobre o acento claro; prefira `text-white` para pequenos rótulos ou use o acento escuro em contexto invertido.
-
-- Sidebar móvel: implementado como drawer com `focus trap`, Esc para fechar e bloqueio de scroll enquanto aberto.
-
-## Testes visuais realizados
-
-- Capturas realizadas em 375px, 768px e 1440px para verificar o layout responsivo e o comportamento do `Sidebar` (drawer no mobile, fixo no desktop).
-
-## Próximos passos recomendados
-
-- Completar sweep para qualquer ocorrência remanescente de cores hard-coded (já reduzido consideravelmente).
-- Implementar scroll-spy para destacar a seção ativa ao rolar a página.
-- Testes automatizados de acessibilidade (axe, pa11y) em pipelines CI.
-
-## Como explorar o repositório
-
-- Veja `src/App.tsx` para a ordem e o layout das seções.
-- Abra `src/components/Sidebar.tsx` para a implementação da navegação e do tema.
-- Consulte `src/styles/index.css` para os tokens de paleta e o suporte ao modo escuro.
-- Repare em `src/components/Contact.tsx` para o contato neutro e profissional.
-
-## Objetivo do portfólio
-
-Este site apresenta Anderson como um desenvolvedor full-stack em formação com foco em **automação de processos**, **React/TypeScript** e entregas que reduzem trabalho manual e melhoram produtividade.
+Este portfólio tem como propósito apresentar Anderson Cataldo como um desenvolvedor em formação, com interesse especial em desenvolvimento web, automação e soluções que reduzem trabalho manual e aumentam eficiência.

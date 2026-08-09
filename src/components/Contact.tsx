@@ -1,16 +1,19 @@
 import { Linkedin, FileText } from 'lucide-react';
-import resumeFile from '../assets/Curriculo Anderson PT-BR.pdf';
-import { motion } from 'framer-motion';
+import resumeFile from '../assets/curriculo-anderson-pt-br.pdf';
+import { motion, useReducedMotion } from 'framer-motion';
 import CopyEmail from './CopyEmail';
+import { EMAIL, LINKEDIN_URL } from '../config/links';
 
 const Contact = () => {
+  const shouldReduceMotion = useReducedMotion();
+
   return (
-    <section id="contato" className="py-fluid-section bg-apple-bg" aria-labelledby="contact-title">
+    <section id="contato" className="py-fluid-section bg-apple-bg scroll-mt-24 lg:scroll-mt-28" aria-labelledby="contact-title">
       <div className="section-container">
         <div className="grid gap-16 lg:grid-cols-[1.05fr_0.95fr] items-start">
           <div>
             <motion.p
-              initial={{ opacity: 0, y: 10 }}
+              initial={shouldReduceMotion ? { opacity: 1, y: 0 } : { opacity: 0, y: 10 }}
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
               className="text-apple-accent font-semibold text-lg mb-2"
@@ -18,10 +21,10 @@ const Contact = () => {
               Contato
             </motion.p>
             <motion.h2
-              initial={{ opacity: 0, y: 10 }}
+              initial={shouldReduceMotion ? { opacity: 1, y: 0 } : { opacity: 0, y: 10 }}
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
-              transition={{ delay: 0.1 }}
+              transition={shouldReduceMotion ? { duration: 0 } : { delay: 0.1 }}
               id="contact-title"
               className="text-fluid-h2 font-bold tracking-tight text-apple-text mb-8 leading-tight"
             >
@@ -34,23 +37,23 @@ const Contact = () => {
 
           <div className="grid gap-6 w-full">
             <motion.div
-              initial={{ opacity: 0, x: 20 }}
+              initial={shouldReduceMotion ? { opacity: 1, x: 0 } : { opacity: 0, x: 20 }}
               whileInView={{ opacity: 1, x: 0 }}
               viewport={{ once: true }}
               className="apple-card p-6 md:p-8"
             >
-              <CopyEmail email="andersonvcataldo@gmail.com" />
+              <CopyEmail email={EMAIL} />
             </motion.div>
 
             <motion.div
-              initial={{ opacity: 0, x: 20 }}
+              initial={shouldReduceMotion ? { opacity: 1, x: 0 } : { opacity: 0, x: 20 }}
               whileInView={{ opacity: 1, x: 0 }}
               viewport={{ once: true }}
-              transition={{ delay: 0.1 }}
+              transition={shouldReduceMotion ? { duration: 0 } : { delay: 0.1 }}
               className="apple-card p-6 md:p-8 flex flex-col gap-6"
             >
               <div className="flex items-center gap-4">
-                  <div className="bg-apple-bg p-4 rounded-2xl shrink-0">
+                <div className="bg-apple-bg p-4 rounded-2xl shrink-0">
                   <Linkedin className="w-6 h-6 text-apple-accent" />
                 </div>
                 <div>
@@ -59,7 +62,7 @@ const Contact = () => {
                 </div>
               </div>
               <a
-                href="https://linkedin.com/in/andersonnviana"
+                href={LINKEDIN_URL}
                 target="_blank"
                 rel="noopener noreferrer"
                 className="text-apple-accent hover:underline font-bold"
@@ -69,10 +72,10 @@ const Contact = () => {
             </motion.div>
 
             <motion.div
-              initial={{ opacity: 0, x: 20 }}
+              initial={shouldReduceMotion ? { opacity: 1, x: 0 } : { opacity: 0, x: 20 }}
               whileInView={{ opacity: 1, x: 0 }}
               viewport={{ once: true }}
-              transition={{ delay: 0.2 }}
+              transition={shouldReduceMotion ? { duration: 0 } : { delay: 0.2 }}
               className="apple-card p-6 md:p-8 bg-apple-accent border-none"
             >
               <div className="flex items-start gap-4 md:gap-6 mb-8">

@@ -1,7 +1,9 @@
-import { motion } from 'framer-motion';
+import { motion, useReducedMotion } from 'framer-motion';
 import { Terminal, Layout, Wrench, ShieldCheck } from 'lucide-react';
 
 const Skills = () => {
+  const shouldReduceMotion = useReducedMotion();
+
   const skillGroups = [
     {
       title: 'Front-End',
@@ -29,11 +31,11 @@ const Skills = () => {
   ];
 
   return (
-    <section id="habilidades" className="py-fluid-section bg-apple-bg" aria-labelledby="skills-title">
+    <section id="habilidades" className="py-fluid-section bg-apple-bg scroll-mt-24 lg:scroll-mt-28" aria-labelledby="skills-title">
       <div className="section-container">
         <div className="text-center mb-20">
           <motion.p 
-            initial={{ opacity: 0, y: 10 }}
+            initial={shouldReduceMotion ? { opacity: 1, y: 0 } : { opacity: 0, y: 10 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
             className="text-apple-accent font-semibold text-lg mb-2"
@@ -41,10 +43,10 @@ const Skills = () => {
             Expertise
           </motion.p>
           <motion.h2 
-            initial={{ opacity: 0, y: 10 }}
+            initial={shouldReduceMotion ? { opacity: 1, y: 0 } : { opacity: 0, y: 10 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
-            transition={{ delay: 0.1 }}
+            transition={shouldReduceMotion ? { duration: 0 } : { delay: 0.1 }}
             id="skills-title" 
             className="text-fluid-h2 font-bold tracking-tight text-apple-text leading-tight"
           >
@@ -56,10 +58,10 @@ const Skills = () => {
           {skillGroups.map((group, index) => (
             <motion.li
               key={index}
-              initial={{ opacity: 0, y: 20 }}
+              initial={shouldReduceMotion ? { opacity: 1, y: 0 } : { opacity: 0, y: 20 }}
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
-              transition={{ duration: 0.5, delay: index * 0.1 }}
+              transition={shouldReduceMotion ? { duration: 0 } : { duration: 0.5, delay: index * 0.1 }}
               className="apple-card p-10 flex flex-col items-start"
             >
               <div className="bg-apple-bg w-14 h-14 rounded-2xl flex items-center justify-center mb-8 border-apple" aria-hidden="true">
@@ -81,9 +83,10 @@ const Skills = () => {
         </ul>
 
         <motion.div 
-          initial={{ opacity: 0, y: 20 }}
+          initial={shouldReduceMotion ? { opacity: 1, y: 0 } : { opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
+          transition={shouldReduceMotion ? { duration: 0 } : { duration: 0.45 }}
           className="apple-card p-10 bg-apple-bg/50"
         >
           <div className="flex flex-col lg:flex-row items-center justify-between gap-12">
