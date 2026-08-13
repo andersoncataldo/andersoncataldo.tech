@@ -27,7 +27,7 @@ const Hero = () => {
             transition={shouldReduceMotion ? { duration: 0 } : { duration: 1, delay: 0.1, ease: [0.16, 1, 0.3, 1] }}
             className="text-fluid-h1 font-bold tracking-tight mb-10 text-apple-text leading-[0.9]"
           >
-            Full-stack em formação com <br />
+            Full-Stack Developer com <br />
             <span className="text-apple-accent">impacto real em React e RPA.</span>
           </motion.h1>
 
@@ -49,16 +49,19 @@ const Hero = () => {
             className="grid gap-4 sm:grid-cols-2 md:grid-cols-3"
           >
             <div className="apple-card p-6 text-left">
-              <p className="text-apple-secondary uppercase text-[10px] tracking-widest mb-3">Formação</p>
-              <p className="text-lg font-bold text-apple-text">6º semestre em Ciência da Computação</p>
+              <p className="text-apple-secondary uppercase text-[10px] tracking-widest mb-3">+ horas</p>
+              <p className="text-3xl font-black text-apple-text mb-2">200+</p>
+              <p className="text-lg font-bold text-apple-text">horas automatizadas</p>
             </div>
             <div className="apple-card p-6 text-left">
-              <p className="text-apple-secondary uppercase text-[10px] tracking-widest mb-3">Experiência</p>
-              <p className="text-lg font-bold text-apple-text">Apps internos e automações corporativas</p>
+              <p className="text-apple-secondary uppercase text-[10px] tracking-widest mb-3">Produção</p>
+              <p className="text-3xl font-black text-apple-text mb-2">3</p>
+              <p className="text-lg font-bold text-apple-text">sistemas em produção</p>
             </div>
             <div className="apple-card p-6 text-left">
-              <p className="text-apple-secondary uppercase text-[10px] tracking-widest mb-3">Diferencial</p>
-              <p className="text-lg font-bold text-apple-text">React/TypeScript + RPA</p>
+              <p className="text-apple-secondary uppercase text-[10px] tracking-widest mb-3">Empresas</p>
+              <p className="text-3xl font-black text-apple-text mb-2">2</p>
+              <p className="text-lg font-bold text-apple-text">organizações atendidas</p>
             </div>
           </motion.div>
 
@@ -66,13 +69,20 @@ const Hero = () => {
             initial={shouldReduceMotion ? { opacity: 1, y: 0 } : { opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={shouldReduceMotion ? { duration: 0 } : { duration: 0.8, delay: 0.4 }}
-            className="mt-12 flex flex-col sm:flex-row items-center justify-center gap-4 max-w-4xl mx-auto"
+            className="mt-12 flex flex-col sm:flex-row items-center justify-center gap-4 max-w-2xl mx-auto"
           >
-            {['6º semestre', '2 experiências profissionais', 'Automações RPA'].map((label) => (
-              <div key={label} className="px-5 py-4 bg-apple-bg rounded-full border border-apple text-sm font-semibold text-apple-text">
-                {label}
-              </div>
-            ))}
+            <a
+              href="#projetos"
+              className="inline-flex min-h-[52px] items-center justify-center rounded-full bg-apple-accent px-6 py-3 text-base font-bold text-white shadow-lg shadow-apple-accent/20 transition hover:-translate-y-0.5 hover:shadow-xl"
+            >
+              Ver Projetos
+            </a>
+            <a
+              href="#contato"
+              className="inline-flex min-h-[52px] items-center justify-center rounded-full border border-apple bg-apple-bg px-6 py-3 text-base font-bold text-apple-text transition hover:-translate-y-0.5 hover:border-apple-accent"
+            >
+              Entrar em Contato
+            </a>
           </motion.div>
         </div>
       </div>

@@ -1,6 +1,6 @@
 import { motion, useReducedMotion } from 'framer-motion';
-import andersonImg from '../assets/anderson-cataldo.jpeg';
-import { MapPin, GraduationCap } from 'lucide-react';
+import andersonImg from '../assets/anderson-cataldo.webp';
+import { Globe, GraduationCap, MapPin } from 'lucide-react';
 
 const About = () => {
   const shouldReduceMotion = useReducedMotion();
@@ -68,14 +68,24 @@ const About = () => {
                   <GraduationCap className="w-5 h-5 text-apple-accent" />
                   <p className="font-bold text-apple-text">Formação</p>
                 </div>
-                <p className="text-sm text-apple-secondary font-medium leading-relaxed">Bacharelado em Ciência da Computação (Unifor) - 6º semestre.</p>
+                <p className="text-sm text-apple-secondary font-medium leading-relaxed">Bacharelado em Ciência da Computação (Unifor) — 6º semestre.</p>
               </div>
               <div className="p-6 bg-apple-bg rounded-3xl border border-apple">
                 <div className="flex items-center gap-4 mb-2">
                   <MapPin className="w-5 h-5 text-apple-accent" />
                   <p className="font-bold text-apple-text">Localização</p>
                 </div>
-                <p className="text-sm text-apple-secondary font-medium leading-relaxed">Fortaleza, Ceará — disponível para oportunidades em desenvolvimento e automação.</p>
+                <p className="text-sm text-apple-secondary font-medium leading-relaxed">Fortaleza, CE — disponível para remoto e híbrido.</p>
+              </div>
+              <div className="p-6 bg-apple-bg rounded-3xl border border-apple md:col-span-2">
+                <div className="flex items-center gap-4 mb-3">
+                  <Globe className="w-5 h-5 text-apple-accent" />
+                  <p className="font-bold text-apple-text">Idiomas</p>
+                </div>
+                <div className="flex flex-wrap gap-4 text-sm text-apple-secondary font-medium leading-relaxed">
+                  <span><strong className="text-apple-text">Português:</strong> Nativo</span>
+                  <span><strong className="text-apple-text">Inglês:</strong> Intermediário</span>
+                </div>
               </div>
             </div>
           </article>

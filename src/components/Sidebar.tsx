@@ -1,10 +1,9 @@
-import { useEffect, useRef, useState, type MouseEvent } from 'react';
+import { memo, useEffect, useRef, useState, type MouseEvent } from 'react';
 import {
   Home,
   User,
   Briefcase,
   Layout,
-  Zap,
   Mail,
   Github,
   Linkedin,
@@ -15,9 +14,10 @@ import {
   Menu,
   X,
   FileText,
+  Zap,
 } from 'lucide-react';
-import andersonImg from '../assets/anderson-cataldo.jpeg';
-import resumeFile from '../assets/curriculo-anderson-pt-br.pdf';
+import andersonImg from '../assets/anderson-cataldo.webp';
+import resumeFile from '../assets/Anderson_Viana_Curriculo_PT-BR.pdf';
 import { GITHUB_URL, LINKEDIN_URL } from '../config/links';
 
 interface SidebarProps {
@@ -49,6 +49,177 @@ const externalLinks = [
     icon: Linkedin,
   },
 ];
+
+interface SidebarContentProps {
+  collapsed: boolean;
+  setCollapsed: (value: boolean) => void;
+  theme: 'light' | 'dark';
+  onThemeToggle: () => void;
+  activeSection: string;
+  handleNavClick: (href: string, event: MouseEvent<HTMLAnchorElement>) => void;
+  setMobileOpen: (value: boolean) => void;
+  isMobile?: boolean;
+}
+
+// Declared outside of Sidebar so it isn't recreated (and remounted) on every render.
+const SidebarContent = memo(
+  ({
+    collapsed,
+    setCollapsed,
+    theme,
+    onThemeToggle,
+    activeSection,
+    handleNavClick,
+    setMobileOpen,
+    isMobile = false,
+  }: SidebarContentProps) => (
+    <>
+      <div>
+        <div className="flex items-center justify-between gap-3 border-b border-white/10 px-5 py-5">
+          <div className="flex items-center gap-3">
+            <div className="h-12 w-12 overflow-hidden rounded-3xl bg-white/10">
+              <img src={andersonImg} alt="Anderson Cataldo" className="h-full w-full object-cover" />
+            </div>
+            <div className={`transition-opacity duration-200 ${collapsed ? 'opacity-0 pointer-events-none' : 'opacity-100'}`}>
+              <p className="text-sm font-semibold text-white">Anderson Cataldo</p>
+              <p className="text-[11px] text-slate-400">Full-Stack | RPA</p>
+            </div>
+          </div>
+          {isMobile ? (
+            <button
+              type="button"
+              onClick={() => setMobileOpen(false)}
+              className="inline-flex h-10 w-10 items-center justify-center rounded-2xl bg-white/10 text-white transition hover:bg-white/15"
+              aria-label="Fechar menu móvel"
+            >
+              <X className="h-5 w-5" />
+            </button>
+          ) : (
+            <button
+              type="button"
+              onClick={() => setCollapsed(!collapsed)}
+              className="inline-flex h-11 w-11 items-center justify-center rounded-2xl bg-white/10 text-white transition hover:bg-white/15"
+              aria-label={collapsed ? 'Expandir sidebar' : 'Recolher sidebar'}
+            >
+              {collapsed ? <ChevronRight className="h-5 w-5" /> : <ChevronLeft className="h-5 w-5" />}
+            </button>
+          )}
+        </div>
+
+        <nav className="px-2 py-5">
+          <ul className="space-y-1">
+            {navLinks.map((link) => {
+              const Icon = link.icon;
+              const targetId = link.href === '#' ? 'inicio' : link.href.slice(1);
+              const isActive = activeSection === targetId;
+
+              return (
+                <li key={link.name}>
+                  <a
+                    href={link.href}
+                    onClick={(event) => handleNavClick(link.href, event)}
+                    aria-current={isActive ? 'page' : undefined}
+                    className={`group flex items-center gap-3 rounded-3xl px-4 py-3 text-sm font-semibold transition ${
+                      isActive ? 'bg-white/15 text-white' : 'text-slate-100 hover:bg-white/10'
+                    }`}
+                  >
+                    <Icon className={`h-5 w-5 ${isActive ? 'text-apple-accent' : 'text-apple-secondary'}`} aria-hidden="true" />
+                    <span className={`transition-opacity duration-200 ${collapsed ? 'opacity-0 w-0 overflow-hidden' : 'opacity-100'}`}>
+                      {link.name}
+                    </span>
+                  </a>
+                </li>
+              );
+            })}
+          </ul>
+
+          {collapsed ? (
+            <div className="mt-10 flex items-center justify-center gap-3 px-2">
+              {externalLinks.map((link) => {
+                const Icon = link.icon;
+                return (
+                  <a
+                    key={link.name}
+                    href={link.href}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    aria-label={link.name}
+                    className="rounded-2xl p-2 text-slate-100 transition hover:bg-white/10"
+                  >
+                    <Icon className="h-5 w-5" aria-hidden="true" />
+                  </a>
+                );
+              })}
+            </div>
+          ) : (
+            <div className="mt-10 px-4">
+              <p className="text-xs uppercase tracking-[0.24em] text-slate-400">Links</p>
+              <ul className="mt-4 space-y-2">
+                {externalLinks.map((link) => {
+                  const Icon = link.icon;
+                  return (
+                    <li key={link.name}>
+                      <a
+                        href={link.href}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="group flex items-center gap-3 rounded-3xl px-4 py-3 text-sm font-semibold text-slate-100 transition hover:bg-white/10"
+                        aria-label={link.name}
+                      >
+                        <Icon className="h-5 w-5 text-slate-200" aria-hidden="true" />
+                        <span>{link.name}</span>
+                      </a>
+                    </li>
+                  );
+                })}
+              </ul>
+            </div>
+          )}
+        </nav>
+      </div>
+
+      <div className="border-t border-white/10 px-5 py-5">
+        {!collapsed && (
+          <div className="rounded-3xl border border-white/10 bg-white/5 p-4 transition-opacity duration-200">
+            <p className="text-[10px] uppercase tracking-[0.3em] text-slate-400">Tema</p>
+            <p className="mt-2 text-sm text-slate-100">{theme === 'dark' ? 'Modo escuro' : 'Modo claro'}</p>
+          </div>
+        )}
+
+        <div className="mt-4 flex items-center justify-between gap-3">
+          <button
+            type="button"
+            onClick={onThemeToggle}
+            className="inline-flex h-11 w-full items-center justify-center gap-2 rounded-3xl border border-white/10 bg-white/10 text-sm font-semibold text-white transition hover:bg-white/15"
+            aria-label="Alternar entre modo claro e escuro"
+            aria-pressed={theme === 'dark'}
+          >
+            {theme === 'dark' ? <Sun className="h-4 w-4" /> : <Moon className="h-4 w-4" />}
+            {!collapsed && <span>Tema</span>}
+          </button>
+          {!collapsed && (
+            <div className="flex flex-col items-center gap-1">
+              <a
+                href={resumeFile}
+                target="_blank"
+                rel="noopener noreferrer"
+                download="curriculo-anderson-cataldo.pdf"
+                className="inline-flex h-11 items-center justify-center rounded-3xl border border-white/10 bg-white/10 px-4 text-sm font-semibold text-white transition hover:bg-white/15"
+                aria-label="Baixar currículo profissional em PDF"
+              >
+                <FileText className="h-4 w-4" aria-hidden="true" />
+                <span>CV</span>
+              </a>
+              <span className="text-[9px] uppercase tracking-[0.2em] text-slate-300">Atualizado em Jul/2026</span>
+            </div>
+          )}
+        </div>
+      </div>
+    </>
+  ),
+);
+
+SidebarContent.displayName = 'SidebarContent';
 
 const Sidebar = ({ theme, onThemeToggle, collapsed, setCollapsed }: SidebarProps) => {
   const [mobileOpen, setMobileOpen] = useState(false);
@@ -157,128 +328,6 @@ const Sidebar = ({ theme, onThemeToggle, collapsed, setCollapsed }: SidebarProps
     };
   }, [mobileOpen]);
 
-  const SidebarContent = ({ isMobile = false }: { isMobile?: boolean }) => (
-    <>
-      <div>
-        <div className="flex items-center justify-between gap-3 border-b border-white/10 px-5 py-5">
-          <div className="flex items-center gap-3">
-            <div className="h-12 w-12 overflow-hidden rounded-3xl bg-white/10">
-              <img src={andersonImg} alt="Anderson Cataldo" className="h-full w-full object-cover" />
-            </div>
-            {!collapsed && (
-              <div>
-                <p className="text-sm font-semibold text-white">Anderson Cataldo</p>
-                <p className="text-[11px] text-slate-400">Portfólio de carreira</p>
-              </div>
-            )}
-          </div>
-          {isMobile ? (
-            <button
-              type="button"
-              onClick={() => setMobileOpen(false)}
-              className="inline-flex h-10 w-10 items-center justify-center rounded-2xl bg-white/10 text-white transition hover:bg-white/15"
-              aria-label="Fechar menu móvel"
-            >
-              <X className="h-5 w-5" />
-            </button>
-          ) : (
-            <button
-              type="button"
-              onClick={() => setCollapsed(!collapsed)}
-              className="inline-flex h-11 w-11 items-center justify-center rounded-2xl bg-white/10 text-white transition hover:bg-white/15"
-              aria-label={collapsed ? 'Expandir sidebar' : 'Recolher sidebar'}
-            >
-              {collapsed ? <ChevronRight className="h-5 w-5" /> : <ChevronLeft className="h-5 w-5" />}
-            </button>
-          )}
-        </div>
-
-        <nav className="px-2 py-5">
-          <ul className="space-y-1">
-            {navLinks.map((link) => {
-              const Icon = link.icon;
-              const targetId = link.href === '#' ? 'inicio' : link.href.slice(1);
-              const isActive = activeSection === targetId;
-
-              return (
-                <li key={link.name}>
-                  <a
-                    href={link.href}
-                    onClick={(event) => handleNavClick(link.href, event)}
-                    aria-current={isActive ? 'page' : undefined}
-                    className={`group flex items-center gap-3 rounded-3xl px-4 py-3 text-sm font-semibold transition ${
-                      isActive ? 'bg-white/15 text-white' : 'text-slate-100 hover:bg-white/10'
-                    }`}
-                  >
-                    <Icon className={`h-5 w-5 ${isActive ? 'text-apple-accent' : 'text-apple-secondary'}`} aria-hidden="true" />
-                    {!collapsed && <span>{link.name}</span>}
-                  </a>
-                </li>
-              );
-            })}
-          </ul>
-
-          {!collapsed && (
-            <div className="mt-10 px-4">
-              <p className="text-xs uppercase tracking-[0.24em] text-slate-400">Links</p>
-              <ul className="mt-4 space-y-2">
-                {externalLinks.map((link) => {
-                  const Icon = link.icon;
-                  return (
-                    <li key={link.name}>
-                      <a
-                        href={link.href}
-                        target="_blank"
-                        rel="noopener noreferrer"
-                        className="group flex items-center gap-3 rounded-3xl px-4 py-3 text-sm font-semibold text-slate-100 transition hover:bg-white/10"
-                      >
-                        <Icon className="h-5 w-5 text-slate-200" aria-hidden="true" />
-                        <span>{link.name}</span>
-                      </a>
-                    </li>
-                  );
-                })}
-              </ul>
-            </div>
-          )}
-        </nav>
-      </div>
-
-      <div className="border-t border-white/10 px-5 py-5">
-        {!collapsed && (
-          <div className="rounded-3xl border border-white/10 bg-white/5 p-4">
-            <p className="text-[10px] uppercase tracking-[0.3em] text-slate-400">Tema</p>
-            <p className="mt-2 text-sm text-slate-100">{theme === 'dark' ? 'Modo escuro' : 'Modo claro'}</p>
-          </div>
-        )}
-
-        <div className="mt-4 flex items-center justify-between gap-3">
-          <button
-            type="button"
-            onClick={onThemeToggle}
-            className="inline-flex h-11 w-full items-center justify-center gap-2 rounded-3xl border border-white/10 bg-white/10 text-sm font-semibold text-white transition hover:bg-white/15"
-            aria-label="Alternar entre modo claro e escuro"
-            aria-pressed={theme === 'dark'}
-          >
-            {theme === 'dark' ? <Sun className="h-4 w-4" /> : <Moon className="h-4 w-4" />}
-            {!collapsed && <span>Tema</span>}
-          </button>
-          {!collapsed && (
-            <a
-              href={resumeFile}
-              target="_blank"
-              rel="noopener noreferrer"
-              className="inline-flex h-11 items-center justify-center rounded-3xl border border-white/10 bg-white/10 px-4 text-sm font-semibold text-white transition hover:bg-white/15"
-            >
-              <FileText className="h-4 w-4" aria-hidden="true" />
-              <span>CV</span>
-            </a>
-          )}
-        </div>
-      </div>
-    </>
-  );
-
   return (
     <>
       <aside
@@ -288,7 +337,15 @@ const Sidebar = ({ theme, onThemeToggle, collapsed, setCollapsed }: SidebarProps
           aria-label="Barra lateral de navegação"
       >
         <div className="flex h-full flex-col justify-between">
-          <SidebarContent />
+          <SidebarContent
+            collapsed={collapsed}
+            setCollapsed={setCollapsed}
+            theme={theme}
+            onThemeToggle={onThemeToggle}
+            activeSection={activeSection}
+            handleNavClick={handleNavClick}
+            setMobileOpen={setMobileOpen}
+          />
         </div>
       </aside>
 
@@ -324,7 +381,16 @@ const Sidebar = ({ theme, onThemeToggle, collapsed, setCollapsed }: SidebarProps
         aria-label="Menu de navegação móvel"
       >
         <div className="flex h-full flex-col justify-between">
-          <SidebarContent isMobile />
+          <SidebarContent
+            collapsed={collapsed}
+            setCollapsed={setCollapsed}
+            theme={theme}
+            onThemeToggle={onThemeToggle}
+            activeSection={activeSection}
+            handleNavClick={handleNavClick}
+            setMobileOpen={setMobileOpen}
+            isMobile
+          />
         </div>
       </aside>
     </>

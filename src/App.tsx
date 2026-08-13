@@ -1,6 +1,7 @@
 import { Suspense, lazy, useEffect, useState } from 'react';
 import Sidebar from './components/Sidebar';
 import Hero from './components/Hero';
+import ErrorBoundary from './components/ErrorBoundary';
 
 // Lazy loading components for better performance
 const About = lazy(() => import('./components/About'));
@@ -11,10 +12,19 @@ const Projects = lazy(() => import('./components/Projects'));
 const Contact = lazy(() => import('./components/Contact'));
 const Footer = lazy(() => import('./components/Footer'));
 
-// Simple loading placeholder
 const SectionLoader = () => (
   <div className="w-full h-48 flex items-center justify-center">
-    <div className="w-8 h-8 border-4 border-apple-accent border-t-transparent rounded-full animate-spin"></div>
+    <div className="w-8 h-8 border-4 border-apple-accent border-t-transparent rounded-full animate-spin" aria-label="Carregando seção" />
+  </div>
+);
+
+const SectionError = () => (
+  <div className="section-container py-12">
+    <div className="apple-card p-8 text-center">
+      <p className="text-apple-accent font-bold uppercase tracking-[0.22em] text-xs mb-2">Aviso</p>
+      <h3 className="text-2xl font-bold text-apple-text mb-3">Esta seção não pôde ser carregada.</h3>
+      <p className="text-apple-secondary font-medium">Tente recarregar a página ou voltar mais tarde.</p>
+    </div>
   </div>
 );
 
@@ -58,28 +68,42 @@ function App() {
         <Sidebar theme={theme} onThemeToggle={handleThemeToggle} collapsed={collapsed} setCollapsed={setCollapsed} />
         <main id="main-content" className="relative">
           <Hero />
-          <Suspense fallback={<SectionLoader />}>
-            <About />
-          </Suspense>
-          <Suspense fallback={<SectionLoader />}>
-            <Experience />
-          </Suspense>
-          <Suspense fallback={<SectionLoader />}>
-            <Automation />
-          </Suspense>
-          <Suspense fallback={<SectionLoader />}>
-            <Skills />
-          </Suspense>
-          <Suspense fallback={<SectionLoader />}>
-            <Projects />
-          </Suspense>
-          <Suspense fallback={<SectionLoader />}>
-            <Contact />
-          </Suspense>
+          <ErrorBoundary fallback={<SectionError />}>
+            <Suspense fallback={<SectionLoader />}>
+              <About />
+            </Suspense>
+          </ErrorBoundary>
+          <ErrorBoundary fallback={<SectionError />}>
+            <Suspense fallback={<SectionLoader />}>
+              <Experience />
+            </Suspense>
+          </ErrorBoundary>
+          <ErrorBoundary fallback={<SectionError />}>
+            <Suspense fallback={<SectionLoader />}>
+              <Automation />
+            </Suspense>
+          </ErrorBoundary>
+          <ErrorBoundary fallback={<SectionError />}>
+            <Suspense fallback={<SectionLoader />}>
+              <Skills />
+            </Suspense>
+          </ErrorBoundary>
+          <ErrorBoundary fallback={<SectionError />}>
+            <Suspense fallback={<SectionLoader />}>
+              <Projects />
+            </Suspense>
+          </ErrorBoundary>
+          <ErrorBoundary fallback={<SectionError />}>
+            <Suspense fallback={<SectionLoader />}>
+              <Contact />
+            </Suspense>
+          </ErrorBoundary>
         </main>
-        <Suspense fallback={null}>
-          <Footer />
-        </Suspense>
+        <ErrorBoundary fallback={null}>
+          <Suspense fallback={null}>
+            <Footer />
+          </Suspense>
+        </ErrorBoundary>
       </div>
     </>
   );

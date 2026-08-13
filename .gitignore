@@ -8,35 +8,33 @@ pnpm-debug.log*
 lerna-debug.log*
 
 # Dependencies and build outputs
-node_modules
-dist
-dist-ssr
-.vite
+node_modules/
+dist/
+dist-ssr/
+.vite/
+coverage/
 
 # Environment files
 .env
 .env.*
 *.local
+*.env
 
-# Editor directories and files
-.vscode/*
-!.vscode/extensions.json
-.idea
-.DS_Store
-*.suo
-*.ntvs*
-*.njsproj
-*.sln
-*.sw?
-
-# Misc
-coverage
-npm-debug.log*
-*.tgz
-
-# repomix
-repomix-output.xml
-
-# prompt and temp files
-*.txt
+# Build and cache artifacts
 *.tsbuildinfo
+.cache/
+
+# OS and editor files
+.DS_Store
+Thumbs.db
+.vscode/
+.idea/
+
+# Local temporary files
+*.tmp
+*.temp
+*.bak
+
+# Prompt and local generated files
+prompt.txt
+repomix-output.xml

@@ -1,0 +1,435 @@
+From 2e723aa8519be358ca75cc1c6136e02affa47734 Mon Sep 17 00:00:00 2001
+From: fixes <a@a.com>
+Date: Thu, 13 Aug 2026 22:33:10 +0000
+Subject: [PATCH] fix: unify canonical domain, fix Sidebar remount bug,
+ integrate Automation section, drop unused dep
+
+---
+ index.html                  |   2 +-
+ package.json                |   1 -
+ public/robots.txt           |   2 +-
+ public/sitemap.xml          |   3 +-
+ src/App.tsx                 |   6 +
+ src/components/Projects.tsx |   2 +-
+ src/components/Sidebar.tsx  | 266 +++++++++++++++++++++---------------
+ src/config/links.ts         |   2 +-
+ 8 files changed, 167 insertions(+), 117 deletions(-)
+
+diff --git a/index.html b/index.html
+index f4967b6..7bd7c06 100644
+--- a/index.html
++++ b/index.html
+@@ -39,7 +39,7 @@
+         "@type": "Person",
+         "name": "Anderson Cataldo",
+         "jobTitle": "Full-Stack Developer & RPA",
+-        "url": "https://andersoncataldotech.vercel.app",
++        "url": "https://andersoncataldo.tech",
+         "sameAs": [
+           "https://github.com/andersoncataldo",
+           "https://linkedin.com/in/andersonnviana"
+diff --git a/package.json b/package.json
+index 9eee50a..8a08bdc 100644
+--- a/package.json
++++ b/package.json
+@@ -23,7 +23,6 @@
+     "@tailwindcss/postcss": "^4.2.2",
+     "@types/react": "^18.3.3",
+     "@types/react-dom": "^18.3.0",
+-    "@vitejs/plugin-react-oxc": "^0.1.0",
+     "autoprefixer": "^10.4.27",
+     "eslint": "^9.9.0",
+     "eslint-plugin-react-hooks": "^5.1.0-rc.0",
+diff --git a/public/robots.txt b/public/robots.txt
+index b0ac496..7729838 100644
+--- a/public/robots.txt
++++ b/public/robots.txt
+@@ -1,4 +1,4 @@
+ User-agent: *
+ Allow: /
+ 
+-Sitemap: https://andersoncataldotech.vercel.app/sitemap.xml
++Sitemap: https://andersoncataldo.tech/sitemap.xml
+diff --git a/public/sitemap.xml b/public/sitemap.xml
+index 27ab0bd..8175a0c 100644
+--- a/public/sitemap.xml
++++ b/public/sitemap.xml
+@@ -1,7 +1,8 @@
+ <?xml version="1.0" encoding="UTF-8"?>
+ <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
+   <url>
+-    <loc>https://andersoncataldotech.vercel.app/</loc>
++    <loc>https://andersoncataldo.tech/</loc>
++    <lastmod>2026-08-13</lastmod>
+     <changefreq>weekly</changefreq>
+     <priority>1.0</priority>
+   </url>
+diff --git a/src/App.tsx b/src/App.tsx
+index 6b6f0c6..ee9f5bc 100644
+--- a/src/App.tsx
++++ b/src/App.tsx
+@@ -6,6 +6,7 @@ import ErrorBoundary from './components/ErrorBoundary';
+ // Lazy loading components for better performance
+ const About = lazy(() => import('./components/About'));
+ const Experience = lazy(() => import('./components/Experience'));
++const Automation = lazy(() => import('./components/Automation'));
+ const Skills = lazy(() => import('./components/Skills'));
+ const Projects = lazy(() => import('./components/Projects'));
+ const Contact = lazy(() => import('./components/Contact'));
+@@ -77,6 +78,11 @@ function App() {
+               <Experience />
+             </Suspense>
+           </ErrorBoundary>
++          <ErrorBoundary fallback={<SectionError />}>
++            <Suspense fallback={<SectionLoader />}>
++              <Automation />
++            </Suspense>
++          </ErrorBoundary>
+           <ErrorBoundary fallback={<SectionError />}>
+             <Suspense fallback={<SectionLoader />}>
+               <Skills />
+diff --git a/src/components/Projects.tsx b/src/components/Projects.tsx
+index 5696683..3f25179 100644
+--- a/src/components/Projects.tsx
++++ b/src/components/Projects.tsx
+@@ -30,7 +30,7 @@ const projects: ProjectType[] = [
+     impact: 'Destaque profissional com interface fluida e design responsivo.',
+     icon: 'BookOpen',
+     github: 'https://github.com/andersoncataldo/andersoncataldo.tech',
+-    liveDemo: 'https://andersoncataldotech.vercel.app',
++    liveDemo: 'https://andersoncataldo.tech',
+     images: [previewPortfolio],
+   },
+ ];
+diff --git a/src/components/Sidebar.tsx b/src/components/Sidebar.tsx
+index 705b70f..607c807 100644
+--- a/src/components/Sidebar.tsx
++++ b/src/components/Sidebar.tsx
+@@ -1,4 +1,4 @@
+-import { useEffect, useRef, useState, type MouseEvent } from 'react';
++import { memo, useEffect, useRef, useState, type MouseEvent } from 'react';
+ import {
+   Home,
+   User,
+@@ -14,6 +14,7 @@ import {
+   Menu,
+   X,
+   FileText,
++  Zap,
+ } from 'lucide-react';
+ import andersonImg from '../assets/anderson-cataldo.webp';
+ import resumeFile from '../assets/Anderson_Viana_Curriculo_PT-BR.pdf';
+@@ -30,6 +31,7 @@ const navLinks = [
+   { name: 'Início', href: '#', icon: Home },
+   { name: 'Sobre', href: '#sobre', icon: User },
+   { name: 'Experiência', href: '#experiencia', icon: Briefcase },
++  { name: 'Automação', href: '#rpa', icon: Zap },
+   { name: 'Habilidades', href: '#habilidades', icon: Layout },
+   { name: 'Projetos', href: '#projetos', icon: FileText },
+   { name: 'Contato', href: '#contato', icon: Mail },
+@@ -48,114 +50,29 @@ const externalLinks = [
+   },
+ ];
+ 
+-const Sidebar = ({ theme, onThemeToggle, collapsed, setCollapsed }: SidebarProps) => {
+-  const [mobileOpen, setMobileOpen] = useState(false);
+-  const mobileDrawerRef = useRef<HTMLDivElement | null>(null);
+-  const [activeSection, setActiveSection] = useState('inicio');
+-
+-  useEffect(() => {
+-    const sections = Array.from(document.querySelectorAll<HTMLElement>('section[id]'));
+-    if (sections.length === 0) return;
+-
+-    const observer = new IntersectionObserver(
+-      (entries) => {
+-        const visible = entries
+-          .filter((entry) => entry.isIntersecting)
+-          .sort((a, b) => b.intersectionRatio - a.intersectionRatio)[0];
+-        if (visible?.target.id) {
+-          setActiveSection(visible.target.id);
+-        }
+-      },
+-      { rootMargin: '-35% 0px -55% 0px', threshold: [0.35, 0.5, 0.75] },
+-    );
+-
+-    sections.forEach((section) => observer.observe(section));
+-    return () => observer.disconnect();
+-  }, []);
+-
+-  useEffect(() => {
+-    const handleResize = () => {
+-      if (window.innerWidth >= 1024) {
+-        setMobileOpen(false);
+-      }
+-    };
+-
+-    window.addEventListener('resize', handleResize);
+-    return () => window.removeEventListener('resize', handleResize);
+-  }, []);
+-
+-  const scrollToSection = (href: string) => {
+-    const targetId = href === '#' ? 'inicio' : href.replace('#', '');
+-    const target = document.getElementById(targetId);
+-
+-    if (!target) {
+-      window.scrollTo({ top: 0, behavior: 'smooth' });
+-      return;
+-    }
+-
+-    const offset = window.innerWidth >= 1024 ? 96 : 80;
+-    const top = target.getBoundingClientRect().top + window.scrollY - offset;
+-    window.scrollTo({ top, behavior: 'smooth' });
+-  };
+-
+-  const handleNavClick = (href: string, event: MouseEvent<HTMLAnchorElement>) => {
+-    if (mobileOpen) {
+-      setMobileOpen(false);
+-    }
+-
+-    event.preventDefault();
+-
+-    if (href === '#') {
+-      window.scrollTo({ top: 0, behavior: 'smooth' });
+-      return;
+-    }
+-
+-    scrollToSection(href);
+-  };
+-
+-  useEffect(() => {
+-    if (!mobileOpen) return;
+-
+-    const prevActive = document.activeElement as HTMLElement | null;
+-    const node = mobileDrawerRef.current;
+-    const focusableSelector = 'a[href], button, textarea, select, [tabindex]:not([tabindex="-1"])';
+-    const focusable = node ? Array.from(node.querySelectorAll<HTMLElement>(focusableSelector)) : [];
+-    const first = focusable[0];
+-    const last = focusable[focusable.length - 1];
+-
+-    const onKeyDown = (e: KeyboardEvent) => {
+-      if (e.key === 'Escape') {
+-        setMobileOpen(false);
+-      }
+-
+-      if (e.key === 'Tab' && focusable.length > 0) {
+-        if (e.shiftKey) {
+-          if (document.activeElement === first) {
+-            e.preventDefault();
+-            last?.focus();
+-          }
+-        } else {
+-          if (document.activeElement === last) {
+-            e.preventDefault();
+-            first?.focus();
+-          }
+-        }
+-      }
+-    };
+-
+-    document.addEventListener('keydown', onKeyDown);
+-    const prevOverflow = document.body.style.overflow;
+-    document.body.style.overflow = 'hidden';
+-    first?.focus();
+-
+-    return () => {
+-      document.removeEventListener('keydown', onKeyDown);
+-      document.body.style.overflow = prevOverflow;
+-      prevActive?.focus();
+-    };
+-  }, [mobileOpen]);
++interface SidebarContentProps {
++  collapsed: boolean;
++  setCollapsed: (value: boolean) => void;
++  theme: 'light' | 'dark';
++  onThemeToggle: () => void;
++  activeSection: string;
++  handleNavClick: (href: string, event: MouseEvent<HTMLAnchorElement>) => void;
++  setMobileOpen: (value: boolean) => void;
++  isMobile?: boolean;
++}
+ 
+-  const SidebarContent = ({ isMobile = false }: { isMobile?: boolean }) => (
++// Declared outside of Sidebar so it isn't recreated (and remounted) on every render.
++const SidebarContent = memo(
++  ({
++    collapsed,
++    setCollapsed,
++    theme,
++    onThemeToggle,
++    activeSection,
++    handleNavClick,
++    setMobileOpen,
++    isMobile = false,
++  }: SidebarContentProps) => (
+     <>
+       <div>
+         <div className="flex items-center justify-between gap-3 border-b border-white/10 px-5 py-5">
+@@ -299,7 +216,117 @@ const Sidebar = ({ theme, onThemeToggle, collapsed, setCollapsed }: SidebarProps
+         </div>
+       </div>
+     </>
+-  );
++  ),
++);
++
++SidebarContent.displayName = 'SidebarContent';
++
++const Sidebar = ({ theme, onThemeToggle, collapsed, setCollapsed }: SidebarProps) => {
++  const [mobileOpen, setMobileOpen] = useState(false);
++  const mobileDrawerRef = useRef<HTMLDivElement | null>(null);
++  const [activeSection, setActiveSection] = useState('inicio');
++
++  useEffect(() => {
++    const sections = Array.from(document.querySelectorAll<HTMLElement>('section[id]'));
++    if (sections.length === 0) return;
++
++    const observer = new IntersectionObserver(
++      (entries) => {
++        const visible = entries
++          .filter((entry) => entry.isIntersecting)
++          .sort((a, b) => b.intersectionRatio - a.intersectionRatio)[0];
++        if (visible?.target.id) {
++          setActiveSection(visible.target.id);
++        }
++      },
++      { rootMargin: '-35% 0px -55% 0px', threshold: [0.35, 0.5, 0.75] },
++    );
++
++    sections.forEach((section) => observer.observe(section));
++    return () => observer.disconnect();
++  }, []);
++
++  useEffect(() => {
++    const handleResize = () => {
++      if (window.innerWidth >= 1024) {
++        setMobileOpen(false);
++      }
++    };
++
++    window.addEventListener('resize', handleResize);
++    return () => window.removeEventListener('resize', handleResize);
++  }, []);
++
++  const scrollToSection = (href: string) => {
++    const targetId = href === '#' ? 'inicio' : href.replace('#', '');
++    const target = document.getElementById(targetId);
++
++    if (!target) {
++      window.scrollTo({ top: 0, behavior: 'smooth' });
++      return;
++    }
++
++    const offset = window.innerWidth >= 1024 ? 96 : 80;
++    const top = target.getBoundingClientRect().top + window.scrollY - offset;
++    window.scrollTo({ top, behavior: 'smooth' });
++  };
++
++  const handleNavClick = (href: string, event: MouseEvent<HTMLAnchorElement>) => {
++    if (mobileOpen) {
++      setMobileOpen(false);
++    }
++
++    event.preventDefault();
++
++    if (href === '#') {
++      window.scrollTo({ top: 0, behavior: 'smooth' });
++      return;
++    }
++
++    scrollToSection(href);
++  };
++
++  useEffect(() => {
++    if (!mobileOpen) return;
++
++    const prevActive = document.activeElement as HTMLElement | null;
++    const node = mobileDrawerRef.current;
++    const focusableSelector = 'a[href], button, textarea, select, [tabindex]:not([tabindex="-1"])';
++    const focusable = node ? Array.from(node.querySelectorAll<HTMLElement>(focusableSelector)) : [];
++    const first = focusable[0];
++    const last = focusable[focusable.length - 1];
++
++    const onKeyDown = (e: KeyboardEvent) => {
++      if (e.key === 'Escape') {
++        setMobileOpen(false);
++      }
++
++      if (e.key === 'Tab' && focusable.length > 0) {
++        if (e.shiftKey) {
++          if (document.activeElement === first) {
++            e.preventDefault();
++            last?.focus();
++          }
++        } else {
++          if (document.activeElement === last) {
++            e.preventDefault();
++            first?.focus();
++          }
++        }
++      }
++    };
++
++    document.addEventListener('keydown', onKeyDown);
++    const prevOverflow = document.body.style.overflow;
++    document.body.style.overflow = 'hidden';
++    first?.focus();
++
++    return () => {
++      document.removeEventListener('keydown', onKeyDown);
++      document.body.style.overflow = prevOverflow;
++      prevActive?.focus();
++    };
++  }, [mobileOpen]);
+ 
+   return (
+     <>
+@@ -310,7 +337,15 @@ const Sidebar = ({ theme, onThemeToggle, collapsed, setCollapsed }: SidebarProps
+           aria-label="Barra lateral de navegação"
+       >
+         <div className="flex h-full flex-col justify-between">
+-          <SidebarContent />
++          <SidebarContent
++            collapsed={collapsed}
++            setCollapsed={setCollapsed}
++            theme={theme}
++            onThemeToggle={onThemeToggle}
++            activeSection={activeSection}
++            handleNavClick={handleNavClick}
++            setMobileOpen={setMobileOpen}
++          />
+         </div>
+       </aside>
+ 
+@@ -346,7 +381,16 @@ const Sidebar = ({ theme, onThemeToggle, collapsed, setCollapsed }: SidebarProps
+         aria-label="Menu de navegação móvel"
+       >
+         <div className="flex h-full flex-col justify-between">
+-          <SidebarContent isMobile />
++          <SidebarContent
++            collapsed={collapsed}
++            setCollapsed={setCollapsed}
++            theme={theme}
++            onThemeToggle={onThemeToggle}
++            activeSection={activeSection}
++            handleNavClick={handleNavClick}
++            setMobileOpen={setMobileOpen}
++            isMobile
++          />
+         </div>
+       </aside>
+     </>
+diff --git a/src/config/links.ts b/src/config/links.ts
+index 8e44f8e..80e9244 100644
+--- a/src/config/links.ts
++++ b/src/config/links.ts
+@@ -1,6 +1,6 @@
+ export const EMAIL = 'andersonvcataldo@gmail.com';
+ export const GITHUB_URL = 'https://github.com/andersoncataldo';
+ export const LINKEDIN_URL = 'https://linkedin.com/in/andersonnviana';
+-export const SITE_URL = 'https://andersoncataldotech.vercel.app';
++export const SITE_URL = 'https://andersoncataldo.tech';
+ export const SITE_TITLE = 'Anderson Cataldo | Full-Stack Developer & RPA';
+ export const SITE_DESCRIPTION = 'Portfólio de Anderson Cataldo, Desenvolvedor Full-Stack e especialista em RPA focado em automação e eficiência.';
+-- 
+2.43.0
+

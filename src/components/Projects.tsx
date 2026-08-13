@@ -1,5 +1,7 @@
 import { motion, useReducedMotion } from 'framer-motion';
 import { Github, ExternalLink, BookOpen, Layout, ArrowRight } from 'lucide-react';
+import previewCarlo from '../assets/project-carlo-acutis-preview.svg';
+import previewPortfolio from '../assets/project-portfolio-preview.svg';
 import { Project as ProjectType } from '../types';
 
 const projects: ProjectType[] = [
@@ -15,6 +17,7 @@ const projects: ProjectType[] = [
     icon: 'Layout',
     github: 'https://github.com/andersoncataldo/CarloAcutis',
     liveDemo: 'https://carlo-acutis-virid.vercel.app',
+    images: [previewCarlo],
   },
   {
     title: 'Portfólio Web Profissional',
@@ -27,7 +30,8 @@ const projects: ProjectType[] = [
     impact: 'Destaque profissional com interface fluida e design responsivo.',
     icon: 'BookOpen',
     github: 'https://github.com/andersoncataldo/andersoncataldo.tech',
-    liveDemo: 'https://andersoncataldotech.vercel.app',
+    liveDemo: 'https://andersoncataldo.tech',
+    images: [previewPortfolio],
   },
 ];
 
@@ -39,29 +43,29 @@ const Projects = () => {
       <div className="section-container">
         <div className="flex flex-col md:flex-row md:items-end justify-between mb-20 gap-8">
           <div>
-            <motion.p 
+            <motion.p
               initial={shouldReduceMotion ? { opacity: 1, y: 0 } : { opacity: 0, y: 10 }}
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
               className="text-apple-accent font-semibold text-lg mb-2"
             >
-              Portfolio
+              Projetos
             </motion.p>
-            <motion.h2 
+            <motion.h2
               initial={shouldReduceMotion ? { opacity: 1, y: 0 } : { opacity: 0, y: 10 }}
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
               transition={shouldReduceMotion ? { duration: 0 } : { delay: 0.1 }}
-              id="projects-title" 
+              id="projects-title"
               className="text-fluid-h2 font-bold tracking-tight text-apple-text leading-tight"
             >
               Projetos Selecionados
             </motion.h2>
           </div>
-          <a 
-            href="https://github.com/andersoncataldo" 
-            target="_blank" 
-            rel="noopener noreferrer" 
+          <a
+            href="https://github.com/andersoncataldo"
+            target="_blank"
+            rel="noopener noreferrer"
             className="inline-flex items-center gap-2 text-apple-accent font-bold text-lg hover:underline underline-offset-4 decoration-2 min-h-[48px]"
             aria-label="Ver todos os repositórios no GitHub"
           >
@@ -72,28 +76,38 @@ const Projects = () => {
         <div className="grid md:grid-cols-2 gap-10">
           {projects.map((project, index) => (
             <motion.article
-              key={index}
+              key={project.title}
               initial={shouldReduceMotion ? { opacity: 1, y: 0 } : { opacity: 0, y: 20 }}
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
+              whileHover={{ y: -4, transition: { duration: 0.2 } }}
               transition={shouldReduceMotion ? { duration: 0 } : { duration: 0.6, delay: index * 0.1 }}
               className="apple-card group flex flex-col"
             >
-              <div className="p-10 md:p-12 h-full flex flex-col">
-                <div className="mb-10 flex justify-between items-start">
-                  <div className="bg-apple-bg p-5 rounded-2xl border-apple group-hover:scale-110 transition-transform duration-500" aria-hidden="true">
+              <div className="p-6 md:p-8 h-full flex flex-col">
+                <div className="mb-6 overflow-hidden rounded-[24px] border border-apple bg-apple-bg">
+                  <img
+                    src={project.images?.[0]}
+                    alt={`Preview do projeto ${project.title}`}
+                    className="h-52 w-full object-cover transition duration-500 group-hover:scale-[1.02]"
+                    loading="lazy"
+                  />
+                </div>
+                <div className="mb-6 flex justify-between items-start">
+                  <div className="bg-apple-bg p-5 rounded-2xl border-apple transition-transform duration-500" aria-hidden="true">
                     {project.icon === 'Layout' ? <Layout className="w-10 h-10 text-apple-accent" /> : <BookOpen className="w-10 h-10 text-apple-accent" />}
                   </div>
-                  <div className="flex gap-4">
+                  <div className="flex items-center gap-2">
                     {project.github && (
-                      <a 
-                        href={project.github} 
-                        target="_blank" 
-                        rel="noopener noreferrer" 
-                        className="p-3 text-apple-secondary hover:text-apple-text transition-colors min-h-[48px] min-w-[48px] flex items-center justify-center"
+                      <a
+                        href={project.github}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="inline-flex items-center gap-2 rounded-full border border-apple px-3 py-2 text-apple-secondary hover:text-apple-text transition-colors min-h-[48px]"
                         aria-label={`Ver código de ${project.title} no GitHub`}
                       >
-                        <Github className="w-6 h-6" aria-hidden="true" />
+                        <Github className="w-4 h-4" aria-hidden="true" />
+                        <span className="text-[10px] font-bold uppercase tracking-[0.2em]">Ver código</span>
                       </a>
                     )}
                   </div>
@@ -109,7 +123,7 @@ const Projects = () => {
                   {project.description}
                 </p>
 
-                <div className="mb-8 grid gap-4 p-6 bg-apple-bg rounded-2xl border-apple">
+                <div className="mb-8 grid gap-4 p-6 bg-apple-bg rounded-2xl border border-apple">
                   <div>
                     <p className="text-[10px] font-bold uppercase tracking-widest text-apple-accent mb-1">Problema</p>
                     <p className="text-apple-text text-sm">{project.challenge}</p>
@@ -131,8 +145,8 @@ const Projects = () => {
                 </div>
 
                 <ul className="flex flex-wrap gap-2 mb-10 mt-auto">
-                  {project.techStack.map((t, i) => (
-                    <span key={i} className="px-3 py-1 bg-apple-bg text-apple-text text-[11px] font-bold uppercase tracking-wider rounded-full border-apple">
+                  {project.techStack.map((t) => (
+                    <span key={t} className="border border-apple px-3 py-1 bg-apple-bg text-apple-text text-[11px] font-bold uppercase tracking-wider rounded-full">
                       {t}
                     </span>
                   ))}
@@ -141,13 +155,13 @@ const Projects = () => {
                 {project.liveDemo && (
                   <a
                     href={project.liveDemo}
-                    target="_blank" 
+                    target="_blank"
                     rel="noopener noreferrer"
                     className="inline-flex items-center gap-3 text-apple-accent font-bold text-lg group/btn w-fit min-h-[48px]"
                   >
                     Acessar Projeto
                     <div className="w-10 h-10 rounded-full bg-apple-bg flex items-center justify-center group-hover/btn:bg-apple-accent group-hover/btn:text-white transition-all duration-300" aria-hidden="true">
-                        <ArrowRight className="w-5 h-5" />
+                      <ArrowRight className="w-5 h-5" />
                     </div>
                   </a>
                 )}

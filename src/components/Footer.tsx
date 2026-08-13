@@ -11,8 +11,24 @@ const Footer = () => {
             <p>© {currentYear} Anderson Cataldo. Todos os direitos reservados.</p>
           </div>
           <div className="flex gap-8">
-            <a href={LINKEDIN_URL} target="_blank" rel="noopener noreferrer" className="text-apple-secondary hover:text-apple-text text-sm font-bold transition-colors">LinkedIn</a>
-            <a href={GITHUB_URL} target="_blank" rel="noopener noreferrer" className="text-apple-secondary hover:text-apple-text text-sm font-bold transition-colors">GitHub</a>
+            <a
+              href={LINKEDIN_URL}
+              target="_blank"
+              rel="noopener noreferrer"
+              aria-label="Ver perfil no LinkedIn (abre em nova aba)"
+              className="text-apple-secondary hover:text-apple-text text-sm font-bold transition-colors"
+            >
+              LinkedIn
+            </a>
+            <a
+              href={GITHUB_URL}
+              target="_blank"
+              rel="noopener noreferrer"
+              aria-label="Ver repositórios no GitHub (abre em nova aba)"
+              className="text-apple-secondary hover:text-apple-text text-sm font-bold transition-colors"
+            >
+              GitHub
+            </a>
           </div>
         </div>
       </div>

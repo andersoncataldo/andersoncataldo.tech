@@ -1,5 +1,5 @@
 import { Linkedin, FileText } from 'lucide-react';
-import resumeFile from '../assets/curriculo-anderson-pt-br.pdf';
+import resumeFile from '../assets/Anderson_Viana_Curriculo_PT-BR.pdf';
 import { motion, useReducedMotion } from 'framer-motion';
 import CopyEmail from './CopyEmail';
 import { EMAIL, LINKEDIN_URL } from '../config/links';
@@ -87,10 +87,14 @@ const Contact = () => {
                   <p className="text-white/70 font-medium text-sm md:text-base">Baixe o PDF com meu histórico profissional e stack em detalhes.</p>
                 </div>
               </div>
+              <div className="mb-4 text-right">
+                <span className="text-[10px] font-bold uppercase tracking-[0.24em] text-white/70">Atualizado em Jul/2026</span>
+              </div>
               <a
                 href={resumeFile}
                 target="_blank"
                 rel="noopener noreferrer"
+                download="curriculo-anderson-cataldo.pdf"
                 className="w-full bg-apple-accent text-white py-4 rounded-xl font-bold text-center block transition-all hover:opacity-95 active:scale-95 min-h-12"
               >
                 Baixar CV

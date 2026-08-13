@@ -1,202 +1,382 @@
-PROMPT: AUDITORIA COMPLETA PÓS-CORREÇÃO (Portfólio Anderson Viana Cataldo)
+﻿================================================================================
+PROMPT DE AUDITORIA E MELHORIA — PORTFOLIO andersoncataldo.tech
+================================================================================
+Gerado em: 2026-08-09
+Objetivo: Este documento e uma auditoria completa do portfolio web de Anderson
+Cataldo. Ele deve ser lido por uma IA (ou desenvolvedor) para aplicar TODOS os
+ajustes e melhorias listados abaixo sem perder o estilo visual atual do projeto.
 
-CONTEXTO
-Este é um portfólio pessoal em React 18 + TypeScript + Vite + Tailwind v4, com
-sidebar fixa à esquerda como navegação principal. Um conjunto de correções já
-foi aplicado anteriormente (bug de contraste no dark mode, link de navegação
-faltando, remoção de código morto, etc.).
+O projeto usa: React 18 + TypeScript + Vite + Tailwind CSS v4 + Framer Motion.
+A UI tem estetica "Apple-inspired", sidebar fixa (desktop) + drawer (mobile),
+modo claro/escuro com persistencia via localStorage.
 
-Sua tarefa agora NÃO é aplicar aquele prompt de novo. É fazer uma auditoria
-NOVA, completa e cética, como se o código nunca tivesse sido revisado antes:
-assuma que as correções anteriores podem ter sido parciais, ter introduzido
-efeitos colaterais, ou que existam problemas que não foram cobertos da
-primeira vez. Verifique também se cada item do prompt anterior foi realmente
-resolvido (não confie apenas na existência de um commit dizendo que foi
-resolvido — confirme lendo o código).
+================================================================================
+SECAO 1 — INFORMACOES GERAIS DO PROJETO
+================================================================================
 
-Percorra literalmente TODOS os arquivos do projeto (componentes, estilos,
-configs, tipos, HTML, scripts) antes de concluir. Não pule arquivos pequenos
-ou de config assumindo que "não têm erro".
+Estrutura de arquivos relevante:
+  /index.html                        — entrada HTML, SEO, Open Graph, Schema.org
+  /src/App.tsx                       — layout raiz, lazy loading, theme toggle
+  /src/main.tsx                      — bootstrap React
+  /src/styles/index.css              — design tokens, Tailwind @theme, classes utilitarias
+  /src/config/links.ts               — EMAIL, GITHUB_URL, LINKEDIN_URL, SITE_URL
+  /src/types/index.ts                — interfaces Project e Experience
+  /src/assets/anderson-cataldo.jpeg  — foto do desenvolvedor (94 KB, JPEG)
+  /src/assets/curriculo-anderson-pt-br.pdf — curriculo em PDF
+  /public/favicon.svg                — icone SVG do site
+  /public/robots.txt                 — configuracao de crawlers
+  /public/sitemap.xml                — sitemap basico
 
-Produza um relatório estruturado (não apenas uma lista solta) com, para cada
-problema encontrado: arquivo + linha (ou trecho), descrição do problema,
-causa raiz, severidade (Crítico / Alto / Médio / Baixo) e uma sugestão de
-correção. Ao final, um resumo com contagem de problemas por categoria e por
-severidade.
+  Componentes em /src/components/:
+    Sidebar.tsx    — navegacao lateral + mobile drawer + theme toggle + CV link
+    Hero.tsx       — secao inicial com titulo, badges e CTA cards
+    About.tsx      — foto + bio + cards de formacao e localizacao
+    Experience.tsx — timeline de experiencias profissionais e educacao
+    Automation.tsx — secao de automacao RPA com 3 cards
+    Skills.tsx     — stack tecnologica + soft skills
+    Projects.tsx   — 2 projetos com detalhes de desafio/solucao/resultado
+    Contact.tsx    — cards de e-mail (copiar), LinkedIn e download de CV
+    Footer.tsx     — copyright + links sociais
+    CopyEmail.tsx  — botao interativo para copiar e-mail
 
-============================================================
-MÉTODO DE AUDITORIA (siga nesta ordem)
-============================================================
+================================================================================
+SECAO 2 — BUGS E PROBLEMAS TECNICOS IDENTIFICADOS
+================================================================================
 
-PASSO 1 — Build e verificação estática
-- Rode `npm run build` (tsc -b && vite build) e `npm run lint`. Reporte
-  qualquer erro/warning literal, mesmo que pareça inofensivo.
-- Procure por: tipos "any" implícitos, imports não usados, variáveis não
-  usadas, componentes/funções declarados e nunca chamados, props declaradas
-  na interface mas nunca usadas no componente.
-- Verifique se existem arquivos órfãos: componentes, hooks, utils ou assets
-  que não são importados por nenhum outro arquivo do projeto.
+BUG-01: Foto nao convertida para WebP — performance critica
+  Arquivo: /src/assets/anderson-cataldo.jpeg (94 KB)
+  Problema: JPEG sem otimizacao. Nenhuma diretiva de conversao para WebP.
+            O Vite nao converte automaticamente sem plugin.
+  Impacto: LCP (Largest Contentful Paint) mais lento; piora o PageSpeed Score.
+  Correcao: Converter anderson-cataldo.jpeg para anderson-cataldo.webp (qualidade
+            85%). Atualizar os imports em About.tsx e Sidebar.tsx para o arquivo .webp.
+            Manter fallback JPEG se necessario via picture element.
 
-PASSO 2 — Navegação e roteamento interno
-- Para cada seção renderizada em src/App.tsx (com seu `id`), confirme que
-  existe um link correspondente na sidebar (src/components/Sidebar.tsx) e
-  que o href bate exatamente com o id da seção (ex: `#sobre` -> `id="sobre"`).
-- Para cada link da sidebar, confirme que o destino (`#algumId`) existe de
-  fato em algum elemento do DOM renderizado.
-- Verifique se o estado "ativo" (scroll-spy) muda corretamente ao rolar por
-  todas as seções, inclusive a primeira e a última, e não trava em um estado
-  incorreto quando a página é redimensionada ou quando o usuário clica um
-  link e a página ainda está animando o scroll suave.
-- Verifique o comportamento em três contextos: sidebar fixa em desktop,
-  drawer mobile, e o botão de colapsar/expandir — clique tudo mentalmente
-  (ou simule) e veja se algum estado fica inconsistente (ex: menu mobile
-  aberto ao redimensionar para desktop, foco perdido ao fechar o drawer).
+BUG-02: Duplicacao da informacao "6 semestre" na Hero
+  Arquivo: /src/components/Hero.tsx (linhas 53 e 71)
+  Problema: "6 semestre em Ciencia da Computacao" aparece no card de "Formacao"
+            (linha 53) e novamente como pill "6 semestre" no bloco de pills
+            abaixo (linha 71). Mesma informacao repetida em visual diferente
+            na mesma secao.
+  Correcao: Remover ou substituir o pill redundante "6 semestre" da linha 71
+            por algo mais informativo como "Fortaleza, CE" ou "2 anos de exp."
 
-PASSO 3 — Consistência visual entre temas (claro/escuro)
-- Para CADA componente que define cor de fundo, cor de texto ou borda,
-  verifique manualmente a combinação resultante em light mode E em dark mode
-  usando os valores reais de src/styles/index.css. Procure especificamente
-  por:
-  - texto e fundo que resolvem para a mesma cor (ou cores muito próximas) em
-    qualquer um dos dois temas;
-  - classes que misturam tokens dinâmicos (ex: bg-apple-text, que muda com o
-    tema) com cores fixas (ex: text-white, text-black) sem tratar o caso em
-    que o token muda de lado;
-  - elementos com fundo definido mas sem cor de texto explícita, herdando
-    uma cor que pode não ter contraste suficiente.
-- Verifique se a transição entre temas (toggle) é suave em todos os
-  componentes, inclusive nos que são carregados via lazy/Suspense (podem não
-  ter recebido o className correto na primeira renderização).
+BUG-03: key={index} em listas mapeadas — anti-pattern React
+  Arquivos:
+    Experience.tsx linha 79  — key={index} em experiences.map()
+    Projects.tsx linha 75    — key={index} em projects.map()
+    Skills.tsx linha 60      — key={index} em skillGroups.map()
+    Skills.tsx linha 74      — key={i} em group.skills.map()
+    Skills.tsx linha 103     — key={i} em softSkills.map()
+  Problema: Usar index como key pode causar problemas de reconciliacao do React,
+            especialmente se a ordem dos itens mudar. E um code smell reconhecido.
+  Correcao: Para skills estaticas, usar o proprio nome como key (sao unicos).
+            Para Experience e Project, usar title/company como key.
 
-PASSO 4 — Dados e conteúdo
-- Compare cada interface em src/types/index.ts com os dados reais
-  (src/components/Experience.tsx, Projects.tsx) e com o que é efetivamente
-  renderizado em tela. Aponte qualquer campo que exista nos dados mas nunca
-  seja exibido, e qualquer campo usado no JSX que não exista no tipo.
-- Verifique datas e períodos de experiência (ex: "Jun/2026 - Atual") quanto a
-  consistência cronológica (datas de início antes de fim, não sobreposição
-  ilógica, ano coerente com a data atual do sistema).
-- Verifique se todos os links externos (GitHub, LinkedIn, demos, PDF do
-  currículo) apontam para URLs válidas em formato (https://, sem espaços,
-  sem barra dupla) e se têm `target="_blank"` acompanhado de
-  `rel="noopener noreferrer"`.
-- Verifique se e-mail, GitHub e LinkedIn aparecem com o mesmo valor em todos
-  os lugares onde são citados (sidebar, contato, rodapé, meta tags) — sinal
-  de que a centralização de constantes (se foi feita) está sendo usada de
-  fato em todos os pontos, e não apenas em parte deles.
+BUG-04: vite.config.ts com comentario de migracao esquecido
+  Arquivo: /vite.config.ts linha 2
+  Problema: Ha um comentario "// <--- Mude aqui (tire o '-oxc')" que e um
+            artefato de desenvolvimento. Nao deve existir em producao.
+  Correcao: Remover o comentario, deixar apenas o import limpo.
 
-PASSO 5 — Componentes interativos (funcionalidade real)
-- CopyEmail.tsx: confirme que o estado "copiado" volta ao normal depois do
-  timeout, que falhas de clipboard (navigator.clipboard indisponível, ex.
-  contexto não-HTTPS) são tratadas sem quebrar a UI, e que o botão continua
-  acessível por teclado (Enter/Espaço).
-- Toggle de tema: confirme que o valor salvo no localStorage é respeitado no
-  carregamento inicial sem "flash" de tema errado (FOUC), e que alternar o
-  tema não reseta outros estados da sidebar (ex: menu mobile aberto,
-  scroll-spy).
-- Sidebar mobile (drawer): confirme que o focus trap continua funcionando,
-  que Esc fecha o menu, que o scroll do body é restaurado ao fechar, e que
-  não há como tabular para elementos "atrás" do overlay enquanto ele está
-  aberto.
-- Botão de colapsar sidebar (desktop): confirme que nenhum conteúdo fica
-  cortado, sobreposto ou ilegível no estado colapsado, e que o aria-label do
-  botão muda corretamente entre "Expandir" e "Recolher" conforme o estado.
+BUG-05: package.json com nome generico "vite-react"
+  Arquivo: /package.json linha 2
+  Problema: "name": "vite-react" e o nome padrao do template Vite.
+  Correcao: Mudar para "name": "andersoncataldo-tech" e adicionar campos:
+            "version": "1.0.0", "author": "Anderson Cataldo",
+            "description": "Portfolio profissional de Anderson Cataldo"
 
-PASSO 6 — Responsividade
-- Avalie o layout nos breakpoints usados pelo projeto (mobile ~375px,
-  tablet ~768px, desktop ~1024px+, e o breakpoint `lg` do Tailwind onde a
-  sidebar deixa de ser drawer). Procure por:
-  - texto cortado, sobreposição de elementos, scroll horizontal indesejado;
-  - áreas clicáveis menores que 44x44px em botões/links importantes;
-  - grids que quebram mal em telas intermediárias (ex: 2 colunas viram 1
-    coluna larga demais, ou ficam apertadas antes da hora).
-- Verifique se o `main` sempre recebe o padding-left correto correspondente
-  ao estado da sidebar (aberta/colapsada) em cada breakpoint, sem sobra de
-  espaço em branco nem conteúdo escondido atrás da sidebar fixa.
+BUG-06: aria-labelledby sem correspondencia em Skills
+  Arquivo: /src/components/Skills.tsx linha 71 e linha 102
+  Problema:
+    - Linha 71: aria-labelledby aponta para id que nao existe no elemento h3.
+    - Linha 102: aria-labelledby="soft-skills-title" sem elemento correspondente.
+  Correcao:
+    - No h3 de cada grupo, adicionar id={"skill-group-" + index}.
+    - No h4 "Mindset Profissional", adicionar id="soft-skills-title".
 
-PASSO 7 — Acessibilidade (a11y)
-- Verifique se todo elemento interativo (botão, link, input) tem nome
-  acessível (texto visível, aria-label ou aria-labelledby).
-- Verifique a ordem de tabulação (tab order) da página inteira, incluindo
-  sidebar, conteúdo principal e footer — deve seguir uma ordem lógica visual.
-- Verifique se há pelo menos um heading `<h1>` por página e se a hierarquia
-  de headings (h1 > h2 > h3) é sequencial, sem pular níveis.
-- Verifique se `aria-current`, `aria-expanded`, `aria-hidden` e `role` são
-  usados corretamente e refletem o estado real do componente (não estáticos
-  quando deveriam mudar dinamicamente).
-- Verifique se `prefers-reduced-motion` é respeitado nas animações do
-  framer-motion, caso a correção correspondente tenha sido implementada —
-  confirme que ela realmente desativa/reduz o movimento e não é apenas
-  cosmética.
+BUG-07: Open Graph image usando favicon.svg — inadequado para compartilhamento
+  Arquivo: /index.html linhas 25 e 31
+  Problema: og:image e twitter:image apontam para /favicon.svg.
+            Redes sociais nao renderizam SVG para preview.
+  Correcao: Criar /public/og-image.png (1200x630px) com nome e cargo do Anderson.
+            Atualizar as meta tags para apontar para a URL publica da imagem.
 
-PASSO 8 — Performance e carregamento
-- Verifique se os componentes lazy-loaded (About, Experience, Automation,
-  Skills, Projects, Contact, Footer) não causam layout shift perceptível
-  quando entram (compare com e sem o fallback do Suspense).
-- Verifique se imagens têm dimensões explícitas (width/height ou
-  aspect-ratio) para evitar CLS, e se usam `loading="lazy"` apenas quando
-  fora da primeira dobra.
-- Verifique o tamanho e formato dos assets (imagem de perfil, PDF do
-  currículo) e se há algum asset não utilizado ainda incluso no bundle.
-- Verifique se não há chamadas, listeners ou observers (scroll, resize,
-  IntersectionObserver) criados sem a devida limpeza (cleanup) no
-  useEffect, o que causaria vazamento de memória ou comportamento
-  duplicado ao navegar/re-renderizar.
+BUG-08: Sidebar colapsada nao mostra icones de links externos
+  Arquivo: /src/components/Sidebar.tsx linha 221
+  Problema: Ao colapsar, os icones de GitHub/LinkedIn somem completamente.
+            Deveriam mostrar apenas os icones (sem texto), consistente com navLinks.
+  Correcao: Quando collapsed, mostrar os icones de externalLinks sem texto.
 
-PASSO 9 — SEO e metadados
-- Verifique se index.html tem title, description, canonical, Open Graph e
-  Twitter Card preenchidos corretamente e com valores plausíveis (não
-  genéricos/placeholder).
-- Verifique se o favicon carrega corretamente e não é mais o ícone padrão do
-  Vite/React.
-- Verifique se public/robots.txt e public/sitemap.xml (caso existam) estão
-  com sintaxe válida e URLs corretas.
-- Verifique se algum dado estruturado (JSON-LD), se implementado, é um JSON
-  válido e reflete os dados reais do site (nome, links).
+BUG-09: SectionLoader usa classe border-apple-accent nao definida no CSS
+  Arquivo: /src/App.tsx linha 17
+  Problema: "border-apple-accent" nao esta definida em index.css.
+            Apenas bg-apple-accent e text-apple-accent estao mapeadas.
+  Correcao: Adicionar em index.css:
+            .border-apple-accent { border-color: var(--color-apple-blue); }
 
-PASSO 10 — Higiene de repositório
-- Verifique .gitignore quanto a arquivos de build que não deveriam ser
-  versionados (*.tsbuildinfo, dist, node_modules, .env).
-- Verifique se ainda existem arquivos mortos, duplicados ou renomeações
-  pendentes (ex: assets com espaço no nome, componentes não referenciados).
-- Verifique se README.md está atualizado e reflete o estado real do projeto
-  (seções existentes, scripts, notas de design) — aponte qualquer
-  divergência entre o que o README descreve e o que o código realmente faz.
+BUG-10: Sem preload da foto principal
+  Arquivo: /index.html
+  Problema: A foto do Anderson nao tem preload. O navegador so a descobre
+            quando o JS processa o componente, atrasando o LCP.
+  Correcao: Adicionar no head do index.html:
+            <link rel="preload" as="image" href="/anderson-cataldo.webp" />
+            (apos converter para WebP conforme BUG-01).
 
-============================================================
-FORMATO DE SAÍDA ESPERADO
-============================================================
+================================================================================
+SECAO 3 — O QUE ESTA FALTANDO (adicionar ao portfolio)
+================================================================================
 
-1. Resumo executivo (3-5 linhas): estado geral do projeto, se está pronto
-   para produção ou não, e os problemas mais urgentes.
+FALTA-01: Secao de metricas quantitativas / numeros de impacto
+  Por que: Frases como "reduzindo checagens manuais" sao vagas. Recrutadores e
+           empresas de tech valorizam impacto mensuravel.
+  O que fazer: Adicionar um bloco visual de "Numeros" entre o Hero e o About
+               (ou como cards no Hero) com dados reais:
+               - Exemplo: "200+ horas automatizadas", "3 sistemas em producao",
+                 "2 empresas de grande porte", etc.
+  Alternativa: Substituir os 3 cards de contexto do Hero (Formacao, Experiencia,
+               Diferencial) por cards de metricas com numero grande em destaque.
 
-2. Tabela ou lista de problemas encontrados, agrupados por categoria (Build/
-   Tipagem, Navegação, Temas/Contraste, Dados/Conteúdo, Interatividade,
-   Responsividade, Acessibilidade, Performance, SEO, Repositório), cada um
-   com:
-   - Arquivo e localização
-   - Descrição do problema
-   - Severidade (Crítico / Alto / Médio / Baixo)
-   - Sugestão objetiva de correção
+FALTA-02: Botao de CTA principal no Hero
+  Por que: A secao Hero nao tem um Call-To-Action claro. O visitante nao sabe
+           o que fazer depois de ler o headline.
+  O que fazer: Adicionar abaixo dos cards, dois botoes:
+    [Ver Projetos] — scroll para #projetos (primario, bg-apple-accent, text-white)
+    [Entrar em Contato] — scroll para #contato (secundario, outlined)
+  Implementar scrollToSection via ancoras HTML simples ou usando a funcao
+  scrollToSection ja existente no Sidebar.tsx como referencia.
 
-3. Checklist de confirmação dos itens do prompt de correção anterior,
-   indicando para cada um: Resolvido / Parcialmente resolvido / Não
-   resolvido / Não verificável, com justificativa curta.
+FALTA-03: Preview/screenshot dos projetos
+  Por que: A secao Projects usa apenas icones genericos (Layout, BookOpen).
+           Recrutadores tecnicos querem ver o produto visual.
+  O que fazer: Para o projeto "Sao Carlo Acutis", adicionar um screenshot real.
+               Para o "Portfolio Web", um screenshot do proprio site.
+               Usar o campo images?: string[] ja existente na interface Project.
+               Renderizar uma imagem preview no topo do card de projeto.
 
-4. Contagem final de problemas por severidade e recomendação de próximos
-   passos priorizados.
+FALTA-04: Secao de idiomas
+  Por que: Para empresas internacionais, conhecer o nivel de ingles e fundamental.
+  O que fazer: Adicionar no componente About.tsx ou Skills.tsx um card "Idiomas":
+    - Portugues: Nativo
+    - Ingles: [nivel real — Intermediario/Avancado/Fluente]
+  Usar icone Globe da lucide-react.
 
-============================================================
-REGRAS IMPORTANTES
-============================================================
-- Não presuma que algo está correto só porque "parece" ter sido corrigido —
-  leia o código-fonte atual antes de concluir qualquer item.
-- Não ignore arquivos de configuração (tsconfig*, vite.config.ts,
-  eslint.config.js, postcss.config.js, package.json) — erros de configuração
-  também são bugs.
-- Se um problema já havia sido listado na auditoria anterior e ainda existir,
-  reporte de novo (não assuma que "já foi visto, não precisa repetir").
-- Se encontrar um problema novo, não coberto por nenhuma auditoria anterior,
-  destaque isso explicitamente no relatório.
-- Não aplique correções nesta etapa — apenas audite e relate. A aplicação
-  das correções deve ser um passo separado, após revisão do relatório.
+FALTA-05: Disponibilidade e modalidade de trabalho
+  Por que: Empresas precisam saber se o candidato aceita remoto, hibrido, presencial.
+  O que fazer: No About.tsx, no card de "Localizacao", expandir o texto para:
+               "Fortaleza, CE — disponivel para remoto e hibrido"
+
+FALTA-06: Error boundary para componentes lazy
+  Arquivo: /src/App.tsx
+  Por que: Se qualquer chunk lazy falhar (usuario offline, CDN down), a aplicacao
+           mostrara tela em branco sem feedback.
+  O que fazer: Criar ErrorBoundary.tsx simples e envolver cada Suspense:
+               <ErrorBoundary fallback={<SectionError />}>
+                 <Suspense fallback={<SectionLoader />}>
+                   <About />
+                 </Suspense>
+               </ErrorBoundary>
+  Referencia de implementacao de ErrorBoundary com React class component ou
+  usar biblioteca react-error-boundary se preferir.
+
+FALTA-07: Meta tag theme-color para mobile
+  Arquivo: /index.html
+  O que fazer: Adicionar no head:
+    <meta name="theme-color" content="#7c3aed" media="(prefers-color-scheme: light)" />
+    <meta name="theme-color" content="#1e1b4b" media="(prefers-color-scheme: dark)" />
+
+FALTA-08: Link canonico no HTML
+  Arquivo: /index.html
+  O que fazer: Adicionar no head:
+    <link rel="canonical" href="https://andersoncataldo.tech" />
+    (ou URL de producao atual)
+
+FALTA-09: Badge visual "Atual" nas experiencias ativas
+  Arquivo: /src/components/Experience.tsx
+  O que fazer: No item de experiencia com periodo "Atual", mostrar um badge
+               verde com texto "Em andamento" ou um dot verde animado ao lado
+               do periodo para destacar visualmente o emprego atual vs anterior.
+
+FALTA-10: Link "Ver codigo" com label visivel nos cards de Projects
+  Arquivo: /src/components/Projects.tsx
+  O que fazer: Ao lado do icone do GitHub, adicionar texto "Ver codigo" pequeno
+               que aparece no hover, ou tornar o link mais evidente visualmente.
+
+================================================================================
+SECAO 4 — O QUE REMOVER (itens que prejudicam a profissionalidade)
+================================================================================
+
+REMOVER-01: Secao "Automacao" como secao separada no nav
+  Motivo: O conteudo de RPA e muito limitado (3 cards de texto sem metricas
+          ou projetos demonstraveis). Para um recrutador dev, parece "enchimento".
+          O RPA ja aparece bem em Experience e Skills.
+  Recomendacao: Fundir o conteudo de Automation.tsx dentro de Experience.tsx ou
+                About.tsx como bloco de destaque. Remover "Automacao" do nav.
+                Resultado: Inicio -> Sobre -> Experiencia -> Habilidades -> Projetos -> Contato
+
+REMOVER-02: Pills redundantes na Hero (bloco motion.div linhas 65-76)
+  Arquivo: /src/components/Hero.tsx
+  Motivo: O bloco de pills "6 semestre | 2 experiencias | Automacoes RPA" repete
+          informacoes que ja estao nos 3 cards acima na mesma secao.
+  Recomendacao: Remover completamente o bloco de pills (linhas 65-76),
+                deixando apenas os 3 cards de contexto.
+
+REMOVER-03: Comentario de migracao no vite.config.ts
+  Arquivo: /vite.config.ts linha 2
+  Motivo: "// <--- Mude aqui (tire o '-oxc')" e um comentario pessoal que nao
+          deve existir em repositorio profissional publico.
+  Recomendacao: Deletar o comentario.
+
+REMOVER-04: "Portfolio" sem acento na secao Projects
+  Arquivo: /src/components/Projects.tsx linha 48
+  Motivo: Diz "Portfolio" em ingles sem acento num site em pt-BR. Inconsistente.
+  Recomendacao: Mudar para "Projetos" (consistente com o nav).
+
+REMOVER-05: Subtitle "Portfolio de carreira" na Sidebar
+  Arquivo: /src/components/Sidebar.tsx linha 171
+  Motivo: Redundante. O contexto ja deixa claro que e um portfolio.
+  Recomendacao: Substituir por "Full-Stack | RPA" ou "Desenvolvedor Full-Stack"
+                para posicionar melhor o profissional.
+
+================================================================================
+SECAO 5 — MELHORIAS DE PROFISSIONALISMO E QUALIDADE
+================================================================================
+
+MELHORIA-01: Titulo da Hero — remover "em formacao"
+  Arquivo: /src/components/Hero.tsx linha 30
+  Texto atual: "Full-stack em formacao com impacto real em React e RPA."
+  Problema: "Em formacao" diminui o posicionamento. Anderson ja tem 2 experiencias
+            profissionais reais e projetos em producao.
+  Sugestao: "Full-Stack Developer com impacto real em React e RPA."
+            ou "Transformando codigo em automacao com React e RPA."
+
+MELHORIA-02: Adicionar data de atualizacao visivel perto do botao de CV
+  Arquivos: /src/components/Sidebar.tsx e /src/components/Contact.tsx
+  Sugestao: Adicionar texto discreto "Atualizado em Jul/2026" ou badge com data
+            proximo ao botao de download do CV.
+
+MELHORIA-03: Adicionar transicao suave ao colapsar sidebar (texto)
+  Arquivo: /src/components/Sidebar.tsx
+  Problema: Quando a sidebar colapsa, o texto desaparece abruptamente.
+  Sugestao: Envolver textos com transicao de opacidade:
+            className com transition-opacity duration-200 e opacity-0/opacity-100
+            dependendo do estado collapsed.
+
+MELHORIA-04: Adicionar atributo download no link do curriculo
+  Arquivos: /src/components/Sidebar.tsx e /src/components/Contact.tsx
+  Sugestao: Adicionar download="curriculo-anderson-cataldo.pdf" nos links do CV.
+
+MELHORIA-05: Hover interativo nos cards de Projects
+  Arquivo: /src/components/Projects.tsx
+  Sugestao: No motion.article, adicionar:
+            whileHover={{ y: -4, transition: { duration: 0.2 } }}
+            No apple-card no CSS, adicionar hover:shadow-xl.
+
+MELHORIA-06: Traducao dos titulos de grupos de Skills para pt-BR
+  Arquivo: /src/components/Skills.tsx
+  Sugestao:
+    "Back-End & Automation" -> "Back-End & Automacao"
+    "Infrastructure & DB" -> "Infraestrutura & Banco de Dados"
+
+MELHORIA-07: Adicionar aria-label descritivos nos links do Footer
+  Arquivo: /src/components/Footer.tsx
+  Sugestao: aria-label="Ver perfil no LinkedIn (abre em nova aba)"
+            aria-label="Ver repositorios no GitHub (abre em nova aba)"
+
+MELHORIA-08: Verificar classes border-apple em todos os spans de tech tags
+  Arquivos: Projects.tsx linha 135, Experience.tsx linha 101
+  Problema: Alguns spans usam apenas border-apple sem a classe border do Tailwind,
+            podendo nao mostrar a borda em alguns contextos.
+  Sugestao: Verificar visualmente todos os tech tags e adicionar classe "border"
+            do Tailwind junto com "border-apple" onde necessario.
+
+================================================================================
+SECAO 6 — ORDEM DE PRIORIDADE PARA IMPLEMENTACAO
+================================================================================
+
+CRITICO (impacto imediato na impressao profissional):
+  1. MELHORIA-01 — Remover "em formacao" do headline da Hero
+  2. REMOVER-01 — Fundir/remover secao Automacao como secao separada
+  3. BUG-07 — Criar og-image.png real (1200x630px) para redes sociais
+  4. FALTA-02 — Adicionar CTA buttons no Hero
+  5. REMOVER-02 — Remover pills redundantes da Hero
+
+ALTA PRIORIDADE (qualidade do codigo e acessibilidade):
+  6. BUG-03 — Corrigir key={index} nas listas
+  7. BUG-06 — Corrigir aria-labelledby sem id correspondente
+  8. BUG-09 — Adicionar .border-apple-accent no CSS
+  9. FALTA-06 — Adicionar ErrorBoundary nos Suspense
+
+MEDIA PRIORIDADE (melhorias de UX e conteudo):
+  10. BUG-01 + BUG-10 — Converter foto para WebP + preload
+  11. FALTA-01 — Adicionar metricas quantitativas nas experiencias
+  12. FALTA-04 — Adicionar secao de idiomas
+  13. FALTA-09 — Badge "Atual" nas experiencias ativas
+  14. MELHORIA-03 — Transicao suave ao colapsar sidebar
+  15. MELHORIA-05 — Hover interativo nos cards de Projects
+
+BAIXA PRIORIDADE (polimento final):
+  16. BUG-04 — Remover comentario do vite.config.ts
+  17. BUG-05 — Corrigir nome no package.json
+  18. REMOVER-03 — Limpar comentario de migracao
+  19. REMOVER-04 — Corrigir "Portfolio" -> "Porfolio" com acento
+  20. REMOVER-05 — Melhorar subtitulo da Sidebar
+  21. MELHORIA-02 — Mostrar data de atualizacao do CV
+  22. MELHORIA-04 — Adicionar atributo download no CV
+  23. MELHORIA-07 — Melhorar aria-label no Footer
+  24. FALTA-07 — Meta tag theme-color
+  25. FALTA-08 — Link canonical
+
+================================================================================
+SECAO 7 — CONTEXTO ADICIONAL PARA A IA QUE IRA IMPLEMENTAR
+================================================================================
+
+1. NAO alterar o design system atual (cores, fontes, espacamentos). O visual
+   "Apple-inspired" com sidebar azul/roxo (#7c3aed) e intencional e bom.
+
+2. NAO adicionar novas dependencias desnecessarias. O projeto ja tem Framer Motion
+   para animacoes — usa-lo para novos elementos animados.
+
+3. O portfolio e 100% em portugues brasileiro. Manter esse idioma em todos os
+   novos textos adicionados. Termos tecnicos (React, TypeScript, RPA) permanecem
+   em ingles por serem nomes proprios de tecnologias.
+
+4. O projeto usa Tailwind CSS v4 com @theme block (nao tailwind.config.js). Todas
+   as customizacoes de design tokens ficam em /src/styles/index.css dentro de @theme.
+   NAO criar tailwind.config.js.
+
+5. Framer Motion: todos os componentes ja usam o padrao:
+   - useReducedMotion() para respeitar preferencias de acessibilidade
+   - whileInView com viewport={{ once: true }} para animar entrada
+   - Verificar esse padrao em qualquer novo elemento animado.
+
+6. A sidebar tem dois estados em desktop: expanded (w-72) e collapsed (w-20).
+   Qualquer conteudo adicionado a sidebar deve respeitar o estado collapsed,
+   mostrando apenas icone sem texto quando collapsed.
+
+7. Assets: Qualquer nova imagem deve ser adicionada em /src/assets/ e importada
+   via ES module import. Nao usar URLs hardcoded para assets locais.
+
+8. O curriculo PDF esta em /src/assets/curriculo-anderson-pt-br.pdf e e importado
+   com import resumeFile from '../assets/curriculo-anderson-pt-br.pdf'
+
+9. Acessibilidade: O projeto tem bom suporte a a11y (skip link, aria-labels,
+   role="dialog" no mobile drawer, aria-live no CopyEmail). Manter esse nivel
+   e corrigir os bugs de aria identificados na Secao 2.
+
+10. Informacoes de contato do desenvolvedor:
+    - E-mail: andersonvcataldo@gmail.com
+    - GitHub: https://github.com/andersoncataldo
+    - LinkedIn: https://linkedin.com/in/andersonnviana
+    - Site atual: https://andersoncataldotech.vercel.app
+    - Formacao: Bacharelado em Ciencia da Computacao, Unifor, 6 semestre
+    - Localizacao: Fortaleza, Ceara, Brasil
+    - Experiencias: Estagiario T.I. na Distribuidora Mais Saude (atual, Jun/2026),
+                    Aprendiz fiscal na Grupo 3Coracoes (Jan/2025 - Abr/2026)
+
+================================================================================
+FIM DO PROMPT DE AUDITORIA
+================================================================================
+Documento gerado por: Antigravity (Google DeepMind)
+Portfolio auditado: andersoncataldo.tech
+Data: 2026-08-09

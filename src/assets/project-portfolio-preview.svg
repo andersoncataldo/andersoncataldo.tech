@@ -1,0 +1,26 @@
+<svg width="1200" height="820" viewBox="0 0 1200 820" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <rect width="1200" height="820" rx="36" fill="#F8F5FF"/>
+  <rect x="44" y="44" width="1112" height="732" rx="30" fill="#FFFFFF" stroke="#E9D5FF" stroke-width="3"/>
+  <rect x="90" y="90" width="222" height="56" rx="18" fill="#F1E8FF"/>
+  <rect x="112" y="108" width="96" height="20" rx="10" fill="#7C3AED"/>
+  <rect x="882" y="104" width="172" height="46" rx="14" fill="#7C3AED"/>
+  <rect x="90" y="182" width="1020" height="200" rx="28" fill="#F3E8FF"/>
+  <rect x="112" y="214" width="332" height="24" rx="12" fill="#7C3AED" fill-opacity="0.18"/>
+  <rect x="112" y="254" width="410" height="30" rx="15" fill="#0F172A"/>
+  <rect x="112" y="298" width="460" height="18" rx="9" fill="#64748B" fill-opacity="0.8"/>
+  <rect x="112" y="334" width="280" height="18" rx="9" fill="#64748B" fill-opacity="0.6"/>
+  <rect x="812" y="214" width="250" height="130" rx="20" fill="#FFFFFF" stroke="#E9D5FF"/>
+  <circle cx="930" cy="278" r="48" fill="#7C3AED" fill-opacity="0.18"/>
+  <path d="M905 299L922 316L952 277" stroke="#7C3AED" stroke-width="10" stroke-linecap="round" stroke-linejoin="round"/>
+  <rect x="90" y="420" width="300" height="246" rx="20" fill="#F8FAFC" stroke="#E2E8F0"/>
+  <rect x="420" y="420" width="300" height="246" rx="20" fill="#F8FAFC" stroke="#E2E8F0"/>
+  <rect x="750" y="420" width="300" height="246" rx="20" fill="#F8FAFC" stroke="#E2E8F0"/>
+  <rect x="122" y="457" width="180" height="16" rx="8" fill="#7C3AED" fill-opacity="0.18"/>
+  <rect x="122" y="492" width="200" height="90" rx="16" fill="#F1E8FF"/>
+  <rect x="452" y="457" width="180" height="16" rx="8" fill="#7C3AED" fill-opacity="0.18"/>
+  <rect x="452" y="492" width="200" height="90" rx="16" fill="#F1E8FF"/>
+  <rect x="782" y="457" width="180" height="16" rx="8" fill="#7C3AED" fill-opacity="0.18"/>
+  <rect x="782" y="492" width="200" height="90" rx="16" fill="#F1E8FF"/>
+  <rect x="90" y="692" width="180" height="56" rx="16" fill="#7C3AED"/>
+  <text x="122" y="728" fill="#FFFFFF" font-family="Arial, sans-serif" font-size="20" font-weight="700">Projetos</text>
+</svg>

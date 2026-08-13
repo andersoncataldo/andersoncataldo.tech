@@ -1,4 +1,4 @@
 User-agent: *
 Allow: /
 
-Sitemap: https://andersoncataldotech.vercel.app/sitemap.xml
+Sitemap: https://andersoncataldo.tech/sitemap.xml
