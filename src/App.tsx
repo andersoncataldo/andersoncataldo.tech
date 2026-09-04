@@ -64,7 +64,7 @@ function App() {
       >
         Pular para o conteúdo
       </a>
-      <div className={`min-h-screen overflow-x-hidden bg-apple-bg text-apple-text selection:bg-apple-accent/10 transition-colors transition-[padding-left] duration-300 ${collapsed ? 'lg:pl-20' : 'lg:pl-72'}`}>
+      <div className={`min-h-screen overflow-x-hidden bg-apple-bg text-apple-text selection:bg-indigo-500/10 transition-colors transition-[padding-left] duration-300 ${collapsed ? 'lg:pl-20' : 'lg:pl-64'}`}>
         <Sidebar theme={theme} onThemeToggle={handleThemeToggle} collapsed={collapsed} setCollapsed={setCollapsed} />
         <main id="main-content" className="relative">
           <Hero />

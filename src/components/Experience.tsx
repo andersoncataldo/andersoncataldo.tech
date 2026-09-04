@@ -1,65 +1,22 @@
 import { motion, useReducedMotion } from 'framer-motion';
-import { Calendar, MapPin } from 'lucide-react';
-import { Experience as ExperienceType } from '../types';
-
-const experiences: ExperienceType[] = [
-  {
-    title: 'Estagiário de T.I',
-    company: 'Distribuidora Mais Saúde',
-    period: 'Jun/2026 - Atual',
-    location: 'Fortaleza, Ceará',
-    results: [
-      'Criação de apps internos com Next.js e Tailwind que simplificaram processos de atendimento e análise de dados.',
-      'Geração de APIs em Node.js com PostgreSQL via Supabase para entregar dados em tempo real a equipes operacionais.',
-      'Automatização de deploys na Vercel e organização de demandas em Trello para acelerar a entrega de novas funcionalidades.',
-      'Suporte técnico e infraestrutura para reduzir interrupções em sistemas internos e manter a rotina do time fluida.'
-    ],
-    stack: ['Next.js', 'React', 'Node.js', 'PostgreSQL', 'Supabase', 'Vercel'],
-    type: 'work',
-  },
-  {
-    title: 'Aprendiz – Setor Fiscal | Sistemas e Projetos',
-    company: 'Grupo 3Corações',
-    period: 'Jan/2025 - Abr/2026',
-    location: 'Fortaleza, Ceará',
-    results: [
-      'Desenvolvimento de automações RPA para extração em massa de XMLs, reduzindo checagens manuais e retrabalho.',
-      'Transformação de processos repetitivos em rotinas automatizadas, proporcionando ganho de produtividade e maior confiabilidade.',
-      'Construção de dashboards que reuniram indicadores fiscais e operacionais, facilitando decisões baseadas em dados.',
-      'Documentação técnica estruturada para garantir manutenibilidade e facilitar futuras melhorias nas automações.'
-    ],
-    stack: ['Python', 'RPA', 'Excel', 'Dashboards', 'Automação'],
-    type: 'work',
-  },
-  {
-    title: 'Bacharelado em Ciência da Computação',
-    company: 'Universidade de Fortaleza (Unifor)',
-    period: 'Jan/2024 - Atual',
-    location: 'Fortaleza, Ceará',
-    results: [
-      'Foco em engenharia de software, APIs e desenvolvimento full-stack com ênfase em TypeScript.',
-      'Atualmente no 6º semestre com experiência prática em projetos corporativos e automações de fluxo.',
-      'Melhoria contínua na forma de transformar teoria em soluções aplicáveis e confiáveis.'
-    ],
-    stack: ['Engenharia de Software', 'Algoritmos', 'TypeScript', 'Full-Stack'],
-    type: 'education',
-  },
-];
+import { Calendar, MapPin, Building2, TrendingUp, CheckCircle2 } from 'lucide-react';
+import { experiences } from '../data/experience';
 
 const Experience = () => {
   const shouldReduceMotion = useReducedMotion();
 
   return (
-    <section id="experiencia" className="py-fluid-section bg-apple-bg scroll-mt-24 lg:scroll-mt-28" aria-labelledby="experience-title">
+    <section id="experiencia" className="py-fluid-section bg-apple-bg scroll-mt-20" aria-labelledby="experience-title">
       <div className="section-container">
-        <div className="mb-16">
+        {/* Section Header */}
+        <div className="max-w-3xl mb-14">
           <motion.p
             initial={shouldReduceMotion ? { opacity: 1, y: 0 } : { opacity: 0, y: 10 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
-            className="text-apple-accent font-semibold text-lg mb-2"
+            className="text-xs uppercase font-mono font-bold tracking-widest text-indigo-600 dark:text-indigo-400 mb-2"
           >
-            Carreira
+            Carreira & Histórico
           </motion.p>
           <motion.h2
             initial={shouldReduceMotion ? { opacity: 1, y: 0 } : { opacity: 0, y: 10 }}
@@ -67,65 +24,110 @@ const Experience = () => {
             viewport={{ once: true }}
             transition={shouldReduceMotion ? { duration: 0 } : { delay: 0.1 }}
             id="experience-title"
-            className="text-fluid-h2 font-bold tracking-tight text-apple-text leading-tight"
+            className="text-fluid-h2 font-extrabold tracking-tight text-apple-text leading-tight"
           >
-            Trajetória Profissional
+            Trajetória Profissional & Acadêmica
           </motion.h2>
+          <p className="text-apple-secondary text-base sm:text-lg mt-3">
+            Experiência corporativa prática comprovada com entregas reais, metodologias ágeis e geração de valor mensurável.
+          </p>
         </div>
 
-        <div className="grid gap-10">
+        {/* Timeline List */}
+        <div className="space-y-8 relative">
           {experiences.map((exp, index) => {
-            const isCurrent = exp.period.toLowerCase().includes('atual');
-
             return (
-              <motion.div
+              <motion.article
                 key={`${exp.company}-${exp.title}`}
                 initial={shouldReduceMotion ? { opacity: 1, y: 0 } : { opacity: 0, y: 20 }}
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true }}
-                transition={shouldReduceMotion ? { duration: 0 } : { duration: 0.6, delay: index * 0.1 }}
-                className="apple-card p-8 md:p-12 flex flex-col md:grid md:grid-cols-[280px_1fr] gap-8 md:gap-16"
+                transition={shouldReduceMotion ? { duration: 0 } : { duration: 0.5, delay: index * 0.1 }}
+                className="apple-card p-6 sm:p-8 md:p-10 border border-slate-200 dark:border-slate-800 relative"
               >
-                <div className="flex flex-col space-y-4">
-                  <div className="flex items-center gap-2 text-apple-secondary text-sm font-medium">
-                    <Calendar className="w-4 h-4" />
-                    <span>{exp.period}</span>
-                    {isCurrent && (
-                      <span className="inline-flex items-center gap-2 rounded-full border border-emerald-500/30 bg-emerald-500/10 px-2.5 py-1 text-[10px] font-bold uppercase tracking-wider text-emerald-700">
-                        <span className="h-2 w-2 rounded-full bg-emerald-500" aria-hidden="true" />
-                        Em andamento
-                      </span>
-                    )}
-                  </div>
-                  <div>
-                    <h3 className="text-2xl font-bold text-apple-text mb-1">{exp.company}</h3>
-                    <p className="text-lg text-apple-accent font-semibold">{exp.title}</p>
-                  </div>
-                  <div className="flex items-center gap-2 text-apple-secondary text-sm">
-                    <MapPin className="w-4 h-4" />
-                    <span>{exp.location}</span>
-                  </div>
-                  <div className="flex flex-wrap gap-2 pt-4">
-                    {exp.stack.map((tech) => (
-                      <span key={tech} className="border border-apple px-3 py-1 bg-apple-bg text-apple-text text-[11px] font-bold uppercase tracking-wider rounded-full">
-                        {tech}
-                      </span>
-                    ))}
-                  </div>
-                </div>
+                <div className="flex flex-col lg:grid lg:grid-cols-[300px_1fr] gap-8">
+                  {/* Left Column: Role, Company, Period */}
+                  <div className="space-y-4">
+                    <div className="flex items-center gap-2 text-xs font-mono text-apple-secondary">
+                      <Calendar className="w-3.5 h-3.5 text-indigo-500" />
+                      <span>{exp.period}</span>
+                      {exp.current && (
+                        <span className="inline-flex items-center gap-1.5 px-2 py-0.5 rounded-full bg-emerald-500/15 text-emerald-600 dark:text-emerald-400 font-bold text-[10px] border border-emerald-500/30">
+                          <span className="w-1.5 h-1.5 rounded-full bg-emerald-500 animate-pulse" />
+                          Atual
+                        </span>
+                      )}
+                    </div>
 
-                <div className="flex flex-col justify-center">
-                  <p className="text-apple-secondary font-medium mb-6 uppercase tracking-widest text-xs">Principais Resultados</p>
-                  <ul className="space-y-4" role="list">
-                    {exp.results.map((item) => (
-                      <li key={item} className="flex gap-4 text-apple-text leading-relaxed text-base font-medium">
-                        <div className="mt-2.5 w-1.5 h-1.5 rounded-full bg-apple-accent shrink-0" aria-hidden="true" />
-                        {item}
-                      </li>
-                    ))}
-                  </ul>
+                    <div>
+                      <h3 className="text-xl sm:text-2xl font-bold text-apple-text tracking-tight">{exp.title}</h3>
+                      <div className="flex items-center gap-1.5 text-indigo-600 dark:text-indigo-400 font-semibold text-sm mt-1">
+                        <Building2 className="w-4 h-4 shrink-0" />
+                        <span>{exp.company}</span>
+                      </div>
+                      {exp.companyRole && (
+                        <p className="text-xs text-apple-secondary mt-1">{exp.companyRole}</p>
+                      )}
+                    </div>
+
+                    <div className="flex items-center gap-1.5 text-xs text-apple-secondary">
+                      <MapPin className="w-3.5 h-3.5 shrink-0" />
+                      <span>{exp.location}</span>
+                    </div>
+
+                    {/* Quick KPIs */}
+                    {exp.metrics && (
+                      <div className="grid grid-cols-2 gap-2 pt-2">
+                        {exp.metrics.map((metric) => (
+                          <div
+                            key={metric.label}
+                            className="p-2.5 rounded-xl bg-slate-50 dark:bg-slate-800/60 border border-slate-200 dark:border-slate-800"
+                          >
+                            <span className="text-[10px] text-apple-secondary block uppercase tracking-wider">{metric.label}</span>
+                            <span className="text-base font-extrabold text-indigo-600 dark:text-indigo-400">{metric.value}</span>
+                          </div>
+                        ))}
+                      </div>
+                    )}
+
+                    {/* Tech Stack Chips */}
+                    <div className="pt-2">
+                      <p className="text-[10px] font-mono font-bold uppercase tracking-wider text-apple-secondary mb-2">Tecnologias Utilizadas:</p>
+                      <div className="flex flex-wrap gap-1.5">
+                        {exp.stack.map((tech) => (
+                          <span
+                            key={tech}
+                            className="px-2.5 py-1 rounded-lg text-xs font-mono bg-slate-100 dark:bg-slate-800/80 text-apple-text border border-slate-200 dark:border-slate-700/80"
+                          >
+                            {tech}
+                          </span>
+                        ))}
+                      </div>
+                    </div>
+                  </div>
+
+                  {/* Right Column: Summary & Concrete Results */}
+                  <div className="flex flex-col justify-between space-y-6">
+                    <div>
+                      <div className="flex items-center gap-2 text-xs font-mono font-bold uppercase tracking-wider text-indigo-600 dark:text-indigo-400 mb-3">
+                        <TrendingUp className="w-4 h-4" /> Contexto & Entregas Principais
+                      </div>
+                      <p className="text-sm sm:text-base text-apple-secondary leading-relaxed mb-4">
+                        {exp.summary}
+                      </p>
+
+                      <ul className="space-y-3" role="list">
+                        {exp.results.map((result) => (
+                          <li key={result} className="flex items-start gap-3 text-xs sm:text-sm text-apple-text leading-relaxed font-medium">
+                            <CheckCircle2 className="w-4 h-4 text-indigo-500 shrink-0 mt-0.5" />
+                            <span>{result}</span>
+                          </li>
+                        ))}
+                      </ul>
+                    </div>
+                  </div>
                 </div>
-              </motion.div>
+              </motion.article>
             );
           })}
         </div>
