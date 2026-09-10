@@ -2,6 +2,8 @@ import { useState, useMemo } from 'react';
 import { motion, useReducedMotion } from 'framer-motion';
 import { Layout, Server, Database, Bot, ShieldCheck, Search, Sparkles } from 'lucide-react';
 import { skillCategories } from '../data/skills';
+import { useLanguage } from '../context/LanguageContext';
+import type { SkillLevel } from '../types';
 
 const categoryIcons: Record<string, typeof Layout> = {
   Layout,
@@ -11,16 +13,32 @@ const categoryIcons: Record<string, typeof Layout> = {
   ShieldCheck,
 };
 
+const levelStyles: Record<SkillLevel, string> = {
+  advanced: 'bg-emerald-500/15 text-emerald-600 dark:text-emerald-400 border border-emerald-500/30',
+  intermediate: 'bg-indigo-500/15 text-indigo-600 dark:text-indigo-400 border border-indigo-500/30',
+  growing: 'bg-slate-200 dark:bg-slate-800 text-slate-600 dark:text-slate-400',
+};
+
 const Skills = () => {
   const shouldReduceMotion = useReducedMotion();
+  const { t, language } = useLanguage();
   const [searchQuery, setSearchQuery] = useState('');
   const [selectedCategory, setSelectedCategory] = useState<string>('all');
+
+  const categoryFilters: { id: string; label: string }[] = [
+    { id: 'all', label: t.skills.filters.all },
+    { id: 'frontend', label: t.skills.filters.frontend },
+    { id: 'backend', label: t.skills.filters.backend },
+    { id: 'database', label: t.skills.filters.database },
+    { id: 'automation', label: t.skills.filters.automation },
+    { id: 'engineering', label: t.skills.filters.engineering },
+  ];
 
   const filteredCategories = useMemo(() => {
     return skillCategories
       .filter((cat) => {
         if (selectedCategory === 'all') return true;
-        return cat.title.toLowerCase().includes(selectedCategory.toLowerCase());
+        return cat.id === selectedCategory;
       })
       .map((cat) => {
         if (!searchQuery.trim()) return cat;
@@ -28,8 +46,8 @@ const Skills = () => {
         const matchedSkills = cat.skills.filter(
           (s) =>
             s.name.toLowerCase().includes(q) ||
-            s.keyword.toLowerCase().includes(q) ||
-            s.level.toLowerCase().includes(q),
+            s.keyword[language].toLowerCase().includes(q) ||
+            t.skills.levels[s.level].toLowerCase().includes(q),
         );
         return {
           ...cat,
@@ -37,7 +55,7 @@ const Skills = () => {
         };
       })
       .filter((cat) => cat.skills.length > 0);
-  }, [searchQuery, selectedCategory]);
+  }, [searchQuery, selectedCategory, language, t]);
 
   return (
     <section id="habilidades" className="py-fluid-section bg-apple-bg scroll-mt-20" aria-labelledby="skills-title">
@@ -51,7 +69,7 @@ const Skills = () => {
               viewport={{ once: true }}
               className="text-xs uppercase font-mono font-bold tracking-widest text-indigo-600 dark:text-indigo-400 mb-2"
             >
-              Competências Técnicas & ATS Keywords
+              {t.skills.eyebrow}
             </motion.p>
             <motion.h2
               initial={shouldReduceMotion ? { opacity: 1, y: 0 } : { opacity: 0, y: 10 }}
@@ -61,7 +79,7 @@ const Skills = () => {
               id="skills-title"
               className="text-fluid-h2 font-extrabold tracking-tight text-apple-text leading-tight"
             >
-              Stack Tecnológica & Engenharia
+              {t.skills.title}
             </motion.h2>
           </div>
 
@@ -72,8 +90,8 @@ const Skills = () => {
               type="text"
               value={searchQuery}
               onChange={(e) => setSearchQuery(e.target.value)}
-              placeholder="Buscar tecnologia ou keyword..."
-              aria-label="Buscar tecnologia ou palavra-chave"
+              placeholder={t.skills.searchPlaceholder}
+              aria-label={t.skills.searchAria}
               className="w-full pl-10 pr-4 py-2.5 rounded-xl border border-slate-200 dark:border-slate-800 bg-white dark:bg-slate-900 text-xs sm:text-sm text-apple-text placeholder:text-slate-400 focus:outline-none focus:ring-2 focus:ring-indigo-500 transition"
             />
           </div>
@@ -81,72 +99,20 @@ const Skills = () => {
 
         {/* Category Filters */}
         <div className="flex flex-wrap gap-2 mb-10">
-          <button
-            type="button"
-            onClick={() => setSelectedCategory('all')}
-            className={`px-3.5 py-1.5 rounded-xl text-xs font-semibold transition ${
-              selectedCategory === 'all'
-                ? 'bg-indigo-600 text-white shadow-md shadow-indigo-600/20'
-                : 'bg-white dark:bg-slate-900 text-apple-secondary hover:text-apple-text border border-slate-200 dark:border-slate-800'
-            }`}
-          >
-            Todas as Áreas
-          </button>
-          <button
-            type="button"
-            onClick={() => setSelectedCategory('Front-End')}
-            className={`px-3.5 py-1.5 rounded-xl text-xs font-semibold transition ${
-              selectedCategory === 'Front-End'
-                ? 'bg-indigo-600 text-white shadow-md shadow-indigo-600/20'
-                : 'bg-white dark:bg-slate-900 text-apple-secondary hover:text-apple-text border border-slate-200 dark:border-slate-800'
-            }`}
-          >
-            Front-End
-          </button>
-          <button
-            type="button"
-            onClick={() => setSelectedCategory('Back-End')}
-            className={`px-3.5 py-1.5 rounded-xl text-xs font-semibold transition ${
-              selectedCategory === 'Back-End'
-                ? 'bg-indigo-600 text-white shadow-md shadow-indigo-600/20'
-                : 'bg-white dark:bg-slate-900 text-apple-secondary hover:text-apple-text border border-slate-200 dark:border-slate-800'
-            }`}
-          >
-            Back-End & APIs
-          </button>
-          <button
-            type="button"
-            onClick={() => setSelectedCategory('Bancos')}
-            className={`px-3.5 py-1.5 rounded-xl text-xs font-semibold transition ${
-              selectedCategory === 'Bancos'
-                ? 'bg-indigo-600 text-white shadow-md shadow-indigo-600/20'
-                : 'bg-white dark:bg-slate-900 text-apple-secondary hover:text-apple-text border border-slate-200 dark:border-slate-800'
-            }`}
-          >
-            Bancos & Cloud
-          </button>
-          <button
-            type="button"
-            onClick={() => setSelectedCategory('Automação')}
-            className={`px-3.5 py-1.5 rounded-xl text-xs font-semibold transition ${
-              selectedCategory === 'Automação'
-                ? 'bg-indigo-600 text-white shadow-md shadow-indigo-600/20'
-                : 'bg-white dark:bg-slate-900 text-apple-secondary hover:text-apple-text border border-slate-200 dark:border-slate-800'
-            }`}
-          >
-            RPA & Python
-          </button>
-          <button
-            type="button"
-            onClick={() => setSelectedCategory('Engenharia')}
-            className={`px-3.5 py-1.5 rounded-xl text-xs font-semibold transition ${
-              selectedCategory === 'Engenharia'
-                ? 'bg-indigo-600 text-white shadow-md shadow-indigo-600/20'
-                : 'bg-white dark:bg-slate-900 text-apple-secondary hover:text-apple-text border border-slate-200 dark:border-slate-800'
-            }`}
-          >
-            Práticas & Metodologias
-          </button>
+          {categoryFilters.map((filter) => (
+            <button
+              key={filter.id}
+              type="button"
+              onClick={() => setSelectedCategory(filter.id)}
+              className={`px-3.5 py-1.5 rounded-xl text-xs font-semibold transition ${
+                selectedCategory === filter.id
+                  ? 'bg-indigo-600 text-white shadow-md shadow-indigo-600/20'
+                  : 'bg-white dark:bg-slate-900 text-apple-secondary hover:text-apple-text border border-slate-200 dark:border-slate-800'
+              }`}
+            >
+              {filter.label}
+            </button>
+          ))}
         </div>
 
         {/* Categories Grid */}
@@ -156,7 +122,7 @@ const Skills = () => {
 
             return (
               <motion.div
-                key={group.title}
+                key={group.id}
                 initial={shouldReduceMotion ? { opacity: 1, y: 0 } : { opacity: 0, y: 20 }}
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true }}
@@ -169,8 +135,8 @@ const Skills = () => {
                       <Icon className="w-5 h-5" />
                     </div>
                     <div>
-                      <h3 className="text-base sm:text-lg font-bold text-apple-text tracking-tight">{group.title}</h3>
-                      <p className="text-xs text-apple-secondary line-clamp-1">{group.description}</p>
+                      <h3 className="text-base sm:text-lg font-bold text-apple-text tracking-tight">{group.title[language]}</h3>
+                      <p className="text-xs text-apple-secondary line-clamp-1">{group.description[language]}</p>
                     </div>
                   </div>
 
@@ -189,18 +155,12 @@ const Skills = () => {
                             {skill.highlight && <Sparkles className="w-3 h-3 text-amber-500 shrink-0" />}
                             {skill.name}
                           </span>
-                          <span className={`text-[10px] font-mono px-2 py-0.5 rounded-md font-medium shrink-0 ${
-                            skill.level === 'Avançado'
-                              ? 'bg-emerald-500/15 text-emerald-600 dark:text-emerald-400 border border-emerald-500/30'
-                              : skill.level === 'Intermediário'
-                              ? 'bg-indigo-500/15 text-indigo-600 dark:text-indigo-400 border border-indigo-500/30'
-                              : 'bg-slate-200 dark:bg-slate-800 text-slate-600 dark:text-slate-400'
-                          }`}>
-                            {skill.level}
+                          <span className={`text-[10px] font-mono px-2 py-0.5 rounded-md font-medium shrink-0 ${levelStyles[skill.level]}`}>
+                            {t.skills.levels[skill.level]}
                           </span>
                         </div>
                         <p className="text-[11px] text-apple-secondary mt-1 font-mono leading-tight">
-                          {skill.keyword}
+                          {skill.keyword[language]}
                         </p>
                       </div>
                     ))}
@@ -213,13 +173,13 @@ const Skills = () => {
 
         {filteredCategories.length === 0 && (
           <div className="text-center py-12 apple-card p-8 border border-slate-200 dark:border-slate-800">
-            <p className="text-sm text-apple-secondary">Nenhuma habilidade encontrada para o termo "{searchQuery}".</p>
+            <p className="text-sm text-apple-secondary">{t.skills.noResults.replace('{query}', searchQuery)}</p>
             <button
               type="button"
               onClick={() => { setSearchQuery(''); setSelectedCategory('all'); }}
               className="mt-3 text-xs font-bold text-indigo-600 dark:text-indigo-400 underline"
             >
-              Limpar filtros de busca
+              {t.skills.clearFilters}
             </button>
           </div>
         )}

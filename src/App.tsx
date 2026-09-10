@@ -2,6 +2,7 @@ import { Suspense, lazy, useEffect, useState } from 'react';
 import Sidebar from './components/Sidebar';
 import Hero from './components/Hero';
 import ErrorBoundary from './components/ErrorBoundary';
+import { LanguageProvider, useLanguage } from './context/LanguageContext';
 
 // Lazy loading components for better performance
 const About = lazy(() => import('./components/About'));
@@ -12,23 +13,30 @@ const Projects = lazy(() => import('./components/Projects'));
 const Contact = lazy(() => import('./components/Contact'));
 const Footer = lazy(() => import('./components/Footer'));
 
-const SectionLoader = () => (
-  <div className="w-full h-48 flex items-center justify-center">
-    <div className="w-8 h-8 border-4 border-apple-accent border-t-transparent rounded-full animate-spin" aria-label="Carregando seção" />
-  </div>
-);
-
-const SectionError = () => (
-  <div className="section-container py-12">
-    <div className="apple-card p-8 text-center">
-      <p className="text-apple-accent font-bold uppercase tracking-[0.22em] text-xs mb-2">Aviso</p>
-      <h3 className="text-2xl font-bold text-apple-text mb-3">Esta seção não pôde ser carregada.</h3>
-      <p className="text-apple-secondary font-medium">Tente recarregar a página ou voltar mais tarde.</p>
+const SectionLoader = () => {
+  const { t } = useLanguage();
+  return (
+    <div className="w-full h-48 flex items-center justify-center">
+      <div className="w-8 h-8 border-4 border-apple-accent border-t-transparent rounded-full animate-spin" aria-label={t.common.loadingSection} />
     </div>
-  </div>
-);
+  );
+};
 
-function App() {
+const SectionError = () => {
+  const { t } = useLanguage();
+  return (
+    <div className="section-container py-12">
+      <div className="apple-card p-8 text-center">
+        <p className="text-apple-accent font-bold uppercase tracking-[0.22em] text-xs mb-2">{t.common.sectionErrorTitle}</p>
+        <h3 className="text-2xl font-bold text-apple-text mb-3">{t.common.sectionErrorHeading}</h3>
+        <p className="text-apple-secondary font-medium">{t.common.sectionErrorBody}</p>
+      </div>
+    </div>
+  );
+};
+
+const AppShell = () => {
+  const { t } = useLanguage();
   const [theme, setTheme] = useState<'light' | 'dark'>(() => {
     if (typeof window === 'undefined') {
       return 'light';
@@ -62,7 +70,7 @@ function App() {
         href="#main-content"
         className="sr-only focus:not-sr-only focus:absolute focus:top-4 focus:left-4 focus:z-50 focus:px-4 focus:py-2 focus:bg-white focus:text-apple-text focus:rounded-full focus:ring-2 focus:ring-apple-accent"
       >
-        Pular para o conteúdo
+        {t.meta.skipToContent}
       </a>
       <div className={`min-h-screen overflow-x-hidden bg-apple-bg text-apple-text selection:bg-indigo-500/10 transition-colors transition-[padding-left] duration-300 ${collapsed ? 'lg:pl-20' : 'lg:pl-64'}`}>
         <Sidebar theme={theme} onThemeToggle={handleThemeToggle} collapsed={collapsed} setCollapsed={setCollapsed} />
@@ -106,6 +114,14 @@ function App() {
         </ErrorBoundary>
       </div>
     </>
+  );
+};
+
+function App() {
+  return (
+    <LanguageProvider>
+      <AppShell />
+    </LanguageProvider>
   );
 }
 

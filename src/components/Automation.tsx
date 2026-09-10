@@ -1,8 +1,10 @@
 import { motion, useReducedMotion } from 'framer-motion';
 import PipelineVisualizer from './PipelineVisualizer';
+import { useLanguage } from '../context/LanguageContext';
 
 const Automation = () => {
   const shouldReduceMotion = useReducedMotion();
+  const { t } = useLanguage();
 
   return (
     <section id="rpa" className="py-fluid-section bg-apple-bg scroll-mt-20" aria-labelledby="automation-title">
@@ -15,7 +17,7 @@ const Automation = () => {
             viewport={{ once: true }}
             className="text-xs uppercase font-mono font-bold tracking-widest text-indigo-600 dark:text-indigo-400 mb-2"
           >
-            Engenharia de Automação & RPA
+            {t.automation.eyebrow}
           </motion.p>
           <motion.h2
             initial={shouldReduceMotion ? { opacity: 1, y: 0 } : { opacity: 0, y: 10 }}
@@ -25,7 +27,7 @@ const Automation = () => {
             id="automation-title"
             className="text-fluid-h2 font-extrabold tracking-tight text-apple-text leading-tight"
           >
-            Automação de Processos & Dados em Larga Escala
+            {t.automation.title}
           </motion.h2>
           <motion.p
             initial={shouldReduceMotion ? { opacity: 1, y: 0 } : { opacity: 0, y: 10 }}
@@ -34,7 +36,8 @@ const Automation = () => {
             transition={shouldReduceMotion ? { duration: 0 } : { delay: 0.2 }}
             className="text-apple-secondary text-base sm:text-lg mt-3 leading-relaxed"
           >
-            Construção de robôs e pipelines em Python para extração, validação contra schemas SEFAZ, tratamento de dados (Pandas) e integração com sistemas legados — com mais de <strong className="text-apple-text font-semibold">15.000 documentos processados por mês</strong>.
+            {t.automation.subtitleBefore}{' '}
+            <strong className="text-apple-text font-semibold">{t.automation.subtitleHighlight}</strong>.
           </motion.p>
         </div>
 

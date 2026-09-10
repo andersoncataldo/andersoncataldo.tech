@@ -1,9 +1,11 @@
 import { motion, useReducedMotion } from 'framer-motion';
 import { Calendar, MapPin, Building2, TrendingUp, CheckCircle2 } from 'lucide-react';
 import { experiences } from '../data/experience';
+import { useLanguage } from '../context/LanguageContext';
 
 const Experience = () => {
   const shouldReduceMotion = useReducedMotion();
+  const { t, language } = useLanguage();
 
   return (
     <section id="experiencia" className="py-fluid-section bg-apple-bg scroll-mt-20" aria-labelledby="experience-title">
@@ -16,7 +18,7 @@ const Experience = () => {
             viewport={{ once: true }}
             className="text-xs uppercase font-mono font-bold tracking-widest text-indigo-600 dark:text-indigo-400 mb-2"
           >
-            Carreira & Histórico
+            {t.experience.eyebrow}
           </motion.p>
           <motion.h2
             initial={shouldReduceMotion ? { opacity: 1, y: 0 } : { opacity: 0, y: 10 }}
@@ -26,10 +28,10 @@ const Experience = () => {
             id="experience-title"
             className="text-fluid-h2 font-extrabold tracking-tight text-apple-text leading-tight"
           >
-            Trajetória Profissional & Acadêmica
+            {t.experience.title}
           </motion.h2>
           <p className="text-apple-secondary text-base sm:text-lg mt-3">
-            Experiência corporativa prática comprovada com entregas reais, metodologias ágeis e geração de valor mensurável.
+            {t.experience.subtitle}
           </p>
         </div>
 
@@ -38,7 +40,7 @@ const Experience = () => {
           {experiences.map((exp, index) => {
             return (
               <motion.article
-                key={`${exp.company}-${exp.title}`}
+                key={`${exp.company}-${exp.title.pt}`}
                 initial={shouldReduceMotion ? { opacity: 1, y: 0 } : { opacity: 0, y: 20 }}
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true }}
@@ -50,29 +52,29 @@ const Experience = () => {
                   <div className="space-y-4">
                     <div className="flex items-center gap-2 text-xs font-mono text-apple-secondary">
                       <Calendar className="w-3.5 h-3.5 text-indigo-500" />
-                      <span>{exp.period}</span>
+                      <span>{exp.period[language]}</span>
                       {exp.current && (
                         <span className="inline-flex items-center gap-1.5 px-2 py-0.5 rounded-full bg-emerald-500/15 text-emerald-600 dark:text-emerald-400 font-bold text-[10px] border border-emerald-500/30">
                           <span className="w-1.5 h-1.5 rounded-full bg-emerald-500 animate-pulse" />
-                          Atual
+                          {t.experience.current}
                         </span>
                       )}
                     </div>
 
                     <div>
-                      <h3 className="text-xl sm:text-2xl font-bold text-apple-text tracking-tight">{exp.title}</h3>
+                      <h3 className="text-xl sm:text-2xl font-bold text-apple-text tracking-tight">{exp.title[language]}</h3>
                       <div className="flex items-center gap-1.5 text-indigo-600 dark:text-indigo-400 font-semibold text-sm mt-1">
                         <Building2 className="w-4 h-4 shrink-0" />
                         <span>{exp.company}</span>
                       </div>
                       {exp.companyRole && (
-                        <p className="text-xs text-apple-secondary mt-1">{exp.companyRole}</p>
+                        <p className="text-xs text-apple-secondary mt-1">{exp.companyRole[language]}</p>
                       )}
                     </div>
 
                     <div className="flex items-center gap-1.5 text-xs text-apple-secondary">
                       <MapPin className="w-3.5 h-3.5 shrink-0" />
-                      <span>{exp.location}</span>
+                      <span>{exp.location[language]}</span>
                     </div>
 
                     {/* Quick KPIs */}
@@ -80,10 +82,10 @@ const Experience = () => {
                       <div className="grid grid-cols-2 gap-2 pt-2">
                         {exp.metrics.map((metric) => (
                           <div
-                            key={metric.label}
+                            key={metric.label.pt}
                             className="p-2.5 rounded-xl bg-slate-50 dark:bg-slate-800/60 border border-slate-200 dark:border-slate-800"
                           >
-                            <span className="text-[10px] text-apple-secondary block uppercase tracking-wider">{metric.label}</span>
+                            <span className="text-[10px] text-apple-secondary block uppercase tracking-wider">{metric.label[language]}</span>
                             <span className="text-base font-extrabold text-indigo-600 dark:text-indigo-400">{metric.value}</span>
                           </div>
                         ))}
@@ -92,7 +94,7 @@ const Experience = () => {
 
                     {/* Tech Stack Chips */}
                     <div className="pt-2">
-                      <p className="text-[10px] font-mono font-bold uppercase tracking-wider text-apple-secondary mb-2">Tecnologias Utilizadas:</p>
+                      <p className="text-[10px] font-mono font-bold uppercase tracking-wider text-apple-secondary mb-2">{t.experience.technologiesUsed}</p>
                       <div className="flex flex-wrap gap-1.5">
                         {exp.stack.map((tech) => (
                           <span
@@ -110,17 +112,17 @@ const Experience = () => {
                   <div className="flex flex-col justify-between space-y-6">
                     <div>
                       <div className="flex items-center gap-2 text-xs font-mono font-bold uppercase tracking-wider text-indigo-600 dark:text-indigo-400 mb-3">
-                        <TrendingUp className="w-4 h-4" /> Contexto & Entregas Principais
+                        <TrendingUp className="w-4 h-4" /> {t.experience.contextDeliveries}
                       </div>
                       <p className="text-sm sm:text-base text-apple-secondary leading-relaxed mb-4">
-                        {exp.summary}
+                        {exp.summary[language]}
                       </p>
 
                       <ul className="space-y-3" role="list">
                         {exp.results.map((result) => (
-                          <li key={result} className="flex items-start gap-3 text-xs sm:text-sm text-apple-text leading-relaxed font-medium">
+                          <li key={result.pt} className="flex items-start gap-3 text-xs sm:text-sm text-apple-text leading-relaxed font-medium">
                             <CheckCircle2 className="w-4 h-4 text-indigo-500 shrink-0 mt-0.5" />
-                            <span>{result}</span>
+                            <span>{result[language]}</span>
                           </li>
                         ))}
                       </ul>

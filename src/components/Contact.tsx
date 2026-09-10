@@ -1,11 +1,12 @@
 import { Linkedin, FileText, MessageCircle, MapPin, CheckCircle2 } from 'lucide-react';
-import resumeFile from '../assets/Anderson_Viana_Curriculo_PT-BR.pdf';
 import { motion, useReducedMotion } from 'framer-motion';
 import CopyEmail from './CopyEmail';
-import { EMAIL, LINKEDIN_URL, WHATSAPP_URL, LOCATION, AVAILABILITY } from '../config/links';
+import { EMAIL, LINKEDIN_URL, WHATSAPP_URL, LOCATION } from '../config/links';
+import { useLanguage } from '../context/LanguageContext';
 
 const Contact = () => {
   const shouldReduceMotion = useReducedMotion();
+  const { t, resumePt, resumeEn } = useLanguage();
 
   return (
     <section id="contato" className="py-fluid-section bg-apple-bg scroll-mt-20" aria-labelledby="contact-title">
@@ -19,7 +20,7 @@ const Contact = () => {
               viewport={{ once: true }}
               className="text-xs uppercase font-mono font-bold tracking-widest text-indigo-600 dark:text-indigo-400 mb-2"
             >
-              Contato Profissional & Oportunidades
+              {t.contact.eyebrow}
             </motion.p>
             <motion.h2
               initial={shouldReduceMotion ? { opacity: 1, y: 0 } : { opacity: 0, y: 10 }}
@@ -29,24 +30,25 @@ const Contact = () => {
               id="contact-title"
               className="text-fluid-h2 font-extrabold tracking-tight text-apple-text mb-6 leading-tight"
             >
-              Vamos conversar sobre oportunidades e desafios de engenharia?
+              {t.contact.title}
             </motion.h2>
 
-            <p className="text-apple-secondary text-base sm:text-lg mb-8 leading-relaxed">
-              Estou aberto a oportunidades profissionais como <strong className="text-apple-text font-semibold">Desenvolvedor Júnior ou Estagiário Full-Stack / Front-End</strong>. Tenho facilidade para me adaptar a novas tecnologias, comprometimento com entregas de qualidade e motivação contínua para crescer com o time.
-            </p>
+            <p
+              className="text-apple-secondary text-base sm:text-lg mb-8 leading-relaxed [&_strong]:text-apple-text [&_strong]:font-semibold"
+              dangerouslySetInnerHTML={{ __html: t.contact.intro }}
+            />
 
-            {/* Recruiter Availability Box */}
+            {/* Professional Status Box */}
             <div className="p-6 rounded-2xl apple-card border border-slate-200 dark:border-slate-800 bg-gradient-to-br from-indigo-50/50 to-slate-50 dark:from-indigo-950/30 dark:to-slate-900 mb-8">
               <div className="flex items-center gap-2 mb-3">
                 <span className="w-2.5 h-2.5 rounded-full bg-emerald-500 animate-pulse" />
                 <span className="text-xs font-mono font-bold uppercase tracking-wider text-emerald-600 dark:text-emerald-400">
-                  Status Atual de Contratação
+                  {t.contact.statusLabel}
                 </span>
               </div>
-              <h3 className="text-base sm:text-lg font-bold text-apple-text mb-2">{AVAILABILITY}</h3>
+              <h3 className="text-base sm:text-lg font-bold text-apple-text mb-2">{t.common.availabilityStatus}</h3>
               <p className="text-xs sm:text-sm text-apple-secondary leading-relaxed">
-                Disponível para atuação em modelo remoto (qualquer região do Brasil) ou híbrido/presencial em Fortaleza e região metropolitana.
+                {t.contact.availabilityNote}
               </p>
 
               <div className="mt-4 pt-3 border-t border-slate-200/60 dark:border-slate-800 flex items-center gap-2 text-xs text-apple-secondary">
@@ -58,20 +60,14 @@ const Contact = () => {
             {/* What you can expect */}
             <div className="space-y-2.5">
               <p className="text-xs font-mono font-bold uppercase tracking-wider text-apple-secondary mb-3">
-                O que você pode esperar de mim no time:
+                {t.contact.expectTitle}
               </p>
-              <div className="flex items-center gap-2.5 text-xs sm:text-sm text-apple-text">
-                <CheckCircle2 className="w-4 h-4 text-emerald-500 shrink-0" />
-                <span>Curva de aprendizado rápida em novas stacks e ferramentas</span>
-              </div>
-              <div className="flex items-center gap-2.5 text-xs sm:text-sm text-apple-text">
-                <CheckCircle2 className="w-4 h-4 text-emerald-500 shrink-0" />
-                <span>Mentalidade analítica voltada a poupar tempo e simplificar processos</span>
-              </div>
-              <div className="flex items-center gap-2.5 text-xs sm:text-sm text-apple-text">
-                <CheckCircle2 className="w-4 h-4 text-emerald-500 shrink-0" />
-                <span>Comunicação transparente, código documentado e boa convivência em equipe</span>
-              </div>
+              {t.contact.expectItems.map((item) => (
+                <div key={item} className="flex items-center gap-2.5 text-xs sm:text-sm text-apple-text">
+                  <CheckCircle2 className="w-4 h-4 text-emerald-500 shrink-0" />
+                  <span>{item}</span>
+                </div>
+              ))}
             </div>
           </div>
 
@@ -102,13 +98,13 @@ const Contact = () => {
                   <MessageCircle className="w-6 h-6" />
                 </div>
                 <div>
-                  <p className="text-[11px] font-mono font-bold uppercase tracking-wider text-emerald-600 dark:text-emerald-400">Mensagem Direta</p>
-                  <p className="text-base sm:text-lg font-bold text-apple-text mt-0.5">Conversar no WhatsApp</p>
-                  <p className="text-xs text-apple-secondary">Resposta rápida para recrutadores e gestores</p>
+                  <p className="text-[11px] font-mono font-bold uppercase tracking-wider text-emerald-600 dark:text-emerald-400">{t.contact.whatsappLabel}</p>
+                  <p className="text-base sm:text-lg font-bold text-apple-text mt-0.5">{t.contact.whatsappTitle}</p>
+                  <p className="text-xs text-apple-secondary">{t.contact.whatsappNote}</p>
                 </div>
               </div>
               <span className="text-xs font-bold text-emerald-600 dark:text-emerald-400 hidden sm:inline group-hover:translate-x-1 transition-transform">
-                Enviar Mensagem ➔
+                {t.contact.whatsappCta}
               </span>
             </motion.a>
 
@@ -128,13 +124,13 @@ const Contact = () => {
                   <Linkedin className="w-6 h-6" />
                 </div>
                 <div>
-                  <p className="text-[11px] font-mono font-bold uppercase tracking-wider text-apple-secondary">Rede Profissional</p>
+                  <p className="text-[11px] font-mono font-bold uppercase tracking-wider text-apple-secondary">{t.contact.linkedinLabel}</p>
                   <p className="text-base sm:text-lg font-bold text-apple-text mt-0.5">linkedin.com/in/andersonnviana</p>
-                  <p className="text-xs text-apple-secondary">Conecte-se comigo e acompanhe minhas publicações</p>
+                  <p className="text-xs text-apple-secondary">{t.contact.linkedinNote}</p>
                 </div>
               </div>
               <span className="text-xs font-bold text-indigo-600 dark:text-indigo-400 hidden sm:inline group-hover:translate-x-1 transition-transform">
-                Ver Perfil ➔
+                {t.contact.linkedinCta}
               </span>
             </motion.a>
 
@@ -151,27 +147,38 @@ const Contact = () => {
                   <FileText className="w-6 h-6 text-white" />
                 </div>
                 <div>
-                  <span className="text-[10px] font-mono font-bold uppercase tracking-widest text-indigo-200">Documento Oficial</span>
-                  <h4 className="text-lg sm:text-xl font-bold text-white mt-0.5">Currículo Técnico Completo</h4>
+                  <span className="text-[10px] font-mono font-bold uppercase tracking-widest text-indigo-200">{t.contact.resumeDocLabel}</span>
+                  <h4 className="text-lg sm:text-xl font-bold text-white mt-0.5">{t.contact.resumeTitle}</h4>
                   <p className="text-xs sm:text-sm text-indigo-100 mt-1 leading-relaxed">
-                    Baixe o PDF com o histórico detalhado, formação acadêmica e stack técnica completa.
+                    {t.contact.resumeNote}
                   </p>
                 </div>
               </div>
 
-              <div className="flex items-center justify-between gap-3 pt-2">
+              <div className="flex flex-wrap items-center justify-between gap-3 pt-2">
                 <span className="text-[10px] uppercase font-mono tracking-wider text-indigo-200">
-                  PDF Atualizado • Julho/2026
+                  {t.contact.resumeUpdated}
                 </span>
-                <a
-                  href={resumeFile}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  download="curriculo-anderson-cataldo.pdf"
-                  className="inline-flex items-center justify-center gap-2 px-5 py-2.5 rounded-xl bg-white text-indigo-700 hover:bg-indigo-50 text-xs sm:text-sm font-bold shadow-md transition-all active:scale-95 min-h-[42px]"
-                >
-                  <FileText className="w-4 h-4" /> Baixar Currículo PDF
-                </a>
+                <div className="flex gap-2">
+                  <a
+                    href={resumePt}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    download="curriculo-anderson-cataldo-pt.pdf"
+                    className="inline-flex items-center justify-center gap-2 px-4 py-2.5 rounded-xl bg-white text-indigo-700 hover:bg-indigo-50 text-xs sm:text-sm font-bold shadow-md transition-all active:scale-95 min-h-[42px]"
+                  >
+                    <FileText className="w-4 h-4" /> {t.contact.resumeDownloadPt}
+                  </a>
+                  <a
+                    href={resumeEn}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    download="anderson-cataldo-resume-en.pdf"
+                    className="inline-flex items-center justify-center gap-2 px-4 py-2.5 rounded-xl bg-white/15 text-white border border-white/40 hover:bg-white/25 text-xs sm:text-sm font-bold shadow-md transition-all active:scale-95 min-h-[42px]"
+                  >
+                    <FileText className="w-4 h-4" /> {t.contact.resumeDownloadEn}
+                  </a>
+                </div>
               </div>
             </motion.div>
           </div>

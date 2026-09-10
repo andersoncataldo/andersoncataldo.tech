@@ -1,19 +1,21 @@
 import { GITHUB_URL, LINKEDIN_URL, WHATSAPP_URL } from '../config/links';
+import { useLanguage } from '../context/LanguageContext';
 
 const Footer = () => {
+  const { t } = useLanguage();
   const currentYear = new Date().getFullYear();
-  
+
   return (
     <footer className="py-12 bg-white dark:bg-[#070b14] border-t border-slate-200 dark:border-slate-800 text-apple-secondary text-xs sm:text-sm">
       <div className="section-container">
         <div className="flex flex-col md:flex-row justify-between items-center gap-6">
           <div className="space-y-1 text-center md:text-left">
-            <p className="font-bold text-apple-text">Anderson Cataldo • Full-Stack Developer & RPA</p>
+            <p className="font-bold text-apple-text">{t.footer.tagline}</p>
             <p className="text-apple-secondary text-xs">
-              Construído com React 18, TypeScript, Tailwind CSS v4 & Framer Motion.
+              {t.footer.builtWith}
             </p>
             <p className="text-[11px] text-slate-400">
-              © {currentYear} Anderson Cataldo. Todos os direitos reservados.
+              © {currentYear} Anderson Cataldo. {t.footer.rights}
             </p>
           </div>
 
@@ -22,7 +24,7 @@ const Footer = () => {
               href="#inicio"
               className="text-apple-secondary hover:text-indigo-600 dark:hover:text-indigo-400 transition-colors"
             >
-              Voltar ao topo ↑
+              {t.footer.backToTop}
             </a>
             <a
               href={LINKEDIN_URL}

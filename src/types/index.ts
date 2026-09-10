@@ -1,18 +1,23 @@
+export interface LocalizedText {
+  pt: string;
+  en: string;
+}
+
 export interface Project {
   id: string;
-  title: string;
-  subtitle: string;
+  title: LocalizedText;
+  subtitle: LocalizedText;
   category: 'fullstack' | 'automation' | 'frontend';
-  categoryLabel: string;
-  description: string;
-  challenge: string;
-  role: string;
-  solution: string;
-  architecture?: string[];
-  result: string;
+  categoryLabel: LocalizedText;
+  description: LocalizedText;
+  challenge: LocalizedText;
+  role: LocalizedText;
+  solution: LocalizedText;
+  architecture?: LocalizedText[];
+  result: LocalizedText;
   techStack: string[];
-  impact: string;
-  metrics?: { label: string; value: string }[];
+  impact: LocalizedText;
+  metrics?: { label: LocalizedText; value: string }[];
   icon: string;
   github?: string;
   liveDemo?: string;
@@ -21,34 +26,37 @@ export interface Project {
 }
 
 export interface Experience {
-  title: string;
+  title: LocalizedText;
   company: string;
-  companyRole?: string;
-  period: string;
-  location: string;
-  summary: string;
-  results: string[];
-  metrics?: { label: string; value: string }[];
+  companyRole?: LocalizedText;
+  period: LocalizedText;
+  location: LocalizedText;
+  summary: LocalizedText;
+  results: LocalizedText[];
+  metrics?: { label: LocalizedText; value: string }[];
   stack: string[];
   type: 'work' | 'education';
   current?: boolean;
 }
 
+export type SkillLevel = 'advanced' | 'intermediate' | 'growing';
+
 export interface SkillCategory {
-  title: string;
-  description: string;
+  id: string;
+  title: LocalizedText;
+  description: LocalizedText;
   iconName: string;
   skills: {
     name: string;
-    level: 'Avançado' | 'Intermediário' | 'Em expansão';
-    keyword: string;
+    level: SkillLevel;
+    keyword: LocalizedText;
     highlight?: boolean;
   }[];
 }
 
 export interface MetricItem {
   value: string;
-  label: string;
-  description: string;
-  trend?: string;
+  label: LocalizedText;
+  description: LocalizedText;
+  trend?: LocalizedText;
 }

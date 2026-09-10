@@ -27,8 +27,7 @@ coverage/
 # OS and editor files
 .DS_Store
 Thumbs.db
-.vscode/
-.idea/
+.venv
 
 # Local temporary files
 *.tmp
