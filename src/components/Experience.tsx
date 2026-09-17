@@ -86,7 +86,9 @@ const Experience = () => {
                             className="p-2.5 rounded-xl bg-slate-50 dark:bg-slate-800/60 border border-slate-200 dark:border-slate-800"
                           >
                             <span className="text-[10px] text-apple-secondary block uppercase tracking-wider">{metric.label[language]}</span>
-                            <span className="text-base font-extrabold text-indigo-600 dark:text-indigo-400">{metric.value}</span>
+                            <span className="text-base font-extrabold text-indigo-600 dark:text-indigo-400">
+                              {typeof metric.value === 'string' ? metric.value : metric.value[language]}
+                            </span>
                           </div>
                         ))}
                       </div>

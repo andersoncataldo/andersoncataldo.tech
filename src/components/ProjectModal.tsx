@@ -86,7 +86,9 @@ export const ProjectModal = ({ project, onClose }: ProjectModalProps) => {
             {project.metrics.map((m) => (
               <div key={m.label.pt} className="p-3.5 rounded-xl bg-slate-50 dark:bg-slate-800/60 border border-slate-200 dark:border-slate-800">
                 <p className="text-[11px] text-apple-secondary font-medium uppercase tracking-wider">{m.label[language]}</p>
-                <p className="text-lg sm:text-xl font-bold text-indigo-600 dark:text-indigo-400 mt-0.5">{m.value}</p>
+                <p className="text-lg sm:text-xl font-bold text-indigo-600 dark:text-indigo-400 mt-0.5">
+                  {typeof m.value === 'string' ? m.value : m.value[language]}
+                </p>
               </div>
             ))}
           </div>
