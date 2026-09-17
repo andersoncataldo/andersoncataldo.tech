@@ -62,7 +62,7 @@ export const automationPipeline: PipelineStep[] = [
       pt: 'Disponibilização automatizada de planilhas formatadas e painéis de indicadores para tomada de decisão.',
       en: 'Automated delivery of formatted spreadsheets and KPI dashboards to support decision-making.',
     },
-    technologies: ['Power BI', 'Excel Automation', 'Notificações Automatizadas'],
+    technologies: ['Excel Automation', 'Notificações Automatizadas'],
     metrics: { pt: 'Redução de 3h40 para 18s', en: 'Reduced from 3h40 to 18s' },
     details: [
       { pt: 'Exportação de planilhas com formatação condicional pronta para auditoria', en: 'Exporting audit-ready spreadsheets with conditional formatting' },

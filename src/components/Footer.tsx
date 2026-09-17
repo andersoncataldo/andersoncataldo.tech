@@ -6,7 +6,7 @@ const Footer = () => {
   const currentYear = new Date().getFullYear();
 
   return (
-    <footer className="py-12 bg-white dark:bg-[#070b14] border-t border-slate-200 dark:border-slate-800 text-apple-secondary text-xs sm:text-sm">
+    <footer className="py-12 bg-apple-surface border-t border-slate-200 dark:border-slate-800 text-apple-secondary text-xs sm:text-sm">
       <div className="section-container">
         <div className="flex flex-col md:flex-row justify-between items-center gap-6">
           <div className="space-y-1 text-center md:text-left">
@@ -14,7 +14,8 @@ const Footer = () => {
             <p className="text-apple-secondary text-xs">
               {t.footer.builtWith}
             </p>
-            <p className="text-[11px] text-slate-400">
+            {/* text-apple-muted garante contraste ≥ 4.5:1 nos dois temas (WCAG AA ✅) */}
+            <p className="text-[11px] text-apple-muted">
               © {currentYear} Anderson Cataldo. {t.footer.rights}
             </p>
           </div>

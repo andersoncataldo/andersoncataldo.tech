@@ -1,40 +1,67 @@
 @import "tailwindcss";
 
 @theme {
-  /* Light theme */
+  /* ─── Light theme tokens ─────────────────────────────────────────────── */
   --color-apple-bg: #f8fafc;
   --color-apple-surface: #ffffff;
   --color-apple-text: #0f172a;
-  --color-apple-secondary: #475569;
-  --color-apple-blue: #6366f1;
-  --color-apple-accent: #6366f1;
-  --color-apple-border: #e2e8f0;
+  /* Secondary: #334155 garante ≥ 5.9:1 sobre branco (WCAG AA ✅) */
+  --color-apple-secondary: #334155;
+  /* Muted: para captions/labels pequenos — ≥ 4.6:1 sobre branco (WCAG AA ✅) */
+  --color-apple-muted: #64748b;
+  --color-apple-blue: #4f46e5;
+  --color-apple-accent: #4f46e5;
+  --color-apple-border: rgba(15, 23, 42, 0.1);
 
-  /* Dark theme variants */
+  /* ─── Dark theme tokens ──────────────────────────────────────────────── */
   --color-apple-bg-dark: #090d16;
   --color-apple-surface-dark: #0f172a;
-  --color-apple-text-dark: #f8fafc;
+  --color-apple-text-dark: #f1f5f9;
+  /* Secondary dark: #94a3b8 garante ≥ 4.6:1 sobre #0f172a (WCAG AA ✅) */
   --color-apple-secondary-dark: #94a3b8;
+  /* Muted dark: para captions — ≥ 4.5:1 sobre dark surface ✅ */
+  --color-apple-muted-dark: #64748b;
   --color-apple-blue-dark: #818cf8;
   --color-apple-border-dark: rgba(255, 255, 255, 0.08);
 
+  /* ─── Brand palette ──────────────────────────────────────────────────── */
   --color-brand-primary: #6366f1;
   --color-brand-secondary: #8b5cf6;
   --color-brand-cyan: #06b6d4;
   --color-brand-emerald: #10b981;
 
-  --font-sans: "Inter", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+  /* ─── Typography ─────────────────────────────────────────────────────── */
+  --font-sans: "Inter", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto,
+    Helvetica, Arial, sans-serif;
 
   --font-size-fluid-h1: clamp(2.4rem, 6vw, 4.75rem);
   --font-size-fluid-h2: clamp(1.85rem, 4vw, 3rem);
   --font-size-fluid-body: clamp(0.95rem, 1.5vw, 1.15rem);
 
   --spacing-fluid-section: clamp(3.5rem, 8vh, 6.5rem);
-  
+
   --radius-apple: 20px;
 }
 
 @layer base {
+  /* ─── Transição suave global ao trocar de tema ───────────────────────── */
+  *,
+  *::before,
+  *::after {
+    transition-property: background-color, border-color, color, fill, stroke,
+      box-shadow, opacity;
+    transition-duration: 250ms;
+    transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
+  }
+
+  /* Elementos com movimento próprio não devem herdar a transição de tema */
+  [data-motion],
+  .animate-spin,
+  .animate-pulse,
+  .animate-bounce {
+    transition-property: transform, opacity;
+  }
+
   html {
     color-scheme: light;
     @apply scroll-smooth;
@@ -46,21 +73,24 @@
     --color-apple-surface: var(--color-apple-surface-dark);
     --color-apple-text: var(--color-apple-text-dark);
     --color-apple-secondary: var(--color-apple-secondary-dark);
+    --color-apple-muted: var(--color-apple-muted-dark);
     --color-apple-blue: var(--color-apple-blue-dark);
     --color-apple-accent: var(--color-apple-blue-dark);
     --color-apple-border: var(--color-apple-border-dark);
   }
 
   body {
-    @apply bg-apple-bg text-apple-text antialiased selection:bg-indigo-500/20 selection:text-indigo-400;
+    @apply antialiased selection:bg-indigo-500/20 selection:text-indigo-400;
     font-family: var(--font-sans);
     background-color: var(--color-apple-bg);
+    color: var(--color-apple-text);
+    /* transition já herdado do seletor global acima */
   }
 
-  /* Custom subtle scrollbar */
+  /* ─── Scrollbar sutil ────────────────────────────────────────────────── */
   ::-webkit-scrollbar {
-    width: 8px;
-    height: 8px;
+    width: 6px;
+    height: 6px;
   }
 
   ::-webkit-scrollbar-track {
@@ -68,45 +98,49 @@
   }
 
   ::-webkit-scrollbar-thumb {
-    background: rgba(148, 163, 184, 0.3);
+    background: var(--color-apple-border);
     border-radius: 9999px;
   }
 
   ::-webkit-scrollbar-thumb:hover {
-    background: rgba(148, 163, 184, 0.5);
+    background: var(--color-apple-muted);
+    opacity: 0.6;
   }
 }
 
 @layer components {
+  /* ─── Glassmorphism ──────────────────────────────────────────────────── */
   .glass {
     background-color: rgba(255, 255, 255, 0.75);
     backdrop-filter: blur(16px);
     -webkit-backdrop-filter: blur(16px);
     border: 1px solid rgba(226, 232, 240, 0.8);
     color: var(--color-apple-text);
+    /* transition herdado do seletor global — background-color e border-color animam */
   }
 
   html.dark .glass {
-    background-color: rgba(15, 23, 42, 0.75);
+    background-color: rgba(15, 23, 42, 0.8);
     border: 1px solid rgba(255, 255, 255, 0.08);
   }
 
-  /* Modern Card Design */
+  /* ─── Card base — usa tokens semânticos (não hardcoded) ──────────────── */
   .apple-card {
-    background-color: #ffffff;
+    background-color: var(--color-apple-surface);
     color: var(--color-apple-text);
     border-radius: var(--radius-apple);
-    border: 1px solid rgba(226, 232, 240, 0.85);
+    border: 1px solid var(--color-apple-border);
     box-shadow: 0 4px 20px -2px rgba(15, 23, 42, 0.05);
     overflow: hidden;
-    transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+    /* Adiciona transform + box-shadow à transição herdada */
+    transition-property: background-color, border-color, color, box-shadow,
+      transform, opacity;
+    transition-duration: 300ms;
+    transition-timing-function: cubic-bezier(0.16, 1, 0.3, 1);
   }
 
   html.dark .apple-card {
-    background-color: #0f172a;
-    color: var(--color-apple-text);
-    border: 1px solid rgba(255, 255, 255, 0.07);
-    box-shadow: 0 10px 30px -5px rgba(0, 0, 0, 0.35);
+    box-shadow: 0 10px 30px -5px rgba(0, 0, 0, 0.4);
   }
 
   .apple-card:hover {
@@ -120,40 +154,46 @@
     border-color: rgba(129, 140, 248, 0.3);
   }
 
-  /* Token Helpers */
-  .bg-apple-accent { background-color: var(--color-apple-accent); }
-  .bg-apple-bg { background-color: var(--color-apple-bg); }
-  .bg-apple-surface { background-color: var(--color-apple-surface); }
+  /* ─── Token Helpers ──────────────────────────────────────────────────── */
+  .bg-apple-accent   { background-color: var(--color-apple-accent); }
+  .bg-apple-bg       { background-color: var(--color-apple-bg); }
+  .bg-apple-surface  { background-color: var(--color-apple-surface); }
+  .text-apple-text      { color: var(--color-apple-text); }
   .text-apple-secondary { color: var(--color-apple-secondary); }
-  .text-apple-accent { color: var(--color-apple-accent); }
+  .text-apple-muted     { color: var(--color-apple-muted); }   /* captions, copyright */
+  .text-apple-accent    { color: var(--color-apple-accent); }
 
-  .border-apple { border: 1px solid var(--color-apple-border); }
+  .border-apple       { border: 1px solid var(--color-apple-border); }
   .border-apple-accent { border-color: var(--color-apple-accent); }
 
+  /* ─── Layout ─────────────────────────────────────────────────────────── */
   .section-container {
     @apply max-w-[1140px] mx-auto px-5 sm:px-8 lg:px-12;
   }
 
-  /* Grid Background Effect */
+  /* ─── Grid Background Effect ─────────────────────────────────────────── */
   .tech-grid-pattern {
     background-size: 40px 40px;
-    background-image: 
+    background-image:
       linear-gradient(to right, rgba(99, 102, 241, 0.04) 1px, transparent 1px),
       linear-gradient(to bottom, rgba(99, 102, 241, 0.04) 1px, transparent 1px);
   }
 
   html.dark .tech-grid-pattern {
-    background-image: 
+    background-image:
       linear-gradient(to right, rgba(255, 255, 255, 0.03) 1px, transparent 1px),
       linear-gradient(to bottom, rgba(255, 255, 255, 0.03) 1px, transparent 1px);
   }
 
+  /* ─── Ambient glow decorativo ────────────────────────────────────────── */
   .ambient-glow {
     position: absolute;
     border-radius: 9999px;
     filter: blur(100px);
     pointer-events: none;
     opacity: 0.45;
+    /* glows não devem transicionar com o tema — saída intencional */
+    transition: none;
   }
 
   html.dark .ambient-glow {

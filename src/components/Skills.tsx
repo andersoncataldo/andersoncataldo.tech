@@ -147,7 +147,7 @@ const Skills = () => {
                         className={`p-3 rounded-xl border transition-all ${
                           skill.highlight
                             ? 'bg-indigo-50/50 dark:bg-indigo-950/20 border-indigo-200/80 dark:border-indigo-800/40'
-                            : 'bg-slate-50/60 dark:bg-slate-850 border-slate-200 dark:border-slate-800'
+                            : 'bg-slate-50/60 dark:bg-slate-900 border-slate-200 dark:border-slate-800'
                         }`}
                       >
                         <div className="flex items-center justify-between gap-2">

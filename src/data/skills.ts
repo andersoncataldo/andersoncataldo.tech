@@ -65,12 +65,12 @@ export const skillCategories: SkillCategory[] = [
       { name: 'Extração e Parsing XML / NFe', level: 'advanced', keyword: { pt: 'Documentos Fiscais, Validação de Schemas', en: 'Tax Documents, Schema Validation' }, highlight: true },
       { name: 'Pandas & Análise de Dados', level: 'intermediate', keyword: { pt: 'ETL, Limpeza de Dados, Exportação de Relatórios', en: 'ETL, Data Cleaning, Report Exporting' }, highlight: true },
       { name: 'Selenium & Web Scraping', level: 'intermediate', keyword: { pt: 'Navegação Headless, Extração Dinâmica de Portais', en: 'Headless Browsing, Dynamic Portal Extraction' } },
-      { name: 'Power BI & Dashboards', level: 'intermediate', keyword: { pt: 'Visualização de Métricas Operacionais e KPIs', en: 'Operational Metrics & KPI Visualization' } },
+      { name: 'Dashboards', level: 'intermediate', keyword: { pt: 'Visualização de Métricas Operacionais e KPIs', en: 'Operational Metrics & KPI Visualization' } },
     ],
   },
   {
     id: 'engineering',
-    title: { pt: 'Engenharia de Software & Práticas', en: 'Software Engineering & Practices' },
+    title: { pt: 'Desenvolvimento de Software & Práticas', en: 'Software Development & Practices' },
     description: {
       pt: 'Mentalidade orientada à qualidade de entrega, manutenibilidade de código e colaboração ágil.',
       en: 'A mindset oriented toward delivery quality, code maintainability and agile collaboration.',

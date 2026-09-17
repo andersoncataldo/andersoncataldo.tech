@@ -127,7 +127,7 @@ const Projects = () => {
                 </p>
 
                 {/* Challenge & Result Summary Pill */}
-                <div className="p-3.5 rounded-xl bg-slate-50 dark:bg-slate-850 border border-slate-200 dark:border-slate-800 space-y-2 mb-6">
+                <div className="p-3.5 rounded-xl bg-slate-50 dark:bg-slate-900 border border-slate-200 dark:border-slate-800 space-y-2 mb-6">
                   <div>
                     <span className="text-[10px] font-mono font-bold uppercase tracking-wider text-indigo-600 dark:text-indigo-400 block">
                       {t.projects.keyResult}

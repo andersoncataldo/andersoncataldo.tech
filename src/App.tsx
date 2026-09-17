@@ -72,7 +72,7 @@ const AppShell = () => {
       >
         {t.meta.skipToContent}
       </a>
-      <div className={`min-h-screen overflow-x-hidden bg-apple-bg text-apple-text selection:bg-indigo-500/10 transition-colors transition-[padding-left] duration-300 ${collapsed ? 'lg:pl-20' : 'lg:pl-64'}`}>
+      <div className={`min-h-screen overflow-x-hidden bg-apple-bg text-apple-text selection:bg-indigo-500/10 transition-[padding-left] duration-300 ${collapsed ? 'lg:pl-20' : 'lg:pl-64'}`}>
         <Sidebar theme={theme} onThemeToggle={handleThemeToggle} collapsed={collapsed} setCollapsed={setCollapsed} />
         <main id="main-content" className="relative">
           <Hero />

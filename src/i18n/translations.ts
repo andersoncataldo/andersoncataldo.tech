@@ -21,7 +21,7 @@ const pt = {
       mobileDrawerLabel: 'Menu de navegação móvel',
     },
     sidebar: {
-      roleTag: 'Dev Jr • Full-Stack',
+      roleTag: 'Desenvolvedor Full-Stack',
       lightMode: 'Modo Claro',
       darkMode: 'Modo Escuro',
       toggleTheme: 'Alternar modo claro e escuro',
@@ -31,7 +31,7 @@ const pt = {
     },
     hero: {
       ariaLabel: 'Apresentação Profissional',
-      statusBadge: 'Engenharia de Software Ativa',
+      statusBadge: 'Desenvolvimento de Software Ativa',
       statusBadgeSuffix: 'Full-Stack & Automação RPA',
       headlinePrefix: 'Desenvolvedor Full-Stack com',
       headlineHighlight: 'impacto real em React, APIs e RPA.',
@@ -67,7 +67,7 @@ const pt = {
     about: {
       ariaLabel: 'about-title',
       eyebrow: 'Trajetória & Filosofia',
-      title: 'Engenharia de software que resolve problemas reais de negócios.',
+      title: 'Desenvolvimento de software que resolve problemas reais de negócios.',
       degreeLabel: 'Graduação',
       degreeValue: 'Ciência da Computação',
       degreeSchool: 'Unifor • 6º Semestre',
@@ -77,7 +77,7 @@ const pt = {
       paragraphs: [
         'Como estudante de <strong>Ciência da Computação na Unifor (6º semestre)</strong>, combino fundamentos sólidos de computação — como estruturas de dados, algoritmos e bancos de dados relacionais — com experiência direta no desenvolvimento de soluções em produção.',
         'Minha vivência prática inclui o desenvolvimento de <strong>sistemas web corporativos com Next.js, React e Supabase</strong> na Distribuidora Mais Saúde e a criação de <strong>robôs de automação (RPA) em Python</strong> no Grupo 3Corações, que processam mais de 15.000 XMLs fiscais mensalmente e reduziram mais de 200 horas de trabalho manual.',
-        'Como <strong>Desenvolvedor de Software Júnior</strong>, meu foco contínuo é projetar arquiteturas resilientes, escrever código sustentável e implementar automações que eliminem gargalos de negócios — sempre aberto a novas conexões profissionais e desafios de engenharia.',
+        'Como <strong>Desenvolvedor de Software</strong>, meu foco contínuo é projetar arquiteturas resilientes, escrever código sustentável e implementar automações que eliminem gargalos de negócios — sempre aberto a novas conexões profissionais e desafios de engenharia.',
       ],
       pillars: [
         {
@@ -253,7 +253,7 @@ const en = {
       mobileDrawerLabel: 'Mobile navigation menu',
     },
     sidebar: {
-      roleTag: 'Jr Dev • Full-Stack',
+      roleTag: 'Full-Stack Developer',
       lightMode: 'Light Mode',
       darkMode: 'Dark Mode',
       toggleTheme: 'Toggle light and dark mode',
@@ -309,7 +309,7 @@ const en = {
       paragraphs: [
         'As a <strong>Computer Science student at Unifor (6th semester)</strong>, I combine solid computing fundamentals — data structures, algorithms and relational databases — with hands-on experience shipping production software.',
         'My practical background includes building <strong>corporate web systems with Next.js, React and Supabase</strong> at Distribuidora Mais Saúde, and developing <strong>Python automation robots (RPA)</strong> at Grupo 3Corações, processing more than 15,000 tax XML files per month and saving over 200 hours of manual work.',
-        'As a <strong>Junior Software Developer</strong>, my ongoing focus is designing resilient architectures, writing maintainable code and building automations that remove real business bottlenecks — always open to new professional connections and engineering challenges.',
+        'As a <strong>Software Developer</strong>, my ongoing focus is designing resilient architectures, writing maintainable code and building automations that remove real business bottlenecks — always open to new professional connections and engineering challenges.',
       ],
       pillars: [
         {

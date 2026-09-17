@@ -12,7 +12,7 @@ export const experiences: Experience[] = [
       en: 'Full-Stack Developer & Systems Support',
     },
     period: { pt: 'Jun/2026 - Presente', en: 'Jun/2026 - Present' },
-    location: { pt: 'Fortaleza, CE (Presencial / Híbrido)', en: 'Fortaleza, CE (On-site / Hybrid)' },
+    location: { pt: 'Fortaleza, CE - Presencial', en: 'Fortaleza, CE - On-site' },
     summary: {
       pt: 'Atuação na concepção e evolução de aplicações web internas para otimização de rotinas de atendimento, estoque e relatórios operacionais em tempo real.',
       en: 'Designing and evolving internal web applications to streamline customer service workflows, inventory control and real-time operational reporting.',
@@ -59,7 +59,7 @@ export const experiences: Experience[] = [
       en: 'RPA Automation Developer & Process Analyst',
     },
     period: { pt: 'Jan/2025 - Abr/2026', en: 'Jan/2025 - Apr/2026' },
-    location: { pt: 'Eusébio / Fortaleza, CE', en: 'Eusébio / Fortaleza, CE' },
+    location: { pt: 'Eusébio / Fortaleza, CE - Presencial', en: 'Eusébio / Fortaleza, CE - On-site' },
     summary: {
       pt: 'Desenvolvimento e sustentação de robôs de automação de processos (RPA) em Python voltados para o setor fiscal de uma das maiores empresas de alimentos do Brasil.',
       en: 'Developed and maintained Python RPA robots for the tax department of one of the largest food companies in Brazil.',
@@ -91,7 +91,7 @@ export const experiences: Experience[] = [
       { label: { pt: 'Horas manuais poupadas', en: 'Manual hours saved' }, value: '200h+' },
       { label: { pt: 'Precisão na extração', en: 'Extraction accuracy' }, value: '99.8%' },
     ],
-    stack: ['Python', 'RPA', 'Pandas', 'XML/NFe', 'Excel Avançado', 'Power BI / Dashboards', 'Scrum'],
+    stack: ['Python', 'RPA', 'Pandas', 'XML/NFe', 'Excel Avançado', 'Dashboards', 'Scrum'],
     type: 'work',
     current: false,
   },
@@ -105,8 +105,8 @@ export const experiences: Experience[] = [
     period: { pt: 'Jan/2024 - Dez/2027 (Previsão)', en: 'Jan/2024 - Dec/2027 (Expected)' },
     location: { pt: 'Fortaleza, CE', en: 'Fortaleza, CE' },
     summary: {
-      pt: 'Formação acadêmica sólida com foco em Fundamentos da Computação, Engenharia de Software, Estruturas de Dados, Bancos de Dados Relacionais e Desenvolvimento de Sistemas.',
-      en: 'Solid academic background focused on Computing Fundamentals, Software Engineering, Data Structures, Relational Databases and Systems Development.',
+      pt: 'Formação acadêmica sólida com foco em Fundamentos da Computação, Desenvolvimento de Software, Estruturas de Dados, Bancos de Dados Relacionais e Desenvolvimento de Sistemas.',
+      en: 'Solid academic background focused on Computing Fundamentals, Software Development, Data Structures, Relational Databases and Systems Development.',
     },
     results: [
       {
@@ -123,10 +123,10 @@ export const experiences: Experience[] = [
       },
     ],
     metrics: [
-      { label: { pt: 'Progresso do curso', en: 'Program progress' }, value: '6º Semestre' },
-      { label: { pt: 'Foco técnico', en: 'Technical focus' }, value: 'Engenharia de Software' },
+      { label: { pt: 'Progresso do curso', en: 'Program progress' }, value: { pt: '6º Semestre', en: '6th Semester' } },
+      { label: { pt: 'Foco técnico', en: 'Technical focus' }, value: { pt: 'Engenharia de Software', en: 'Software Engineering' } },
     ],
-    stack: ['Estruturas de Dados', 'Algoritmos', 'Java / Spring', 'PostgreSQL', 'TypeScript', 'Clean Code'],
+    stack: ['Estruturas de Dados', 'Algoritmos', 'Java / Spring', 'PostgreSQL', 'TypeScript', 'Clean Code', 'Metodologias Ágeis', 'Padrões de Projeto', 'POO'],
     type: 'education',
     current: true,
   },

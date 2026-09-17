@@ -17,7 +17,7 @@ export interface Project {
   result: LocalizedText;
   techStack: string[];
   impact: LocalizedText;
-  metrics?: { label: LocalizedText; value: string }[];
+  metrics?: { label: LocalizedText; value: string | LocalizedText }[];
   icon: string;
   github?: string;
   liveDemo?: string;
@@ -33,7 +33,7 @@ export interface Experience {
   location: LocalizedText;
   summary: LocalizedText;
   results: LocalizedText[];
-  metrics?: { label: LocalizedText; value: string }[];
+  metrics?: { label: LocalizedText; value: string | LocalizedText }[];
   stack: string[];
   type: 'work' | 'education';
   current?: boolean;
