@@ -26,8 +26,13 @@
     <meta name="description" content="Portfólio de Anderson Cataldo. Desenvolvedor Full-Stack (React, TypeScript, Next.js, Python, Node.js) focado em código limpo, produtos digitais e automação corporativa de alto impacto." />
     <meta property="og:title" content="Anderson Cataldo | Desenvolvedor Full-Stack & RPA" />
     <meta property="og:description" content="Portfólio de Anderson Cataldo com projetos em React, TypeScript, Next.js, automações RPA e métricas reais de produção." />
+    <meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1" />
     <meta property="og:image" content="https://andersoncataldo.tech/og-image.png" />
+    <meta property="og:image:width" content="1200" />
+    <meta property="og:image:height" content="630" />
+    <meta property="og:image:alt" content="Anderson Cataldo - Full-Stack Developer & Automação RPA" />
     <meta property="og:type" content="website" />
+    <meta property="og:locale" content="pt_BR" />
     <meta property="og:url" content="https://andersoncataldo.tech" />
     <meta name="twitter:card" content="summary_large_image" />
     <meta name="twitter:title" content="Anderson Cataldo | Full-Stack Developer & RPA" />
@@ -36,13 +41,44 @@
     <script type="application/ld+json">
       {
         "@context": "https://schema.org",
-        "@type": "Person",
-        "name": "Anderson Cataldo",
-        "jobTitle": "Full-Stack Developer & RPA",
-        "url": "https://andersoncataldo.tech",
-        "sameAs": [
-          "https://github.com/andersoncataldo",
-          "https://linkedin.com/in/andersonnviana"
+        "@graph": [
+          {
+            "@type": "Person",
+            "@id": "https://andersoncataldo.tech/#person",
+            "name": "Anderson Cataldo",
+            "jobTitle": "Desenvolvedor Full-Stack & Especialista RPA",
+            "url": "https://andersoncataldo.tech",
+            "sameAs": [
+              "https://github.com/andersoncataldo",
+              "https://linkedin.com/in/andersonnviana"
+            ],
+            "alumniOf": {
+              "@type": "EducationalOrganization",
+              "name": "Universidade de Fortaleza (Unifor)"
+            },
+            "knowsAbout": [
+              "React",
+              "TypeScript",
+              "Next.js",
+              "Node.js",
+              "Python",
+              "RPA",
+              "PostgreSQL",
+              "Supabase",
+              "Tailwind CSS"
+            ]
+          },
+          {
+            "@type": "WebSite",
+            "@id": "https://andersoncataldo.tech/#website",
+            "url": "https://andersoncataldo.tech",
+            "name": "Anderson Cataldo Tech",
+            "description": "Portfólio de Engenharia de Software e Automação de Processos Corporativos",
+            "publisher": {
+              "@id": "https://andersoncataldo.tech/#person"
+            },
+            "inLanguage": ["pt-BR", "en"]
+          }
         ]
       }
     </script>

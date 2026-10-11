@@ -63,11 +63,14 @@ export const DevConsole = () => {
         </div>
 
         {/* Tab Controls */}
-        <div className="flex items-center gap-1 bg-slate-900/80 p-0.5 rounded-lg border border-slate-800">
+        <div className="flex items-center gap-1 bg-slate-900/80 p-0.5 rounded-lg border border-slate-800" role="tablist" aria-label="Terminal JSON categories">
           <button
             type="button"
+            role="tab"
+            aria-selected={activeTab === 'profile'}
+            aria-controls="console-panel"
             onClick={() => setActiveTab('profile')}
-            className={`px-2.5 py-1 rounded-md text-[11px] transition-all ${
+            className={`px-2.5 py-1 rounded-md text-[11px] transition-all focus:outline-none focus:ring-1 focus:ring-indigo-400 ${
               activeTab === 'profile'
                 ? 'bg-indigo-600 text-white font-bold shadow-sm'
                 : 'text-slate-400 hover:text-slate-200'
@@ -77,8 +80,11 @@ export const DevConsole = () => {
           </button>
           <button
             type="button"
+            role="tab"
+            aria-selected={activeTab === 'stack'}
+            aria-controls="console-panel"
             onClick={() => setActiveTab('stack')}
-            className={`px-2.5 py-1 rounded-md text-[11px] transition-all ${
+            className={`px-2.5 py-1 rounded-md text-[11px] transition-all focus:outline-none focus:ring-1 focus:ring-indigo-400 ${
               activeTab === 'stack'
                 ? 'bg-indigo-600 text-white font-bold shadow-sm'
                 : 'text-slate-400 hover:text-slate-200'
@@ -88,8 +94,11 @@ export const DevConsole = () => {
           </button>
           <button
             type="button"
+            role="tab"
+            aria-selected={activeTab === 'metrics'}
+            aria-controls="console-panel"
             onClick={() => setActiveTab('metrics')}
-            className={`px-2.5 py-1 rounded-md text-[11px] transition-all ${
+            className={`px-2.5 py-1 rounded-md text-[11px] transition-all focus:outline-none focus:ring-1 focus:ring-indigo-400 ${
               activeTab === 'metrics'
                 ? 'bg-indigo-600 text-white font-bold shadow-sm'
                 : 'text-slate-400 hover:text-slate-200'
@@ -103,16 +112,19 @@ export const DevConsole = () => {
         <button
           type="button"
           onClick={handleCopy}
-          className="text-slate-400 hover:text-slate-200 p-1.5 rounded-lg hover:bg-slate-800 transition"
+          className="text-slate-400 hover:text-slate-200 p-1.5 rounded-lg hover:bg-slate-800 transition focus:outline-none focus:ring-1 focus:ring-indigo-400"
           aria-label={t.devConsole.copyAria}
           title={t.devConsole.copyTitle}
         >
           {copied ? <Check className="w-4 h-4 text-emerald-400" /> : <Copy className="w-4 h-4" />}
+          <span className="sr-only" role="status" aria-live="polite">
+            {copied ? 'Copiado para a área de transferência' : ''}
+          </span>
         </button>
       </div>
 
       {/* Console Body */}
-      <div className="p-4 md:p-5 text-slate-300 overflow-x-auto max-h-[320px] scrollbar-thin">
+      <div id="console-panel" role="tabpanel" aria-label={activeTab} className="p-4 md:p-5 text-slate-300 overflow-x-auto max-h-[320px] scrollbar-thin">
         <div className="flex items-center gap-2 text-slate-500 mb-3 text-xs">
           <span className="text-emerald-400 font-bold">$</span>
           <span>{t.devConsole.catCommand}/{activeTab}.json</span>

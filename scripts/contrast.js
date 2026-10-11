@@ -34,7 +34,7 @@ const tokens = {
   darkBg: '#000000',
   darkText: '#ffffff',
   darkSecondary: '#9aa0b4',
-  accentDark: '#5b21a9'
+  accentDark: '#818cf8'
 };
 
 const tests = [
@@ -45,7 +45,7 @@ const tests = [
 
   { a: 'darkText', b: 'darkBg', purpose: 'body text on background (dark)' },
   { a: 'accentDark', b: 'darkBg', purpose: 'accent on dark background' },
-  { a: 'darkText', b: 'accentDark', purpose: 'white text on accent (dark sidebar)' },
+  { a: 'lightText', b: 'accentDark', purpose: 'dark text on accent (dark sidebar)' },
   { a: 'darkSecondary', b: 'darkBg', purpose: 'secondary on dark bg' },
   { a: 'lightSecondary', b: 'lightBg', purpose: 'secondary on light bg' },
 ];

@@ -53,7 +53,7 @@ A aplicação vai além de uma landing page estática tradicional: ela funciona 
 
 - **Paleta de Alta Tecnologia:** Superfícies em ardósia/vidro escuro (`#090e1a` / `#0f172a`), detalhes luminosos em Índigo/Violeta elétrico e destaques funcionais em Ciano e Esmeralda.
 - **Tema Claro / Escuro:** Persistência automática via `localStorage` e sincronização com preferências do sistema operacional (`prefers-color-scheme`).
-- **Acessibilidade (WCAG 2.1 AA):** Navegação por teclado, leitor de tela (`aria-*`), atalho de pular para o conteúdo (`skip-to-content`) e respeito a `prefers-reduced-motion`.
+- **Acessibilidade Estrita (WCAG 2.1 AA):** Navegação 100% por teclado, semântica canônica WAI-ARIA (`role="tablist"`, `role="tab"`, `aria-selected`, `aria-controls`), Focus Trap com restauração de foco em modais (`ProjectModal.tsx`), atalho de pular para o conteúdo (`skip-to-content`) com alto contraste (8.5:1) e respeito integral a `prefers-reduced-motion`.
 
 ### 6. Contato de Alta Conversão
 
@@ -62,6 +62,16 @@ A aplicação vai além de uma landing page estática tradicional: ela funciona 
 - Link direto para conversa no WhatsApp com mensagem pré-formatada.
 - Download direto do Currículo Técnico em PDF atualizado.
 
+### 7. Internacionalização Completa (i18n)
+
+- Suporte nativo bilíngue (**Português do Brasil** e **Inglês**) implementado via `LanguageContext`.
+- Dicionário de traduções centralizado e tipado em `src/i18n/translations.ts` cobrindo todas as seções e dados da interface.
+
+### 8. CI/CD Automatizado & Infraestrutura Resiliente na Vercel
+
+- **Integração Contínua (GitHub Actions):** Pipeline automatizado em `.github/workflows/ci.yml` executando validação de linter (`npm run lint`) e build com checagem de tipos estrita (`tsc -b && vite build`) a cada push ou PR para a branch `main`.
+- **Hospedagem & Segurança (`vercel.json`):** Headers de segurança de nível bancário (`Content-Security-Policy`, `HSTS`, `X-Content-Type-Options: nosniff`, `X-Frame-Options: DENY`), política de cache imutável de 1 ano para assets estáticos com hash (`/assets/*`) e controle de rotas SPA.
+
 ---
 
 ## 🛠️ Stack Tecnológica
@@ -69,10 +79,11 @@ A aplicação vai além de uma landing page estática tradicional: ela funciona 
 | Camada                      | Tecnologias                                                                         |
 | :-------------------------- | :---------------------------------------------------------------------------------- |
 | **Front-End & UI**          | React 18, TypeScript 5, Vite 6, Tailwind CSS v4, Framer Motion, Lucide React        |
+| **Internacionalização**     | Context API (`LanguageContext`), TypeScript i18n Dictionaries (PT-BR / EN)           |
 | **Back-End & APIs**         | Node.js (Express), Python (Django & Scripts), Java (Spring Boot)                    |
 | **Bancos de Dados & Cloud** | PostgreSQL, Supabase, Neon Serverless, Vercel, Git & GitHub                         |
 | **Automação & RPA**         | Python 3.11+, Pandas, lxml, BeautifulSoup, Task Scheduler / Cron                    |
-| **Práticas & Engenharia**   | Clean Code, RESTful APIs, Git Flow, Metodologias Ágeis (Scrum/Kanban), WCAG AA, SEO |
+| **DevOps & Qualidade**      | GitHub Actions (CI/CD), ESLint 9, OpenSpec, Vercel Security Headers, WCAG AA, SEO    |
 
 ---
 
@@ -90,10 +101,24 @@ A aplicação vai além de uma landing page estática tradicional: ela funciona 
 
 ```text
 andersoncataldo.tech/
+├── .agents/                      # Ecossistema de 10 Agentes Especializados de IA (Local / .gitignore)
+│   ├── _shared/                  # Contratos canônicos, contexto, checklists e handoffs
+│   ├── orchestrator.md           # Orquestrador geral e ponto de entrada
+│   └── ...                       # Personas especialistas (frontend, backend, security, etc.)
+├── .gemini/                      # Configurações e comandos do Gemini CLI (/agent-*, /opsx:*)
+├── .github/                      # Workflows de CI/CD automatizados (GitHub Actions)
+│   └── workflows/ci.yml          # Pipeline de validação contínua (lint + build)
+├── openspec/                     # Especificações vivas e governança Spec-Driven Development
+│   ├── specs/                    # 8 Especificações canônicas de baseline do portfólio
+│   ├── changes/                  # Histórico estruturado de mudanças (proposal, design, tasks)
+│   └── project.md                # Diretrizes de projeto, stack e métricas imutáveis
 ├── public/
 │   ├── favicon.svg               # Ícone da aplicação
+│   ├── og-image.png              # Banner de compartilhamento em redes sociais
 │   ├── robots.txt                # Diretrizes de indexação para robôs de busca
 │   └── sitemap.xml               # Mapa do site indexável
+├── scripts/
+│   └── contrast.js               # Validador automatizado de contraste WCAG 2.1 AA
 ├── src/
 │   ├── assets/                   # Imagens, previews SVG de projetos e CV em PDF
 │   ├── components/               # Componentes de interface modulares
@@ -113,23 +138,42 @@ andersoncataldo.tech/
 │   │   └── Skills.tsx            # Busca e catálogo de habilidades técnicas
 │   ├── config/
 │   │   └── links.ts              # URLs oficiais, e-mail, WhatsApp e meta-dados
+│   ├── context/
+│   │   └── LanguageContext.tsx   # Gerenciamento de idioma com suporte a PT-BR e EN
 │   ├── data/                     # Camada de dados centralizada e tipada
 │   │   ├── automation.ts         # Etapas e métricas do pipeline de automação
 │   │   ├── experience.ts         # Histórico corporativo e acadêmico detalhado
 │   │   ├── metrics.ts            # Indicadores quantitativos de impacto
 │   │   ├── projects.ts           # Casos de sucesso, desafios e arquitetura
 │   │   └── skills.ts             # Competências, níveis e palavras-chave ATS
+│   ├── i18n/
+│   │   └── translations.ts       # Dicionário de traduções bilíngue estritamente tipado
 │   ├── styles/
 │   │   └── index.css             # Tokens do Tailwind v4, temas e utilitários globais
 │   ├── types/
 │   │   └── index.ts              # Contratos e tipos estritos TypeScript
 │   ├── App.tsx                   # Layout principal, controle de tema e Lazy Loading
 │   └── main.tsx                  # Ponto de entrada da aplicação React
+├── AGENTS.md                     # Ponto de entrada universal para ferramentas de IA
+├── CHANGELOG.md                  # Histórico de versões (SemVer e Keep a Changelog)
+├── GEMINI.md                     # Governança raiz do Gemini CLI e regra de ouro
 ├── index.html                    # HTML5 semântico com JSON-LD Schema e SEO
 ├── package.json                  # Dependências e scripts npm
 ├── tsconfig.json                 # Configurações do compilador TypeScript
+├── vercel.json                   # Headers de segurança, cache imutável e SPA rewrites
 └── vite.config.ts                # Configuração do Vite e plugins
 ```
+
+---
+
+## 🤖 Ecossistema de Agentes de IA & OpenSpec
+
+O repositório adota **Spec-Driven Development** governado pelo **OpenSpec** e conta com 10 personas de IA especializadas em [`.agents/`](./.agents/README.md) mantidas no ambiente local de desenvolvimento (configuradas no `.gitignore` para manter o repositório público enxuto):
+> *"Toda mudança não trivial passa pelo orquestrador e pelo fluxo OpenSpec."*
+
+- **Orquestrador Central:** [`/agent-orchestrator`](./.agents/orchestrator.md) — triagem, divisão de tarefas e abertura de changes.
+- **Especialistas:** Front-End, Back-End, Database, API (OpenAPI 3.1), Security (OWASP), Prompt Engineer, Documentation e Deploy.
+- **Governança:** Consulte [`GEMINI.md`](./GEMINI.md) e [`openspec/project.md`](./openspec/project.md).
 
 ---
 

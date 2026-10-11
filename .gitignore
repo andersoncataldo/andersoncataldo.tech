@@ -35,6 +35,17 @@ Thumbs.db
 *.bak
 
 # Prompt and local generated files
-prompt.txt
+task.txt
 repomix-output.xml
 AVALIACAO_QUALIDADE_PERFORMANCE.md
+auditoria-portfolio.html
+auditoria_geral_portfolio.md
+
+# AI Agents & Local Assistant Environment
+.agents/
+.gemini/
+.github/
+openspec/
+CHANGELOG.md
+AGENTS.md
+GEMINI.md

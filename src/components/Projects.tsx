@@ -68,8 +68,9 @@ const Projects = () => {
             <button
               key={filter.id}
               type="button"
+              aria-pressed={selectedTab === filter.id}
               onClick={() => setSelectedTab(filter.id)}
-              className={`px-4 py-2 rounded-xl text-xs sm:text-sm font-semibold transition ${
+              className={`px-4 py-2 rounded-xl text-xs sm:text-sm font-semibold transition focus:outline-none focus:ring-2 focus:ring-indigo-500 ${
                 selectedTab === filter.id
                   ? 'bg-indigo-600 text-white shadow-md shadow-indigo-600/20'
                   : 'bg-white dark:bg-slate-900 text-apple-secondary hover:text-apple-text border border-slate-200 dark:border-slate-800'

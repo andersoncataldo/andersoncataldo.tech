@@ -1,4 +1,4 @@
-import { useEffect } from 'react';
+import { useEffect, useRef } from 'react';
 import { X, Github, ExternalLink, CheckCircle2, Layers, Cpu, BarChart3 } from 'lucide-react';
 import { Project } from '../types';
 import { useLanguage } from '../context/LanguageContext';
@@ -10,22 +10,51 @@ interface ProjectModalProps {
 
 export const ProjectModal = ({ project, onClose }: ProjectModalProps) => {
   const { t, language } = useLanguage();
+  const modalContainerRef = useRef<HTMLDivElement>(null);
+  const previouslyFocusedElementRef = useRef<HTMLElement | null>(null);
 
   useEffect(() => {
+    if (!project) return;
+
+    previouslyFocusedElementRef.current = document.activeElement as HTMLElement | null;
+
+    const modalNode = modalContainerRef.current;
+    const focusableSelector = 'a[href], button, textarea, input, select, [tabindex]:not([tabindex="-1"])';
+    const focusable = modalNode ? Array.from(modalNode.querySelectorAll<HTMLElement>(focusableSelector)) : [];
+    const firstFocusable = focusable[0];
+    const lastFocusable = focusable[focusable.length - 1];
+
+    // Focus the first element (close button)
+    firstFocusable?.focus();
+
     const handleKeyDown = (e: KeyboardEvent) => {
       if (e.key === 'Escape') {
         onClose();
+        return;
+      }
+
+      if (e.key === 'Tab' && focusable.length > 0) {
+        if (e.shiftKey) {
+          if (document.activeElement === firstFocusable) {
+            e.preventDefault();
+            lastFocusable?.focus();
+          }
+        } else {
+          if (document.activeElement === lastFocusable) {
+            e.preventDefault();
+            firstFocusable?.focus();
+          }
+        }
       }
     };
 
-    if (project) {
-      document.body.style.overflow = 'hidden';
-      window.addEventListener('keydown', handleKeyDown);
-    }
+    document.body.style.overflow = 'hidden';
+    window.addEventListener('keydown', handleKeyDown);
 
     return () => {
       document.body.style.overflow = '';
       window.removeEventListener('keydown', handleKeyDown);
+      previouslyFocusedElementRef.current?.focus();
     };
   }, [project, onClose]);
 
@@ -40,6 +69,7 @@ export const ProjectModal = ({ project, onClose }: ProjectModalProps) => {
       aria-labelledby="project-modal-title"
     >
       <div
+        ref={modalContainerRef}
         className="relative w-full max-w-3xl max-h-[90vh] overflow-y-auto bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 rounded-3xl shadow-2xl p-6 sm:p-8"
         onClick={(e) => e.stopPropagation()}
       >

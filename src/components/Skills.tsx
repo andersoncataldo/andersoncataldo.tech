@@ -103,8 +103,9 @@ const Skills = () => {
             <button
               key={filter.id}
               type="button"
+              aria-pressed={selectedCategory === filter.id}
               onClick={() => setSelectedCategory(filter.id)}
-              className={`px-3.5 py-1.5 rounded-xl text-xs font-semibold transition ${
+              className={`px-3.5 py-1.5 rounded-xl text-xs font-semibold transition focus:outline-none focus:ring-2 focus:ring-indigo-500 ${
                 selectedCategory === filter.id
                   ? 'bg-indigo-600 text-white shadow-md shadow-indigo-600/20'
                   : 'bg-white dark:bg-slate-900 text-apple-secondary hover:text-apple-text border border-slate-200 dark:border-slate-800'

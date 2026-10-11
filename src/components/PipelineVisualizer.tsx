@@ -11,15 +11,18 @@ export const PipelineVisualizer = () => {
   return (
     <div className="w-full space-y-8">
       {/* Pipeline Navigation Bar */}
-      <div className="grid grid-cols-2 md:grid-cols-4 gap-3">
+      <div className="grid grid-cols-2 md:grid-cols-4 gap-3" role="tablist" aria-label="Pipeline automation steps">
         {automationPipeline.map((step, index) => {
           const isActive = index === activeStepIndex;
           return (
             <button
               key={step.stepNumber}
               type="button"
+              role="tab"
+              aria-selected={isActive}
+              aria-controls="pipeline-detail-panel"
               onClick={() => setActiveStepIndex(index)}
-              className={`text-left p-4 rounded-2xl border transition-all relative ${
+              className={`text-left p-4 rounded-2xl border transition-all relative focus:outline-none focus:ring-2 focus:ring-indigo-500 ${
                 isActive
                   ? 'bg-indigo-600/10 border-indigo-500 shadow-md shadow-indigo-500/10 dark:bg-indigo-950/40'
                   : 'bg-white dark:bg-slate-900/60 border-slate-200 dark:border-slate-800 hover:border-indigo-400/40'
@@ -32,7 +35,7 @@ export const PipelineVisualizer = () => {
                   {t.automation.step} {step.stepNumber}
                 </span>
                 {isActive && (
-                  <span className="w-2 h-2 rounded-full bg-emerald-500 animate-ping" />
+                  <span className="w-2 h-2 rounded-full bg-emerald-500 animate-ping motion-reduce:animate-none" aria-hidden="true" />
                 )}
               </div>
               <p className="font-bold text-sm text-apple-text truncate">{step.title[language].split('&')[0]}</p>
@@ -43,7 +46,7 @@ export const PipelineVisualizer = () => {
       </div>
 
       {/* Interactive Flow Container */}
-      <div className="apple-card p-6 md:p-8 bg-gradient-to-br from-white to-slate-50 dark:from-slate-900 dark:to-[#0b1120] border border-slate-200 dark:border-slate-800">
+      <div id="pipeline-detail-panel" role="tabpanel" aria-label={currentStep.title[language]} className="apple-card p-6 md:p-8 bg-gradient-to-br from-white to-slate-50 dark:from-slate-900 dark:to-[#0b1120] border border-slate-200 dark:border-slate-800">
         <div className="flex flex-col lg:flex-row gap-8 items-start justify-between">
           <div className="flex-1 space-y-4">
             <div className="flex items-center gap-3">
