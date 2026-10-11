@@ -12,7 +12,7 @@ const Hero = () => {
   return (
     <section
       id="inicio"
-      className="relative min-h-[95vh] flex items-center justify-center overflow-hidden bg-apple-bg pt-16 pb-12 sm:pt-20 sm:pb-16 tech-grid-pattern scroll-mt-20"
+      className="relative min-h-[92vh] flex items-center justify-center overflow-hidden bg-apple-bg pt-16 pb-12 sm:pt-20 sm:pb-16 tech-grid-pattern scroll-mt-20"
       aria-label={t.hero.ariaLabel}
     >
       {/* Subtle Ambient Glows */}
@@ -28,10 +28,10 @@ const Hero = () => {
             transition={shouldReduceMotion ? { duration: 0 } : { duration: 0.6 }}
             className="mb-6 inline-flex flex-wrap items-center justify-center gap-2"
           >
-            <span className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 text-xs font-semibold shadow-sm">
-              <span className="w-2 h-2 rounded-full bg-emerald-500 animate-pulse" />
-              <span className="text-apple-text">{t.hero.statusBadge}</span>
-              <span className="text-apple-secondary font-normal">• {t.hero.statusBadgeSuffix}</span>
+            <span className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 text-xs font-semibold shadow-sm text-slate-800 dark:text-slate-100">
+              <span className="w-2 h-2 rounded-full bg-emerald-500 animate-pulse shrink-0" />
+              <span>{t.hero.statusBadge}</span>
+              <span className="text-slate-500 dark:text-slate-400 font-normal">• {t.hero.statusBadgeSuffix}</span>
             </span>
           </motion.div>
 
@@ -40,10 +40,10 @@ const Hero = () => {
             initial={shouldReduceMotion ? { opacity: 1, y: 0 } : { opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={shouldReduceMotion ? { duration: 0 } : { duration: 0.8, delay: 0.1 }}
-            className="text-fluid-h1 font-extrabold tracking-tight mb-6 text-apple-text leading-[1.05]"
+            className="text-fluid-h1 font-extrabold tracking-tight mb-6 text-slate-900 dark:text-white leading-[1.08]"
           >
             {t.hero.headlinePrefix} <br />
-            <span className="text-transparent bg-clip-text bg-gradient-to-r from-indigo-500 via-purple-500 to-cyan-500">
+            <span className="text-transparent bg-clip-text bg-gradient-to-r from-indigo-600 via-purple-600 to-cyan-500 dark:from-indigo-400 dark:via-purple-400 dark:to-cyan-400">
               {t.hero.headlineHighlight}
             </span>
           </motion.h1>
@@ -53,10 +53,10 @@ const Hero = () => {
             initial={shouldReduceMotion ? { opacity: 1, y: 0 } : { opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={shouldReduceMotion ? { duration: 0 } : { duration: 0.8, delay: 0.2 }}
-            className="text-base sm:text-lg md:text-xl text-apple-secondary leading-relaxed font-normal max-w-3xl mx-auto mb-8"
+            className="text-base sm:text-lg md:text-xl text-slate-600 dark:text-slate-300 leading-relaxed font-normal max-w-3xl mx-auto mb-8"
           >
-            {t.hero.introLead} <strong className="text-apple-text font-semibold">Anderson Cataldo</strong>{t.hero.introMiddle}{' '}
-            <strong className="text-apple-text font-semibold">{t.hero.introHours}</strong>.
+            {t.hero.introLead} <strong className="text-slate-900 dark:text-white font-semibold">Anderson Cataldo</strong>{t.hero.introMiddle}{' '}
+            <strong className="text-slate-900 dark:text-white font-semibold">{t.hero.introHours}</strong>.
           </motion.p>
 
           {/* Quick CTAs */}
@@ -77,9 +77,9 @@ const Hero = () => {
               target="_blank"
               rel="noopener noreferrer"
               download={`curriculo-anderson-cataldo-${language}.pdf`}
-              className="inline-flex items-center gap-2 rounded-xl border border-slate-300 dark:border-slate-700 bg-white dark:bg-slate-900 px-5 py-3.5 text-sm font-bold text-apple-text hover:border-indigo-500 transition-all hover:-translate-y-0.5 min-h-[48px]"
+              className="inline-flex items-center gap-2 rounded-xl border border-slate-300 dark:border-slate-700 bg-white dark:bg-slate-900 px-5 py-3.5 text-sm font-bold text-slate-800 dark:text-white hover:border-indigo-500 shadow-sm transition-all hover:-translate-y-0.5 min-h-[48px]"
             >
-              <FileText className="w-4 h-4 text-indigo-500" /> {t.hero.ctaResume}
+              <FileText className="w-4 h-4 text-indigo-600 dark:text-indigo-400" /> {t.hero.ctaResume}
             </a>
             <a
               href={WHATSAPP_URL}
@@ -102,7 +102,7 @@ const Hero = () => {
             {keyMetrics.map((metric) => (
               <div
                 key={metric.label.pt}
-                className="apple-card p-4 sm:p-5 bg-white/80 dark:bg-slate-900/80 backdrop-blur-md flex flex-col justify-between"
+                className="p-4 sm:p-5 rounded-2xl bg-white dark:bg-slate-900/80 border border-slate-200 dark:border-slate-800 shadow-sm dark:shadow-md backdrop-blur-md flex flex-col justify-between transition-all hover:border-indigo-500/40 hover:-translate-y-0.5"
               >
                 <div>
                   {metric.trend && (
@@ -110,14 +110,14 @@ const Hero = () => {
                       {metric.trend[language]}
                     </span>
                   )}
-                  <p className="text-2xl sm:text-3xl font-black text-apple-text mt-1 mb-1 tracking-tight">
+                  <p className="text-2xl sm:text-3xl font-black text-slate-900 dark:text-white mt-1 mb-1 tracking-tight">
                     {metric.value}
                   </p>
-                  <p className="text-xs sm:text-sm font-bold text-apple-text leading-snug">
+                  <p className="text-xs sm:text-sm font-bold text-slate-800 dark:text-slate-200 leading-snug">
                     {metric.label[language]}
                   </p>
                 </div>
-                <p className="text-[11px] text-apple-secondary mt-2 leading-relaxed line-clamp-2">
+                <p className="text-[11px] text-slate-500 dark:text-slate-400 mt-2 leading-relaxed line-clamp-2">
                   {metric.description[language]}
                 </p>
               </div>

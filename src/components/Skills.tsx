@@ -14,9 +14,9 @@ const categoryIcons: Record<string, typeof Layout> = {
 };
 
 const levelStyles: Record<SkillLevel, string> = {
-  advanced: 'bg-emerald-500/15 text-emerald-600 dark:text-emerald-400 border border-emerald-500/30',
-  intermediate: 'bg-indigo-500/15 text-indigo-600 dark:text-indigo-400 border border-indigo-500/30',
-  growing: 'bg-slate-200 dark:bg-slate-800 text-slate-600 dark:text-slate-400',
+  advanced: 'bg-emerald-500/15 text-emerald-700 dark:text-emerald-400 border border-emerald-500/30',
+  intermediate: 'bg-indigo-500/15 text-indigo-700 dark:text-indigo-400 border border-indigo-500/30',
+  growing: 'bg-slate-100 dark:bg-slate-800 text-slate-700 dark:text-slate-300 border border-slate-200 dark:border-slate-700',
 };
 
 const Skills = () => {
@@ -128,7 +128,7 @@ const Skills = () => {
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true }}
                 transition={shouldReduceMotion ? { duration: 0 } : { duration: 0.5, delay: index * 0.08 }}
-                className="apple-card p-6 sm:p-7 border border-slate-200 dark:border-slate-800 flex flex-col justify-between"
+                className="p-6 sm:p-7 rounded-2xl bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 shadow-sm dark:shadow-md flex flex-col justify-between transition-all hover:border-indigo-500/40"
               >
                 <div>
                   <div className="flex items-center gap-3 mb-4">

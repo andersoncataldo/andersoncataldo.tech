@@ -45,7 +45,7 @@ const Experience = () => {
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true }}
                 transition={shouldReduceMotion ? { duration: 0 } : { duration: 0.5, delay: index * 0.1 }}
-                className="apple-card p-6 sm:p-8 md:p-10 border border-slate-200 dark:border-slate-800 relative"
+                className="p-6 sm:p-8 md:p-10 rounded-2xl bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 shadow-sm dark:shadow-md relative transition-all"
               >
                 <div className="flex flex-col lg:grid lg:grid-cols-[300px_1fr] gap-8">
                   {/* Left Column: Role, Company, Period */}

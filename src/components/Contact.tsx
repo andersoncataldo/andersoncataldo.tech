@@ -39,19 +39,19 @@ const Contact = () => {
             />
 
             {/* Professional Status Box */}
-            <div className="p-6 rounded-2xl apple-card border border-slate-200 dark:border-slate-800 bg-gradient-to-br from-indigo-50/50 to-slate-50 dark:from-indigo-950/30 dark:to-slate-900 mb-8">
+            <div className="p-6 rounded-2xl bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 shadow-sm mb-8">
               <div className="flex items-center gap-2 mb-3">
                 <span className="w-2.5 h-2.5 rounded-full bg-emerald-500 animate-pulse" />
                 <span className="text-xs font-mono font-bold uppercase tracking-wider text-emerald-600 dark:text-emerald-400">
                   {t.contact.statusLabel}
                 </span>
               </div>
-              <h3 className="text-base sm:text-lg font-bold text-apple-text mb-2">{t.common.availabilityStatus}</h3>
-              <p className="text-xs sm:text-sm text-apple-secondary leading-relaxed">
+              <h3 className="text-base sm:text-lg font-bold text-slate-900 dark:text-white mb-2">{t.common.availabilityStatus}</h3>
+              <p className="text-xs sm:text-sm text-slate-600 dark:text-slate-300 leading-relaxed">
                 {t.contact.availabilityNote}
               </p>
 
-              <div className="mt-4 pt-3 border-t border-slate-200/60 dark:border-slate-800 flex items-center gap-2 text-xs text-apple-secondary">
+              <div className="mt-4 pt-3 border-t border-slate-200/60 dark:border-slate-800 flex items-center gap-2 text-xs text-slate-500 dark:text-slate-400">
                 <MapPin className="w-4 h-4 text-indigo-500 shrink-0" />
                 <span>{LOCATION}</span>
               </div>
@@ -59,11 +59,11 @@ const Contact = () => {
 
             {/* What you can expect */}
             <div className="space-y-2.5">
-              <p className="text-xs font-mono font-bold uppercase tracking-wider text-apple-secondary mb-3">
+              <p className="text-xs font-mono font-bold uppercase tracking-wider text-slate-500 dark:text-slate-400 mb-3">
                 {t.contact.expectTitle}
               </p>
               {t.contact.expectItems.map((item) => (
-                <div key={item} className="flex items-center gap-2.5 text-xs sm:text-sm text-apple-text">
+                <div key={item} className="flex items-center gap-2.5 text-xs sm:text-sm text-slate-700 dark:text-slate-200">
                   <CheckCircle2 className="w-4 h-4 text-emerald-500 shrink-0" />
                   <span>{item}</span>
                 </div>
@@ -91,7 +91,7 @@ const Contact = () => {
               whileInView={{ opacity: 1, x: 0 }}
               viewport={{ once: true }}
               transition={shouldReduceMotion ? { duration: 0 } : { delay: 0.1 }}
-              className="apple-card p-6 border border-emerald-500/20 bg-emerald-50/30 dark:bg-emerald-950/20 hover:border-emerald-500/50 flex items-center justify-between group transition"
+              className="p-6 rounded-2xl bg-white dark:bg-slate-900 border border-emerald-500/30 hover:border-emerald-500/60 shadow-sm flex items-center justify-between group transition"
             >
               <div className="flex items-center gap-4">
                 <div className="p-3.5 rounded-2xl bg-emerald-500 text-white shadow-md shadow-emerald-500/20 group-hover:scale-105 transition-transform shrink-0">
@@ -99,8 +99,8 @@ const Contact = () => {
                 </div>
                 <div>
                   <p className="text-[11px] font-mono font-bold uppercase tracking-wider text-emerald-600 dark:text-emerald-400">{t.contact.whatsappLabel}</p>
-                  <p className="text-base sm:text-lg font-bold text-apple-text mt-0.5">{t.contact.whatsappTitle}</p>
-                  <p className="text-xs text-apple-secondary">{t.contact.whatsappNote}</p>
+                  <p className="text-base sm:text-lg font-bold text-slate-900 dark:text-white mt-0.5">{t.contact.whatsappTitle}</p>
+                  <p className="text-xs text-slate-500 dark:text-slate-400">{t.contact.whatsappNote}</p>
                 </div>
               </div>
               <span className="text-xs font-bold text-emerald-600 dark:text-emerald-400 hidden sm:inline group-hover:translate-x-1 transition-transform">
@@ -117,7 +117,7 @@ const Contact = () => {
               whileInView={{ opacity: 1, x: 0 }}
               viewport={{ once: true }}
               transition={shouldReduceMotion ? { duration: 0 } : { delay: 0.2 }}
-              className="apple-card p-6 border border-slate-200 dark:border-slate-800 flex items-center justify-between group transition"
+              className="p-6 rounded-2xl bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 shadow-sm flex items-center justify-between group transition hover:border-indigo-500/40"
             >
               <div className="flex items-center gap-4">
                 <div className="p-3.5 rounded-2xl bg-indigo-50 dark:bg-indigo-950/60 text-indigo-600 dark:text-indigo-400 border border-indigo-200 dark:border-indigo-800/60 group-hover:scale-105 transition-transform shrink-0">

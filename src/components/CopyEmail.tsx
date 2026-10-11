@@ -40,7 +40,7 @@ const CopyEmail = ({ email }: { email: string }) => {
     <button
       type="button"
       onClick={handleCopy}
-      className="flex items-center gap-4 p-6 apple-card border border-slate-200 dark:border-slate-800 hover:border-indigo-500/50 transition-all group w-full text-left"
+      className="flex items-center gap-4 p-6 rounded-2xl bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 shadow-sm hover:border-indigo-500/50 transition-all group w-full text-left"
       aria-label={`${t.contact.emailAria}: ${email}`}
     >
       <div className="p-3.5 rounded-2xl bg-indigo-50 dark:bg-indigo-950/60 text-indigo-600 dark:text-indigo-400 border border-indigo-200 dark:border-indigo-800/60 group-hover:scale-105 transition-transform shrink-0" aria-hidden="true">

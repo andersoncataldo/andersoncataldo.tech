@@ -1,22 +1,25 @@
 @import "tailwindcss";
 
+/* ─── Class-based dark mode selector para Tailwind CSS v4 ─────────────────── */
+@custom-variant dark (&:where(.dark, .dark *));
+
 @theme {
   /* ─── Light theme tokens ─────────────────────────────────────────────── */
   --color-apple-bg: #f8fafc;
   --color-apple-surface: #ffffff;
   --color-apple-text: #0f172a;
   /* Secondary: #334155 garante ≥ 5.9:1 sobre branco (WCAG AA ✅) */
-  --color-apple-secondary: #334155;
+  --color-apple-secondary: #475569;
   /* Muted: para captions/labels pequenos — ≥ 4.6:1 sobre branco (WCAG AA ✅) */
   --color-apple-muted: #64748b;
   --color-apple-blue: #4f46e5;
   --color-apple-accent: #4f46e5;
-  --color-apple-border: rgba(15, 23, 42, 0.1);
+  --color-apple-border: #e2e8f0;
 
   /* ─── Dark theme tokens ──────────────────────────────────────────────── */
   --color-apple-bg-dark: #090d16;
   --color-apple-surface-dark: #0f172a;
-  --color-apple-text-dark: #f1f5f9;
+  --color-apple-text-dark: #f8fafc;
   /* Secondary dark: #94a3b8 garante ≥ 4.6:1 sobre #0f172a (WCAG AA ✅) */
   --color-apple-secondary-dark: #94a3b8;
   /* Muted dark: para captions — ≥ 4.5:1 sobre dark surface ✅ */
@@ -34,9 +37,9 @@
   --font-sans: "Inter", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto,
     Helvetica, Arial, sans-serif;
 
-  --font-size-fluid-h1: clamp(2.4rem, 6vw, 4.75rem);
-  --font-size-fluid-h2: clamp(1.85rem, 4vw, 3rem);
-  --font-size-fluid-body: clamp(0.95rem, 1.5vw, 1.15rem);
+  --font-size-fluid-h1: clamp(2.2rem, 5.5vw, 4.5rem);
+  --font-size-fluid-h2: clamp(1.75rem, 3.8vw, 2.75rem);
+  --font-size-fluid-body: clamp(0.95rem, 1.4vw, 1.15rem);
 
   --spacing-fluid-section: clamp(3.5rem, 8vh, 6.5rem);
 
@@ -178,9 +181,9 @@
   .border-apple       { border: 1px solid var(--color-apple-border); }
   .border-apple-accent { border-color: var(--color-apple-accent); }
 
-  /* ─── Layout ─────────────────────────────────────────────────────────── */
+  /* ─── Layout Responsivo para Múltiplas Telas (Mobile a TV 4K) ────────── */
   .section-container {
-    @apply max-w-[1140px] mx-auto px-5 sm:px-8 lg:px-12;
+    @apply max-w-[1180px] 2xl:max-w-[1320px] mx-auto px-4 sm:px-6 lg:px-8 xl:px-10;
   }
 
   /* ─── Grid Background Effect ─────────────────────────────────────────── */

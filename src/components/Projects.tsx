@@ -90,11 +90,11 @@ const Projects = () => {
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
               transition={shouldReduceMotion ? { duration: 0 } : { duration: 0.5, delay: index * 0.1 }}
-              className="apple-card group flex flex-col border border-slate-200 dark:border-slate-800"
+              className="rounded-2xl bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 shadow-sm dark:shadow-md group flex flex-col overflow-hidden transition-all hover:border-indigo-500/40"
             >
               {/* Preview Image */}
               {project.images?.[0] && (
-                <div className="relative aspect-16/10 overflow-hidden bg-slate-950 border-b border-slate-200 dark:border-slate-800">
+                <div className="relative aspect-16/10 overflow-hidden bg-slate-100 dark:bg-slate-950 border-b border-slate-200 dark:border-slate-800">
                   <img
                     src={project.images[0]}
                     alt={`${t.projects.previewAlt} ${project.title[language]}`}
@@ -102,11 +102,11 @@ const Projects = () => {
                     loading="lazy"
                   />
                   <div className="absolute top-4 left-4 flex gap-2">
-                    <span className="px-2.5 py-1 rounded-full text-[11px] font-mono font-bold bg-[#090e1a]/85 backdrop-blur-md text-indigo-400 border border-indigo-500/30">
+                    <span className="px-2.5 py-1 rounded-full text-[11px] font-mono font-bold bg-white/90 dark:bg-[#090e1a]/85 backdrop-blur-md text-indigo-700 dark:text-indigo-400 border border-indigo-500/30">
                       {project.categoryLabel[language]}
                     </span>
                     {project.featured && (
-                      <span className="px-2.5 py-1 rounded-full text-[11px] font-mono font-bold bg-emerald-950/85 backdrop-blur-md text-emerald-400 border border-emerald-500/30">
+                      <span className="px-2.5 py-1 rounded-full text-[11px] font-mono font-bold bg-emerald-500/10 dark:bg-emerald-950/85 backdrop-blur-md text-emerald-700 dark:text-emerald-400 border border-emerald-500/30">
                         {t.projects.featured}
                       </span>
                     )}

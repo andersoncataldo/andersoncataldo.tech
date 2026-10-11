@@ -24,29 +24,45 @@ export const PipelineVisualizer = () => {
               onClick={() => setActiveStepIndex(index)}
               className={`text-left p-4 rounded-2xl border transition-all relative focus:outline-none focus:ring-2 focus:ring-indigo-500 ${
                 isActive
-                  ? 'bg-indigo-600/10 border-indigo-500 shadow-md shadow-indigo-500/10 dark:bg-indigo-950/40'
+                  ? 'bg-indigo-50/80 dark:bg-indigo-950/40 border-indigo-500 shadow-md shadow-indigo-500/10'
                   : 'bg-white dark:bg-slate-900/60 border-slate-200 dark:border-slate-800 hover:border-indigo-400/40'
               }`}
             >
               <div className="flex items-center justify-between mb-2">
-                <span className={`text-xs font-mono font-bold px-2 py-0.5 rounded ${
-                  isActive ? 'bg-indigo-600 text-white' : 'bg-slate-100 dark:bg-slate-800 text-slate-500 dark:text-slate-400'
-                }`}>
+                <span
+                  className={`text-xs font-mono font-bold px-2 py-0.5 rounded ${
+                    isActive
+                      ? 'bg-indigo-600 text-white'
+                      : 'bg-slate-100 dark:bg-slate-800 text-slate-600 dark:text-slate-400'
+                  }`}
+                >
                   {t.automation.step} {step.stepNumber}
                 </span>
                 {isActive && (
-                  <span className="w-2 h-2 rounded-full bg-emerald-500 animate-ping motion-reduce:animate-none" aria-hidden="true" />
+                  <span
+                    className="w-2 h-2 rounded-full bg-emerald-500 animate-ping motion-reduce:animate-none"
+                    aria-hidden="true"
+                  />
                 )}
               </div>
-              <p className="font-bold text-sm text-apple-text truncate">{step.title[language].split('&')[0]}</p>
-              <p className="text-[11px] text-apple-secondary truncate mt-1">{step.metrics[language]}</p>
+              <p className="font-bold text-sm text-slate-900 dark:text-white truncate">
+                {step.title[language].split('&')[0]}
+              </p>
+              <p className="text-[11px] text-slate-500 dark:text-slate-400 truncate mt-1">
+                {step.metrics[language]}
+              </p>
             </button>
           );
         })}
       </div>
 
       {/* Interactive Flow Container */}
-      <div id="pipeline-detail-panel" role="tabpanel" aria-label={currentStep.title[language]} className="apple-card p-6 md:p-8 bg-gradient-to-br from-white to-slate-50 dark:from-slate-900 dark:to-[#0b1120] border border-slate-200 dark:border-slate-800">
+      <div
+        id="pipeline-detail-panel"
+        role="tabpanel"
+        aria-label={currentStep.title[language]}
+        className="p-6 md:p-8 rounded-3xl bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 shadow-sm dark:shadow-xl transition-all"
+      >
         <div className="flex flex-col lg:flex-row gap-8 items-start justify-between">
           <div className="flex-1 space-y-4">
             <div className="flex items-center gap-3">
@@ -57,20 +73,24 @@ export const PipelineVisualizer = () => {
                 <span className="text-xs font-bold uppercase tracking-widest text-indigo-600 dark:text-indigo-400">
                   {t.automation.stepOf.replace('{n}', currentStep.stepNumber)}
                 </span>
-                <h3 className="text-xl md:text-2xl font-bold text-apple-text">{currentStep.title[language]}</h3>
+                <h3 className="text-xl md:text-2xl font-bold text-slate-900 dark:text-white">
+                  {currentStep.title[language]}
+                </h3>
               </div>
             </div>
 
-            <p className="text-apple-secondary text-base leading-relaxed">
+            <p className="text-slate-600 dark:text-slate-300 text-base leading-relaxed">
               {currentStep.description[language]}
             </p>
 
             {/* Step Sub-points */}
             <div className="space-y-2 pt-2">
-              <p className="text-xs font-bold uppercase tracking-wider text-apple-secondary">{t.automation.technicalValidations}</p>
+              <p className="text-xs font-bold uppercase tracking-wider text-slate-500 dark:text-slate-400">
+                {t.automation.technicalValidations}
+              </p>
               <ul className="space-y-2">
                 {currentStep.details.map((detail) => (
-                  <li key={detail.pt} className="flex items-start gap-2.5 text-sm text-apple-text">
+                  <li key={detail.pt} className="flex items-start gap-2.5 text-sm text-slate-700 dark:text-slate-200">
                     <CheckCircle2 className="w-4 h-4 text-emerald-500 shrink-0 mt-0.5" />
                     <span>{detail[language]}</span>
                   </li>
@@ -80,11 +100,13 @@ export const PipelineVisualizer = () => {
 
             {/* Stack Tags */}
             <div className="pt-4 flex flex-wrap items-center gap-2">
-              <span className="text-xs text-apple-secondary font-semibold mr-1">{t.automation.technologies}</span>
+              <span className="text-xs text-slate-500 dark:text-slate-400 font-semibold mr-1">
+                {t.automation.technologies}
+              </span>
               {currentStep.technologies.map((tech) => (
                 <span
                   key={tech}
-                  className="px-2.5 py-1 rounded-lg text-xs font-mono font-medium bg-slate-100 dark:bg-slate-800 text-apple-text border border-slate-200 dark:border-slate-700"
+                  className="px-2.5 py-1 rounded-lg text-xs font-mono font-medium bg-slate-100 dark:bg-slate-800 text-slate-700 dark:text-slate-300 border border-slate-200 dark:border-slate-700"
                 >
                   {tech}
                 </span>
@@ -93,10 +115,12 @@ export const PipelineVisualizer = () => {
           </div>
 
           {/* Metric Pill Card */}
-          <div className="w-full lg:w-72 p-6 rounded-2xl bg-indigo-600 text-white shadow-xl shadow-indigo-600/20 flex flex-col justify-between shrink-0">
+          <div className="w-full lg:w-72 p-6 rounded-2xl bg-gradient-to-br from-indigo-600 to-indigo-700 text-white shadow-xl shadow-indigo-600/25 flex flex-col justify-between shrink-0">
             <div>
               <div className="flex items-center justify-between mb-4">
-                <span className="text-xs uppercase tracking-widest text-indigo-200 font-bold">{t.automation.performanceMetric}</span>
+                <span className="text-xs uppercase tracking-widest text-indigo-100 font-bold">
+                  {t.automation.performanceMetric}
+                </span>
                 <Zap className="w-4 h-4 text-amber-300" />
               </div>
               <p className="text-3xl font-extrabold mb-2 tracking-tight">{currentStep.metrics[language]}</p>
@@ -120,15 +144,17 @@ export const PipelineVisualizer = () => {
         {rpaHighlights.map((item, idx) => (
           <div
             key={item.title.pt}
-            className="apple-card p-6 border border-slate-200 dark:border-slate-800 flex flex-col justify-between"
+            className="p-6 rounded-2xl bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 shadow-sm dark:shadow-md flex flex-col justify-between"
           >
             <div>
               <div className="flex items-center gap-2 mb-3 text-indigo-600 dark:text-indigo-400">
                 {idx === 0 ? <Zap className="w-5 h-5" /> : idx === 1 ? <Bot className="w-5 h-5" /> : <ShieldCheck className="w-5 h-5" />}
-                <span className="text-xs font-bold uppercase tracking-wider text-apple-secondary">{item.subtitle[language]}</span>
+                <span className="text-xs font-bold uppercase tracking-wider text-slate-500 dark:text-slate-400">
+                  {item.subtitle[language]}
+                </span>
               </div>
-              <h4 className="text-lg font-bold text-apple-text mb-2">{item.title[language]}</h4>
-              <p className="text-sm text-apple-secondary leading-relaxed">{item.description[language]}</p>
+              <h4 className="text-lg font-bold text-slate-900 dark:text-white mb-2">{item.title[language]}</h4>
+              <p className="text-sm text-slate-600 dark:text-slate-300 leading-relaxed">{item.description[language]}</p>
             </div>
             <div className="mt-4 pt-3 border-t border-slate-100 dark:border-slate-800 flex items-center gap-1 text-xs font-semibold text-indigo-600 dark:text-indigo-400">
               <span>{t.automation.provenImpact}</span>
