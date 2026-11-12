@@ -134,6 +134,18 @@ export const CommandPalette = ({ isOpen, onClose, onThemeToggle, theme }: Comman
 
     // Quick Actions
     {
+      id: 'action-ask-ai',
+      category: language === 'pt' ? 'Inteligência Artificial' : 'Artificial Intelligence',
+      title: language === 'pt' ? 'Pergunte ao Anderson AI' : 'Ask Anderson AI',
+      subtitle: language === 'pt' ? 'Assistente conversacional RAG com streaming' : 'Conversational RAG assistant with streaming',
+      icon: <Sparkles className="w-4 h-4 text-amber-500" />,
+      action: () => {
+        onClose();
+        setTimeout(() => window.dispatchEvent(new CustomEvent('open-anderson-ai')), 150);
+      },
+      badge: 'AI',
+    },
+    {
       id: 'action-copy-email',
       category: language === 'pt' ? 'Ações Rápidas' : 'Quick Actions',
       title: language === 'pt' ? 'Copiar E-mail' : 'Copy Email Address',

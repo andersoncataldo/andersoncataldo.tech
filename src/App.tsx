@@ -4,6 +4,8 @@ import Hero from './components/Hero';
 import ErrorBoundary from './components/ErrorBoundary';
 import ScrollProgress from './components/ScrollProgress';
 import CommandPalette from './components/CommandPalette';
+import AiAssistantWidget from './components/AiAssistantWidget';
+import ReloadPrompt from './components/ReloadPrompt';
 import { LanguageProvider, useLanguage } from './context/LanguageContext';
 
 // Lazy loading components for better performance
@@ -89,6 +91,8 @@ const AppShell = () => {
         onThemeToggle={handleThemeToggle}
         theme={theme}
       />
+      <AiAssistantWidget />
+      <ReloadPrompt />
       <a
         href="#main-content"
         className="sr-only focus:not-sr-only focus:fixed focus:top-4 focus:left-4 focus:z-50 focus:px-5 focus:py-2.5 focus:bg-indigo-600 focus:text-white focus:font-bold focus:shadow-xl focus:rounded-full focus:ring-2 focus:ring-white focus:outline-none"

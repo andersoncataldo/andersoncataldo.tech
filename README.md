@@ -56,6 +56,22 @@ A aplicação foi desenvolvida no padrão de craft de produtos digitais Silicon 
 - 7 categorias técnicas completas: IA & Agentes, Automação & RPA, Back-End, Front-End, Bancos de Dados & Storage, Qualidade/DevOps e Métodos.
 - Filtro por busca reativa e tags de proficiência (`Avançado`, `Intermediário`, `Em expansão`).
 
+### 8. Assistente Conversacional "Pergunte ao Anderson AI" (`AiAssistantWidget.tsx` & `/api/chat`)
+- Chat conversacional inteligente integrado com streaming Server-Sent Events (SSE) via **Google Gemini Flash** no Vercel Edge Runtime.
+- **RAG Estático & Guardrails:** Grounding factual estrito na trajetória de Anderson, com defesas contra *prompt injection* e alucinações.
+- **Resiliência Local:** Motor de contingência determinístico que responde com fatos verificados instantaneamente mesmo offline ou sem chave de API.
+- Quick Prompts com 1 clique para recrutadores (FTP_SYNC -99%, squad de 9 agentes, certificação Huawei, etc.).
+
+### 9. Progressive Web App (PWA) & Capacidade Offline (`vite-plugin-pwa`)
+- Instalação nativa como Web App no Android, iOS e Desktop.
+- Service Worker com estratégias de cache Workbox (*Stale-While-Revalidate* e *Cache-First*) para carregamento instantâneo sem conexão.
+- Prompt discreto de atualização com notificação não intrusiva (`ReloadPrompt.tsx`).
+
+### 10. Geração Dinâmica de Cartões OpenGraph (`api/og.tsx` Edge Runtime)
+- Endpoint Edge de geração de imagens sociais 1200x630 via `@vercel/og`.
+- Renderização em tempo real de métricas corporativas (*15 Robôs, -99.1% FTP_SYNC, 9 Agentes Maker-Checker, Huawei HCIA-Storage*).
+- Suporte a internacionalização dinâmica (`?lang=pt` e `?lang=en`) e cache CDN global.
+
 ---
 
 ## 🛠️ Stack Tecnológica
