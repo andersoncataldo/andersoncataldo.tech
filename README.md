@@ -1,12 +1,12 @@
 # Portfólio de Anderson Cataldo
 
 [![Vite](https://img.shields.io/badge/Vite-6.4-646CFF?logo=vite&logoColor=white)](https://vitejs.dev/)
-[![React](https://img.shields.io/badge/React-18.3-61DAFB?logo=react&logoColor=black)](https://react.dev/)
+[![React](https://img.shields.io/badge/React-19%20%2F%2018.3-61DAFB?logo=react&logoColor=black)](https://react.dev/)
 [![TypeScript](https://img.shields.io/badge/TypeScript-5.5-3178C6?logo=typescript&logoColor=white)](https://www.typescriptlang.org/)
 [![Tailwind CSS](https://img.shields.io/badge/Tailwind_CSS-v4-06B6D4?logo=tailwindcss&logoColor=white)](https://tailwindcss.com/)
 [![License: MIT](https://img.shields.io/badge/License-MIT-green.svg)](LICENSE)
 
-> Portfólio de alta performance e vitrine técnica profissional de **Anderson Cataldo**, Desenvolvedor Full-Stack (React, TypeScript, Next.js, Python, Node.js) e especialista em automação de processos corporativos (RPA).
+> Portfólio de alta performance e vitrine técnica profissional de nível **SaaS** de **Anderson Cataldo**, Desenvolvedor Full-Stack | Automação & RPA | Agentes de IA (LLM) | Python · TypeScript.
 
 🔗 **Live Demo:** [https://andersoncataldo.tech](https://andersoncataldo.tech)  
 📁 **Repositório:** [https://github.com/andersoncataldo/andersoncataldo.tech](https://github.com/andersoncataldo/andersoncataldo.tech)
@@ -15,62 +15,46 @@
 
 ## 🎯 Sobre o Projeto & Posicionamento
 
-Este projeto foi concebido para apresentar Anderson Cataldo com o nível de maturidade, rigor de engenharia e foco em resultados de um **Desenvolvedor com vivência corporativa real e sólida base acadêmica em Ciência da Computação (Unifor - 6º Semestre)**.
+Este projeto foi concebido para apresentar Anderson Cataldo com o mais alto nível de maturidade, rigor de engenharia e foco em resultados de um **Desenvolvedor Full-Stack, Automação & IA**.
 
-A aplicação vai além de uma landing page estática tradicional: ela funciona como uma **Single Page Application (SPA)** modular, performática, acessível e orientada a dados, integrando componentes interativos, arquitetura desacoplada e métricas reais de produção.
+A aplicação foi desenvolvida no padrão de craft de produtos digitais Silicon Valley (estilo Linear, Raycast e Apple), operando como uma **Single Page Application (SPA)** ultra-rápida, acessível (WCAG 2.1 AA) e com profunda interatividade de software real.
 
 ---
 
-## 🚀 Destaques & Recursos Técnicos
+## 🚀 Destaques & Recursos Técnicos SaaS
 
-### 1. Terminal Interativo de Engenharia (`DevConsole.tsx`)
+### 1. Command Palette Global (`Ctrl + K` / `Cmd + K`)
+- Modal de comando instantâneo inspirado no Raycast e Linear.
+- Atalho global via teclado com busca difusa reativa.
+- Ações rápidas: navegação para qualquer seção, cópia de e-mail, redirecionamento para WhatsApp, download de CV (PT ou EN), alternância de tema e troca de idioma.
 
-- Widget interativo no Hero simulando um terminal de desenvolvedor.
-- Permite alternar entre dados em formato JSON em tempo real: `profile.json`, `stack.json` e `metrics.json`.
-- Função de cópia com um clique para a área de transferência com feedback visual imediato.
+### 2. Terminal CLI Interativo Executável (`DevConsole.tsx`)
+- Terminal executável com histórico de comandos (navegável com setas `↑` e `↓`) e prompt `visitor@cataldo-tech:~$`.
+- Comandos implementados: `help`, `bio`, `stack`, `rpa`, `ai-agents`, `projects`, `contact`, `cv`, `clear` e o comando especial `sudo hire`.
+- Abas gráficas de inspeção JSON (`profile.json`, `stack.json`, `metrics.json`) com botão de cópia instantânea.
 
-### 2. Visualizador do Fluxo de Automação (`PipelineVisualizer.tsx`)
+### 3. Calculadora Interativa de ROI de Automação (`RpaRoiCalculator.tsx`)
+- Simulador interativo SaaS com sliders para volume mensal de processos, tempo manual por item e custo de hora operacional.
+- Cálculo em tempo real de horas poupadas/mês, economia financeira anual estimada (R$) e precisão de schemas SEFAZ.
+- Call to Action integrado com parâmetros pré-carregados para o WhatsApp.
 
-- Demonstração visual e técnica em 4 etapas do pipeline corporativo de RPA:
-  1. **Captura & Ingestão de Lotes:** Varredura automática e download de lotes fiscais.
-  2. **Parsing & Validação:** Validação contra schemas da SEFAZ com lxml e BeautifulSoup (99.85% de precisão).
-  3. **ETL & Conciliação:** Tratamento estruturado com Pandas e conciliação contábil.
-  4. **Entrega & Relatórios:** Geração automatizada de planilhas e dashboards.
-- Métricas em destaque: **15.000+ XMLs processados/mês** e **200+ horas manuais poupadas**.
+### 4. Navegação Contínua no Modal de Projetos (`ProjectModal.tsx`)
+- Navegação fluida entre os projetos sem necessidade de fechar e reabrir o modal.
+- Botões de cabeçalho "← Anterior" e "Próximo →" com suporte a teclas de atalho de seta (`ArrowLeft` / `ArrowRight`).
 
-### 3. Vitrine de Projetos Filtrável & Modal de Arquitetura (`ProjectModal.tsx`)
+### 5. Barra de Progresso de Leitura (`ScrollProgress.tsx`)
+- Barra no topo com gradiente suave indicando a porcentagem de leitura da página.
 
-- Filtros instantâneos por categoria: `Todos`, `Full-Stack & Web`, `Automações RPA & Python` e `Front-End & Performance`.
-- Cartões com visualização de resultados de negócio, preview com moldura técnica e tags de stack.
-- **Modal de Detalhamento Técnico:** Exibe o desafio de engenharia, arquitetura adotada em camadas, decisões de design e métricas de cada projeto.
+### 6. Pipeline de 15 Automações & FTP_SYNC (`PipelineVisualizer.tsx`)
+- Demonstração visual e técnica em 4 etapas do pipeline corporativo:
+  1. **FTP_SYNC & Coleta Autônoma:** Ponte com servidores FTP/SFTP a cada 15 min (−99% de tempo, de 6h para < 10s).
+  2. **Parsing & Validação de Schemas:** Validação SEFAZ e EDI Pharma Link com 99.85% de precisão.
+  3. **Integração WinThor ERP (Oracle) & ETL:** Atualização de lotes e conciliação contábil via Pandas.
+  4. **Entrega Executiva & Monitoramento:** Painel Streamlit e alertas em tempo real.
 
-### 4. Busca em Tempo Real e Categorias de Habilidades (`Skills.tsx`)
-
-- Campo de pesquisa reativo para filtragem instantânea de tecnologias e palavras-chave.
-- Categorização clara com tags de proficiência (`Avançado`, `Intermediário`, `Em expansão`) e destaque para palavras-chave de triagem técnica (ATS).
-
-### 5. Design System Moderno & Acessibilidade
-
-- **Paleta de Alta Tecnologia:** Superfícies em ardósia/vidro escuro (`#090e1a` / `#0f172a`), detalhes luminosos em Índigo/Violeta elétrico e destaques funcionais em Ciano e Esmeralda.
-- **Tema Claro / Escuro:** Persistência automática via `localStorage` e sincronização com preferências do sistema operacional (`prefers-color-scheme`).
-- **Acessibilidade Estrita (WCAG 2.1 AA):** Navegação 100% por teclado, semântica canônica WAI-ARIA (`role="tablist"`, `role="tab"`, `aria-selected`, `aria-controls`), Focus Trap com restauração de foco em modais (`ProjectModal.tsx`), atalho de pular para o conteúdo (`skip-to-content`) com alto contraste (8.5:1) e respeito integral a `prefers-reduced-motion`.
-
-### 6. Contato de Alta Conversão
-
-- Indicador de status de contratação ao vivo: `🟢 Aberto a Oportunidades (Estágio & Júnior)`.
-- Botão de 1-clique para copiar e-mail profissional com notificação toast.
-- Link direto para conversa no WhatsApp com mensagem pré-formatada.
-- Download direto do Currículo Técnico em PDF atualizado.
-
-### 7. Internacionalização Completa (i18n)
-
-- Suporte nativo bilíngue (**Português do Brasil** e **Inglês**) implementado via `LanguageContext`.
-- Dicionário de traduções centralizado e tipado em `src/i18n/translations.ts` cobrindo todas as seções e dados da interface.
-
-### 8. CI/CD Automatizado & Infraestrutura Resiliente na Vercel
-
-- **Integração Contínua (GitHub Actions):** Pipeline automatizado em `.github/workflows/ci.yml` executando validação de linter (`npm run lint`) e build com checagem de tipos estrita (`tsc -b && vite build`) a cada push ou PR para a branch `main`.
-- **Hospedagem & Segurança (`vercel.json`):** Headers de segurança de nível bancário (`Content-Security-Policy`, `HSTS`, `X-Content-Type-Options: nosniff`, `X-Frame-Options: DENY`), política de cache imutável de 1 ano para assets estáticos com hash (`/assets/*`) e controle de rotas SPA.
+### 7. Competências & ATS Keywords (`Skills.tsx`)
+- 7 categorias técnicas completas: IA & Agentes, Automação & RPA, Back-End, Front-End, Bancos de Dados & Storage, Qualidade/DevOps e Métodos.
+- Filtro por busca reativa e tags de proficiência (`Avançado`, `Intermediário`, `Em expansão`).
 
 ---
 
@@ -78,22 +62,25 @@ A aplicação vai além de uma landing page estática tradicional: ela funciona 
 
 | Camada                      | Tecnologias                                                                         |
 | :-------------------------- | :---------------------------------------------------------------------------------- |
-| **Front-End & UI**          | React 18, TypeScript 5, Vite 6, Tailwind CSS v4, Framer Motion, Lucide React        |
-| **Internacionalização**     | Context API (`LanguageContext`), TypeScript i18n Dictionaries (PT-BR / EN)           |
-| **Back-End & APIs**         | Node.js (Express), Python (Django & Scripts), Java (Spring Boot)                    |
-| **Bancos de Dados & Cloud** | PostgreSQL, Supabase, Neon Serverless, Vercel, Git & GitHub                         |
-| **Automação & RPA**         | Python 3.11+, Pandas, lxml, BeautifulSoup, Task Scheduler / Cron                    |
-| **DevOps & Qualidade**      | GitHub Actions (CI/CD), ESLint 9, OpenSpec, Vercel Security Headers, WCAG AA, SEO    |
+| **Front-End & UI SaaS**     | React 19 / 18, TypeScript 5, Next.js 16 (App Router), Vite 6, Tailwind CSS v4, Framer Motion, Recharts |
+| **IA & Sistemas Multiagente**| Claude Code, MCP (Model Context Protocol), Gemini API, OpenAI API, Maker-Checker, Guardrails |
+| **Automação & RPA**         | Python 3.11+, Paramiko (SFTP), ftplib, Playwright, Selenium, Pandas, lxml, BeautifulSoup, PyInstaller |
+| **Back-End & APIs**         | Node.js (Express), Python (FastAPI), SQLAlchemy, Alembic, Pydantic v2, Zod, JWT SSO |
+| **Bancos de Dados & Storage**| PostgreSQL, Supabase (RLS), Oracle SQL (TOTVS WinThor), Huawei HCIA-Storage, Neon  |
+| **DevOps & Qualidade**      | Pytest (58 suítes), Playwright E2E (35 testes), GitHub Actions CI/CD, Cloudflare, Render, Vercel |
 
 ---
 
 ## 📊 Métricas de Impacto Comprovadas
 
-- **15.000+** Documentos fiscais (XML/NFe) processados por mês de forma autônoma (Grupo 3Corações).
-- **200+** Horas acumuladas de retrabalho manual poupadas para equipes operacionais.
-- **-40%** de tempo em consultas internas com sistemas corporativos em Next.js e Supabase (Distribuidora Mais Saúde).
-- **3+** Aplicações web completas entregues em ambiente de produção real.
-- **6º Semestre** do Bacharelado em Ciência da Computação na Universidade de Fortaleza (Unifor).
+- **15** Automações corporativas entregues em produção.
+- **-99%** no tempo de processo com o FTP_SYNC (reduzido de 6 horas para menos de 10 segundos).
+- **15.000+** Documentos fiscais (XML/NFe) processados de forma autônoma por mês (Grupo 3corações).
+- **200+** Horas acumuladas de retrabalho manual eliminadas para equipes de negócios.
+- **9 Agentes de IA** operando no modelo maker-checker com Claude Code e menor privilégio.
+- **58 testes Pytest** e **35 asserções Playwright** aprovados na auditoria de go-live.
+- **4 Sistemas Unificados** sob SSO corporativo no monorepo Central Grupo Mais.
+- **6º Semestre** de Ciência da Computação na UNIFOR e certificação internacional **Huawei HCIA-Storage V5.0**.
 
 ---
 
@@ -101,145 +88,60 @@ A aplicação vai além de uma landing page estática tradicional: ela funciona 
 
 ```text
 andersoncataldo.tech/
-├── .agents/                      # Ecossistema de 10 Agentes Especializados de IA (Local / .gitignore)
-│   ├── _shared/                  # Contratos canônicos, contexto, checklists e handoffs
-│   ├── orchestrator.md           # Orquestrador geral e ponto de entrada
-│   └── ...                       # Personas especialistas (frontend, backend, security, etc.)
-├── .gemini/                      # Configurações e comandos do Gemini CLI (/agent-*, /opsx:*)
-├── .github/                      # Workflows de CI/CD automatizados (GitHub Actions)
-│   └── workflows/ci.yml          # Pipeline de validação contínua (lint + build)
-├── openspec/                     # Especificações vivas e governança Spec-Driven Development
-│   ├── specs/                    # 8 Especificações canônicas de baseline do portfólio
-│   ├── changes/                  # Histórico estruturado de mudanças (proposal, design, tasks)
-│   └── project.md                # Diretrizes de projeto, stack e métricas imutáveis
-├── public/
-│   ├── favicon.svg               # Ícone da aplicação
-│   ├── og-image.png              # Banner de compartilhamento em redes sociais
-│   ├── robots.txt                # Diretrizes de indexação para robôs de busca
-│   └── sitemap.xml               # Mapa do site indexável
-├── scripts/
-│   └── contrast.js               # Validador automatizado de contraste WCAG 2.1 AA
+├── .agents/                      # Ecossistema de Agentes de IA e Governança
+├── .github/workflows/ci.yml      # CI/CD automatizado (lint + build)
+├── openspec/                     # Especificações vivas (Spec-Driven Development)
+├── public/                       # Assets públicos (favicon, og-image, sitemap)
+├── scripts/                      # Scripts utilitários de engenharia (contrast.js)
 ├── src/
-│   ├── assets/                   # Imagens, previews SVG de projetos e CV em PDF
-│   ├── components/               # Componentes de interface modulares
+│   ├── assets/                   # Previews, fotos e currículos em PDF (PT e EN)
+│   ├── components/               # Componentes modulares UI
 │   │   ├── About.tsx             # Trajetória, formação e pilares profissionais
-│   │   ├── Automation.tsx        # Apresentação do motor de RPA corporativo
-│   │   ├── Contact.tsx           # Canais de contato direto e download do CV
-│   │   ├── CopyEmail.tsx         # Botão de copiar e-mail com toast animado
-│   │   ├── DevConsole.tsx        # Terminal interativo de especificações
-│   │   ├── ErrorBoundary.tsx     # Captura e tratamento de falhas em componentes
-│   │   ├── Experience.tsx        # Timeline interativa com KPIs de carreira
-│   │   ├── Footer.tsx            # Rodapé com links e copyright
-│   │   ├── Hero.tsx              # Apresentação principal, métricas e CTAs
+│   │   ├── Automation.tsx        # Seção de RPA e simulador de ROI
+│   │   ├── CommandPalette.tsx    # Command Palette global (Ctrl+K)
+│   │   ├── Contact.tsx           # Canais de contato direto
+│   │   ├── CopyEmail.tsx         # Cópia de e-mail com toast
+│   │   ├── DevConsole.tsx        # Terminal CLI interativo executável + abas JSON
+│   │   ├── ErrorBoundary.tsx     # Tratamento resiliente de falhas
+│   │   ├── Experience.tsx        # Linha do tempo profissional e certificações
+│   │   ├── Footer.tsx            # Rodapé institucional
+│   │   ├── Hero.tsx              # Apresentação e chamada de ação
 │   │   ├── PipelineVisualizer.tsx# Visualizador interativo do fluxo RPA
-│   │   ├── ProjectModal.tsx      # Modal de detalhamento técnico dos projetos
-│   │   ├── Projects.tsx          # Vitrine de projetos com abas de categoria
-│   │   ├── Sidebar.tsx           # Navegação lateral com glassmorphism e drawer móvel
-│   │   └── Skills.tsx            # Busca e catálogo de habilidades técnicas
-│   ├── config/
-│   │   └── links.ts              # URLs oficiais, e-mail, WhatsApp e meta-dados
-│   ├── context/
-│   │   └── LanguageContext.tsx   # Gerenciamento de idioma com suporte a PT-BR e EN
-│   ├── data/                     # Camada de dados centralizada e tipada
-│   │   ├── automation.ts         # Etapas e métricas do pipeline de automação
-│   │   ├── experience.ts         # Histórico corporativo e acadêmico detalhado
-│   │   ├── metrics.ts            # Indicadores quantitativos de impacto
-│   │   ├── projects.ts           # Casos de sucesso, desafios e arquitetura
-│   │   └── skills.ts             # Competências, níveis e palavras-chave ATS
-│   ├── i18n/
-│   │   └── translations.ts       # Dicionário de traduções bilíngue estritamente tipado
-│   ├── styles/
-│   │   └── index.css             # Tokens do Tailwind v4, temas e utilitários globais
-│   ├── types/
-│   │   └── index.ts              # Contratos e tipos estritos TypeScript
-│   ├── App.tsx                   # Layout principal, controle de tema e Lazy Loading
-│   └── main.tsx                  # Ponto de entrada da aplicação React
-├── AGENTS.md                     # Ponto de entrada universal para ferramentas de IA
-├── CHANGELOG.md                  # Histórico de versões (SemVer e Keep a Changelog)
-├── GEMINI.md                     # Governança raiz do Gemini CLI e regra de ouro
-├── index.html                    # HTML5 semântico com JSON-LD Schema e SEO
-├── package.json                  # Dependências e scripts npm
-├── tsconfig.json                 # Configurações do compilador TypeScript
-├── vercel.json                   # Headers de segurança, cache imutável e SPA rewrites
-└── vite.config.ts                # Configuração do Vite e plugins
+│   │   ├── ProjectModal.tsx      # Modal de projeto com navegação contínua
+│   │   ├── Projects.tsx          # Vitrine de projetos filtrável
+│   │   ├── RpaRoiCalculator.tsx  # Simulador interativo de ROI de automação
+│   │   ├── ScrollProgress.tsx    # Barra de progresso de leitura no topo
+│   │   ├── Sidebar.tsx           # Sidebar responsiva com acionador de comandos
+│   │   └── Skills.tsx            # Catálogo e busca de competências
+│   ├── config/links.ts           # Links oficiais e dados de contato
+│   ├── context/LanguageContext.tsx# Provedor de idioma (PT/EN)
+│   ├── data/                     # Camada centralizada de dados tipados
+│   ├── i18n/translations.ts      # Dicionário de traduções bilíngue estrito
+│   └── styles/index.css          # Tokens Tailwind v4 e temas
 ```
 
 ---
 
-## 🤖 Ecossistema de Agentes de IA & OpenSpec
+## 🚀 Como Executar Localmente
 
-O repositório adota **Spec-Driven Development** governado pelo **OpenSpec** e conta com 10 personas de IA especializadas em [`.agents/`](./.agents/README.md) mantidas no ambiente local de desenvolvimento (configuradas no `.gitignore` para manter o repositório público enxuto):
-> *"Toda mudança não trivial passa pelo orquestrador e pelo fluxo OpenSpec."*
+```bash
+# 1. Clonar o repositório
+git clone https://github.com/andersoncataldo/andersoncataldo.tech.git
+cd andersoncataldo.tech
 
-- **Orquestrador Central:** [`/agent-orchestrator`](./.agents/orchestrator.md) — triagem, divisão de tarefas e abertura de changes.
-- **Especialistas:** Front-End, Back-End, Database, API (OpenAPI 3.1), Security (OWASP), Prompt Engineer, Documentation e Deploy.
-- **Governança:** Consulte [`GEMINI.md`](./GEMINI.md) e [`openspec/project.md`](./openspec/project.md).
+# 2. Instalar dependências
+npm install
 
----
+# 3. Iniciar servidor de desenvolvimento
+npm run dev
 
-## 💻 Como Executar Localmente
-
-### Pré-requisitos
-
-- Node.js (versão 18 ou superior)
-- npm (ou yarn / pnpm)
-
-### Instalação & Execução
-
-1. **Clone o repositório:**
-
-   ```bash
-   git clone https://github.com/andersoncataldo/andersoncataldo.tech.git
-   cd andersoncataldo.tech
-   ```
-
-2. **Instale as dependências:**
-
-   ```bash
-   npm install
-   ```
-
-3. **Inicie o servidor de desenvolvimento:**
-
-   ```bash
-   npm run dev
-   ```
-
-   Acesse a URL informada no terminal (geralmente `http://localhost:5173`).
-
-4. **Executar verificação de linting:**
-
-   ```bash
-   npm run lint
-   ```
-
-5. **Gerar build de produção otimizada:**
-
-   ```bash
-   npm run build
-   ```
-
-6. **Visualizar a build localmente:**
-   ```bash
-   npm run preview
-   ```
+# 4. Executar build de produção e linter
+npm run lint
+npm run build
+```
 
 ---
 
-## 📈 Avaliação de Qualidade & Performance
+## 📄 Licença
 
-Para uma análise detalhada sobre a pontuação de qualidade de código, padrões de acessibilidade, arquitetura de software e métricas de bundle do Vite, consulte o documento:
-👉 **[AVALIACAO_QUALIDADE_PERFORMANCE.md](./AVALIACAO_QUALIDADE_PERFORMANCE.md)**
-
----
-
-## 📬 Contato & Conexões
-
-- **LinkedIn:** [linkedin.com/in/andersonnviana](https://linkedin.com/in/andersonnviana)
-- **GitHub:** [github.com/andersoncataldo](https://github.com/andersoncataldo)
-- **WhatsApp:** [Enviar Mensagem](https://wa.me/5585994276707)
-- **E-mail:** [andersonvcataldo@gmail.com](mailto:andersonvcataldo@gmail.com)
-
----
-
-Desenvolvido por **Anderson Cataldo**. Código aberto sob a licença [MIT](LICENSE).
+Distribuído sob a licença **MIT**. Consulte `LICENSE` para mais informações.

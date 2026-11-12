@@ -17,6 +17,7 @@ import {
   Zap,
   FolderGit2,
   Languages,
+  Search,
 } from 'lucide-react';
 import andersonImg from '../assets/anderson-cataldo.webp';
 import { GITHUB_URL, LINKEDIN_URL } from '../config/links';
@@ -28,6 +29,7 @@ interface SidebarProps {
   onThemeToggle: () => void;
   collapsed: boolean;
   setCollapsed: (value: boolean) => void;
+  onOpenCommandPalette?: () => void;
 }
 
 const getNavLinks = (t: TranslationDict) => [
@@ -61,6 +63,7 @@ interface SidebarContentProps {
   handleNavClick: (href: string, event: MouseEvent<HTMLAnchorElement>) => void;
   setMobileOpen: (value: boolean) => void;
   isMobile?: boolean;
+  onOpenCommandPalette?: () => void;
 }
 
 const SidebarContent = memo(
@@ -72,6 +75,7 @@ const SidebarContent = memo(
     handleNavClick,
     setMobileOpen,
     isMobile = false,
+    onOpenCommandPalette,
   }: SidebarContentProps) => {
     const { t, language, setLanguage, resumePt, resumeEn } = useLanguage();
     const navLinks = getNavLinks(t);
@@ -117,9 +121,41 @@ const SidebarContent = memo(
             )}
           </div>
 
+          {/* Quick Command Palette Button */}
+          {onOpenCommandPalette && (
+            <div className="pt-3">
+              {collapsed ? (
+                <button
+                  type="button"
+                  onClick={onOpenCommandPalette}
+                  className="h-10 w-10 mx-auto rounded-xl flex items-center justify-center bg-slate-100 dark:bg-slate-800/80 hover:bg-indigo-50 dark:hover:bg-indigo-950/40 border border-slate-200 dark:border-slate-700/60 text-slate-600 dark:text-slate-300 hover:text-indigo-600 dark:hover:text-indigo-400 transition"
+                  title={t.sidebar.searchAria}
+                  aria-label={t.sidebar.searchAria}
+                >
+                  <Search className="h-4 w-4" />
+                </button>
+              ) : (
+                <button
+                  type="button"
+                  onClick={onOpenCommandPalette}
+                  className="w-full flex items-center justify-between px-3.5 py-2 rounded-xl bg-slate-100/90 dark:bg-slate-800/70 hover:bg-slate-200/80 dark:hover:bg-slate-800 border border-slate-200 dark:border-slate-700/60 text-xs text-slate-600 dark:text-slate-300 transition group"
+                  aria-label={t.sidebar.searchAria}
+                >
+                  <span className="flex items-center gap-2.5">
+                    <Search className="w-3.5 h-3.5 text-indigo-500 group-hover:scale-110 transition-transform" />
+                    <span className="font-medium">{t.nav.commandPalette}</span>
+                  </span>
+                  <kbd className="px-1.5 py-0.5 rounded bg-white dark:bg-slate-900 text-[10px] font-mono text-slate-500 border border-slate-200 dark:border-slate-700">
+                    ⌘K
+                  </kbd>
+                </button>
+              )}
+            </div>
+          )}
+
           {/* Navigation Items */}
-          <nav className="py-4">
-            <ul className="space-y-1.5">
+          <nav className="py-3">
+            <ul className="space-y-1">
               {navLinks.map((link) => {
                 const Icon = link.icon;
                 const targetId = link.href === '#' ? 'inicio' : link.href.slice(1);
@@ -134,8 +170,8 @@ const SidebarContent = memo(
                       title={collapsed ? link.name : undefined}
                       className={`group flex items-center rounded-xl text-sm font-medium transition-all ${
                         collapsed
-                          ? 'h-11 w-11 mx-auto justify-center'
-                          : 'gap-3 px-3.5 py-2.5 w-full'
+                          ? 'h-10 w-10 mx-auto justify-center'
+                          : 'gap-3 px-3 py-2 w-full'
                       } ${
                         isActive
                           ? 'bg-indigo-600/10 dark:bg-indigo-600/20 text-indigo-600 dark:text-indigo-400 border border-indigo-500/30 font-semibold shadow-sm shadow-indigo-600/10'
@@ -163,7 +199,7 @@ const SidebarContent = memo(
 
             {/* External Social Links */}
             {collapsed ? (
-              <div className="mt-6 flex flex-col items-center gap-2 pt-4 border-t border-slate-200 dark:border-slate-800/80">
+              <div className="mt-4 flex flex-col items-center gap-1.5 pt-3 border-t border-slate-200 dark:border-slate-800/80">
                 {externalLinks.map((link) => {
                   const Icon = link.icon;
                   return (
@@ -174,7 +210,7 @@ const SidebarContent = memo(
                       rel="noopener noreferrer"
                       aria-label={link.name}
                       title={link.name}
-                      className="h-9 w-9 rounded-xl flex items-center justify-center text-slate-500 dark:text-slate-400 hover:text-slate-900 dark:hover:text-white hover:bg-slate-100 dark:hover:bg-slate-800/80 transition"
+                      className="h-8 w-8 rounded-xl flex items-center justify-center text-slate-500 dark:text-slate-400 hover:text-slate-900 dark:hover:text-white hover:bg-slate-100 dark:hover:bg-slate-800/80 transition"
                     >
                       <Icon className="h-4 w-4" aria-hidden="true" />
                     </a>
@@ -182,11 +218,11 @@ const SidebarContent = memo(
                 })}
               </div>
             ) : (
-              <div className="mt-6 pt-4 border-t border-slate-200 dark:border-slate-800/80">
+              <div className="mt-4 pt-3 border-t border-slate-200 dark:border-slate-800/80">
                 <p className="px-3 text-[10px] uppercase tracking-wider text-slate-400 dark:text-slate-500 font-bold">
                   {t.nav.officialLinks}
                 </p>
-                <ul className="mt-2 space-y-1">
+                <ul className="mt-1.5 space-y-0.5">
                   {externalLinks.map((link) => {
                     const Icon = link.icon;
                     return (
@@ -195,9 +231,9 @@ const SidebarContent = memo(
                           href={link.href}
                           target="_blank"
                           rel="noopener noreferrer"
-                          className="flex items-center gap-3 rounded-xl px-3.5 py-2 text-xs font-medium text-slate-600 dark:text-slate-400 hover:bg-slate-100 dark:hover:bg-slate-800/60 hover:text-slate-900 dark:hover:text-slate-100 transition"
+                          className="flex items-center gap-3 rounded-xl px-3 py-1.5 text-xs font-medium text-slate-600 dark:text-slate-400 hover:bg-slate-100 dark:hover:bg-slate-800/60 hover:text-slate-900 dark:hover:text-slate-100 transition"
                         >
-                          <Icon className="h-4 w-4 text-slate-400" aria-hidden="true" />
+                          <Icon className="h-3.5 w-3.5 text-slate-400" aria-hidden="true" />
                           <span>{link.name}</span>
                         </a>
                       </li>
@@ -210,15 +246,15 @@ const SidebarContent = memo(
         </div>
 
         {/* Footer Controls: Language, Theme & Resume */}
-        <div className="pt-4 border-t border-slate-200 dark:border-slate-800/80">
+        <div className="pt-3 border-t border-slate-200 dark:border-slate-800/80">
           {collapsed ? (
-            <div className="flex flex-col items-center gap-2.5">
+            <div className="flex flex-col items-center gap-2">
               {/* Language Toggle Icon */}
               <button
                 type="button"
                 onClick={() => setLanguage(language === 'pt' ? 'en' : 'pt')}
-                className="h-10 w-10 rounded-xl flex items-center justify-center text-xs font-bold bg-slate-100 dark:bg-slate-800/80 border border-slate-200 dark:border-slate-700/60 text-indigo-600 dark:text-indigo-400 hover:border-indigo-400 transition"
-                title={`${t.sidebar.language}: ${language.toUpperCase()} (clique para alternar)`}
+                className="h-9 w-9 rounded-xl flex items-center justify-center text-xs font-bold bg-slate-100 dark:bg-slate-800/80 border border-slate-200 dark:border-slate-700/60 text-indigo-600 dark:text-indigo-400 hover:border-indigo-400 transition"
+                title={`${t.sidebar.language}: ${language.toUpperCase()}`}
                 aria-label={`${t.sidebar.language}: ${language.toUpperCase()}`}
               >
                 {language.toUpperCase()}
@@ -228,7 +264,7 @@ const SidebarContent = memo(
               <button
                 type="button"
                 onClick={onThemeToggle}
-                className="h-10 w-10 rounded-xl flex items-center justify-center bg-slate-100 dark:bg-slate-800/80 hover:bg-slate-200 dark:hover:bg-slate-700/80 border border-slate-200 dark:border-slate-700/60 transition text-slate-700 dark:text-slate-200"
+                className="h-9 w-9 rounded-xl flex items-center justify-center bg-slate-100 dark:bg-slate-800/80 hover:bg-slate-200 dark:hover:bg-slate-700/80 border border-slate-200 dark:border-slate-700/60 transition text-slate-700 dark:text-slate-200"
                 aria-label={t.sidebar.toggleTheme}
                 title={theme === 'dark' ? t.sidebar.lightMode : t.sidebar.darkMode}
               >
@@ -241,7 +277,7 @@ const SidebarContent = memo(
                 target="_blank"
                 rel="noopener noreferrer"
                 download={`curriculo-anderson-cataldo-${language}.pdf`}
-                className="h-10 w-10 rounded-xl flex items-center justify-center bg-indigo-600 hover:bg-indigo-700 text-white shadow-md shadow-indigo-600/25 transition"
+                className="h-9 w-9 rounded-xl flex items-center justify-center bg-indigo-600 hover:bg-indigo-700 text-white shadow-md shadow-indigo-600/25 transition"
                 aria-label={t.sidebar.downloadCv}
                 title={t.sidebar.downloadCvTitle}
               >
@@ -252,12 +288,12 @@ const SidebarContent = memo(
             <div className="space-y-2">
               {/* Language Toggle Dual Pill */}
               <div className="flex items-center gap-2 rounded-xl bg-slate-100 dark:bg-slate-800/80 border border-slate-200 dark:border-slate-700/60 p-1">
-                <Languages className="h-4 w-4 text-slate-400 ml-1.5 shrink-0" aria-hidden="true" />
+                <Languages className="h-3.5 w-3.5 text-slate-400 ml-1 shrink-0" aria-hidden="true" />
                 <div className="flex flex-1 gap-1" role="group" aria-label={t.sidebar.language}>
                   <button
                     type="button"
                     onClick={() => setLanguage('pt')}
-                    className={`flex-1 h-8 rounded-lg text-xs font-bold transition ${
+                    className={`flex-1 h-7 rounded-lg text-xs font-bold transition ${
                       language === 'pt'
                         ? 'bg-indigo-600 text-white shadow-sm'
                         : 'text-slate-600 dark:text-slate-400 hover:text-slate-900 dark:hover:text-slate-100'
@@ -269,7 +305,7 @@ const SidebarContent = memo(
                   <button
                     type="button"
                     onClick={() => setLanguage('en')}
-                    className={`flex-1 h-8 rounded-lg text-xs font-bold transition ${
+                    className={`flex-1 h-7 rounded-lg text-xs font-bold transition ${
                       language === 'en'
                         ? 'bg-indigo-600 text-white shadow-sm'
                         : 'text-slate-600 dark:text-slate-400 hover:text-slate-900 dark:hover:text-slate-100'
@@ -285,10 +321,10 @@ const SidebarContent = memo(
               <button
                 type="button"
                 onClick={onThemeToggle}
-                className="w-full inline-flex h-10 items-center justify-center gap-2 rounded-xl bg-slate-100 dark:bg-slate-800/80 hover:bg-slate-200 dark:hover:bg-slate-700/80 text-xs font-semibold text-slate-700 dark:text-slate-200 transition border border-slate-200 dark:border-slate-700/60"
+                className="w-full inline-flex h-9 items-center justify-center gap-2 rounded-xl bg-slate-100 dark:bg-slate-800/80 hover:bg-slate-200 dark:hover:bg-slate-700/80 text-xs font-semibold text-slate-700 dark:text-slate-200 transition border border-slate-200 dark:border-slate-700/60"
                 aria-label={t.sidebar.toggleTheme}
               >
-                {theme === 'dark' ? <Sun className="h-4 w-4 text-amber-400" /> : <Moon className="h-4 w-4 text-indigo-500" />}
+                {theme === 'dark' ? <Sun className="h-3.5 w-3.5 text-amber-400" /> : <Moon className="h-3.5 w-3.5 text-indigo-500" />}
                 <span>{theme === 'dark' ? t.sidebar.lightMode : t.sidebar.darkMode}</span>
               </button>
 
@@ -299,11 +335,11 @@ const SidebarContent = memo(
                   target="_blank"
                   rel="noopener noreferrer"
                   download="curriculo-anderson-cataldo-pt.pdf"
-                  className="flex-1 inline-flex h-10 items-center justify-center gap-1 rounded-xl bg-indigo-600 hover:bg-indigo-700 text-[11px] font-bold text-white transition shadow-sm shadow-indigo-600/20"
+                  className="flex-1 inline-flex h-9 items-center justify-center gap-1 rounded-xl bg-indigo-600 hover:bg-indigo-700 text-[11px] font-bold text-white transition shadow-sm shadow-indigo-600/20"
                   aria-label={`${t.sidebar.downloadCv} (PT-BR)`}
                   title={`${t.sidebar.downloadCvTitle} (PT-BR)`}
                 >
-                  <FileText className="h-3.5 w-3.5" aria-hidden="true" />
+                  <FileText className="h-3 w-3" aria-hidden="true" />
                   CV (PT)
                 </a>
                 <a
@@ -311,11 +347,11 @@ const SidebarContent = memo(
                   target="_blank"
                   rel="noopener noreferrer"
                   download="anderson-cataldo-resume-en.pdf"
-                  className="flex-1 inline-flex h-10 items-center justify-center gap-1 rounded-xl bg-indigo-600 hover:bg-indigo-700 text-[11px] font-bold text-white transition shadow-sm shadow-indigo-600/20"
+                  className="flex-1 inline-flex h-9 items-center justify-center gap-1 rounded-xl bg-indigo-600 hover:bg-indigo-700 text-[11px] font-bold text-white transition shadow-sm shadow-indigo-600/20"
                   aria-label={`${t.sidebar.downloadCv} (EN)`}
                   title={`${t.sidebar.downloadCvTitle} (EN)`}
                 >
-                  <FileText className="h-3.5 w-3.5" aria-hidden="true" />
+                  <FileText className="h-3 w-3" aria-hidden="true" />
                   CV (EN)
                 </a>
               </div>
@@ -329,7 +365,13 @@ const SidebarContent = memo(
 
 SidebarContent.displayName = 'SidebarContent';
 
-const Sidebar = ({ theme, onThemeToggle, collapsed, setCollapsed }: SidebarProps) => {
+const Sidebar = ({
+  theme,
+  onThemeToggle,
+  collapsed,
+  setCollapsed,
+  onOpenCommandPalette,
+}: SidebarProps) => {
   const { t } = useLanguage();
   const [mobileOpen, setMobileOpen] = useState(false);
   const mobileDrawerRef = useRef<HTMLDivElement | null>(null);
@@ -464,11 +506,12 @@ const Sidebar = ({ theme, onThemeToggle, collapsed, setCollapsed }: SidebarProps
           activeSection={activeSection}
           handleNavClick={handleNavClick}
           setMobileOpen={setMobileOpen}
+          onOpenCommandPalette={onOpenCommandPalette}
         />
       </aside>
 
-      {/* Mobile Floating Menu Button */}
-      <div className="lg:hidden fixed top-4 left-4 z-50">
+      {/* Mobile Floating Menu Button & Command Trigger */}
+      <div className="lg:hidden fixed top-4 left-4 z-50 flex items-center gap-2">
         <button
           type="button"
           onClick={() => setMobileOpen(true)}
@@ -479,6 +522,16 @@ const Sidebar = ({ theme, onThemeToggle, collapsed, setCollapsed }: SidebarProps
         >
           <Menu className="h-5 w-5 text-indigo-600 dark:text-indigo-400" />
         </button>
+        {onOpenCommandPalette && (
+          <button
+            type="button"
+            onClick={onOpenCommandPalette}
+            className="inline-flex h-11 w-11 items-center justify-center rounded-2xl bg-white/90 dark:bg-[#090e1a]/90 backdrop-blur-md border border-slate-200 dark:border-slate-700/80 text-slate-900 dark:text-white shadow-xl shadow-slate-900/10 dark:shadow-black/30"
+            aria-label={t.sidebar.searchAria}
+          >
+            <Search className="h-4 w-4 text-indigo-600 dark:text-indigo-400" />
+          </button>
+        )}
       </div>
 
       {/* Mobile Overlay */}
@@ -508,6 +561,7 @@ const Sidebar = ({ theme, onThemeToggle, collapsed, setCollapsed }: SidebarProps
           activeSection={activeSection}
           handleNavClick={handleNavClick}
           setMobileOpen={setMobileOpen}
+          onOpenCommandPalette={onOpenCommandPalette}
           isMobile
         />
       </aside>

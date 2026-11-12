@@ -11,7 +11,7 @@ const Projects = () => {
   const shouldReduceMotion = useReducedMotion();
   const { t, language } = useLanguage();
   const [selectedTab, setSelectedTab] = useState<string>('all');
-  const [activeProjectModal, setActiveProjectModal] = useState<Project | null>(null);
+  const [activeProjectIndex, setActiveProjectIndex] = useState<number | null>(null);
 
   const filters: { id: string; label: string }[] = [
     { id: 'all', label: `${t.projects.filters.all} (${projects.length})` },
@@ -24,6 +24,25 @@ const Projects = () => {
     if (selectedTab === 'all') return projects;
     return projects.filter((p) => p.category === selectedTab);
   }, [selectedTab]);
+
+  const activeProject: Project | null =
+    activeProjectIndex !== null ? filteredProjects[activeProjectIndex] || null : null;
+
+  const handlePrevProject = () => {
+    if (activeProjectIndex !== null) {
+      setActiveProjectIndex((prev) =>
+        prev !== null && prev > 0 ? prev - 1 : filteredProjects.length - 1
+      );
+    }
+  };
+
+  const handleNextProject = () => {
+    if (activeProjectIndex !== null) {
+      setActiveProjectIndex((prev) =>
+        prev !== null && prev + 1 < filteredProjects.length ? prev + 1 : 0
+      );
+    }
+  };
 
   return (
     <section id="projetos" className="py-fluid-section bg-apple-bg scroll-mt-20" aria-labelledby="projects-title">
@@ -69,7 +88,10 @@ const Projects = () => {
               key={filter.id}
               type="button"
               aria-pressed={selectedTab === filter.id}
-              onClick={() => setSelectedTab(filter.id)}
+              onClick={() => {
+                setSelectedTab(filter.id);
+                setActiveProjectIndex(null);
+              }}
               className={`px-4 py-2 rounded-xl text-xs sm:text-sm font-semibold transition focus:outline-none focus:ring-2 focus:ring-indigo-500 ${
                 selectedTab === filter.id
                   ? 'bg-indigo-600 text-white shadow-md shadow-indigo-600/20'
@@ -153,7 +175,7 @@ const Projects = () => {
                 <div className="pt-4 border-t border-slate-100 dark:border-slate-800 flex items-center justify-between gap-3">
                   <button
                     type="button"
-                    onClick={() => setActiveProjectModal(project)}
+                    onClick={() => setActiveProjectIndex(index)}
                     className="inline-flex items-center gap-1.5 text-xs sm:text-sm font-bold text-indigo-600 dark:text-indigo-400 hover:text-indigo-700 transition"
                   >
                     <Layers className="w-4 h-4" /> {t.projects.detailsButton}
@@ -189,10 +211,14 @@ const Projects = () => {
           ))}
         </div>
 
-        {/* Modal View */}
+        {/* Modal View with Continuous Prev/Next Navigation */}
         <ProjectModal
-          project={activeProjectModal}
-          onClose={() => setActiveProjectModal(null)}
+          project={activeProject}
+          onClose={() => setActiveProjectIndex(null)}
+          onPrev={handlePrevProject}
+          onNext={handleNextProject}
+          currentIndex={activeProjectIndex ?? undefined}
+          totalProjects={filteredProjects.length}
         />
       </div>
     </section>

@@ -1,5 +1,6 @@
 import { motion, useReducedMotion } from 'framer-motion';
 import PipelineVisualizer from './PipelineVisualizer';
+import RpaRoiCalculator from './RpaRoiCalculator';
 import { useLanguage } from '../context/LanguageContext';
 
 const Automation = () => {
@@ -49,6 +50,16 @@ const Automation = () => {
           transition={shouldReduceMotion ? { duration: 0 } : { duration: 0.6 }}
         >
           <PipelineVisualizer />
+        </motion.div>
+
+        {/* Interactive RPA ROI Simulator SaaS */}
+        <motion.div
+          initial={shouldReduceMotion ? { opacity: 1, y: 0 } : { opacity: 0, y: 20 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+          transition={shouldReduceMotion ? { duration: 0 } : { duration: 0.6, delay: 0.2 }}
+        >
+          <RpaRoiCalculator />
         </motion.div>
       </div>
     </section>

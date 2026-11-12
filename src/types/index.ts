@@ -35,7 +35,7 @@ export interface Experience {
   results: LocalizedText[];
   metrics?: { label: LocalizedText; value: string | LocalizedText }[];
   stack: string[];
-  type: 'work' | 'education';
+  type: 'work' | 'education' | 'certification';
   current?: boolean;
 }
 

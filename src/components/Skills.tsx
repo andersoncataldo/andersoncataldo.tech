@@ -1,6 +1,6 @@
 import { useState, useMemo } from 'react';
 import { motion, useReducedMotion } from 'framer-motion';
-import { Layout, Server, Database, Bot, ShieldCheck, Search, Sparkles } from 'lucide-react';
+import { Layout, Server, Database, Bot, ShieldCheck, Search, Sparkles, Cpu, Zap } from 'lucide-react';
 import { skillCategories } from '../data/skills';
 import { useLanguage } from '../context/LanguageContext';
 import type { SkillLevel } from '../types';
@@ -11,6 +11,8 @@ const categoryIcons: Record<string, typeof Layout> = {
   Database,
   Bot,
   ShieldCheck,
+  Cpu,
+  Zap,
 };
 
 const levelStyles: Record<SkillLevel, string> = {
@@ -27,11 +29,13 @@ const Skills = () => {
 
   const categoryFilters: { id: string; label: string }[] = [
     { id: 'all', label: t.skills.filters.all },
-    { id: 'frontend', label: t.skills.filters.frontend },
-    { id: 'backend', label: t.skills.filters.backend },
-    { id: 'database', label: t.skills.filters.database },
+    { id: 'ai-agents', label: t.skills.filters.aiAgents },
     { id: 'automation', label: t.skills.filters.automation },
-    { id: 'engineering', label: t.skills.filters.engineering },
+    { id: 'backend', label: t.skills.filters.backend },
+    { id: 'frontend', label: t.skills.filters.frontend },
+    { id: 'database', label: t.skills.filters.database },
+    { id: 'devops-quality', label: t.skills.filters.devopsQuality },
+    { id: 'methods', label: t.skills.filters.methods },
   ];
 
   const filteredCategories = useMemo(() => {
@@ -84,7 +88,7 @@ const Skills = () => {
           </div>
 
           {/* Search Input Filter */}
-          <div className="relative w-full md:w-72">
+          <div className="relative w-full md:w-80">
             <Search className="w-4 h-4 text-apple-secondary absolute left-3.5 top-1/2 -translate-y-1/2 pointer-events-none" />
             <input
               type="text"

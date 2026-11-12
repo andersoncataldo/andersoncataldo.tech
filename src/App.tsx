@@ -2,6 +2,8 @@ import { Suspense, lazy, useEffect, useState } from 'react';
 import Sidebar from './components/Sidebar';
 import Hero from './components/Hero';
 import ErrorBoundary from './components/ErrorBoundary';
+import ScrollProgress from './components/ScrollProgress';
+import CommandPalette from './components/CommandPalette';
 import { LanguageProvider, useLanguage } from './context/LanguageContext';
 
 // Lazy loading components for better performance
@@ -53,6 +55,7 @@ const AppShell = () => {
   });
 
   const [collapsed, setCollapsed] = useState(false);
+  const [isCommandPaletteOpen, setIsCommandPaletteOpen] = useState(false);
 
   useEffect(() => {
     document.documentElement.classList.toggle('dark', theme === 'dark');
@@ -60,12 +63,32 @@ const AppShell = () => {
     window.localStorage.setItem('portfolio-theme', theme);
   }, [theme]);
 
+  // Global Ctrl+K / Cmd+K listener
+  useEffect(() => {
+    const handleGlobalKeyDown = (e: KeyboardEvent) => {
+      if ((e.metaKey || e.ctrlKey) && e.key.toLowerCase() === 'k') {
+        e.preventDefault();
+        setIsCommandPaletteOpen((prev) => !prev);
+      }
+    };
+
+    window.addEventListener('keydown', handleGlobalKeyDown);
+    return () => window.removeEventListener('keydown', handleGlobalKeyDown);
+  }, []);
+
   const handleThemeToggle = () => {
     setTheme((current) => (current === 'dark' ? 'light' : 'dark'));
   };
 
   return (
     <>
+      <ScrollProgress />
+      <CommandPalette
+        isOpen={isCommandPaletteOpen}
+        onClose={() => setIsCommandPaletteOpen(false)}
+        onThemeToggle={handleThemeToggle}
+        theme={theme}
+      />
       <a
         href="#main-content"
         className="sr-only focus:not-sr-only focus:fixed focus:top-4 focus:left-4 focus:z-50 focus:px-5 focus:py-2.5 focus:bg-indigo-600 focus:text-white focus:font-bold focus:shadow-xl focus:rounded-full focus:ring-2 focus:ring-white focus:outline-none"
@@ -73,7 +96,13 @@ const AppShell = () => {
         {t.meta.skipToContent}
       </a>
       <div className={`min-h-screen overflow-x-hidden bg-apple-bg text-apple-text selection:bg-indigo-500/10 transition-[padding-left] duration-300 ${collapsed ? 'lg:pl-20' : 'lg:pl-64'}`}>
-        <Sidebar theme={theme} onThemeToggle={handleThemeToggle} collapsed={collapsed} setCollapsed={setCollapsed} />
+        <Sidebar
+          theme={theme}
+          onThemeToggle={handleThemeToggle}
+          collapsed={collapsed}
+          setCollapsed={setCollapsed}
+          onOpenCommandPalette={() => setIsCommandPaletteOpen(true)}
+        />
         <main id="main-content" className="relative">
           <Hero />
           <ErrorBoundary fallback={<SectionError />}>
