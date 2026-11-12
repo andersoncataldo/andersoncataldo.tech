@@ -1,5 +1,5 @@
 import { useEffect, useRef } from 'react';
-import { X, Github, ExternalLink, CheckCircle2, Layers, Cpu, BarChart3, ChevronLeft, ChevronRight } from 'lucide-react';
+import { X, Github, ExternalLink, CheckCircle2, Layers, Cpu, BarChart3, ChevronLeft, ChevronRight, Lock, Globe } from 'lucide-react';
 import { Project } from '../types';
 import { useLanguage } from '../context/LanguageContext';
 
@@ -136,10 +136,21 @@ export const ProjectModal = ({
 
         {/* Header */}
         <div className="mb-6 pr-32">
-          <div className="flex items-center gap-2 mb-2">
+          <div className="flex flex-wrap items-center gap-2 mb-2">
             <span className="px-3 py-1 rounded-full text-xs font-bold uppercase tracking-wider bg-indigo-50 dark:bg-indigo-950/60 text-indigo-600 dark:text-indigo-400 border border-indigo-200 dark:border-indigo-800/60">
               {project.categoryLabel[language]}
             </span>
+            {project.id.includes('grupo') || project.id.includes('mais-saude') || project.id.includes('winthor') || project.id.includes('3coracoes') || project.id.includes('ativos') ? (
+              <span className="inline-flex items-center gap-1 px-2.5 py-0.5 rounded-full text-[11px] font-mono font-medium bg-slate-100 dark:bg-slate-800 text-slate-600 dark:text-slate-300 border border-slate-200 dark:border-slate-700">
+                <Lock className="w-3 h-3 text-amber-500" />
+                <span>{language === 'pt' ? 'Corporativo • LGPD' : 'Enterprise • LGPD'}</span>
+              </span>
+            ) : (
+              <span className="inline-flex items-center gap-1 px-2.5 py-0.5 rounded-full text-[11px] font-mono font-medium bg-indigo-50 dark:bg-indigo-950/60 text-indigo-600 dark:text-indigo-400 border border-indigo-200 dark:border-indigo-800/60">
+                <Globe className="w-3 h-3 text-indigo-500" />
+                <span>{language === 'pt' ? 'Projeto Autoral' : 'Open Project'}</span>
+              </span>
+            )}
             {project.role && (
               <span className="text-xs text-apple-secondary font-medium">• {project.role[language]}</span>
             )}

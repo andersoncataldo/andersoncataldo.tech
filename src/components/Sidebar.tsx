@@ -378,23 +378,50 @@ const Sidebar = ({
   const [activeSection, setActiveSection] = useState('inicio');
 
   useEffect(() => {
-    const sections = Array.from(document.querySelectorAll<HTMLElement>('section[id]'));
-    if (sections.length === 0) return;
+    const handleScroll = () => {
+      const sections = Array.from(document.querySelectorAll<HTMLElement>('section[id]'));
+      if (sections.length === 0) return;
 
-    const observer = new IntersectionObserver(
-      (entries) => {
-        const visible = entries
-          .filter((entry) => entry.isIntersecting)
-          .sort((a, b) => b.intersectionRatio - a.intersectionRatio)[0];
-        if (visible?.target.id) {
-          setActiveSection(visible.target.id);
+      const scrollPos = window.scrollY;
+      const windowHeight = window.innerHeight;
+      const docHeight = document.documentElement.scrollHeight;
+
+      // Top of page
+      if (scrollPos < 120) {
+        setActiveSection('inicio');
+        return;
+      }
+
+      // Bottom of page
+      if (scrollPos + windowHeight >= docHeight - 80) {
+        setActiveSection(sections[sections.length - 1].id);
+        return;
+      }
+
+      // Check current section based on offset
+      const offset = 220;
+      let current = 'inicio';
+      for (const section of sections) {
+        const top = section.offsetTop;
+        if (scrollPos + offset >= top) {
+          current = section.id;
         }
-      },
-      { rootMargin: '-30% 0px -55% 0px', threshold: [0.3, 0.5, 0.7] },
-    );
+      }
+      setActiveSection(current);
+    };
 
-    sections.forEach((section) => observer.observe(section));
-    return () => observer.disconnect();
+    window.addEventListener('scroll', handleScroll, { passive: true });
+    handleScroll();
+
+    // Re-check after lazy components load
+    const timer1 = setTimeout(handleScroll, 400);
+    const timer2 = setTimeout(handleScroll, 1200);
+
+    return () => {
+      window.removeEventListener('scroll', handleScroll);
+      clearTimeout(timer1);
+      clearTimeout(timer2);
+    };
   }, []);
 
   useEffect(() => {
@@ -428,6 +455,9 @@ const Sidebar = ({
     }
 
     event.preventDefault();
+
+    const targetId = href === '#' ? 'inicio' : href.replace('#', '');
+    setActiveSection(targetId);
 
     if (href === '#') {
       window.scrollTo({ top: 0, behavior: 'smooth' });
