@@ -1,7 +1,3 @@
-import previewCarlo from '../assets/project-carlo-acutis-preview.svg';
-import previewPortfolio from '../assets/project-portfolio-preview.svg';
-import previewRpa from '../assets/project-rpa-preview.svg';
-import previewOps from '../assets/project-ops-dashboard.svg';
 import { Project } from '../types';
 
 export const projects: Project[] = [
@@ -50,7 +46,6 @@ export const projects: Project[] = [
     icon: 'Layers',
     github: 'https://github.com/andersoncataldo',
     featured: true,
-    images: [previewOps],
   },
   {
     id: 'sistema-chamados-mais-saude',
@@ -97,7 +92,6 @@ export const projects: Project[] = [
     icon: 'Server',
     github: 'https://github.com/andersoncataldo',
     featured: true,
-    images: [previewOps],
   },
   {
     id: 'sistema-devolucoes-ia',
@@ -144,7 +138,6 @@ export const projects: Project[] = [
     icon: 'Bot',
     github: 'https://github.com/andersoncataldo',
     featured: true,
-    images: [previewOps],
   },
   {
     id: 'ftp-sync-edi-winthor',
@@ -191,7 +184,6 @@ export const projects: Project[] = [
     icon: 'Bot',
     github: 'https://github.com/andersoncataldo',
     featured: true,
-    images: [previewRpa],
   },
   {
     id: 'rpa-fiscal-3coracoes',
@@ -237,7 +229,6 @@ export const projects: Project[] = [
     icon: 'Bot',
     github: 'https://github.com/andersoncataldo',
     featured: true,
-    images: [previewRpa],
   },
   {
     id: 'squad-agentes-ia',
@@ -283,7 +274,6 @@ export const projects: Project[] = [
     icon: 'Cpu',
     github: 'https://github.com/andersoncataldo',
     featured: false,
-    images: [previewCarlo],
   },
   {
     id: 'sistema-ativos-ti',
@@ -329,7 +319,6 @@ export const projects: Project[] = [
     icon: 'ShieldCheck',
     github: 'https://github.com/andersoncataldo',
     featured: false,
-    images: [previewOps],
   },
   {
     id: 'carlo-acutis',
@@ -376,7 +365,6 @@ export const projects: Project[] = [
     github: 'https://github.com/andersoncataldo/CarloAcutis',
     liveDemo: 'https://carlo-acutis-virid.vercel.app',
     featured: false,
-    images: [previewCarlo],
   },
   {
     id: 'portfolio-web-tech',
@@ -424,6 +412,5 @@ export const projects: Project[] = [
     github: 'https://github.com/andersoncataldo/andersoncataldo.tech',
     liveDemo: 'https://andersoncataldo.tech',
     featured: false,
-    images: [previewPortfolio],
   },
 ];

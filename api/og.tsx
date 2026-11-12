@@ -4,19 +4,34 @@ export const config = {
   runtime: 'edge',
 };
 
-export default function handler(req: Request) {
+export default function handler(req: Request): Response {
   try {
     const { searchParams } = new URL(req.url);
     const lang = searchParams.get('lang') === 'en' ? 'en' : 'pt';
+    const section = searchParams.get('section') || 'home';
     const isEn = lang === 'en';
 
-    const title = isEn
-      ? 'Anderson Cataldo | Full-Stack, Automation & AI'
-      : 'Anderson Cataldo | Desenvolvedor Full-Stack & IA';
+    const titleBySection: Record<string, { pt: string; en: string }> = {
+      home: {
+        pt: 'Anderson Cataldo | Desenvolvedor Full-Stack & IA',
+        en: 'Anderson Cataldo | Full-Stack, Automation & AI',
+      },
+      automation: {
+        pt: 'Anderson Cataldo | Engenharia RPA & WinThor Oracle',
+        en: 'Anderson Cataldo | RPA Engineering & WinThor Oracle',
+      },
+      projects: {
+        pt: 'Anderson Cataldo | Sistemas Corporativos & IA',
+        en: 'Anderson Cataldo | Enterprise Systems & AI',
+      },
+    };
+
+    const selectedTitle = titleBySection[section] || titleBySection.home;
+    const title = isEn ? selectedTitle.en : selectedTitle.pt;
 
     const subtitle = isEn
-      ? '15 Corporate Automations • -99.1% FTP_SYNC • 9 Maker-Checker Agents • Huawei HCIA-Storage'
-      : '15 Robôs Corporativos • -99.1% FTP_SYNC • 9 Agentes Maker-Checker • Huawei HCIA-Storage';
+      ? '15 Corporate Automations • -99% FTP_SYNC • 9 Maker-Checker Agents • Huawei HCIA-Storage'
+      : '15 Robôs Corporativos • -99% FTP_SYNC • 9 Agentes Maker-Checker • Huawei HCIA-Storage';
 
     return new ImageResponse(
       (
@@ -72,6 +87,7 @@ export default function handler(req: Request) {
             >
               <div
                 style={{
+                  display: 'flex',
                   width: '10px',
                   height: '10px',
                   borderRadius: '50%',
@@ -86,7 +102,8 @@ export default function handler(req: Request) {
           <div style={{ display: 'flex', flexDirection: 'column', gap: '16px' }}>
             <div
               style={{
-                fontSize: '56px',
+                display: 'flex',
+                fontSize: '54px',
                 fontWeight: 900,
                 letterSpacing: '-0.03em',
                 lineHeight: 1.1,
@@ -98,10 +115,11 @@ export default function handler(req: Request) {
 
             <div
               style={{
+                display: 'flex',
                 fontSize: '24px',
                 color: '#94a3b8',
                 lineHeight: 1.4,
-                maxWidth: '960px',
+                maxWidth: '980px',
               }}
             >
               {subtitle}
@@ -145,9 +163,9 @@ export default function handler(req: Request) {
                 border: '1px solid rgba(51, 65, 85, 0.5)',
               }}
             >
-              <span style={{ fontSize: '32px', fontWeight: 800, color: '#34d399' }}>-99.1%</span>
+              <span style={{ fontSize: '32px', fontWeight: 800, color: '#34d399' }}>-99%</span>
               <span style={{ fontSize: '15px', color: '#94a3b8', marginTop: '4px' }}>
-                {isEn ? 'FTP_SYNC I/O Latency' : 'Tempo de I/O FTP_SYNC'}
+                {isEn ? 'FTP_SYNC Process Time' : 'Tempo Processo FTP_SYNC'}
               </span>
             </div>
 
@@ -162,7 +180,9 @@ export default function handler(req: Request) {
                 border: '1px solid rgba(51, 65, 85, 0.5)',
               }}
             >
-              <span style={{ fontSize: '32px', fontWeight: 800, color: '#c084fc' }}>9 Agentes</span>
+              <span style={{ fontSize: '32px', fontWeight: 800, color: '#c084fc' }}>
+                {isEn ? '9 Agents' : '9 Agentes'}
+              </span>
               <span style={{ fontSize: '15px', color: '#94a3b8', marginTop: '4px' }}>
                 {isEn ? 'Maker-Checker AI Squad' : 'Squad Maker-Checker'}
               </span>
@@ -181,7 +201,7 @@ export default function handler(req: Request) {
             >
               <span style={{ fontSize: '32px', fontWeight: 800, color: '#f59e0b' }}>HCIA</span>
               <span style={{ fontSize: '15px', color: '#94a3b8', marginTop: '4px' }}>
-                {isEn ? 'Huawei Storage Certified' : 'Certificado Huawei Storage'}
+                {isEn ? 'Huawei Storage V5.0' : 'Huawei Storage V5.0'}
               </span>
             </div>
           </div>

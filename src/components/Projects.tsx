@@ -1,6 +1,6 @@
 import { useState, useMemo } from 'react';
 import { motion, useReducedMotion } from 'framer-motion';
-import { Github, ExternalLink, ArrowRight, Layers, Lock, Globe, Sparkles, Server, Bot, Cpu, ShieldCheck } from 'lucide-react';
+import { Github, ExternalLink, ArrowRight, Layers, Lock, Globe, Sparkles, Server, Bot, Cpu, ShieldCheck, Layout, BookOpen } from 'lucide-react';
 import { projects } from '../data/projects';
 import { Project } from '../types';
 import ProjectModal from './ProjectModal';
@@ -13,6 +13,8 @@ const projectIcons: Record<string, typeof Layers> = {
   Bot,
   Cpu,
   ShieldCheck,
+  Layout,
+  BookOpen,
 };
 
 const Projects = () => {

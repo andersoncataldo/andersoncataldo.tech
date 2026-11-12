@@ -2,22 +2,10 @@
 <html lang="pt-BR" class="scroll-smooth">
   <head>
     <meta charset="UTF-8" />
-    <script>
-      (function () {
-        try {
-          const storedTheme = window.localStorage.getItem('portfolio-theme');
-          const initialTheme = storedTheme === 'light' || storedTheme === 'dark'
-            ? storedTheme
-            : window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light';
-          document.documentElement.classList.toggle('dark', initialTheme === 'dark');
-          document.documentElement.style.colorScheme = initialTheme === 'dark' ? 'dark' : 'light';
-        } catch (error) {
-          console.error('Unable to initialize theme', error);
-        }
-      })();
-    </script>
+    <script src="/theme-init.js"></script>
     <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
     <link rel="apple-touch-icon" href="/apple-touch-icon.png" />
+    <meta name="mobile-web-app-capable" content="yes" />
     <meta name="apple-mobile-web-app-capable" content="yes" />
     <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
     <meta name="apple-mobile-web-app-title" content="Anderson Tech" />

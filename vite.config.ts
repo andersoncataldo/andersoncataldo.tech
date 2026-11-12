@@ -7,7 +7,6 @@ export default defineConfig({
     react(),
     VitePWA({
       registerType: 'autoUpdate',
-      includeAssets: ['favicon.svg', 'apple-touch-icon.png', 'anderson-cataldo.webp'],
       manifest: {
         name: 'Anderson Cataldo | Full Stack, Automação & IA',
         short_name: 'Anderson Tech',
@@ -37,7 +36,8 @@ export default defineConfig({
         ],
       },
       workbox: {
-        globPatterns: ['**/*.{js,css,html,ico,png,svg,webp,pdf}'],
+        globPatterns: ['**/*.{js,css,html,svg,webp,pdf}', 'apple-touch-icon.png'],
+        navigateFallbackDenylist: [/^\/api\//],
         runtimeCaching: [
           {
             urlPattern: /^https:\/\/fonts\.googleapis\.com\/.*/i,

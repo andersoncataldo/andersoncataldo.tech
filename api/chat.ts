@@ -4,17 +4,57 @@ export const config = {
   runtime: 'edge',
 };
 
+declare const process: { env?: Record<string, string | undefined> } | undefined;
+
 interface ChatMessage {
   role: 'user' | 'assistant' | 'system';
   content: string;
 }
 
 interface RequestPayload {
-  messages: ChatMessage[];
-  lang?: 'pt' | 'en';
+  messages: unknown;
+  lang?: unknown;
 }
 
-export default async function handler(req: Request) {
+// Rate limiter em memória por isolate Edge (15 req / 60s por IP)
+const RATE_LIMIT_WINDOW_MS = 60_000;
+const RATE_LIMIT_MAX_REQUESTS = 15;
+const ipRateLimitMap = new Map<string, { count: number; resetAt: number }>();
+
+function checkRateLimit(ip: string): boolean {
+  const now = Date.now();
+  const record = ipRateLimitMap.get(ip);
+
+  if (!record || now > record.resetAt) {
+    ipRateLimitMap.set(ip, { count: 1, resetAt: now + RATE_LIMIT_WINDOW_MS });
+    return true;
+  }
+
+  if (record.count >= RATE_LIMIT_MAX_REQUESTS) {
+    return false;
+  }
+
+  record.count += 1;
+  return true;
+}
+
+function isPromptInjectionAttempt(text: string): boolean {
+  const normalized = text.toLowerCase();
+  const patterns = [
+    'ignore previous instructions',
+    'ignore all instructions',
+    'ignore todas as instruções',
+    'esqueça as instruções',
+    'disregard previous',
+    'reveal your system prompt',
+    'mostre seu prompt',
+    'api_key',
+    'gemini_api_key',
+  ];
+  return patterns.some((pattern) => normalized.includes(pattern));
+}
+
+export default async function handler(req: Request): Promise<Response> {
   if (req.method !== 'POST') {
     return new Response(
       JSON.stringify({
@@ -27,9 +67,29 @@ export default async function handler(req: Request) {
     );
   }
 
+  // Verificação de Rate Limit por IP
+  const clientIp = req.headers.get('x-forwarded-for')?.split(',')[0]?.trim() || 'anonymous';
+  if (!checkRateLimit(clientIp)) {
+    return new Response(
+      JSON.stringify({
+        type: 'https://tools.ietf.org/html/rfc6585#section-4',
+        title: 'Too Many Requests',
+        status: 429,
+        detail: 'Limite de requisições excedido. Aguarde um minuto antes de tentar novamente.',
+      }),
+      {
+        status: 429,
+        headers: {
+          'Content-Type': 'application/problem+json',
+          'Retry-After': '60',
+        },
+      },
+    );
+  }
+
   let payload: RequestPayload;
   try {
-    payload = await req.json();
+    payload = (await req.json()) as RequestPayload;
   } catch {
     return new Response(
       JSON.stringify({
@@ -42,8 +102,7 @@ export default async function handler(req: Request) {
     );
   }
 
-  const { messages, lang = 'pt' } = payload;
-  if (!Array.isArray(messages) || messages.length === 0) {
+  if (!Array.isArray(payload.messages) || payload.messages.length === 0) {
     return new Response(
       JSON.stringify({
         type: 'https://tools.ietf.org/html/rfc7231#section-6.5.1',
@@ -55,8 +114,43 @@ export default async function handler(req: Request) {
     );
   }
 
-  const lastUserMessage = [...messages].reverse().find((m) => m.role === 'user')?.content || '';
-  const apiKey = process.env.GEMINI_API_KEY;
+  const lang: 'pt' | 'en' = payload.lang === 'en' ? 'en' : 'pt';
+
+  // Sanitização e validação estrita de cada mensagem (Prevenção contra DoS e TypeError)
+  const sanitizedMessages: ChatMessage[] = payload.messages
+    .slice(-8)
+    .filter(
+      (item): item is { role: unknown; content: unknown } =>
+        Boolean(item) && typeof item === 'object',
+    )
+    .map((item) => ({
+      role: (item.role === 'assistant' ? 'assistant' : 'user') as 'user' | 'assistant',
+      content: typeof item.content === 'string' ? item.content.slice(0, 800).trim() : '',
+    }))
+    .filter((item) => item.content.length > 0);
+
+  if (sanitizedMessages.length === 0) {
+    return new Response(
+      JSON.stringify({
+        type: 'https://tools.ietf.org/html/rfc7231#section-6.5.1',
+        title: 'Bad Request',
+        status: 400,
+        detail: 'Nenhuma mensagem de texto válida encontrada.',
+      }),
+      { status: 400, headers: { 'Content-Type': 'application/problem+json' } },
+    );
+  }
+
+  const lastUserMessage =
+    [...sanitizedMessages].reverse().find((m) => m.role === 'user')?.content || '';
+
+  // Guardrail OWASP LLM01: bloqueio preventivo de Prompt Injection
+  if (isPromptInjectionAttempt(lastUserMessage)) {
+    const safeReply = queryOfflineKnowledge(lastUserMessage, lang);
+    return createStreamResponse(safeReply, 'security_guardrail');
+  }
+
+  const apiKey = typeof process !== 'undefined' ? process?.env?.GEMINI_API_KEY : undefined;
 
   // Se não houver chave no ambiente da Vercel, acionar motor de contingência determinístico
   if (!apiKey) {
@@ -65,19 +159,26 @@ export default async function handler(req: Request) {
   }
 
   try {
-    // Montagem do histórico para o Google Gemini REST API
     const contents = [
       {
         role: 'user',
-        parts: [{ text: `${AI_SYSTEM_PROMPT}\n\n[IMPORTANTE: Responda no idioma: ${lang === 'en' ? 'Inglês' : 'Português'}]` }],
+        parts: [
+          {
+            text: `${AI_SYSTEM_PROMPT}\n\n[IMPORTANTE: Responda no idioma: ${lang === 'en' ? 'Inglês' : 'Português'}]`,
+          },
+        ],
       },
       {
         role: 'model',
-        parts: [{ text: 'Entendido. Sou o Anderson AI e responderei estritamente baseado nos fatos oficiais de carreira de Anderson Cataldo com concisão e precisão.' }],
+        parts: [
+          {
+            text: 'Entendido. Sou o Anderson AI e responderei estritamente baseado nos fatos oficiais de carreira de Anderson Cataldo com concisão e precisão.',
+          },
+        ],
       },
-      ...messages.slice(-6).map((m) => ({
+      ...sanitizedMessages.slice(-6).map((m) => ({
         role: m.role === 'assistant' ? 'model' : 'user',
-        parts: [{ text: m.content }],
+        parts: [{ text: `<user_query>${m.content}</user_query>` }],
       })),
     ];
 
@@ -96,12 +197,10 @@ export default async function handler(req: Request) {
     });
 
     if (!geminiRes.ok || !geminiRes.body) {
-      // Degradação elegante sob erro upstream (ex: 429 quota esgotada)
       const fallbackResponse = queryOfflineKnowledge(lastUserMessage, lang);
       return createStreamResponse(fallbackResponse, 'fallback_quota_exceeded');
     }
 
-    // Criar stream de transformação para repassar o texto limpo ao cliente via SSE
     const transformStream = new TransformStream();
     const writer = transformStream.writable.getWriter();
     const encoder = new TextEncoder();
@@ -110,6 +209,7 @@ export default async function handler(req: Request) {
 
     (async () => {
       let buffer = '';
+      let emittedAnyText = false;
       try {
         while (true) {
           const { done, value } = await reader.read();
@@ -126,7 +226,8 @@ export default async function handler(req: Request) {
               try {
                 const parsed = JSON.parse(jsonStr);
                 const textPart = parsed.candidates?.[0]?.content?.parts?.[0]?.text;
-                if (textPart) {
+                if (typeof textPart === 'string' && textPart.length > 0) {
+                  emittedAnyText = true;
                   await writer.write(encoder.encode(`data: ${JSON.stringify({ text: textPart })}\n\n`));
                 }
               } catch {
@@ -135,11 +236,21 @@ export default async function handler(req: Request) {
             }
           }
         }
+
+        // Se o stream terminou sem emitir texto (ex: filtro de segurança), envia fallback
+        if (!emittedAnyText) {
+          const fallbackText = queryOfflineKnowledge(lastUserMessage, lang);
+          await writer.write(encoder.encode(`data: ${JSON.stringify({ text: fallbackText, mode: 'offline' })}\n\n`));
+        }
       } catch (err) {
         console.error('Erro no processamento do stream Gemini:', err);
       } finally {
-        await writer.write(encoder.encode('data: [DONE]\n\n'));
-        await writer.close();
+        try {
+          await writer.write(encoder.encode('data: [DONE]\n\n'));
+          await writer.close();
+        } catch {
+          // Stream já fechado pelo cliente
+        }
       }
     })();
 
@@ -158,16 +269,14 @@ export default async function handler(req: Request) {
 }
 
 /**
- * Cria uma resposta Server-Sent Events simulada para o motor heurístico de contingência
+ * Cria uma resposta Server-Sent Events para o motor heurístico de contingência
  */
 function createStreamResponse(text: string, mode: string): Response {
   const encoder = new TextEncoder();
   const readable = new ReadableStream({
-    async start(controller) {
-      // Envia evento de metadados
-      controller.enqueue(encoder.encode(`event: meta\ndata: ${JSON.stringify({ mode })}\n\n`));
+    start(controller) {
+      controller.enqueue(encoder.encode(`data: ${JSON.stringify({ mode: 'offline', reason: mode })}\n\n`));
 
-      // Emite o texto em pequenas frações para simular digitação natural
       const words = text.split(' ');
       for (let i = 0; i < words.length; i += 3) {
         const chunk = words.slice(i, i + 3).join(' ') + (i + 3 < words.length ? ' ' : '');

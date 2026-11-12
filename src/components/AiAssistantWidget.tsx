@@ -11,32 +11,138 @@ interface Message {
   mode?: 'gemini' | 'offline';
 }
 
+function getWelcomeText(lang: 'pt' | 'en'): string {
+  return lang === 'en'
+    ? "👋 Hello! I'm **Anderson AI**, official assistant for Anderson Cataldo's portfolio. Ask me about his architecture achievements, enterprise automations (**FTP_SYNC -99%**), **9-agent AI squad**, or certifications!"
+    : '👋 Olá! Sou o **Anderson AI**, assistente oficial do portfólio de Anderson Cataldo. Pergunte-me sobre suas realizações de engenharia, automações corporativas (**FTP_SYNC -99%**), **squad com 9 agentes de IA** ou certificações!';
+}
+
+/**
+ * Renderiza inline markdown (**negrito** e [link](url)) com proteção anti-XSS
+ */
+function renderInlineFormatting(text: string): React.ReactNode[] {
+  const tokenRegex = /(\*\*[^*]+\*\*|\[[^\]]+\]\([^)]+\))/g;
+  const parts = text.split(tokenRegex);
+
+  return parts.map((part, idx) => {
+    if (part.startsWith('**') && part.endsWith('**') && part.length > 4) {
+      return (
+        <strong key={idx} className="font-bold text-slate-900 dark:text-white">
+          {part.slice(2, -2)}
+        </strong>
+      );
+    }
+
+    const linkMatch = part.match(/^\[([^\]]+)\]\(([^)]+)\)$/);
+    if (linkMatch) {
+      const [, label, href] = linkMatch;
+      const isSafeProtocol =
+        href.startsWith('https://') || href.startsWith('http://') || href.startsWith('mailto:');
+      if (isSafeProtocol) {
+        return (
+          <a
+            key={idx}
+            href={href}
+            target={href.startsWith('mailto:') ? undefined : '_blank'}
+            rel={href.startsWith('mailto:') ? undefined : 'noopener noreferrer'}
+            className="font-bold text-indigo-600 dark:text-indigo-400 underline hover:text-indigo-500 transition-colors"
+          >
+            {label}
+          </a>
+        );
+      }
+    }
+
+    return <React.Fragment key={idx}>{part}</React.Fragment>;
+  });
+}
+
+/**
+ * Renderiza blocos Markdown leves (### títulos, - listas e parágrafos) em JSX puro
+ */
+function renderFormattedContent(content: string): React.ReactNode {
+  const lines = content.split('\n');
+  return (
+    <div className="space-y-1.5">
+      {lines.map((line, index) => {
+        const trimmed = line.trim();
+        if (!trimmed) {
+          return <div key={index} className="h-1" />;
+        }
+
+        if (trimmed.startsWith('### ')) {
+          return (
+            <h4
+              key={index}
+              className="font-bold text-xs sm:text-sm text-indigo-600 dark:text-indigo-400 pt-0.5"
+            >
+              {renderInlineFormatting(trimmed.slice(4))}
+            </h4>
+          );
+        }
+
+        if (trimmed.startsWith('- ')) {
+          return (
+            <div key={index} className="flex items-start gap-2 pl-1">
+              <span className="text-indigo-500 dark:text-indigo-400 font-bold mt-0.5">•</span>
+              <span className="flex-1">{renderInlineFormatting(trimmed.slice(2))}</span>
+            </div>
+          );
+        }
+
+        const numberedMatch = trimmed.match(/^(\d+\.)\s+(.*)$/);
+        if (numberedMatch) {
+          return (
+            <div key={index} className="flex items-start gap-2 pl-1">
+              <span className="text-indigo-600 dark:text-indigo-400 font-mono font-bold text-[11px] mt-0.5">
+                {numberedMatch[1]}
+              </span>
+              <span className="flex-1">{renderInlineFormatting(numberedMatch[2])}</span>
+            </div>
+          );
+        }
+
+        return (
+          <p key={index} className="leading-relaxed">
+            {renderInlineFormatting(trimmed)}
+          </p>
+        );
+      })}
+    </div>
+  );
+}
+
 export const AiAssistantWidget: React.FC = () => {
   const { language } = useLanguage();
   const shouldReduceMotion = useReducedMotion();
   const [isOpen, setIsOpen] = useState(false);
   const [inputMessage, setInputMessage] = useState('');
   const [isStreaming, setIsStreaming] = useState(false);
-  const [messages, setMessages] = useState<Message[]>([]);
+  const [messages, setMessages] = useState<Message[]>(() => [
+    {
+      id: 'welcome',
+      role: 'assistant',
+      content: getWelcomeText(language),
+      mode: 'gemini',
+    },
+  ]);
   const messagesEndRef = useRef<HTMLDivElement>(null);
   const inputRef = useRef<HTMLInputElement>(null);
 
-  // Inicializar mensagem de boas-vindas
+  // Atualizar mensagem de boas-vindas ao alternar idioma caso nenhuma pergunta tenha sido enviada
   useEffect(() => {
-    if (messages.length === 0) {
-      setMessages([
-        {
-          id: 'welcome',
-          role: 'assistant',
-          content:
-            language === 'en'
-              ? "👋 Hello! I'm **Anderson AI**, official assistant for Anderson Cataldo's portfolio. Ask me about his architecture achievements, enterprise automations (FTP_SYNC -99%), 9-agent AI squad, or certifications!"
-              : '👋 Olá! Sou o **Anderson AI**, assistente oficial do portfólio de Anderson Cataldo. Pergunte-me sobre suas realizações de engenharia, automações corporativas (FTP_SYNC -99%), squad com 9 agentes de IA ou certificações!',
-          mode: 'gemini',
-        },
-      ]);
-    }
-  }, [language, messages.length]);
+    setMessages((prev) => {
+      if (prev.length === 1 && prev[0].id.startsWith('welcome')) {
+        return [
+          {
+            ...prev[0],
+            content: getWelcomeText(language),
+          },
+        ];
+      }
+      return prev;
+    });
+  }, [language]);
 
   // Rolar para a última mensagem
   useEffect(() => {
@@ -51,7 +157,7 @@ export const AiAssistantWidget: React.FC = () => {
     }
   }, [isOpen]);
 
-  // Escutar evento global para abrir o assistente
+  // Escutar evento global para abrir o assistente (ex: via Command Palette Ctrl+K)
   useEffect(() => {
     const handleOpenAi = () => setIsOpen(true);
     window.addEventListener('open-anderson-ai', handleOpenAi);
@@ -70,7 +176,7 @@ export const AiAssistantWidget: React.FC = () => {
   }, [isOpen]);
 
   const handleSendMessage = async (textToSend?: string) => {
-    const query = (textToSend || inputMessage).trim();
+    const query = (textToSend ?? inputMessage).trim();
     if (!query || isStreaming) return;
 
     setInputMessage('');
@@ -105,43 +211,56 @@ export const AiAssistantWidget: React.FC = () => {
         }),
       });
 
-      if (!response.ok || !response.body) {
-        throw new Error(`HTTP ${response.status}`);
+      const contentType = response.headers.get('content-type') || '';
+      if (!response.ok || !response.body || !contentType.includes('text/event-stream')) {
+        throw new Error(`Invalid SSE response (${response.status})`);
       }
 
       const reader = response.body.getReader();
       const decoder = new TextDecoder();
+      let buffer = '';
       let accumulated = '';
+      let detectedMode: 'gemini' | 'offline' = 'gemini';
 
       while (true) {
         const { done, value } = await reader.read();
         if (done) break;
 
-        const chunk = decoder.decode(value, { stream: true });
-        const lines = chunk.split('\n');
+        buffer += decoder.decode(value, { stream: true });
+        const lines = buffer.split('\n');
+        buffer = lines.pop() || '';
 
         for (const line of lines) {
           if (line.startsWith('data: ')) {
             const dataStr = line.slice(6).trim();
             if (dataStr === '[DONE]') continue;
             try {
-              const parsed = JSON.parse(dataStr);
+              const parsed = JSON.parse(dataStr) as { text?: string; mode?: string };
+              if (parsed.mode === 'offline') {
+                detectedMode = 'offline';
+              }
               if (parsed.text) {
                 accumulated += parsed.text;
                 setMessages((prev) =>
                   prev.map((msg) =>
-                    msg.id === assistantId ? { ...msg, content: accumulated } : msg,
+                    msg.id === assistantId
+                      ? { ...msg, content: accumulated, mode: detectedMode }
+                      : msg,
                   ),
                 );
               }
             } catch {
-              // Fragmento JSON
+              // Fragmento JSON parcial
             }
           }
         }
       }
+
+      if (!accumulated.trim()) {
+        throw new Error('Empty stream response');
+      }
     } catch {
-      // Fallback determinístico de contingência caso o endpoint falhe (ou no Vite dev sem serverless)
+      // Fallback determinístico de contingência (modo offline ou Vite dev/preview sem backend Vercel)
       const fallbackText = queryOfflineKnowledge(query, language);
       setMessages((prev) =>
         prev.map((msg) =>
@@ -160,10 +279,7 @@ export const AiAssistantWidget: React.FC = () => {
       {
         id: `welcome-${Date.now()}`,
         role: 'assistant',
-        content:
-          language === 'en'
-            ? 'Conversation history cleared. What would you like to know about Anderson Cataldo?'
-            : 'Histórico limpo. O que você gostaria de saber sobre a carreira de Anderson Cataldo?',
+        content: getWelcomeText(language),
         mode: 'gemini',
       },
     ]);
@@ -178,7 +294,7 @@ export const AiAssistantWidget: React.FC = () => {
           onClick={() => setIsOpen((prev) => !prev)}
           whileHover={shouldReduceMotion ? {} : { scale: 1.05 }}
           whileTap={shouldReduceMotion ? {} : { scale: 0.95 }}
-          className="relative group flex items-center gap-2.5 px-4 py-3 rounded-full bg-slate-900/90 dark:bg-indigo-950/90 backdrop-blur-md text-white border border-indigo-500/30 hover:border-indigo-400 shadow-xl shadow-indigo-950/30 transition-all focus:outline-none focus-visible:ring-2 focus-visible:ring-indigo-400"
+          className="relative group flex items-center gap-2.5 px-4 py-3 rounded-full bg-slate-900/95 dark:bg-indigo-950/95 backdrop-blur-md text-white border border-indigo-500/30 hover:border-indigo-400 shadow-xl shadow-indigo-950/30 transition-all focus:outline-none focus-visible:ring-2 focus-visible:ring-indigo-400"
           aria-label={isOpen ? 'Fechar assistente de IA' : 'Abrir assistente conversacional de IA'}
           aria-expanded={isOpen}
         >
@@ -205,7 +321,7 @@ export const AiAssistantWidget: React.FC = () => {
             animate={shouldReduceMotion ? { opacity: 1 } : { opacity: 1, y: 0, scale: 1 }}
             exit={shouldReduceMotion ? { opacity: 0 } : { opacity: 0, y: 20, scale: 0.95 }}
             transition={{ duration: 0.2 }}
-            className="fixed bottom-22 right-4 sm:right-6 z-50 w-[calc(100vw-2rem)] sm:w-[420px] max-h-[82vh] h-[580px] flex flex-col rounded-2xl bg-white/95 dark:bg-slate-900/95 backdrop-blur-xl border border-slate-200 dark:border-slate-800 shadow-2xl shadow-indigo-950/40 overflow-hidden"
+            className="fixed bottom-24 right-4 sm:right-6 z-50 w-[calc(100vw-2rem)] sm:w-[420px] max-h-[80vh] h-[560px] flex flex-col rounded-2xl bg-white/95 dark:bg-slate-900/95 backdrop-blur-xl border border-slate-200 dark:border-slate-800 shadow-2xl shadow-indigo-950/40 overflow-hidden"
             role="dialog"
             aria-label="Assistente Virtual Anderson AI"
           >
@@ -221,13 +337,17 @@ export const AiAssistantWidget: React.FC = () => {
                     <h3 className="font-sans font-bold text-sm text-slate-900 dark:text-white">
                       Anderson AI
                     </h3>
-                    <span className="px-1.5 py-0.2 rounded text-[10px] font-mono font-bold bg-indigo-50 dark:bg-indigo-950 text-indigo-600 dark:text-indigo-400 border border-indigo-200 dark:border-indigo-800">
+                    <span className="px-1.5 py-0.5 rounded text-[10px] font-mono font-bold bg-indigo-50 dark:bg-indigo-950 text-indigo-600 dark:text-indigo-400 border border-indigo-200 dark:border-indigo-800">
                       RAG
                     </span>
                   </div>
                   <p className="text-[11px] text-slate-500 dark:text-slate-400 flex items-center gap-1">
                     <ShieldCheck className="w-3 h-3 text-emerald-500" />
-                    <span>{language === 'en' ? 'Grounded & Anti-Hallucination' : 'Fatos Verificados & Anti-Alucinação'}</span>
+                    <span>
+                      {language === 'en'
+                        ? 'Grounded & Anti-Hallucination'
+                        : 'Fatos Verificados & Anti-Alucinação'}
+                    </span>
                   </p>
                 </div>
               </div>
@@ -280,15 +400,21 @@ export const AiAssistantWidget: React.FC = () => {
                   className={`flex flex-col ${msg.role === 'user' ? 'items-end' : 'items-start'}`}
                 >
                   <div
-                    className={`max-w-[85%] rounded-2xl px-3.5 py-2.5 ${
+                    className={`max-w-[88%] rounded-2xl px-3.5 py-2.5 ${
                       msg.role === 'user'
                         ? 'bg-indigo-600 text-white rounded-br-xs'
                         : 'bg-slate-100 dark:bg-slate-800/80 text-slate-800 dark:text-slate-100 border border-slate-200/60 dark:border-slate-700/60 rounded-bl-xs'
                     }`}
                   >
-                    <div className="whitespace-pre-wrap font-sans">
-                      {msg.content || (
-                        <span className="inline-flex items-center gap-1 text-slate-400 italic">
+                    <div className="font-sans">
+                      {msg.content ? (
+                        msg.role === 'assistant' ? (
+                          renderFormattedContent(msg.content)
+                        ) : (
+                          <p className="whitespace-pre-wrap">{msg.content}</p>
+                        )
+                      ) : (
+                        <span className="inline-flex items-center gap-1 text-slate-400 italic py-1">
                           <span className="w-1.5 h-1.5 rounded-full bg-slate-400 animate-pulse" />
                           <span className="w-1.5 h-1.5 rounded-full bg-slate-400 animate-pulse delay-100" />
                           <span className="w-1.5 h-1.5 rounded-full bg-slate-400 animate-pulse delay-200" />
@@ -299,7 +425,9 @@ export const AiAssistantWidget: React.FC = () => {
 
                   {msg.role === 'assistant' && msg.mode === 'offline' && (
                     <span className="text-[10px] text-amber-600 dark:text-amber-400 mt-1 flex items-center gap-1 font-mono">
-                      <span>• {language === 'en' ? 'Offline Verified Cache' : 'Modo Factual Local'}</span>
+                      <span>
+                        • {language === 'en' ? 'Verified Local Knowledge Base' : 'Base Factual Verificada'}
+                      </span>
                     </span>
                   )}
                 </div>
@@ -321,6 +449,7 @@ export const AiAssistantWidget: React.FC = () => {
                   type="text"
                   value={inputMessage}
                   onChange={(e) => setInputMessage(e.target.value)}
+                  maxLength={500}
                   placeholder={
                     language === 'en'
                       ? 'Ask about projects, architecture, stack...'
