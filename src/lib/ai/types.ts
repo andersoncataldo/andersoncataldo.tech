@@ -10,6 +10,7 @@ export type ChunkCategory =
   | 'ai_agents'
   | 'skill'
   | 'metric'
+  | 'portfolio_feature'
   | 'contact';
 
 export type IntentLabel =
@@ -21,9 +22,33 @@ export type IntentLabel =
   | 'fora_de_escopo'
   | 'injecao';
 
+export type QuestionAspect =
+  | 'general'
+  | 'challenge'
+  | 'solution'
+  | 'architecture'
+  | 'result_impact'
+  | 'role'
+  | 'metrics'
+  | 'duration_when'
+  | 'location_where'
+  | 'yes_no_skill';
+
 export interface BilingualText {
   pt: string;
   en: string;
+}
+
+export interface ChunkFacets {
+  challenge?: BilingualText;
+  solution?: BilingualText;
+  architecture?: BilingualText;
+  resultImpact?: BilingualText;
+  role?: BilingualText;
+  metricsSummary?: BilingualText;
+  deepDive?: BilingualText;
+  duration_when?: BilingualText;
+  location_where?: BilingualText;
 }
 
 export interface KnowledgeChunk {
@@ -36,6 +61,8 @@ export interface KnowledgeChunk {
   shortAnswer: BilingualText;
   /** Detalhamento completo para aprofundamento técnico ou contexto do LLM */
   content: BilingualText;
+  /** Facetas estruturadas para responder perguntas específicas sem repetir o mesmo texto */
+  facets?: ChunkFacets;
   /** Palavras-chave e sinônimos bilíngues para busca lexical BM25 e vetorial */
   keywords: string[];
   /** Entidades canônicas associadas (ex.: 'ftp_sync', 'winthor', 'unifor', 'hcia') */
@@ -89,10 +116,12 @@ export interface ChatMessageItem {
 
 export interface IntentPrediction {
   intent: IntentLabel;
+  aspect: QuestionAspect;
   confidence: number;
   scores: Record<IntentLabel, number>;
   isFollowUp: boolean;
   detectedUnlistedTech: string[];
+  detectedKnownTech: string[];
 }
 
 export interface ScoredChunk {

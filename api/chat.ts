@@ -51,8 +51,8 @@ const SEMANTIC_CACHE_MAX = 60;
 const SEMANTIC_CACHE_TTL_MS = 10 * 60_000;
 const semanticCache = new Map<string, { reply: string; mode: 'gemini' | 'offline'; expiresAt: number }>();
 
-function getCacheKey(lang: SupportedLanguage, resolvedQuery: string): string {
-  return `${lang}:${normalizeText(resolvedQuery)}`;
+function getCacheKey(lang: SupportedLanguage, aspect: string, resolvedQuery: string): string {
+  return `${lang}:${aspect}:${normalizeText(resolvedQuery)}`;
 }
 
 function getCachedReply(key: string): { reply: string; mode: 'gemini' | 'offline' } | null {
@@ -221,10 +221,15 @@ export default async function handler(req: Request): Promise<Response> {
     return createStreamResponse(direct.reply, 'offline', `direct_intent_${intent.intent}`);
   }
 
-  // 4. Consulta ao Cache Semântico LRU
-  const cacheKey = getCacheKey(lang, retrieval.resolvedQuery);
+  // 4. Consulta ao Cache Semântico LRU (ignora cache se a mesma resposta já apareceu na conversa atual)
+  const cacheKey = getCacheKey(lang, intent.aspect, retrieval.resolvedQuery);
   const cached = getCachedReply(cacheKey);
-  if (cached) {
+  const recentAssistantTexts = historyBeforeLast
+    .filter((m) => m.role === 'assistant')
+    .slice(-2)
+    .map((m) => m.content)
+    .join('\n');
+  if (cached && (!recentAssistantTexts || !recentAssistantTexts.includes(cached.reply.slice(0, 60)))) {
     return createStreamResponse(cached.reply, cached.mode, 'semantic_cache_hit');
   }
 

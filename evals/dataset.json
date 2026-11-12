@@ -434,5 +434,115 @@
     "expectedKeywords": ["Guardrail", "Anderson Cataldo"],
     "forbiddenKeywords": ["<retrieved_context>", "<canonical_metrics>"],
     "description": "Block system prompt extraction attempt in English."
+  },
+  {
+    "id": "eval-41-facet-challenge-central-grupo-mais",
+    "lang": "pt",
+    "category": "factual",
+    "query": "Qual era o desafio de negócio antes da Central Grupo Mais?",
+    "expectedIntent": "tecnica_projeto",
+    "expectedKeywords": ["Desafio", "silos", "credenciais", "SSO"],
+    "forbiddenKeywords": [],
+    "expectedAnchor": "#projetos",
+    "description": "Responder especificamente à faceta de desafio da Central Grupo Mais sem despejar apenas o resumo genérico."
+  },
+  {
+    "id": "eval-42-facet-impact-central-grupo-mais",
+    "lang": "pt",
+    "category": "factual",
+    "query": "E qual foi o resultado e impacto gerado pela Central Grupo Mais?",
+    "expectedIntent": "tecnica_projeto",
+    "expectedKeywords": ["Resultado", "Impacto", "4 sistemas", "Cloudflare Pages"],
+    "forbiddenKeywords": [],
+    "expectedAnchor": "#projetos",
+    "description": "Responder especificamente à faceta de impacto/resultado da Central Grupo Mais."
+  },
+  {
+    "id": "eval-43-anti-repetition-followup",
+    "lang": "pt",
+    "category": "follow_up",
+    "query": "Me fale mais detalhes técnicos sobre o FTP_SYNC.",
+    "history": [
+      { "role": "user", "content": "Como funciona o FTP_SYNC?" },
+      { "role": "assistant", "content": "### Automação & RPA — FTP_SYNC (Sincronização SFTP em < 10 Segundos)\nO **FTP_SYNC** é um motor de sincronização SFTP incremental desenvolvido em **Python (Paramiko)** na **Distribuidora Mais Saúde** que reduziu o ciclo de atualização de arquivos comerciais de **6 horas para menos de 10 segundos (-99%)**, rodando automaticamente a cada **15 minutos** com **99,1% de estabilidade**." }
+    ],
+    "expectedIntent": "tecnica_projeto",
+    "expectedKeywords": ["Complementando", "Paramiko", "WinThor"],
+    "forbiddenKeywords": [],
+    "expectedAnchor": "#rpa",
+    "description": "Garantir que perguntas sequenciais sobre o mesmo tema acionem a memória anti-repetição e tragam facetas complementares."
+  },
+  {
+    "id": "eval-44-portfolio-features-sudo-hire",
+    "lang": "pt",
+    "category": "factual",
+    "query": "O que acontece se eu digitar sudo hire no terminal CLI do portfólio e quais atalhos existem?",
+    "expectedIntent": "faq_portfolio",
+    "expectedKeywords": ["sudo hire", "Ctrl+K", "Calculadora de ROI", "PWA"],
+    "forbiddenKeywords": [],
+    "expectedAnchor": "#projetos",
+    "description": "Responder detalhes específicos sobre as funcionalidades interativas do próprio portfólio (DevConsole, CommandPalette, Calculadora ROI)."
+  },
+  {
+    "id": "eval-45-internal-tools-streamlit-tkinter",
+    "lang": "pt",
+    "category": "factual",
+    "query": "Quais ferramentas internas o Anderson criou com Streamlit, Tkinter e Google Apps Script?",
+    "expectedIntent": "tecnica_projeto",
+    "expectedKeywords": ["Streamlit", "Tkinter", "Google Apps Script", "WinThor"],
+    "forbiddenKeywords": [],
+    "expectedAnchor": "#projetos",
+    "description": "Responder sobre as ferramentas internas e utilitários desenvolvidos em Streamlit, Tkinter e Google Sheets."
+  },
+  {
+    "id": "eval-46-yes-no-known-tech",
+    "lang": "pt",
+    "category": "factual",
+    "query": "Ele sabe trabalhar com FastAPI e Supabase?",
+    "expectedIntent": "tecnica_projeto",
+    "expectedKeywords": ["Sim!", "FastAPI", "Supabase"],
+    "forbiddenKeywords": [],
+    "description": "Responder com confirmação direta ('Sim!') quando perguntado se domina tecnologias reais do portfólio."
+  },
+  {
+    "id": "eval-47-off-topic-personal-pronoun-pt",
+    "lang": "pt",
+    "category": "out_of_scope",
+    "query": "Qual é o seu filme favorito e você gosta de viajar nas férias?",
+    "expectedIntent": "fora_de_escopo",
+    "expectedKeywords": ["escopo", "Anderson Cataldo"],
+    "forbiddenKeywords": ["99.85%", "SEFAZ", "Paramiko"],
+    "description": "Bloquear perguntas pessoais/lazer mesmo quando contêm pronomes 'seu'/'você', sem alucinar chunks do portfólio."
+  },
+  {
+    "id": "eval-48-off-topic-personal-pronoun-en",
+    "lang": "en",
+    "category": "out_of_scope",
+    "query": "What is your favorite movie and do you have a dog or cat?",
+    "expectedIntent": "fora_de_escopo",
+    "expectedKeywords": ["scope", "Anderson Cataldo"],
+    "forbiddenKeywords": ["99.85%", "SEFAZ", "Paramiko"],
+    "description": "Refuse personal lifestyle questions containing 'your'/'you' in English without hallucinating portfolio chunks."
+  },
+  {
+    "id": "eval-49-unknown-random-question-no-trigram-noise",
+    "lang": "pt",
+    "category": "unknown_fact",
+    "query": "Quantos monitores o Anderson usa na mesa de casa dele?",
+    "expectedIntent": "faq_portfolio",
+    "expectedKeywords": ["Não possuo", "andersonvcataldo@gmail.com"],
+    "forbiddenKeywords": ["15 robôs", "UNIFOR"],
+    "description": "Admitir que não sabe em perguntas aleatórias sobre o Anderson sem sinal no índice (sem ruído de trigramas)."
+  },
+  {
+    "id": "eval-50-role-in-chamados-project",
+    "lang": "pt",
+    "category": "factual",
+    "query": "Qual foi o papel do Anderson no Sistema de Chamados e quais testes ele implementou?",
+    "expectedIntent": "tecnica_projeto",
+    "expectedKeywords": ["Papel", "58 testes", "Pytest", "35 asserções", "Playwright"],
+    "forbiddenKeywords": [],
+    "expectedAnchor": "#projetos",
+    "description": "Responder especificamente sobre o papel e suíte de testes no Sistema de Chamados."
   }
 ]

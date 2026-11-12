@@ -7,9 +7,6 @@ const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
 const ROOT_DIR = path.resolve(__dirname, '..');
 
-/**
- * Carrega um módulo TypeScript do repositório em memória usando esbuild
- */
 async function loadTsModule(relativePath) {
   const fullPath = path.resolve(ROOT_DIR, relativePath);
   const result = await esbuild.build({
@@ -25,17 +22,11 @@ async function loadTsModule(relativePath) {
   return import(dataUrl);
 }
 
-/**
- * Normaliza vetor L2 e quantiza em 4 casas decimais para manter o JSON leve
- */
 function normalizeAndQuantize(vec) {
   const norm = Math.sqrt(vec.reduce((acc, v) => acc + v * v, 0)) || 1;
   return vec.map((v) => Number((v / norm).toFixed(4)));
 }
 
-/**
- * Gera embeddings reais via Gemini API (text-embedding-004) quando GEMINI_API_KEY está presente no build
- */
 async function fetchGeminiEmbeddingsBatch(texts, apiKey) {
   const model = 'models/text-embedding-004';
   const url = `https://generativelanguage.googleapis.com/v1beta/${model}:batchEmbedContents?key=${apiKey}`;
@@ -62,7 +53,7 @@ async function fetchGeminiEmbeddingsBatch(texts, apiKey) {
 }
 
 async function main() {
-  console.log('🔨 [build-knowledge] Extraindo base de conhecimento de src/data/* e src/config/links.ts...');
+  console.log('🔨 [build-knowledge] Extraindo base completa e facetada de src/data/* e src/config/links.ts...');
 
   const [projectsMod, expMod, skillsMod, metricsMod, autoMod, linksMod] = await Promise.all([
     loadTsModule('src/data/projects.ts'),
@@ -94,15 +85,29 @@ async function main() {
       },
       shortAnswer: {
         pt: '**Anderson Viana Cataldo** é Desenvolvedor Full-Stack, especialista em **Automação Corporativa (RPA)** e **Arquitetura de Agentes de IA (LLM)** com foco em Python e TypeScript. Atua na **Distribuidora Mais Saúde** (desde Jun/2026), atuou no **Grupo 3corações** (Jan/2025 a Abr/2026) e cursa o **6º semestre de Ciência da Computação na UNIFOR**.',
-        en: '**Anderson Viana Cataldo** is a Full-Stack Developer specializing in **Enterprise Automation (RPA)** and **AI Agent Architectures (LLM)** using Python and TypeScript. He currently works at **Distribuidora Mais Saúde** (since Jun/2026), previously worked at **Grupo 3corações** (Jan/2025 to Apr/2026), and is a **6th-semester Computer Science student at UNIFOR**.',
+        en: '**Anderson Viana Cataldo** is a Full-Stack Developer specializing in **Enterprise Automation (RPA)** and **AI Agent Architectures (LLM)** using Python and TypeScript. He works at **Distribuidora Mais Saúde** (since Jun/2026), previously worked at **Grupo 3corações** (Jan/2025 to Apr/2026), and is in the **6th semester of Computer Science at UNIFOR**.',
       },
       content: {
-        pt: 'Anderson Viana Cataldo projeta e entrega monorepos corporativos (Next.js 16, React 19/18, FastAPI, Node.js, PostgreSQL/Supabase RLS), orquestra squads multiagente Maker-Checker (9 agentes com Claude Code, MCP e Gemini API) e desenvolve robôs de integração em Python conectados ao ERP TOTVS WinThor (Oracle). Acumula 15 robôs em produção, redução de 99% no FTP_SYNC (de 6h para <10s), certificação internacional Huawei HCIA-Storage V5.0 e Inglês Avançado.',
-        en: 'Anderson Viana Cataldo architects and delivers corporate monorepos (Next.js 16, React 19/18, FastAPI, Node.js, PostgreSQL/Supabase RLS), orchestrates Maker-Checker multi-agent squads (9 agents with Claude Code, MCP, and Gemini API), and builds Python integration robots connected to TOTVS WinThor ERP (Oracle). He has 15 production robots, a -99% time reduction in FTP_SYNC (6h to <10s), Huawei HCIA-Storage V5.0 certification, and Advanced English.',
+        pt: 'Seus 3 pilares centrais são: (1) IA Aplicada & Agentes Autônomos (arquitetura Maker-Checker com 9 agentes, Claude Code, MCP e Gemini API); (2) Automação & Integração ERP Industrial (15 robôs Python integrados ao WinThor/Oracle e SEFAZ, incluindo o FTP_SYNC com redução de 99%); e (3) Engenharia Full-Stack & Qualidade Rigorosa (monorepos com SSO JWT, Next.js 16, React 19/18, FastAPI, Supabase RLS, 58 testes Pytest e 35 asserções Playwright).',
+        en: 'His 3 core pillars are: (1) Applied AI & Autonomous Agents (9-agent Maker-Checker architecture with Claude Code, MCP, and Gemini API); (2) Industrial ERP Automation (15 Python robots integrated with WinThor/Oracle and SEFAZ, including FTP_SYNC with -99% time reduction); and (3) Full-Stack Engineering & Strict Quality (SSO JWT monorepos, Next.js 16, React 19/18, FastAPI, Supabase RLS, 58 Pytest suites, and 35 Playwright assertions).',
+      },
+      facets: {
+        role: {
+          pt: 'Anderson atua como Desenvolvedor Full-Stack, Engenheiro de Automação RPA e Arquiteto de Sistemas Multiagente de IA.',
+          en: 'Anderson serves as a Full-Stack Developer, RPA Automation Engineer, and Multi-Agent AI Architect.',
+        },
+        architecture: {
+          pt: 'Sua atuação apoia-se em 3 pilares técnicos: **IA Aplicada & Agentes Autônomos** (Claude Code, MCP, Gemini API, Maker-Checker), **Automação & Integração ERP Industrial** (Python, WinThor Oracle, EDI Pharma Link, SEFAZ XML) e **Engenharia Full-Stack** (Next.js 16, React 19, FastAPI, Node.js, Supabase RLS).',
+          en: 'His work rests on 3 technical pillars: **Applied AI & Autonomous Agents** (Claude Code, MCP, Gemini API, Maker-Checker), **Industrial ERP Automation** (Python, WinThor Oracle, EDI Pharma Link, SEFAZ XML), and **Full-Stack Engineering** (Next.js 16, React 19, FastAPI, Node.js, Supabase RLS).',
+        },
+        resultImpact: {
+          pt: 'Em produção real, já entregou **15 robôs corporativos**, unificou **4 sistemas internos sob SSO**, reduziu o pipeline **FTP_SYNC em 99% (6h para <10s)** e poupou **mais de 200 horas manuais**.',
+          en: 'In real production, he has shipped **15 corporate robots**, unified **4 internal systems under SSO**, slashed the **FTP_SYNC pipeline by 99% (6h to <10s)**, and saved **over 200 manual hours**.',
+        },
       },
       keywords: [
         'quem e', 'who is', 'anderson', 'cataldo', 'viana', 'resumo', 'summary', 'bio', 'perfil', 'profile',
-        'objetivo', 'goal', 'foco', 'posicionamento', 'diferencial', 'full-stack', 'fullstack', 'sobre', 'about',
+        'objetivo', 'goal', 'foco', 'posicionamento', 'diferencial', 'pilares', 'pillars', 'sobre', 'about',
       ],
       entities: ['anderson_cataldo', 'mais_saude', '3coracoes', 'unifor'],
       metrics: ['15 robôs', '-99%', '9 agentes', '6º semestre'],
@@ -125,6 +130,12 @@ async function main() {
       content: {
         pt: 'Cronologia completa: (1) Tempo de Trabalho: Iniciou em Janeiro de 2025 no Grupo 3corações (Jan/2025 a Abr/2026 — 1 ano e 4 meses no Setor Fiscal desenvolvendo 5 robôs RPA para 15.000+ XMLs/mês e CNDs) e atua desde Junho de 2026 na Distribuidora Mais Saúde (Full-Stack, Automação WinThor com 10 robôs, FTP_SYNC -99%, Central Grupo Mais 4 sistemas SSO e 9 agentes de IA). (2) Tempo de Estudo: 3 anos (2024 a 2027) em Ciência da Computação na UNIFOR, cursando o 6º semestre, além da certificação Huawei HCIA-Storage V5.0 (Jun/2026) e Inglês Avançado.',
         en: 'Full timeline: (1) Work Duration: Started in January 2025 at Grupo 3corações (Jan/2025 to Apr/2026 — 1 year and 4 months in Tax RPA building 5 robots for 15,000+ XMLs/mo and CNDs) and works since June 2026 at Distribuidora Mais Saúde (Full-Stack, 10 WinThor robots, FTP_SYNC -99%, Central Grupo Mais 4 SSO systems, and 9 AI agents). (2) Study Duration: 3 years (2024 to 2027) in Computer Science at UNIFOR, currently in the 6th semester, plus Huawei HCIA-Storage V5.0 certification (Jun/2026) and Advanced English.',
+      },
+      facets: {
+        duration_when: {
+          pt: 'No mercado corporativo, Anderson atua continuamente desde **Janeiro de 2025 (~2 anos de experiência prática)**: trabalhou por **1 ano e 4 meses no Grupo 3corações (Jan/2025 – Abr/2026)** e está na **Distribuidora Mais Saúde desde Junho de 2026**, somando **15 robôs entregues**. Nos estudos, dedica **3 anos (2024 – 2027)** à graduação em **Ciência da Computação na UNIFOR**, estando atualmente no **6º Semestre**.',
+          en: 'In corporate production, Anderson has worked continuously since **January 2025 (~2 years of practical experience)**: **1 year and 4 months at Grupo 3corações (Jan/2025 – Apr/2026)** and at **Distribuidora Mais Saúde since June 2026**, totaling **15 shipped robots**. Academically, he has **3 years of study (2024 – 2027)** in **Computer Science at UNIFOR**, currently in the **6th Semester**.',
+        },
       },
       keywords: [
         'tempo de trabalho', 'tempo de experiencia', 'anos de experiencia', 'quanto tempo trabalha',
@@ -153,6 +164,16 @@ async function main() {
         pt: 'Na UNIFOR, conduz projetos interdisciplinares utilizando React, TypeScript, Java (Spring Boot), Python (FastAPI), modelagem relacional em PostgreSQL e Oracle, Clean Code e Spec-Driven Development. Mantém inglês avançado e certificação internacional Huawei HCIA-Storage V5.0.',
         en: 'At UNIFOR, he leads interdisciplinary projects using React, TypeScript, Java (Spring Boot), Python (FastAPI), relational modeling on PostgreSQL and Oracle, Clean Code, and Spec-Driven Development. He also holds Advanced English proficiency and the Huawei HCIA-Storage V5.0 certification.',
       },
+      facets: {
+        duration_when: {
+          pt: 'A graduação em **Ciência da Computação na UNIFOR** compreende o período de **2024 a 2027 (3 anos de estudo dedicados)**, e Anderson encontra-se atualmente no **6º Semestre**.',
+          en: 'His **B.Sc. in Computer Science at UNIFOR** spans **2024 to 2027 (3 years of study)**, and Anderson is currently in his **6th Semester**.',
+        },
+        architecture: {
+          pt: 'A grade e os projetos acadêmicos na UNIFOR envolvem **Estruturas de Dados Avançadas**, **Análise Assintótica (Big-O)**, **Java com Spring Boot**, **Python com FastAPI**, **React/TypeScript**, **PostgreSQL**, **Oracle** e **Clean Code**.',
+          en: 'Coursework and academic projects at UNIFOR cover **Advanced Data Structures**, **Asymptotic Analysis (Big-O)**, **Java with Spring Boot**, **Python with FastAPI**, **React/TypeScript**, **PostgreSQL**, **Oracle**, and **Clean Code**.',
+        },
+      },
       keywords: [
         'faculdade', 'universidade', 'unifor', 'ciencia da computacao', 'computer science', 'semestre',
         'semester', '6 semestre', '6º semestre', '6th semester', 'graduacao', 'degree', 'college',
@@ -179,6 +200,12 @@ async function main() {
       content: {
         pt: 'A certificação Huawei HCIA-Storage V5.0 é a única certificação internacional oficial declarada no portfólio (ele não declara certificações AWS, Azure ou Kubernetes como possuídas). Ela fundamenta sua atuação em infraestrutura de armazenamento corporativo, resiliência de dados e continuidade de negócios.',
         en: 'The Huawei HCIA-Storage V5.0 certification is the official international certification in his portfolio (he does not claim AWS, Azure, or Kubernetes certifications). It backs his work in enterprise storage infrastructure, data resilience, and business continuity.',
+      },
+      facets: {
+        architecture: {
+          pt: 'O escopo técnico da certificação **Huawei HCIA-Storage V5.0** abrange redes de armazenamento **SAN (Fibre Channel e IP-SAN)**, sistemas **NAS**, proteção por paridade **RAID**, snapshots, replicação remota, virtualização de storage e planos de **Disaster Recovery**.',
+          en: 'The technical scope of **Huawei HCIA-Storage V5.0** covers **SAN (Fibre Channel & IP-SAN)** storage networks, **NAS** systems, **RAID** parity protection, snapshots, remote replication, storage virtualization, and **Disaster Recovery** planning.',
+        },
       },
       keywords: [
         'certificacao', 'certificacoes', 'certificado', 'certification', 'certifications', 'huawei',
@@ -231,6 +258,20 @@ async function main() {
         pt: 'Como a otimização de -99% foi alcançada no FTP_SYNC: antes, a operação baixava arquivos manualmente em múltiplos FTPs, convertia layouts e importava no WinThor (6 horas/dia). Anderson implementou varredura agendada a cada 15 min via Windows Task Scheduler e executável PyInstaller, verificação de integridade por hash/checksum para idempotência (evitando reprocessar arquivos duplicados), parsing posicional EDI Pharma Link e transferência direta via SFTP (Paramiko) para o WinThor Cloud conectado ao banco Oracle, com logs estruturados e painel de monitoramento em Streamlit.',
         en: 'How the -99% optimization in FTP_SYNC was achieved: previously, staff manually downloaded files from partner FTPs, converted layouts, and imported them into WinThor (6 hours/day). Anderson engineered a scheduled 15-minute worker packaged with PyInstaller, checksum hash verification for file idempotency, fixed-width EDI Pharma Link parsing, and direct Paramiko SFTP transfer into WinThor Cloud (Oracle DB), monitored via a Streamlit dashboard.',
       },
+      facets: {
+        challenge: {
+          pt: 'Antes do **FTP_SYNC**, o download manual de arquivos em FTPs de parceiros farmacêuticos, a conversão de layout e a importação no **ERP WinThor Cloud (Oracle)** consumiam **6 horas diárias** e geravam atrasos na liberação de pedidos hospitalares.',
+          en: 'Before **FTP_SYNC**, manually downloading files from pharmaceutical partner FTPs, transforming layouts, and importing into **WinThor Cloud ERP (Oracle)** took **6 hours daily** and delayed hospital order fulfillment.',
+        },
+        solution: {
+          pt: 'Para resolver isso, Anderson construiu o **FTP_SYNC** em **Python 3.11+** com **Paramiko (SFTP)** e **ftplib**, rodando de forma autônoma a cada **15 minutos** com validação de hash (idempotência de arquivos), parsing posicional **EDI Pharma Link** (Eurofarma, Smartped, Momenta), empacotamento **PyInstaller** e painel de supervisão em **Streamlit**.',
+          en: 'To solve this, Anderson built **FTP_SYNC** in **Python 3.11+** using **Paramiko (SFTP)** and **ftplib**, running autonomously every **15 minutes** with checksum hash validation (idempotency), **EDI Pharma Link** parsing (Eurofarma, Smartped, Momenta), **PyInstaller** packaging, and a **Streamlit** monitoring dashboard.',
+        },
+        resultImpact: {
+          pt: 'O resultado direto do **FTP_SYNC** foi a redução do tempo de processo de **6 horas para menos de 10 segundos (-99%)**, operando 24/7 a cada 15 minutos com zero erro humano no banco **Oracle do TOTVS WinThor**.',
+          en: 'The direct result of **FTP_SYNC** was slashing execution time from **6 hours to under 10 seconds (-99%)**, running 24/7 every 15 minutes with zero human error into the **TOTVS WinThor Oracle** database.',
+        },
+      },
       keywords: [
         'ftp_sync', 'ftp sync', 'ftpsync', 'sftp', 'ftp', 'paramiko', 'ftplib', '6 horas', '6h',
         '10 segundos', '10s', '99%', '-99%', '15 minutos', '15 min', 'pharma link', 'edi',
@@ -240,7 +281,32 @@ async function main() {
       metrics: ['6 horas', '10 segundos', '-99%', '15 min', '10 robôs'],
     },
 
-    // 7. Squad de 9 Agentes de IA (Maker-Checker)
+    // 7. Ferramentas Internas Mais Saúde (Streamlit, Tkinter, Google Sheets)
+    {
+      id: 'internal-tools-streamlit-tkinter-sheets',
+      category: 'rpa',
+      sectionAnchor: '#projetos',
+      sectionLabel: { pt: 'Ferramentas Internas (Mais Saúde)', en: 'Internal Tooling (Mais Saúde)' },
+      title: {
+        pt: 'Ferramentas Internas: Painel Streamlit, Catálogo Tkinter (Oracle) e Google Sheets',
+        en: 'Internal Tooling: Streamlit Dashboard, Tkinter Catalog Updater & Google Sheets',
+      },
+      shortAnswer: {
+        pt: 'Além dos 10 robôs WinThor e da Central Grupo Mais, Anderson desenvolveu três ferramentas internas estratégicas na **Distribuidora Mais Saúde**: um **painel em Streamlit** para monitorar a execução dos robôs em tempo real, um **atualizador desktop em Tkinter** com consultas em lote ao banco **Oracle (WinThor)** e uma automação de inventário com **Google Sheets API e Google Apps Script**.',
+        en: 'Alongside the 10 WinThor robots and Central Grupo Mais, Anderson delivered three internal tools at **Distribuidora Mais Saúde**: a **Streamlit dashboard** for real-time robot monitoring, a **Tkinter desktop catalog updater** executing batch **Oracle SQL (WinThor)** queries, and an inventory automation using **Google Sheets API and Google Apps Script**.',
+      },
+      content: {
+        pt: 'Essas ferramentas garantem observabilidade operacional para a equipe de TI e negócios: o painel Streamlit exibe logs estruturados e status de cada robô agendado; o utilitário Tkinter permite atualização rápida de catálogos direto no Oracle; e o Google Sheets Apps Script apoia o controle ágil de inventário.',
+        en: 'These tools provide operational observability: the Streamlit dashboard displays structured logs and status for scheduled robots; the Tkinter utility enables fast batch catalog updates in Oracle; and Google Sheets Apps Script supports agile inventory tracking.',
+      },
+      keywords: [
+        'streamlit', 'tkinter', 'google sheets', 'apps script', 'painel de automacoes',
+        'monitoramento de robos', 'atualizador de catalogo', 'ferramentas internas', 'desktop',
+      ],
+      entities: ['streamlit', 'tkinter', 'google_sheets', 'oracle', 'winthor', 'mais_saude'],
+    },
+
+    // 8. Squad de 9 Agentes de IA (Maker-Checker)
     {
       id: 'ai-agents-squad-maker-checker',
       category: 'ai_agents',
@@ -258,6 +324,16 @@ async function main() {
         pt: 'Regra de ouro do modelo Maker-Checker: quem desenvolve o código (Front-End, Back-End, Automação, Banco de Dados, Documentação) NUNCA valida a própria entrega. Os 3 agentes validadores independentes (QA, Segurança AppSec/LGPD e Compliance de Design System) exigem aprovação em 58 testes automatizados em Pytest (E2E, autenticação e LGPD) e 35 asserções visuais em Playwright antes do go-live, operando com menor privilégio e protocolo anti-alucinação.',
         en: 'Golden rule of the Maker-Checker model: the agent that writes the code (Front-End, Back-End, Automation, Database, Documentation) NEVER validates its own work. The 3 independent validator agents (QA, AppSec/LGPD Security, and Design System Compliance) enforce 58 automated Pytest tests and 35 Playwright visual assertions before go-live, operating under least privilege and anti-hallucination guardrails.',
       },
+      facets: {
+        architecture: {
+          pt: 'A divisão exata dos **9 agentes de IA** na Mais Saúde é: **1 Orquestrador** (planeja e decompõe tarefas via OpenSpec), **5 Executores Makers** (Front-End, Back-End, Automação RPA, Banco de Dados e Documentação) e **3 Validadores Checkers independentes** (QA, Segurança/LGPD e Compliance de Design System), integrados via **Claude Code** e **MCP**.',
+          en: 'The exact breakdown of the **9 AI agents** at Mais Saúde is: **1 Orchestrator** (plans and decomposes tasks via OpenSpec), **5 Maker Executors** (Front-End, Back-End, RPA Automation, Database, and Documentation), and **3 independent Checker Validators** (QA, AppSec/LGPD Security, and Design System Compliance), integrated via **Claude Code** and **MCP**.',
+        },
+        solution: {
+          pt: 'O princípio **Maker-Checker** garante que nenhum agente aprove o próprio código: toda entrega dos Makers passa obrigatoriamente por **58 testes Pytest** e **35 asserções Playwright** executados pelos Checkers antes de ir para produção.',
+          en: 'The **Maker-Checker** principle ensures no agent approves its own code: every Maker delivery must pass **58 Pytest tests** and **35 Playwright assertions** enforced by the Checkers before reaching production.',
+        },
+      },
       keywords: [
         '9 agentes', '9 agents', 'squad', 'maker-checker', 'maker checker', 'claude code', 'mcp',
         'model context protocol', 'orquestrador', 'orchestrator', 'openspec', 'agentes de ia',
@@ -267,7 +343,7 @@ async function main() {
       metrics: ['9 agentes', '58 testes Pytest', '35 asserções Playwright'],
     },
 
-    // 8. Qualidade de Software, Pytest e Playwright
+    // 9. Qualidade de Software, Pytest e Playwright
     {
       id: 'qa-testing-pytest-playwright',
       category: 'skill',
@@ -282,8 +358,8 @@ async function main() {
         en: 'Anderson established automated quality gates in production, delivering **58 automated Pytest tests** (covering API E2E flows, JWT/SSO auth, and LGPD anonymization) and **35 Playwright assertions** (visual regression, WCAG 2.1 AA accessibility, and design system drift checks), achieving a **100% pass rate**.',
       },
       content: {
-        pt: 'Os gates de qualidade rodam integrados ao CI/CD (GitHub Actions), combinando lint estrito (ESLint 9 + TypeScript strict mode), auditoria de contraste WCAG AA e homologação independente Maker-Checker.',
-        en: 'Quality gates run continuously in CI/CD (GitHub Actions), combining strict linting (ESLint 9 + TypeScript strict mode), WCAG AA contrast verification, and independent Maker-Checker sign-off.',
+        pt: 'Os gates de qualidade rodam integrados ao CI/CD (GitHub Actions), combinando lint estrito (ESLint 9 + TypeScript strict mode), suíte de 40+ evals de IA, auditoria de contraste WCAG AA e homologação independente Maker-Checker.',
+        en: 'Quality gates run continuously in CI/CD (GitHub Actions), combining strict linting (ESLint 9 + TypeScript strict mode), 40+ AI evals, WCAG AA contrast verification, and independent Maker-Checker sign-off.',
       },
       keywords: [
         'pytest', 'playwright', 'teste', 'testes', 'testing', 'qa', 'qualidade', '58', '35',
@@ -293,7 +369,33 @@ async function main() {
       metrics: ['58 testes Pytest', '35 asserções Playwright'],
     },
 
-    // 9. Contato, Contratação, Disponibilidade e Currículo
+    // 10. Recursos Interativos do Próprio Portfólio (Terminal CLI, Command Palette, Calculadora de ROI, PWA, OG)
+    {
+      id: 'portfolio-interactive-features',
+      category: 'portfolio_feature',
+      sectionAnchor: '#projetos',
+      sectionLabel: { pt: 'Recursos Interativos do Portfólio', en: 'Interactive Portfolio Features' },
+      title: {
+        pt: 'Funcionalidades SaaS do Portfólio: Terminal CLI (sudo hire), Command Palette (Ctrl+K), Simulador de ROI e PWA',
+        en: 'Portfolio SaaS Features: Interactive CLI (sudo hire), Command Palette (Ctrl+K), ROI Simulator & PWA',
+      },
+      shortAnswer: {
+        pt: 'Este portfólio (`andersoncataldo.tech`) foi construído como uma aplicação SaaS interativa contendo: **Command Palette Global (`Ctrl+K` / `Cmd+K`)**, **Terminal CLI Executável (`DevConsole`)** com comandos como `help`, `bio`, `stack`, `rpa`, `ai-agents`, `projects`, `cv` e o easter egg `sudo hire`, **Simulador Interativo de ROI de Automação RPA**, suporte **PWA Offline (`vite-plugin-pwa`)** e geração dinâmica de imagens **OpenGraph no Edge (`/api/og`)**.',
+        en: 'This portfolio (`andersoncataldo.tech`) is engineered as an interactive SaaS application featuring: **Global Command Palette (`Ctrl+K` / `Cmd+K`)**, **Executable CLI Terminal (`DevConsole`)** supporting commands like `help`, `bio`, `stack`, `rpa`, `ai-agents`, `projects`, `cv`, and the `sudo hire` easter egg, **Interactive RPA ROI Calculator**, **Offline PWA support (`vite-plugin-pwa`)**, and **Dynamic Edge OpenGraph generation (`/api/og`)**.',
+      },
+      content: {
+        pt: 'Detalhes das features do site: (1) No Terminal CLI do topo (Hero), digitar "sudo hire" ativa um fast-track de contratação com link direto para o WhatsApp de Anderson, além de abas JSON copiáveis (profile.json, stack.json, metrics.json). (2) A Calculadora de ROI de RPA na seção Automação permite simular volume mensal de documentos, tempo manual por item e custo/hora para calcular horas poupadas e economia anual em R$. (3) O Command Palette (Ctrl+K) permite navegar por seções, baixar o currículo em PT ou EN, alternar tema claro/escuro, mudar idioma e abrir o Anderson AI.',
+        en: 'Site feature details: (1) In the Hero CLI Terminal, typing "sudo hire" triggers a hiring fast-track with a direct WhatsApp CTA, alongside copyable JSON tabs (profile.json, stack.json, metrics.json). (2) The RPA ROI Calculator in the Automation section lets visitors adjust sliders for monthly volume, manual time per item, and hourly rate to compute saved hours and annual savings. (3) The Command Palette (Ctrl+K) enables quick navigation, PT/EN resume downloads, theme/language toggling, and launching Anderson AI.',
+      },
+      keywords: [
+        'sudo hire', 'terminal', 'cli', 'devconsole', 'command palette', 'ctrl+k', 'cmd+k',
+        'atalho', 'calculadora', 'simulador', 'roi', 'pwa', 'offline', 'opengraph', 'api/og',
+        'funcionalidades do site', 'este site', 'este portfolio', 'easter egg',
+      ],
+      entities: ['portfolio_web_tech', 'dev_console', 'command_palette', 'rpa_roi_calculator', 'pwa'],
+    },
+
+    // 11. Contato, Contratação, Disponibilidade e Currículo
     {
       id: 'contact-and-hiring',
       category: 'contact',
@@ -311,20 +413,28 @@ async function main() {
         pt: `Canais oficiais verificados de Anderson Cataldo: E-mail: ${EMAIL} | LinkedIn: ${LINKEDIN_URL} | GitHub: ${GITHUB_URL} | WhatsApp: +55 85 99225-8794 | Localização: ${LOCATION}. Para propostas de contratação, entrevistas técnicas ou projetos de Engenharia Full-Stack, Automação RPA e Agentes de IA, basta acionar qualquer um dos canais acima.`,
         en: `Verified official contact channels for Anderson Cataldo: Email: ${EMAIL} | LinkedIn: ${LINKEDIN_URL} | GitHub: ${GITHUB_URL} | WhatsApp: +55 85 99225-8794 | Location: ${LOCATION}. For hiring inquiries, technical interviews, or Full-Stack, RPA, and AI Engineering opportunities, reach out through any channel above.`,
       },
+      facets: {
+        location_where: {
+          pt: `Anderson mora em **Fortaleza, Ceará, Brasil**, e possui disponibilidade imediata para trabalho **Remoto, Híbrido ou Presencial**.`,
+          en: `Anderson is located in **Fortaleza, Ceará, Brazil**, with immediate availability for **Remote, Hybrid, or On-Site** work.`,
+        },
+      },
       keywords: [
         'contato', 'contact', 'email', 'e-mail', 'linkedin', 'github', 'whatsapp', 'telefone',
         'celular', 'contratar', 'contratacao', 'hire', 'hiring', 'entrevista', 'interview',
         'vaga', 'disponibilidade', 'disponivel', 'remoto', 'remote', 'hibrido', 'presencial',
-        'fortaleza', 'ceara', 'curriculo', 'cv', 'resume', 'pdf', 'falar com',
+        'fortaleza', 'ceara', 'curriculo', 'cv', 'resume', 'pdf', 'falar com', 'onde mora', 'cidade',
       ],
-      entities: ['contato', 'email', 'linkedin', 'github', 'whatsapp', 'curriculo'],
+      entities: ['contato', 'email', 'linkedin', 'github', 'whatsapp', 'curriculo', 'fortaleza'],
     },
   ];
 
-  // 10. Adicionar dinamicamente cada Experiência de src/data/experience.ts
+  // 12. Adicionar dinamicamente cada Experiência de src/data/experience.ts com Facetas
   for (const exp of experiences) {
     if (exp.type === 'work') {
       const slug = exp.company.toLowerCase().includes('mais') ? 'mais-saude' : '3coracoes';
+      const extraMetricPt = slug === '3coracoes' ? ' (com **99.85% de acurácia SEFAZ**)' : '';
+      const extraMetricEn = slug === '3coracoes' ? ' (with **99.85% SEFAZ accuracy**)' : '';
       chunks.push({
         id: `experience-${slug}`,
         category: 'experience',
@@ -335,12 +445,30 @@ async function main() {
           en: `${exp.company} — ${exp.title.en} (${exp.period.en})`,
         },
         shortAnswer: {
-          pt: `Na **${exp.company}** (${exp.period.pt}, ${exp.location.pt}), atuando como **${exp.title.pt}**: ${exp.summary.pt}`,
-          en: `At **${exp.company}** (${exp.period.en}, ${exp.location.en}), serving as **${exp.title.en}**: ${exp.summary.en}`,
+          pt: `Na **${exp.company}** (${exp.period.pt}, ${exp.location.pt}), atuando como **${exp.title.pt}**: ${exp.summary.pt}${extraMetricPt}`,
+          en: `At **${exp.company}** (${exp.period.en}, ${exp.location.en}), serving as **${exp.title.en}**: ${exp.summary.en}${extraMetricEn}`,
         },
         content: {
           pt: `${exp.company} (${exp.period.pt}) — ${exp.companyRole.pt}.\nPrincipais entregas:\n${exp.results.map((r) => `- ${r.pt}`).join('\n')}\nStack utilizada: ${exp.stack.join(', ')}.`,
           en: `${exp.company} (${exp.period.en}) — ${exp.companyRole.en}.\nKey deliveries:\n${exp.results.map((r) => `- ${r.en}`).join('\n')}\nStack used: ${exp.stack.join(', ')}.`,
+        },
+        facets: {
+          role: {
+            pt: `Na **${exp.company}**, o cargo de Anderson é **${exp.title.pt}** (${exp.companyRole.pt}), atuando no período de **${exp.period.pt}** em formato **${exp.location.pt}**.`,
+            en: `At **${exp.company}**, Anderson's role is **${exp.title.en}** (${exp.companyRole.en}), during **${exp.period.en}** (${exp.location.en}).`,
+          },
+          architecture: {
+            pt: `A stack tecnológica utilizada na **${exp.company}** inclui: **${exp.stack.join(', ')}**.`,
+            en: `The technology stack used at **${exp.company}** includes: **${exp.stack.join(', ')}**.`,
+          },
+          resultImpact: {
+            pt: `Principais resultados entregues na **${exp.company}**:\n${exp.results.slice(0, 4).map((r) => `- ${r.pt}`).join('\n')}`,
+            en: `Key results delivered at **${exp.company}**:\n${exp.results.slice(0, 4).map((r) => `- ${r.en}`).join('\n')}`,
+          },
+          metricsSummary: {
+            pt: `Métricas de destaque na **${exp.company}**: ${exp.metrics.map((m) => `**${m.label.pt}: ${typeof m.value === 'string' ? m.value : m.value.pt}**`).join(' • ')}.`,
+            en: `Highlight metrics at **${exp.company}**: ${exp.metrics.map((m) => `**${m.label.en}: ${typeof m.value === 'string' ? m.value : m.value.en}**`).join(' • ')}.`,
+          },
         },
         keywords: [
           exp.company.toLowerCase(),
@@ -353,7 +481,7 @@ async function main() {
     }
   }
 
-  // 11. Adicionar dinamicamente cada Projeto de src/data/projects.ts
+  // 13. Adicionar dinamicamente cada Projeto de src/data/projects.ts com todas as Facetas (Desafio, Solução, Arquitetura, Impacto, Papel, Métricas)
   for (const proj of projects) {
     chunks.push({
       id: `project-${proj.id}`,
@@ -372,19 +500,44 @@ async function main() {
         pt: `Projeto: ${proj.title.pt} (${proj.categoryLabel.pt}).\nDesafio: ${proj.challenge.pt}\nPapel: ${proj.role.pt}\nSolução Técnica: ${proj.solution.pt}\nArquitetura:\n${proj.architecture.map((a) => `- ${a.pt}`).join('\n')}\nResultado e Impacto: ${proj.result.pt} ${proj.impact.pt}\nMétricas: ${proj.metrics.map((m) => `${m.label.pt}: ${m.value}`).join(' | ')}\nTecnologias: ${proj.techStack.join(', ')}.`,
         en: `Project: ${proj.title.en} (${proj.categoryLabel.en}).\nChallenge: ${proj.challenge.en}\nRole: ${proj.role.en}\nTechnical Solution: ${proj.solution.en}\nArchitecture:\n${proj.architecture.map((a) => `- ${a.en}`).join('\n')}\nResult & Impact: ${proj.result.en} ${proj.impact.en}\nMetrics: ${proj.metrics.map((m) => `${m.label.en}: ${m.value}`).join(' | ')}\nTechnologies: ${proj.techStack.join(', ')}.`,
       },
+      facets: {
+        challenge: {
+          pt: `**Desafio do projeto ${proj.title.pt}:** ${proj.challenge.pt}`,
+          en: `**Challenge in ${proj.title.en}:** ${proj.challenge.en}`,
+        },
+        solution: {
+          pt: `**Solução implementada em ${proj.title.pt}:** ${proj.solution.pt}`,
+          en: `**Solution implemented in ${proj.title.en}:** ${proj.solution.en}`,
+        },
+        architecture: {
+          pt: `**Arquitetura e Stack de ${proj.title.pt} (${proj.techStack.join(', ')}):**\n${proj.architecture.map((a) => `- ${a.pt}`).join('\n')}`,
+          en: `**Architecture & Stack of ${proj.title.en} (${proj.techStack.join(', ')}):**\n${proj.architecture.map((a) => `- ${a.en}`).join('\n')}`,
+        },
+        resultImpact: {
+          pt: `**Resultados e Impacto de ${proj.title.pt}:** ${proj.result.pt} ${proj.impact.pt} (${proj.metrics.map((m) => `**${m.label.pt}: ${m.value}**`).join(' • ')}).`,
+          en: `**Results & Impact of ${proj.title.en}:** ${proj.result.en} ${proj.impact.en} (${proj.metrics.map((m) => `**${m.label.en}: ${m.value}**`).join(' • ')}).`,
+        },
+        role: {
+          pt: `**Papel no projeto ${proj.title.pt}:** Anderson atuou como **${proj.role.pt}**, conduzindo desde a concepção arquitetural até a entrega em produção com gates de qualidade (**58 testes Pytest** e **35 asserções Playwright**).`,
+          en: `**Role in ${proj.title.en}:** Anderson served as **${proj.role.en}**, leading from architectural design to production delivery with automated quality gates (**58 Pytest tests** and **35 Playwright assertions**).`,
+        },
+        metricsSummary: {
+          pt: `Métricas do projeto **${proj.title.pt}**: ${proj.metrics.map((m) => `**${m.label.pt}: ${m.value}**`).join(' | ')}.`,
+          en: `Metrics for **${proj.title.en}**: ${proj.metrics.map((m) => `**${m.label.en}: ${m.value}**`).join(' | ')}.`,
+        },
+      },
       keywords: [
         proj.id,
-        ...proj.id.split('-'),
+        ...proj.id.split('-').filter((w) => w.length >= 4),
         proj.title.pt.toLowerCase(),
         proj.title.en.toLowerCase(),
         ...proj.techStack.map((t) => t.toLowerCase()),
-        'projeto', 'project', 'arquitetura', 'architecture', 'como funciona', 'how it works',
       ],
       entities: [proj.id.replace(/-/g, '_'), ...proj.techStack.map((t) => t.toLowerCase())],
     });
   }
 
-  // 12. Adicionar dinamicamente cada Etapa do Pipeline de Automação (src/data/automation.ts)
+  // 14. Adicionar dinamicamente cada Etapa do Pipeline de Automação (src/data/automation.ts)
   for (const step of automationPipeline) {
     chunks.push({
       id: `rpa-step-${step.stepNumber}`,
@@ -407,13 +560,13 @@ async function main() {
         step.title.pt.toLowerCase(),
         step.title.en.toLowerCase(),
         ...step.technologies.map((t) => t.toLowerCase()),
-        'rpa', 'pipeline', 'automacao', 'automation', 'robo', 'robot',
+        'rpa', 'pipeline', 'automacao', 'automation', 'robo', 'robot', `etapa ${step.stepNumber}`,
       ],
       entities: ['rpa_pipeline', ...step.technologies.map((t) => t.toLowerCase())],
     });
   }
 
-  // 13. Adicionar dinamicamente cada Categoria de Habilidade (src/data/skills.ts)
+  // 15. Adicionar dinamicamente cada Categoria de Habilidade (src/data/skills.ts)
   for (const cat of skillCategories) {
     const skillNames = cat.skills.map((s) => s.name);
     chunks.push({
@@ -444,7 +597,7 @@ async function main() {
     });
   }
 
-  // 14. Resumo Consolidado das Métricas Oficiais (src/data/metrics.ts)
+  // 16. Resumo Consolidado das Métricas Oficiais (src/data/metrics.ts)
   chunks.push({
     id: 'metrics-official-summary',
     category: 'metric',
@@ -470,9 +623,8 @@ async function main() {
     metrics: ['15', '-99%', '15.000+', '99.85%', '200+', '9 Agentes', '58', '35', '4'],
   });
 
-  // Se GEMINI_API_KEY estiver disponível no ambiente de build, calcula embeddings densos
   const apiKey = process.env.GEMINI_API_KEY;
-  let embeddingModelUsed = 'hybrid-local-tfidf-bm25-v2';
+  let embeddingModelUsed = 'hybrid-local-tfidf-bm25-v2.1';
 
   if (apiKey) {
     try {
@@ -494,13 +646,11 @@ async function main() {
     } catch (err) {
       console.warn('⚠️ [build-knowledge] Falha ao consultar Gemini Embeddings API, mantendo índice vetorial local:', err.message);
     }
-  } else {
-    console.log('ℹ️ [build-knowledge] Sem GEMINI_API_KEY no ambiente de build — gerando índice vetorial híbrido (BM25 + Cosine N-Gram/TF-IDF).');
   }
 
   /** @type {import('../src/lib/ai/types').KnowledgeIndexFile} */
   const knowledgeIndex = {
-    version: '2.0.0',
+    version: '2.1.0',
     generatedAt: new Date().toISOString(),
     embeddingModel: embeddingModelUsed,
     totalChunks: chunks.length,
@@ -545,14 +695,14 @@ async function main() {
       'c#', '.net', 'aspnet', 'blazor', 'delphi', 'vb.net', 'abap', 'sap', 'salesforce', 'apex',
       'solidity', 'web3', 'blockchain', 'ethereum', 'unreal engine', 'unity', 'godot',
       'cassandra', 'couchbase', 'neo4j', 'dynamodb', 'snowflake', 'databricks', 'hadoop', 'spark', 'kafka',
-      'terraform', 'ansible', 'puppet', 'chef', 'openshift', 'rancher', 'istio',
+      'terraform', 'ansible', 'puppet', 'chef', 'openshift', 'rancher', 'istio', 'cypress', 'jest', 'angular', 'svelte',
     ],
     chunks,
   };
 
   const outPath = path.resolve(ROOT_DIR, 'src/data/knowledgeIndex.json');
   fs.writeFileSync(outPath, JSON.stringify(knowledgeIndex, null, 2) + '\n', 'utf-8');
-  console.log(`✅ [build-knowledge] ${chunks.length} chunks gravados em src/data/knowledgeIndex.json.`);
+  console.log(`✅ [build-knowledge] ${chunks.length} chunks facetados gravados em src/data/knowledgeIndex.json.`);
 }
 
 main().catch((err) => {

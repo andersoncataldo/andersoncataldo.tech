@@ -21,20 +21,23 @@ interface IndexedChunkDoc {
 }
 
 const SYNONYM_GROUPS: string[][] = [
-  ['ftp_sync', 'ftpsync', 'ftp', 'sftp', 'paramiko', '6 horas', '10 segundos', '99%', '-99%', '15 minutos'],
-  ['winthor', 'totvs', 'oracle', 'erp', 'edi', 'pharma link', 'eurofarma', 'smartped', 'momenta'],
-  ['3coracoes', 'tres coracoes', 'sefaz', 'xml', 'nfe', 'cte', 'cnd', 'fiscal', '15000', '15.000', '99.85%'],
+  ['ftp_sync', 'ftpsync', 'ftpsinc', 'ftp', 'sftp', 'paramiko', '6 horas', '10 segundos', '99%', '-99%', '15 minutos'],
+  ['winthor', 'wintor', 'totvs', 'oracle', 'erp', 'edi', 'pharma link', 'eurofarma', 'smartped', 'momenta'],
+  ['3coracoes', 'tres coracoes', '3 coracoes', 'sefaz', 'xml', 'nfe', 'cte', 'cnd', 'fiscal', '15000', '15.000', '99.85%'],
   ['9 agentes', 'maker-checker', 'maker checker', 'squad', 'claude code', 'mcp', 'orquestrador', 'openspec'],
-  ['pytest', 'playwright', '58', '35', 'qa', 'testes', 'qualidade', 'e2e', 'auditoria'],
+  ['pytest', 'paitest', 'playwright', '58', '35', 'qa', 'testes', 'qualidade', 'e2e', 'auditoria'],
   ['central grupo mais', 'monorepo', 'sso', 'jwt', '4 sistemas', 'portal central'],
   ['chamados', 'helpdesk', 'service desk', 'ticket', 'rbac', 'sla', 'mttr', 'recharts'],
   ['devolucao', 'devolucoes', 'returns', 'logistica reversa', 'pareto', 'modo tv', 'anomalias'],
   ['ativos', 'inventario', 'patrimonio', 'custodia', 'sha-256', 'sha256', 'termos'],
-  ['unifor', 'faculdade', 'universidade', 'ciencia da computacao', 'computer science', '6 semestre', 'estudo', 'graduacao'],
-  ['huawei', 'hcia', 'hcia-storage', 'v5.0', 'certificacao', 'certificado', 'storage', 'san', 'nas', 'raid', 'disaster recovery'],
+  ['unifor', 'unifro', 'faculdade', 'universidade', 'ciencia da computacao', 'computer science', '6 semestre', 'estudo', 'graduacao'],
+  ['huawei', 'huwei', 'hcia', 'hcia-storage', 'v5.0', 'certificacao', 'certificado', 'storage', 'san', 'nas', 'raid', 'disaster recovery'],
   ['banco de dados', 'database', 'db', 'sgbd', 'postgresql', 'postgres', 'supabase', 'rls', 'oracle', 'sql'],
   ['contato', 'email', 'linkedin', 'github', 'whatsapp', 'telefone', 'contratar', 'vaga', 'remoto', 'hibrido', 'fortaleza', 'curriculo', 'cv'],
   ['experiencia', 'trabalho', 'carreira', 'empresas', 'mais saude', 'janeiro de 2025', '2 anos'],
+  ['streamlit', 'tkinter', 'google sheets', 'apps script', 'ferramentas internas', 'painel'],
+  ['sudo hire', 'terminal', 'cli', 'devconsole', 'command palette', 'ctrl+k', 'calculadora', 'roi', 'pwa', 'opengraph'],
+  ['quem e', 'who is', 'sobre o anderson', 'about anderson', 'resumo', 'perfil', 'bio', 'apresentacao', 'posicionamento', 'pilares'],
 ];
 
 function expandQueryTokens(rawQuery: string): string[] {
@@ -56,8 +59,14 @@ function expandQueryTokens(rawQuery: string): string[] {
   return Array.from(expanded);
 }
 
-// Pré-indexação em memória para BM25 e Similaridade de Cosseno (executada 1x por isolate/sessão)
 const DOCS: IndexedChunkDoc[] = index.chunks.map((chunk) => {
+  const facetTexts = chunk.facets
+    ? Object.values(chunk.facets)
+        .filter(Boolean)
+        .map((f) => `${f?.pt || ''} ${f?.en || ''}`)
+        .join(' ')
+    : '';
+
   const combinedText = [
     chunk.id,
     chunk.title.pt,
@@ -66,12 +75,12 @@ const DOCS: IndexedChunkDoc[] = index.chunks.map((chunk) => {
     chunk.shortAnswer.en,
     chunk.content.pt,
     chunk.content.en,
+    facetTexts,
     chunk.keywords.join(' '),
     chunk.entities.join(' '),
     (chunk.metrics || []).join(' '),
   ].join(' ');
 
-  // Damos peso maior ao título, keywords e shortAnswer repetindo seus tokens
   const weightedText = `${chunk.title.pt} ${chunk.title.en} ${chunk.keywords.join(' ')} ${chunk.entities.join(' ')} ${combinedText}`;
   const tokens = tokenize(weightedText, true);
   const tokenFreq = new Map<string, number>();
@@ -123,11 +132,16 @@ function computeBm25(queryTokens: string[], doc: IndexedChunkDoc, rawQueryNorm: 
     score += idf * (numerator / denominator);
   }
 
-  // Boost exato para match direto de keywords e entidades do chunk
+  const SUBJECT_KEYWORDS = new Set(['anderson', 'anderson cataldo', 'viana', 'cataldo']);
   for (const kw of doc.chunk.keywords) {
     const kwNorm = normalizeText(kw);
-    if (kwNorm.length >= 3 && rawQueryNorm.includes(kwNorm)) {
-      score += 2.2;
+    if (kwNorm.length < 3) continue;
+    if (SUBJECT_KEYWORDS.has(kwNorm) && queryTokens.some((t) => !SUBJECT_KEYWORDS.has(t))) {
+      continue;
+    }
+    const escaped = kwNorm.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
+    if (new RegExp(`(^|\\s)${escaped}($|\\s)`).test(rawQueryNorm)) {
+      score += 2.4;
     }
   }
 
@@ -156,7 +170,6 @@ function computeSemanticCosine(
   lang: SupportedLanguage,
   queryEmbedding?: number[],
 ): number {
-  // 1. Similaridade TF-IDF ponderada no espaço de tokens expandidos por sinônimos
   const qWeights = new Map<string, number>();
   for (const t of expandedTokens) {
     const idf = IDF_MAP.get(t) || 1.0;
@@ -182,9 +195,9 @@ function computeSemanticCosine(
     }
   }
 
-  // 2. Similaridade de Cosseno de Trigramas de Caracteres (captura variações de grafia e sub-palavras)
+  // Importante: Trigramas de caracteres só refinam o score quando já há interseção semântica/lexical (evita alucinação com frases aleatórias)
   let charDot = 0;
-  if (queryCharNorm > 0) {
+  if (tfidfDot > 0 && queryCharNorm > 0) {
     for (const [gram, count] of queryCharNgrams.entries()) {
       const dCount = doc.charNgrams.get(gram);
       if (dCount) {
@@ -193,9 +206,8 @@ function computeSemanticCosine(
     }
   }
 
-  const localSemanticScore = 0.72 * tfidfDot + 0.28 * charDot;
+  const localSemanticScore = tfidfDot > 0 ? 0.78 * tfidfDot + 0.22 * charDot : 0;
 
-  // 3. Se houver embedding denso da pergunta e do chunk, funde o score neural com o semântico local
   const chunkDense = doc.chunk.embedding?.[lang];
   if (queryEmbedding && chunkDense && queryEmbedding.length === chunkDense.length) {
     const denseScore = Math.max(0, computeDenseCosine(queryEmbedding, chunkDense));
@@ -219,9 +231,6 @@ function chunkSimilarity(a: KnowledgeChunk, b: KnowledgeChunk): number {
   return Math.min(1, jaccard + sameCategoryPenalty);
 }
 
-/**
- * Resolve correferência pronominal usando as últimas mensagens do histórico
- */
 export function resolveQueryWithHistory(rawQuery: string, history?: ChatMessageItem[]): {
   resolvedQuery: string;
   activeEntities: string[];
@@ -254,12 +263,11 @@ export function resolveQueryWithHistory(rawQuery: string, history?: ChatMessageI
   }
 
   const needsContextResolution =
-    /\b(nele|nela|nisso|nesse|nessa|deles|delas|isso|la|it|that|this|there|e qual|e quais|e como|e quanto|e de quanto|and what|and how|and which)\b/i.test(
+    /\b(nele|nela|nisso|nesse|nessa|deles|delas|isso|la|it|that|this|there|e qual|e quais|e como|e quanto|e de quanto|and what|and how|and which|qual o desafio|qual foi o desafio|qual o impacto|qual o resultado|qual o papel)\b/i.test(
       qNorm,
     ) || qNorm.split(' ').length <= 6;
 
   if (needsContextResolution && activeEntities.length > 0) {
-    // Priorizar entidades específicas (ex: ftp_sync, sistema_ativos_ti) antes de nomes genéricos de empresa
     const prioritized = [...activeEntities].sort((a, b) => {
       const generic = ['anderson_cataldo', 'mais_saude', '3coracoes'];
       return (generic.includes(a) ? 1 : 0) - (generic.includes(b) ? 1 : 0);
@@ -277,19 +285,13 @@ export function resolveQueryWithHistory(rawQuery: string, history?: ChatMessageI
   return { resolvedQuery: rawQuery, activeEntities };
 }
 
-/**
- * Detecta se a pergunta pede dados privados/inexistentes no repositório (ex: CPF, salário exato, RG, endereço residencial)
- */
 export function asksPrivateOrUnknowableFact(rawQuery: string): boolean {
   const q = normalizeText(rawQuery);
-  return /\b(cpf|rg|cnh|passaporte|endereco residencial|rua onde mora|cep|numero da casa|estado civil|casado|solteiro|namorada|esposa|filhos|religiao|tipo sanguineo|altura|peso|data de nascimento exata|signo|salario atual|quanto ele ganha|pretensao salarial exata|expected salary|exact salary|social security|home address|marital status)\b/.test(
+  return /\b(cpf|rg|cnh|passaporte|endereco residencial|rua onde mora|cep|numero da casa|estado civil|casado|solteiro|namorada|esposa|filhos|religiao|tipo sanguineo|altura|peso|data de nascimento exata|idade exata|quantos anos ele tem|signo|salario atual|quanto ele ganha|pretensao salarial exata|expected salary|exact salary|social security|home address|marital status|how old is he)\b/.test(
     q,
   );
 }
 
-/**
- * Executa Recuperação Híbrida (BM25 + Cosine Similarity + RRF + MMR)
- */
 export function retrieveKnowledge(
   rawQuery: string,
   lang: SupportedLanguage,
@@ -302,8 +304,18 @@ export function retrieveKnowledge(
   const topK = options?.topK ?? 4;
   const { resolvedQuery, activeEntities } = resolveQueryWithHistory(rawQuery, options?.history);
   const rawQueryNorm = normalizeText(resolvedQuery);
-  const baseTokens = tokenize(resolvedQuery, true);
-  const expandedTokens = expandQueryTokens(resolvedQuery);
+  const rawBaseTokens = tokenize(resolvedQuery, true);
+  const rawExpandedTokens = expandQueryTokens(resolvedQuery);
+
+  // Remover o nome próprio isolado ('anderson', 'viana', 'cataldo') dos tokens de pontuação quando
+  // houver outros termos de conteúdo na pergunta, evitando falsos positivos em perguntas aleatórias
+  // que apenas citam o nome "Anderson" (ex.: "Quantos monitores o Anderson usa na mesa de casa?").
+  const SUBJECT_NAME_TOKENS = new Set(['anderson', 'viana', 'cataldo']);
+  const nonNameBase = rawBaseTokens.filter((t) => !SUBJECT_NAME_TOKENS.has(t));
+  const nonNameExpanded = rawExpandedTokens.filter((t) => !SUBJECT_NAME_TOKENS.has(t));
+  const baseTokens = nonNameBase.length > 0 ? nonNameBase : rawBaseTokens;
+  const expandedTokens = nonNameExpanded.length > 0 ? nonNameExpanded : rawExpandedTokens;
+
   const queryCharNgrams = extractCharNgrams(resolvedQuery, 3);
   const queryCharNorm =
     Math.sqrt(Array.from(queryCharNgrams.values()).reduce((acc, v) => acc + v * v, 0)) || 1;
@@ -327,7 +339,6 @@ export function retrieveKnowledge(
     };
   });
 
-  // Ordenar por BM25 e por Cosine para calcular o Reciprocal Rank Fusion (RRF)
   const byBm25 = [...initialScores].sort((a, b) => b.bm25Score - a.bm25Score);
   const byCosine = [...initialScores].sort((a, b) => b.cosineScore - a.cosineScore);
 
@@ -343,18 +354,19 @@ export function retrieveKnowledge(
     const rC = cosineRank.get(item.chunk.id) || TOTAL_DOCS;
     const rrf = 1 / (RRF_K + rB) + 1 / (RRF_K + rC);
 
-    // Normalizar combinação de RRF + intensidade direta de sinal
-    const signalStrength = Math.min(1, item.bm25Score / 8) * 0.55 + Math.min(1, item.cosineScore * 1.8) * 0.45;
+    const signalStrength =
+      Math.min(1, item.bm25Score / 8) * 0.55 + Math.min(1, item.cosineScore * 1.8) * 0.45;
     item.rrfScore = rrf;
-    item.finalScore = Number((rrf * 8 + signalStrength * 0.6).toFixed(4));
+    item.finalScore =
+      item.bm25Score === 0 && item.cosineScore === 0
+        ? 0
+        : Number((rrf * 8 + signalStrength * 0.6).toFixed(4));
   }
 
-  // Filtrar candidatos com algum sinal positivo e ordenar
   const candidates = initialScores
-    .filter((item) => item.bm25Score > 0 || item.cosineScore > 0.05)
+    .filter((item) => item.bm25Score > 0 || item.cosineScore >= 0.08)
     .sort((a, b) => b.finalScore - a.finalScore);
 
-  // Aplicar Maximal Marginal Relevance (MMR, lambda = 0.78) para evitar redundância e cobrir perguntas multi-tópico
   const lambda = 0.78;
   const selected: ScoredChunk[] = [];
   const pool = [...candidates.slice(0, 12)];
@@ -385,7 +397,10 @@ export function retrieveKnowledge(
 
   const maxConfidence = selected.length > 0 ? selected[0].finalScore : 0;
   const asksPrivate = asksPrivateOrUnknowableFact(rawQuery);
-  const belowThreshold = asksPrivate || selected.length === 0 || (selected[0].bm25Score === 0 && selected[0].cosineScore < 0.08);
+  const belowThreshold =
+    asksPrivate ||
+    selected.length === 0 ||
+    (selected[0].bm25Score === 0 && selected[0].cosineScore < 0.12);
 
   return {
     topChunks: selected,
