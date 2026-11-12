@@ -173,6 +173,18 @@ function buildAspectAwareParagraph(
     } else if (aspect === 'location_where' && facets.location_where?.[lang]) {
       candidateText = `${facets.location_where[lang]}\n\n${chunk.shortAnswer[lang]}`;
       usedFacet = true;
+    } else if (aspect === 'first_job' && facets.firstJob?.[lang]) {
+      candidateText = `${facets.firstJob[lang]}\n\n${chunk.shortAnswer[lang]}`;
+      usedFacet = true;
+    } else if (aspect === 'current_job' && facets.currentJob?.[lang]) {
+      candidateText = `${facets.currentJob[lang]}\n\n${chunk.shortAnswer[lang]}`;
+      usedFacet = true;
+    } else if (aspect === 'languages_spoken' && facets.languagesSpoken?.[lang]) {
+      candidateText = `${facets.languagesSpoken[lang]}\n\n${chunk.shortAnswer[lang]}`;
+      usedFacet = true;
+    } else if (aspect === 'differentials_pillars' && facets.differentials?.[lang]) {
+      candidateText = `${facets.differentials[lang]}\n\n${chunk.shortAnswer[lang]}`;
+      usedFacet = true;
     }
   }
 

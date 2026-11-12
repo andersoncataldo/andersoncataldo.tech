@@ -544,5 +544,71 @@
     "forbiddenKeywords": [],
     "expectedAnchor": "#projetos",
     "description": "Responder especificamente sobre o papel e suíte de testes no Sistema de Chamados."
+  },
+  {
+    "id": "eval-51-first-job-pt",
+    "lang": "pt",
+    "category": "factual",
+    "query": "Qual foi o primeiro emprego do Anderson?",
+    "expectedIntent": "faq_portfolio",
+    "expectedKeywords": ["Grupo 3corações", "Aprendiz", "Jan/2025", "15.000+", "99,85%"],
+    "forbiddenKeywords": [],
+    "expectedAnchor": "#experiencia",
+    "description": "Responder com precisão sobre o primeiro emprego do Anderson (Grupo 3corações, Aprendiz — Setor Fiscal)."
+  },
+  {
+    "id": "eval-52-first-job-en",
+    "lang": "en",
+    "category": "factual",
+    "query": "What was Anderson's first job and where did he start working?",
+    "expectedIntent": "faq_portfolio",
+    "expectedKeywords": ["Grupo 3corações", "Apprentice", "Jan/2025", "15,000+", "99.85%"],
+    "forbiddenKeywords": [],
+    "expectedAnchor": "#experiencia",
+    "description": "Answer accurately about Anderson's first job at Grupo 3corações in English."
+  },
+  {
+    "id": "eval-53-current-job-pt",
+    "lang": "pt",
+    "category": "factual",
+    "query": "Qual é o emprego atual do Anderson e onde ele trabalha hoje?",
+    "expectedIntent": "faq_portfolio",
+    "expectedKeywords": ["Distribuidora Mais Saúde", "Central Grupo Mais", "WinThor"],
+    "forbiddenKeywords": [],
+    "expectedAnchor": "#experiencia",
+    "description": "Responder com precisão sobre o emprego atual do Anderson na Distribuidora Mais Saúde."
+  },
+  {
+    "id": "eval-54-languages-spoken-pt",
+    "lang": "pt",
+    "category": "factual",
+    "query": "Quais idiomas o Anderson fala e qual o nível de inglês dele?",
+    "expectedIntent": "faq_portfolio",
+    "expectedKeywords": ["Português", "Inglês", "Avançado", "Espanhol"],
+    "forbiddenKeywords": [],
+    "expectedAnchor": "#sobre",
+    "description": "Responder sobre os idiomas falados pelo Anderson (Português Nativo, Inglês Avançado, Espanhol)."
+  },
+  {
+    "id": "eval-55-differentials-pillars-pt",
+    "lang": "pt",
+    "category": "factual",
+    "query": "Qual é o diferencial do Anderson e quais são os 3 pilares dele?",
+    "expectedIntent": "faq_portfolio",
+    "expectedKeywords": ["Maker-Checker", "9 agentes", "15 robôs", "OpenSpec"],
+    "forbiddenKeywords": [],
+    "expectedAnchor": "#sobre",
+    "description": "Responder sobre o diferencial competitivo e os 3 pilares de atuação do Anderson."
+  },
+  {
+    "id": "eval-56-all-projects-catalog-pt",
+    "lang": "pt",
+    "category": "factual",
+    "query": "Quais são todos os projetos do portfólio e quantos projetos ele fez?",
+    "expectedIntent": "faq_portfolio",
+    "expectedKeywords": ["9 projetos", "Central Grupo Mais", "Sistema de Chamados", "FTP_SYNC", "Carlo Acutis"],
+    "forbiddenKeywords": [],
+    "expectedAnchor": "#projetos",
+    "description": "Listar todos os 9 projetos principais do catálogo do portfólio."
   }
 ]

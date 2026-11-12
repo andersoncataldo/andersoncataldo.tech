@@ -32,7 +32,12 @@ export type QuestionAspect =
   | 'metrics'
   | 'duration_when'
   | 'location_where'
-  | 'yes_no_skill';
+  | 'yes_no_skill'
+  | 'first_job'
+  | 'current_job'
+  | 'languages_spoken'
+  | 'differentials_pillars'
+  | 'all_projects_list';
 
 export interface BilingualText {
   pt: string;
@@ -49,6 +54,10 @@ export interface ChunkFacets {
   deepDive?: BilingualText;
   duration_when?: BilingualText;
   location_where?: BilingualText;
+  firstJob?: BilingualText;
+  currentJob?: BilingualText;
+  languagesSpoken?: BilingualText;
+  differentials?: BilingualText;
 }
 
 export interface KnowledgeChunk {

@@ -153,6 +153,41 @@ export function detectKnownTechnologies(rawQuery: string): string[] {
 export function detectQuestionAspect(rawQuery: string): QuestionAspect {
   const q = normalizeText(rawQuery);
 
+  if (
+    /\b(primeiro emprego|primeira experiencia|primeira empresa|onde comecou|comecou a trabalhar|iniciou a carreira|emprego anterior|ultimo emprego|trabalhou antes|ja foi aprendiz|jovem aprendiz|first job|previous job|where did he start|first company|apprentice)\b/.test(
+      q,
+    )
+  ) {
+    return 'first_job';
+  }
+  if (
+    /\b(emprego atual|trabalho atual|onde trabalha hoje|trabalha atualmente|onde ele trabalha|empresa atual|cargo atual|estagio atual|onde faz estagio|current job|current role|where does he work|current company)\b/.test(
+      q,
+    )
+  ) {
+    return 'current_job';
+  }
+  if (
+    /\b(idioma|idiomas|lingua|linguas|fala ingles|nivel de ingles|ingles dele|espanhol|bilingue|fluente|which languages|speak english|english level|spanish)\b/.test(
+      q,
+    )
+  ) {
+    return 'languages_spoken';
+  }
+  if (
+    /\b(diferencial|diferenciais|ponto forte|pontos fortes|por que contratar|pilares|3 pilares|tres pilares|especialidades|metodologia de trabalho|como ele trabalha|why hire|strengths|core pillars|what makes him stand out)\b/.test(
+      q,
+    )
+  ) {
+    return 'differentials_pillars';
+  }
+  if (
+    /\b(todos os projetos|quais sao os projetos|quais projetos ele fez|lista de projetos|quantos projetos|all projects|list of projects|what projects has he built|how many projects)\b/.test(
+      q,
+    )
+  ) {
+    return 'all_projects_list';
+  }
   if (/\b(desafio|desafios|problema|problemas|dor|dores|dificuldade|gargalo|por que criou|por que foi criado|challenge|problem|bottleneck|pain point)\b/.test(q)) {
     return 'challenge';
   }
@@ -171,7 +206,7 @@ export function detectQuestionAspect(rawQuery: string): QuestionAspect {
   if (/\b(como funciona|como fez|como implementou|como construiu|como otimizou|como reduziu|solucao|how does it work|how did he|how was it built|solution)\b/.test(q)) {
     return 'solution';
   }
-  if (/\b(quanto tempo|quando|qual periodo|desde quando|qual semestre|anos de|meses de|how long|when did|duration|what semester)\b/.test(q)) {
+  if (/\b(quanto tempo|quando|qual periodo|desde quando|qual semestre|quando se forma|formatura|previsao de conclusao|termina a faculdade|anos de|meses de|how long|when did|when does he graduate|graduation|duration|what semester)\b/.test(q)) {
     return 'duration_when';
   }
   if (/\b(onde mora|onde fica|qual cidade|qual estado|localizacao|remoto|hibrido|presencial|where does he live|where is he based|location|remote)\b/.test(q)) {
@@ -238,8 +273,8 @@ function hasPortfolioDomainSignal(
 
   const domainPatterns = [
     /\b(anderson|cataldo|viana|portifolio|portfolio|curriculo|cv|resume|perfil|profile)\b/,
-    /\b(experiencia|experiencias|experience|trabalh\w*|work\w*|carreira|career|profission\w*|trajetoria|historico|atuacao|atua|cargo|empresa|empresas|job|role|anos|meses|years|months|tempo de|how long|duration)\b/,
-    /\b(estud\w*|study\w*|faculdade|universidade|unifor|semestre|semester|gradua\w*|formacao|formado|curso|cursos|aula|academico|education|degree|college|university|ciencia da computacao|computer science|big-o)\b/,
+    /\b(experiencia|experiencias|experience|trabalh\w*|work\w*|emprego|empregos|aprendiz|estagio|estagiario|intern|apprentice|carreira|career|profission\w*|trajetoria|historico|atuacao|atua|cargo|empresa|empresas|job|jobs|role|anos|meses|years|months|tempo de|how long|duration)\b/,
+    /\b(estud\w*|study\w*|faculdade|universidade|unifor|semestre|semester|gradua\w*|formacao|formado|formatura|formar|conclusao|curso|cursos|aula|academico|education|degree|college|university|ciencia da computacao|computer science|big-o)\b/,
     /\b(certifica\w*|huawei|hcia|storage|san|nas|raid|disaster recovery|diploma|aws|azure|gcp|cka)\b/,
     /\b(projeto|projetos|project|projects|sistema|sistemas|system|systems|central|grupo mais|mais saude|3coracoes|tres coracoes|chamado|chamados|devolucao|devolucoes|ativo|ativos|sso|monorepo|carlo acutis|modo tv|helpdesk|service desk)\b/,
     /\b(robo|robos|robot|robots|rpa|automacao|automacoes|automation|ftp|sync|ftp_sync|sftp|winthor|totvs|oracle|pharma|eurofarma|smartped|momenta|sefaz|xml|xmls|nfe|cte|cnd|cnds|fiscal|pareto|edi)\b/,

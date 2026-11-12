@@ -104,6 +104,14 @@ async function main() {
           pt: 'Em produção real, já entregou **15 robôs corporativos**, unificou **4 sistemas internos sob SSO**, reduziu o pipeline **FTP_SYNC em 99% (6h para <10s)** e poupou **mais de 200 horas manuais**.',
           en: 'In real production, he has shipped **15 corporate robots**, unified **4 internal systems under SSO**, slashed the **FTP_SYNC pipeline by 99% (6h to <10s)**, and saved **over 200 manual hours**.',
         },
+        differentials: {
+          pt: '**Diferencial e 3 Pilares de Anderson Cataldo:** (1) **IA Aplicada & Agentes Autônomos** — orquestração de um squad de **9 agentes de IA no modelo Maker-Checker** (Claude Code, MCP e Gemini API) com Spec-Driven Development (OpenSpec); (2) **Automação & Integração ERP Industrial** — **15 robôs Python** em produção integrados ao **WinThor (Oracle)** e **SEFAZ** (incluindo o **FTP_SYNC com -99% de tempo**); e (3) **Engenharia Full-Stack & Qualidade Rigorosa** — monorepo com **SSO JWT (4 sistemas)**, **58 testes Pytest**, **35 asserções Playwright** e conformidade **LGPD**.',
+          en: '**Anderson Cataldo’s Core Differentials & 3 Pillars:** (1) **Applied AI & Autonomous Agents** — orchestrating a **9-agent Maker-Checker AI squad** (Claude Code, MCP, Gemini API) with Spec-Driven Development (OpenSpec); (2) **Industrial ERP Automation** — **15 production Python robots** integrated with **WinThor (Oracle)** and **SEFAZ** (including **FTP_SYNC with -99% time**); and (3) **Full-Stack Engineering & Strict Quality** — **SSO JWT monorepo (4 systems)**, **58 Pytest tests**, **35 Playwright assertions**, and **LGPD** compliance.',
+        },
+        languagesSpoken: {
+          pt: '**Idiomas falados por Anderson Cataldo:** **Português (Nativo)**, **Inglês (Avançado)** — leitura técnica fluente, documentação arquitetural, escrita de código e comunicação profissional bilíngue (PT/EN) — além de conhecimentos em **Espanhol**.',
+          en: '**Languages spoken by Anderson Cataldo:** **Portuguese (Native)**, **English (Advanced)** — fluent technical reading, architectural documentation, code authoring, and bilingual (PT/EN) professional communication — plus **Spanish**.',
+        },
       },
       keywords: [
         'quem e', 'who is', 'anderson', 'cataldo', 'viana', 'resumo', 'summary', 'bio', 'perfil', 'profile',
@@ -135,6 +143,14 @@ async function main() {
         duration_when: {
           pt: 'No mercado corporativo, Anderson atua continuamente desde **Janeiro de 2025 (~2 anos de experiência prática)**: trabalhou por **1 ano e 4 meses no Grupo 3corações (Jan/2025 – Abr/2026)** e está na **Distribuidora Mais Saúde desde Junho de 2026**, somando **15 robôs entregues**. Nos estudos, dedica **3 anos (2024 – 2027)** à graduação em **Ciência da Computação na UNIFOR**, estando atualmente no **6º Semestre**.',
           en: 'In corporate production, Anderson has worked continuously since **January 2025 (~2 years of practical experience)**: **1 year and 4 months at Grupo 3corações (Jan/2025 – Apr/2026)** and at **Distribuidora Mais Saúde since June 2026**, totaling **15 shipped robots**. Academically, he has **3 years of study (2024 – 2027)** in **Computer Science at UNIFOR**, currently in the **6th Semester**.',
+        },
+        firstJob: {
+          pt: '**Primeiro emprego de Anderson Cataldo:** Sua primeira experiência corporativa foi no **Grupo 3corações** (**Janeiro de 2025 a Abril de 2026 — 1 ano e 4 meses**, em Eusébio/Fortaleza, CE), onde atuou como **Aprendiz — Setor Fiscal (Sistemas e Projetos)** (`Desenvolvedor de Robôs RPA & Automação de Processos`), construindo **5 robôs RPA em Python** para renovação automática de **CNDs** e processamento de **15.000+ XMLs fiscais/mês (NF-e/CT-e)** com **99,85% de precisão SEFAZ** e economia de **200+ horas manuais**.',
+          en: '**Anderson Cataldo’s First Job:** His first corporate position was at **Grupo 3corações** (**January 2025 to April 2026 — 1 year and 4 months**, in Eusébio/Fortaleza, CE) as **Apprentice — Tax Department (Systems & Projects)** (`RPA Robot Developer & Process Automation`), where he built **5 Python RPA robots** for automated **CND** renewals and processing **15,000+ monthly tax XMLs (NF-e/CT-e)** with **99.85% SEFAZ accuracy**, saving **200+ manual hours**.',
+        },
+        currentJob: {
+          pt: '**Emprego atual de Anderson Cataldo:** Atualmente (**Jun/2026 – Presente**), Anderson trabalha na **Distribuidora Mais Saúde** (Fortaleza, CE — Híbrido/Presencial) como **Estagiário de T.I. — Full-Stack, Automação & IA**, liderando o desenvolvimento da **Central Grupo Mais (4 sistemas unificados com SSO JWT)**, **10 robôs RPA integrados ao ERP TOTVS WinThor (Oracle)** (incluindo o **FTP_SYNC com -99% de tempo**) e o **squad de 9 agentes de IA (Maker-Checker com Claude Code)**.',
+          en: '**Anderson Cataldo’s Current Job:** Currently (**Jun/2026 – Present**), Anderson works at **Distribuidora Mais Saúde** (Fortaleza, CE — Hybrid/On-site) as **IT Intern — Full-Stack, Automation & AI**, leading the development of **Central Grupo Mais (4 unified SSO JWT systems)**, **10 Python RPA robots integrated with TOTVS WinThor ERP (Oracle)** (including **FTP_SYNC with -99% time**), and the **9-agent AI squad (Maker-Checker with Claude Code)**.',
         },
       },
       keywords: [
@@ -469,12 +485,36 @@ async function main() {
             pt: `Métricas de destaque na **${exp.company}**: ${exp.metrics.map((m) => `**${m.label.pt}: ${typeof m.value === 'string' ? m.value : m.value.pt}**`).join(' • ')}.`,
             en: `Highlight metrics at **${exp.company}**: ${exp.metrics.map((m) => `**${m.label.en}: ${typeof m.value === 'string' ? m.value : m.value.en}**`).join(' • ')}.`,
           },
+          ...(slug === '3coracoes'
+            ? {
+                firstJob: {
+                  pt: `**Primeiro Emprego Corporativo — ${exp.company} (${exp.period.pt}):** Anderson iniciou sua carreira corporativa no **Grupo 3corações** como **${exp.title.pt}** (${exp.companyRole.pt}), atuando presencialmente por **1 ano e 4 meses**. Nessa primeira experiência profissional, desenvolveu **5 robôs RPA em Python** para renovação automática de **CNDs** e processamento de **15.000+ XMLs fiscais/mês** com **99,85% de precisão SEFAZ**, poupando **200+ horas manuais**.`,
+                  en: `**First Corporate Job — ${exp.company} (${exp.period.en}):** Anderson started his corporate career at **Grupo 3corações** as **${exp.title.en}** (${exp.companyRole.en}), working on-site for **1 year and 4 months**. In this first professional role, he built **5 Python RPA robots** for automated **CND** renewals and processing **15,000+ monthly tax XMLs** with **99.85% SEFAZ accuracy**, saving **200+ manual hours**.`,
+                },
+              }
+            : {
+                currentJob: {
+                  pt: `**Emprego Atual — ${exp.company} (${exp.period.pt}):** Atualmente, Anderson trabalha na **Distribuidora Mais Saúde** como **${exp.title.pt}** (${exp.companyRole.pt}), onde projetou e desenvolve a **Central Grupo Mais (monorepo SSO com 4 sistemas internos)**, **10 robôs Python integrados ao ERP TOTVS WinThor (Oracle)** (incluindo o **FTP_SYNC com redução de 6h para <10s, -99%**), o **escritório de 9 agentes de IA (Maker-Checker com Claude Code)** e **58 testes Pytest + 35 asserções Playwright**.`,
+                  en: `**Current Job — ${exp.company} (${exp.period.en}):** Currently, Anderson works at **Distribuidora Mais Saúde** as **${exp.title.en}** (${exp.companyRole.en}), where he architected and builds **Central Grupo Mais (SSO monorepo unifying 4 internal systems)**, **10 Python robots integrated with TOTVS WinThor ERP (Oracle)** (including **FTP_SYNC reducing 6h to <10s, -99%**), the **9-agent AI squad (Maker-Checker with Claude Code)**, and **58 Pytest + 35 Playwright tests**.`,
+                },
+              }),
         },
         keywords: [
           exp.company.toLowerCase(),
           slug.replace('-', ' '),
           ...exp.stack.map((s) => s.toLowerCase()),
-          'experiencia', 'experience', 'empresa', 'company', 'trabalho', 'cargo', 'role',
+          'experiencia', 'experience', 'empresa', 'company', 'trabalho', 'emprego', 'cargo', 'role',
+          ...(slug === '3coracoes'
+            ? [
+                'primeiro emprego', 'primeira experiencia', 'primeira empresa', 'onde comecou',
+                'comecou a trabalhar', 'emprego anterior', 'ultimo emprego', 'aprendiz',
+                'jovem aprendiz', 'first job', 'previous job', 'started working', 'apprentice',
+              ]
+            : [
+                'emprego atual', 'trabalho atual', 'onde trabalha hoje', 'trabalha atualmente',
+                'empresa atual', 'cargo atual', 'estagiario', 'estagio', 'current job',
+                'current role', 'where does he work', 'intern',
+              ]),
         ],
         entities: [slug.replace('-', '_'), ...exp.stack.map((s) => s.toLowerCase())],
       });
@@ -536,6 +576,31 @@ async function main() {
       entities: [proj.id.replace(/-/g, '_'), ...proj.techStack.map((t) => t.toLowerCase())],
     });
   }
+
+  // 13b. Catálogo Completo de Projetos em Produção (7 Projetos Principais)
+  chunks.push({
+    id: 'projects-catalog-overview',
+    category: 'project',
+    sectionAnchor: '#projetos',
+    sectionLabel: { pt: 'Catálogo de Projetos', en: 'Projects Catalog' },
+    title: {
+      pt: `Catálogo Completo de Projetos (${projects.length} Sistemas e Pipelines em Produção)`,
+      en: `Complete Projects Catalog (${projects.length} Production Systems & Pipelines)`,
+    },
+    shortAnswer: {
+      pt: `O portfólio de Anderson Cataldo apresenta **${projects.length} projetos principais em produção** (além de **15 robôs corporativos**):\n${projects.map((p, idx) => `${idx + 1}. **${p.title.pt}** (${p.categoryLabel.pt}) — ${p.subtitle.pt}`).join('\n')}`,
+      en: `Anderson Cataldo’s portfolio showcases **${projects.length} flagship production projects** (plus **15 corporate robots**):\n${projects.map((p, idx) => `${idx + 1}. **${p.title.en}** (${p.categoryLabel.en}) — ${p.subtitle.en}`).join('\n')}`,
+    },
+    content: {
+      pt: projects.map((p) => `- ${p.title.pt}: ${p.description.pt} (Stack: ${p.techStack.join(', ')})`).join('\n'),
+      en: projects.map((p) => `- ${p.title.en}: ${p.description.en} (Stack: ${p.techStack.join(', ')})`).join('\n'),
+    },
+    keywords: [
+      'todos os projetos', 'quais sao os projetos', 'quais projetos ele fez', 'lista de projetos',
+      'quantos projetos', 'catalogo de projetos', 'all projects', 'list of projects', 'how many projects',
+    ],
+    entities: ['projetos_catalogo', ...projects.map((p) => p.id.replace(/-/g, '_'))],
+  });
 
   // 14. Adicionar dinamicamente cada Etapa do Pipeline de Automação (src/data/automation.ts)
   for (const step of automationPipeline) {

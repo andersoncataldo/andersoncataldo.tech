@@ -1,8 +1,8 @@
 {
   "version": "2.1.0",
-  "generatedAt": "2026-11-12T23:09:41.764Z",
+  "generatedAt": "2026-11-12T23:46:01.838Z",
   "embeddingModel": "hybrid-local-tfidf-bm25-v2.1",
-  "totalChunks": 34,
+  "totalChunks": 35,
   "canonicalMetrics": {
     "shippedRobots": "15",
     "maisSaudeRobots": "10",
@@ -198,6 +198,14 @@
         "resultImpact": {
           "pt": "Em produção real, já entregou **15 robôs corporativos**, unificou **4 sistemas internos sob SSO**, reduziu o pipeline **FTP_SYNC em 99% (6h para <10s)** e poupou **mais de 200 horas manuais**.",
           "en": "In real production, he has shipped **15 corporate robots**, unified **4 internal systems under SSO**, slashed the **FTP_SYNC pipeline by 99% (6h to <10s)**, and saved **over 200 manual hours**."
+        },
+        "differentials": {
+          "pt": "**Diferencial e 3 Pilares de Anderson Cataldo:** (1) **IA Aplicada & Agentes Autônomos** — orquestração de um squad de **9 agentes de IA no modelo Maker-Checker** (Claude Code, MCP e Gemini API) com Spec-Driven Development (OpenSpec); (2) **Automação & Integração ERP Industrial** — **15 robôs Python** em produção integrados ao **WinThor (Oracle)** e **SEFAZ** (incluindo o **FTP_SYNC com -99% de tempo**); e (3) **Engenharia Full-Stack & Qualidade Rigorosa** — monorepo com **SSO JWT (4 sistemas)**, **58 testes Pytest**, **35 asserções Playwright** e conformidade **LGPD**.",
+          "en": "**Anderson Cataldo’s Core Differentials & 3 Pillars:** (1) **Applied AI & Autonomous Agents** — orchestrating a **9-agent Maker-Checker AI squad** (Claude Code, MCP, Gemini API) with Spec-Driven Development (OpenSpec); (2) **Industrial ERP Automation** — **15 production Python robots** integrated with **WinThor (Oracle)** and **SEFAZ** (including **FTP_SYNC with -99% time**); and (3) **Full-Stack Engineering & Strict Quality** — **SSO JWT monorepo (4 systems)**, **58 Pytest tests**, **35 Playwright assertions**, and **LGPD** compliance."
+        },
+        "languagesSpoken": {
+          "pt": "**Idiomas falados por Anderson Cataldo:** **Português (Nativo)**, **Inglês (Avançado)** — leitura técnica fluente, documentação arquitetural, escrita de código e comunicação profissional bilíngue (PT/EN) — além de conhecimentos em **Espanhol**.",
+          "en": "**Languages spoken by Anderson Cataldo:** **Portuguese (Native)**, **English (Advanced)** — fluent technical reading, architectural documentation, code authoring, and bilingual (PT/EN) professional communication — plus **Spanish**."
         }
       },
       "keywords": [
@@ -258,6 +266,14 @@
         "duration_when": {
           "pt": "No mercado corporativo, Anderson atua continuamente desde **Janeiro de 2025 (~2 anos de experiência prática)**: trabalhou por **1 ano e 4 meses no Grupo 3corações (Jan/2025 – Abr/2026)** e está na **Distribuidora Mais Saúde desde Junho de 2026**, somando **15 robôs entregues**. Nos estudos, dedica **3 anos (2024 – 2027)** à graduação em **Ciência da Computação na UNIFOR**, estando atualmente no **6º Semestre**.",
           "en": "In corporate production, Anderson has worked continuously since **January 2025 (~2 years of practical experience)**: **1 year and 4 months at Grupo 3corações (Jan/2025 – Apr/2026)** and at **Distribuidora Mais Saúde since June 2026**, totaling **15 shipped robots**. Academically, he has **3 years of study (2024 – 2027)** in **Computer Science at UNIFOR**, currently in the **6th Semester**."
+        },
+        "firstJob": {
+          "pt": "**Primeiro emprego de Anderson Cataldo:** Sua primeira experiência corporativa foi no **Grupo 3corações** (**Janeiro de 2025 a Abril de 2026 — 1 ano e 4 meses**, em Eusébio/Fortaleza, CE), onde atuou como **Aprendiz — Setor Fiscal (Sistemas e Projetos)** (`Desenvolvedor de Robôs RPA & Automação de Processos`), construindo **5 robôs RPA em Python** para renovação automática de **CNDs** e processamento de **15.000+ XMLs fiscais/mês (NF-e/CT-e)** com **99,85% de precisão SEFAZ** e economia de **200+ horas manuais**.",
+          "en": "**Anderson Cataldo’s First Job:** His first corporate position was at **Grupo 3corações** (**January 2025 to April 2026 — 1 year and 4 months**, in Eusébio/Fortaleza, CE) as **Apprentice — Tax Department (Systems & Projects)** (`RPA Robot Developer & Process Automation`), where he built **5 Python RPA robots** for automated **CND** renewals and processing **15,000+ monthly tax XMLs (NF-e/CT-e)** with **99.85% SEFAZ accuracy**, saving **200+ manual hours**."
+        },
+        "currentJob": {
+          "pt": "**Emprego atual de Anderson Cataldo:** Atualmente (**Jun/2026 – Presente**), Anderson trabalha na **Distribuidora Mais Saúde** (Fortaleza, CE — Híbrido/Presencial) como **Estagiário de T.I. — Full-Stack, Automação & IA**, liderando o desenvolvimento da **Central Grupo Mais (4 sistemas unificados com SSO JWT)**, **10 robôs RPA integrados ao ERP TOTVS WinThor (Oracle)** (incluindo o **FTP_SYNC com -99% de tempo**) e o **squad de 9 agentes de IA (Maker-Checker com Claude Code)**.",
+          "en": "**Anderson Cataldo’s Current Job:** Currently (**Jun/2026 – Present**), Anderson works at **Distribuidora Mais Saúde** (Fortaleza, CE — Hybrid/On-site) as **IT Intern — Full-Stack, Automation & AI**, leading the development of **Central Grupo Mais (4 unified SSO JWT systems)**, **10 Python RPA robots integrated with TOTVS WinThor ERP (Oracle)** (including **FTP_SYNC with -99% time**), and the **9-agent AI squad (Maker-Checker with Claude Code)**."
         }
       },
       "keywords": [
@@ -833,6 +849,10 @@
         "metricsSummary": {
           "pt": "Métricas de destaque na **Distribuidora Mais Saúde**: **Redução FTP_SYNC: -99% (6h ➔ 10s)** • **Robôs WinThor: 10 robôs** • **Suíte de Testes: 58 Pytest + 35 E2E** • **Sistemas Unificados: 4 em 1 (SSO)**.",
           "en": "Highlight metrics at **Distribuidora Mais Saúde**: **FTP_SYNC Reduction: -99% (6h ➔ 10s)** • **WinThor Robots: 10 robôs** • **Test Suites: 58 Pytest + 35 E2E** • **Unified Systems: 4 em 1 (SSO)**."
+        },
+        "currentJob": {
+          "pt": "**Emprego Atual — Distribuidora Mais Saúde (Jun/2026 - Presente):** Atualmente, Anderson trabalha na **Distribuidora Mais Saúde** como **Estagiário de T.I. — Full-Stack, Automação & IA** (Engenharia de Software, Agentes de IA & Integrações WinThor), onde projetou e desenvolve a **Central Grupo Mais (monorepo SSO com 4 sistemas internos)**, **10 robôs Python integrados ao ERP TOTVS WinThor (Oracle)** (incluindo o **FTP_SYNC com redução de 6h para <10s, -99%**), o **escritório de 9 agentes de IA (Maker-Checker com Claude Code)** e **58 testes Pytest + 35 asserções Playwright**.",
+          "en": "**Current Job — Distribuidora Mais Saúde (Jun/2026 - Present):** Currently, Anderson works at **Distribuidora Mais Saúde** as **IT Intern — Full-Stack, Automation & AI** (Software Engineering, AI Agents & WinThor Integrations), where he architected and builds **Central Grupo Mais (SSO monorepo unifying 4 internal systems)**, **10 Python robots integrated with TOTVS WinThor ERP (Oracle)** (including **FTP_SYNC reducing 6h to <10s, -99%**), the **9-agent AI squad (Maker-Checker with Claude Code)**, and **58 Pytest + 35 Playwright tests**."
         }
       },
       "keywords": [
@@ -856,8 +876,21 @@
         "empresa",
         "company",
         "trabalho",
+        "emprego",
         "cargo",
-        "role"
+        "role",
+        "emprego atual",
+        "trabalho atual",
+        "onde trabalha hoje",
+        "trabalha atualmente",
+        "empresa atual",
+        "cargo atual",
+        "estagiario",
+        "estagio",
+        "current job",
+        "current role",
+        "where does he work",
+        "intern"
       ],
       "entities": [
         "mais_saude",
@@ -912,6 +945,10 @@
         "metricsSummary": {
           "pt": "Métricas de destaque na **Grupo 3corações**: **Documentos / Mês: 15.000+ XMLs** • **Horas Poupadas: 200h+** • **Robôs em Produção: 5 robôs**.",
           "en": "Highlight metrics at **Grupo 3corações**: **Documents / Month: 15.000+ XMLs** • **Hours Saved: 200h+** • **Robots Shipped: 5 robôs**."
+        },
+        "firstJob": {
+          "pt": "**Primeiro Emprego Corporativo — Grupo 3corações (Jan/2025 - Abr/2026):** Anderson iniciou sua carreira corporativa no **Grupo 3corações** como **Aprendiz — Setor Fiscal (Sistemas e Projetos)** (Desenvolvedor de Robôs RPA & Automação de Processos), atuando presencialmente por **1 ano e 4 meses**. Nessa primeira experiência profissional, desenvolveu **5 robôs RPA em Python** para renovação automática de **CNDs** e processamento de **15.000+ XMLs fiscais/mês** com **99,85% de precisão SEFAZ**, poupando **200+ horas manuais**.",
+          "en": "**First Corporate Job — Grupo 3corações (Jan/2025 - Apr/2026):** Anderson started his corporate career at **Grupo 3corações** as **Apprentice — Tax Department (Systems & Projects)** (RPA Robot Developer & Process Automation), working on-site for **1 year and 4 months**. In this first professional role, he built **5 Python RPA robots** for automated **CND** renewals and processing **15,000+ monthly tax XMLs** with **99.85% SEFAZ accuracy**, saving **200+ manual hours**."
         }
       },
       "keywords": [
@@ -930,8 +967,22 @@
         "empresa",
         "company",
         "trabalho",
+        "emprego",
         "cargo",
-        "role"
+        "role",
+        "primeiro emprego",
+        "primeira experiencia",
+        "primeira empresa",
+        "onde comecou",
+        "comecou a trabalhar",
+        "emprego anterior",
+        "ultimo emprego",
+        "aprendiz",
+        "jovem aprendiz",
+        "first job",
+        "previous job",
+        "started working",
+        "apprentice"
       ],
       "entities": [
         "3coracoes",
@@ -1581,6 +1632,50 @@
         "framer motion",
         "vite",
         "seo"
+      ]
+    },
+    {
+      "id": "projects-catalog-overview",
+      "category": "project",
+      "sectionAnchor": "#projetos",
+      "sectionLabel": {
+        "pt": "Catálogo de Projetos",
+        "en": "Projects Catalog"
+      },
+      "title": {
+        "pt": "Catálogo Completo de Projetos (9 Sistemas e Pipelines em Produção)",
+        "en": "Complete Projects Catalog (9 Production Systems & Pipelines)"
+      },
+      "shortAnswer": {
+        "pt": "O portfólio de Anderson Cataldo apresenta **9 projetos principais em produção** (além de **15 robôs corporativos**):\n1. **Central Grupo Mais & SSO Corporativo** (Full-Stack & Cloud) — Monorepo Corporativo Unificando 4 Sistemas Internos com Autenticação Centralizada\n2. **Sistema de Chamados Corporativo** (Full-Stack & BI) — Plataforma Multinível de Atendimento com RBAC Granular e BI com Recharts\n3. **Sistema de Devolução com Diagnóstico por IA** (IA & Logística) — Logística Reversa Inteligente com LLM, Análise de Pareto e Modo TV\n4. **FTP_SYNC & Motor EDI WinThor (Oracle)** (Automação & ERP) — Ponte Autônoma SFTP e Robôs de Integração Farmacêutica com ERP TOTVS\n5. **Motor RPA & Extração Fiscal (Grupo 3corações)** (Automação & RPA) — 5 Robôs em Python para Extração de 15.000 XMLs/mês e Emissão Automática de CNDs\n6. **Squad de Agentes de IA Autônomos** (IA & Sistemas Multiagente) — Arquitetura Multiagente com Memória Compartilhada e Orquestrador 24/7\n7. **Sistema de Ativos de TI & Termos SHA-256** (Full-Stack & Segurança) — Gestão de Inventário com Aprovação em 2 Níveis e Integridade Criptográfica\n8. **Plataforma Gamificada São Carlo Acutis** (Full-Stack) — Engenharia Full-Stack & Gamificação Educacional Interativa\n9. **Portfólio Web SaaS de Alta Performance** (Front-End & Craft) — Arquitetura Front-End Moderna com Acessibilidade WCAG AA, Terminal CLI e Command Palette",
+        "en": "Anderson Cataldo’s portfolio showcases **9 flagship production projects** (plus **15 corporate robots**):\n1. **Central Grupo Mais & Corporate SSO** (Full-Stack & Cloud) — Corporate Monorepo Unifying 4 Internal Systems with Centralized SSO\n2. **Corporate Service Desk System** (Full-Stack & BI) — Multi-Tier Service Desk Platform with Granular RBAC and Recharts BI\n3. **AI-Powered Returns & Reverse Logistics** (AI & Logistics) — Intelligent Reverse Logistics with LLM Diagnostics, Pareto Curve & TV Mode\n4. **FTP_SYNC & WinThor EDI Engine** (Automation & ERP) — Autonomous SFTP Bridge & Pharma EDI Integration Robots with TOTVS ERP\n5. **RPA Engine & Tax Data Extraction** (Automation & RPA) — 5 Python Robots for 15,000 XMLs/mo Extraction and Automated CND Certification\n6. **Autonomous AI Agent Squad** (AI & Multi-Agent Systems) — Multi-Agent Architecture with Shared Memory and 24/7 Orchestrator\n7. **IT Asset Management & SHA-256 Custody** (Full-Stack & Security) — Inventory Management with 2-Step Approval and Cryptographic Integrity\n8. **São Carlo Acutis Gamified Platform** (Full-Stack) — Full-Stack Engineering & Interactive Educational Gamification\n9. **High-Performance SaaS Web Portfolio** (Front-End & Craft) — Modern Front-End Architecture with WCAG AA Accessibility, Interactive CLI & Command Palette"
+      },
+      "content": {
+        "pt": "- Central Grupo Mais & SSO Corporativo: Ecossistema corporativo monorepo com Single Sign-On (JWT) que unifica 4 plataformas críticas da Distribuidora Mais Saúde: Portal Central, Sistema de Chamados, Devoluções e Gestão de Ativos. (Stack: Next.js 16, React 19, TypeScript, FastAPI, Node.js, PostgreSQL, Supabase, Cloudflare Pages)\n- Sistema de Chamados Corporativo: Plataforma enterprise de atendimento técnico e operacional com 4 níveis de hierarquia (solicitante → atendente → gestor → admin), cálculo de SLA preditivo, métricas de MTTR, BI interativo e e-mails transacionais. (Stack: Next.js 16, React 19, TypeScript, Tailwind CSS 4, Supabase, PostgreSQL, Recharts)\n- Sistema de Devolução com Diagnóstico por IA: Sistema corporativo de logística reversa que substituiu formulários e planilhas por triagem automatizada, validação de NF duplicada, Modo TV para a expedição e motor de IA com diagnósticos executivos. (Stack: Python, FastAPI, React, Gemini API, OpenAI, SQLAlchemy, PostgreSQL, Pytest)\n- FTP_SYNC & Motor EDI WinThor (Oracle): Pipeline autônomo em Python de integração de estoque e faturamento conectando 4 gigantes farmacêuticos (Eurofarma, Eurofarma Genérico, Smartped e Momenta) ao ERP TOTVS WinThor (Oracle) no padrão EDI Pharma Link via FTP/SFTP. (Stack: Python, SFTP / FTP, EDI Pharma Link, TOTVS WinThor, Oracle SQL, Paramiko, PyInstaller)\n- Motor RPA & Extração Fiscal (Grupo 3corações): Conjunto de 5 robôs RPA em Python em produção no Grupo 3corações para renovação automática de CNDs em portais do governo, extração massiva de XML fiscais (15.000+/mês) e integração direta com planilhas corporativas. (Stack: Python, RPA, Pandas, Selenium, lxml, BeautifulSoup, Excel Automation)\n- Squad de Agentes de IA Autônomos: Arquitetura de sistemas multiagente construída do zero para dominar os fundamentos de orquestração de LLMs: personas especializadas por papel, memória e contexto compartilhado em JSON, e gerenciamento de processos via PM2. (Stack: Node.js, Google Gemini API, PM2, Multi-Agent, Prompt Engineering, TypeScript)\n- Sistema de Ativos de TI & Termos SHA-256: Sistema corporativo para controle de inventário e custódia de equipamentos de informática com esteira de aprovação em 2 níveis, histórico auditado por triggers no PostgreSQL e geração de termos (.docx) com assinatura de hash SHA-256. (Stack: Next.js, Node.js, PostgreSQL, Supabase, Tailwind CSS, SHA-256)\n- Plataforma Gamificada São Carlo Acutis: Sistema web educacional gamificado com missões interativas, quizzes em tempo real e sistema de pontuação e progresso para o público jovem. (Stack: React, TypeScript, PostgreSQL, Supabase, Tailwind CSS, Vercel)\n- Portfólio Web SaaS de Alta Performance: Interface pessoal projetada no mais alto padrão de craft de engenharia (estilo Linear e Raycast), implementando tokens Tailwind v4, modo escuro/claro perfeito, Command Palette global, simulador de ROI e terminal executável. (Stack: React 18, TypeScript, Tailwind CSS v4, Framer Motion, Vite, SEO)",
+        "en": "- Central Grupo Mais & Corporate SSO: Corporate monorepo ecosystem with Single Sign-On (JWT) unifying 4 mission-critical platforms at Distribuidora Mais Saúde: Central Portal, Service Desk, Returns, and IT Asset Management. (Stack: Next.js 16, React 19, TypeScript, FastAPI, Node.js, PostgreSQL, Supabase, Cloudflare Pages)\n- Corporate Service Desk System: Enterprise IT and operational ticketing platform featuring 4 hierarchical tiers (requester → agent → manager → admin), predictive SLA tracking, MTTR metrics, interactive BI dashboards, and transactional emails. (Stack: Next.js 16, React 19, TypeScript, Tailwind CSS 4, Supabase, PostgreSQL, Recharts)\n- AI-Powered Returns & Reverse Logistics: Enterprise reverse logistics system replacing Google Forms and spreadsheets with automated triage, duplicate invoice validation, warehouse TV Mode, and an AI diagnostic engine. (Stack: Python, FastAPI, React, Gemini API, OpenAI, SQLAlchemy, PostgreSQL, Pytest)\n- FTP_SYNC & WinThor EDI Engine: Autonomous Python pipeline for inventory and billing integration connecting 4 pharmaceutical giants (Eurofarma, Eurofarma Generic, Smartped, Momenta) to TOTVS WinThor ERP (Oracle) in EDI Pharma Link format via FTP/SFTP. (Stack: Python, SFTP / FTP, EDI Pharma Link, TOTVS WinThor, Oracle SQL, Paramiko, PyInstaller)\n- RPA Engine & Tax Data Extraction: Suite of 5 production Python RPA robots at Grupo 3corações for automated CND renewals on tax portals, bulk XML extraction (15,000+/mo), and direct corporate spreadsheet reconciliation. (Stack: Python, RPA, Pandas, Selenium, lxml, BeautifulSoup, Excel Automation)\n- Autonomous AI Agent Squad: Multi-agent architecture built from scratch to master the foundational mechanics of LLM orchestration: specialized role-based personas, shared JSON context memory, and 24/7 PM2 process management. (Stack: Node.js, Google Gemini API, PM2, Multi-Agent, Prompt Engineering, TypeScript)\n- IT Asset Management & SHA-256 Custody: Corporate IT equipment custody and inventory platform with a 2-tier approval flow, audit history via PostgreSQL triggers, and automated .docx Responsibility Term generation signed with SHA-256 cryptographic hashes. (Stack: Next.js, Node.js, PostgreSQL, Supabase, Tailwind CSS, SHA-256)\n- São Carlo Acutis Gamified Platform: Gamified educational web system with interactive missions, real-time quizzes and a scoring/progress system aimed at a young audience. (Stack: React, TypeScript, PostgreSQL, Supabase, Tailwind CSS, Vercel)\n- High-Performance SaaS Web Portfolio: Personal engineering showcase built to Silicon Valley craft standards (Linear and Raycast style), featuring Tailwind v4 tokens, flawless dark/light mode, global Command Palette, ROI calculator, and interactive CLI. (Stack: React 18, TypeScript, Tailwind CSS v4, Framer Motion, Vite, SEO)"
+      },
+      "keywords": [
+        "todos os projetos",
+        "quais sao os projetos",
+        "quais projetos ele fez",
+        "lista de projetos",
+        "quantos projetos",
+        "catalogo de projetos",
+        "all projects",
+        "list of projects",
+        "how many projects"
+      ],
+      "entities": [
+        "projetos_catalogo",
+        "central_grupo_mais",
+        "sistema_chamados_mais_saude",
+        "sistema_devolucoes_ia",
+        "ftp_sync_edi_winthor",
+        "rpa_fiscal_3coracoes",
+        "squad_agentes_ia",
+        "sistema_ativos_ti",
+        "carlo_acutis",
+        "portfolio_web_tech"
       ]
     },
     {

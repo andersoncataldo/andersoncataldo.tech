@@ -1,5 +1,6 @@
 import knowledgeData from '../../data/knowledgeIndex.json';
 import { extractCharNgrams, normalizeText, tokenize } from './guardrails';
+import { detectQuestionAspect } from './intentClassifier';
 import type {
   ChatMessageItem,
   KnowledgeChunk,
@@ -30,11 +31,16 @@ const SYNONYM_GROUPS: string[][] = [
   ['chamados', 'helpdesk', 'service desk', 'ticket', 'rbac', 'sla', 'mttr', 'recharts'],
   ['devolucao', 'devolucoes', 'returns', 'logistica reversa', 'pareto', 'modo tv', 'anomalias'],
   ['ativos', 'inventario', 'patrimonio', 'custodia', 'sha-256', 'sha256', 'termos'],
-  ['unifor', 'unifro', 'faculdade', 'universidade', 'ciencia da computacao', 'computer science', '6 semestre', 'estudo', 'graduacao'],
+  ['unifor', 'unifro', 'faculdade', 'universidade', 'ciencia da computacao', 'computer science', '6 semestre', 'estudo', 'graduacao', 'quando se forma', 'formatura', 'previsao de conclusao', '2027'],
   ['huawei', 'huwei', 'hcia', 'hcia-storage', 'v5.0', 'certificacao', 'certificado', 'storage', 'san', 'nas', 'raid', 'disaster recovery'],
   ['banco de dados', 'database', 'db', 'sgbd', 'postgresql', 'postgres', 'supabase', 'rls', 'oracle', 'sql'],
   ['contato', 'email', 'linkedin', 'github', 'whatsapp', 'telefone', 'contratar', 'vaga', 'remoto', 'hibrido', 'fortaleza', 'curriculo', 'cv'],
-  ['experiencia', 'trabalho', 'carreira', 'empresas', 'mais saude', 'janeiro de 2025', '2 anos'],
+  ['experiencia', 'trabalho', 'emprego', 'carreira', 'empresas', 'mais saude', 'janeiro de 2025', '2 anos'],
+  ['primeiro emprego', 'primeira experiencia', 'primeira empresa', 'onde comecou', 'comecou a trabalhar', 'emprego anterior', 'ultimo emprego', 'aprendiz', 'jovem aprendiz', 'first job', 'previous job', 'started working', 'apprentice'],
+  ['emprego atual', 'trabalho atual', 'onde trabalha hoje', 'trabalha atualmente', 'onde ele trabalha', 'empresa atual', 'cargo atual', 'estagio atual', 'estagiario', 'current job', 'current role', 'where does he work', 'intern'],
+  ['idioma', 'idiomas', 'lingua', 'linguas', 'fala ingles', 'nivel de ingles', 'ingles', 'espanhol', 'bilingue', 'fluente', 'english', 'spanish', 'languages', 'perfil'],
+  ['diferencial', 'diferenciais', 'ponto forte', 'pontos fortes', 'por que contratar', 'pilares', '3 pilares', 'especialidades', 'metodologia', 'why hire', 'strengths', 'pillars', 'maker-checker', 'openspec', 'perfil'],
+  ['todos os projetos', 'quais sao os projetos', 'quais projetos ele fez', 'lista de projetos', 'quantos projetos', 'catalogo de projetos', 'all projects', 'list of projects', 'how many projects'],
   ['streamlit', 'tkinter', 'google sheets', 'apps script', 'ferramentas internas', 'painel'],
   ['sudo hire', 'terminal', 'cli', 'devconsole', 'command palette', 'ctrl+k', 'calculadora', 'roi', 'pwa', 'opengraph'],
   ['quem e', 'who is', 'sobre o anderson', 'about anderson', 'resumo', 'perfil', 'bio', 'apresentacao', 'posicionamento', 'pilares'],
@@ -348,11 +354,26 @@ export function retrieveKnowledge(
   byBm25.forEach((item, idx) => bm25Rank.set(item.chunk.id, idx + 1));
   byCosine.forEach((item, idx) => cosineRank.set(item.chunk.id, idx + 1));
 
+  const aspect = detectQuestionAspect(resolvedQuery);
   const RRF_K = 20;
   for (const item of initialScores) {
     const rB = bm25Rank.get(item.chunk.id) || TOTAL_DOCS;
     const rC = cosineRank.get(item.chunk.id) || TOTAL_DOCS;
     const rrf = 1 / (RRF_K + rB) + 1 / (RRF_K + rC);
+
+    let aspectBoost = 0;
+    if (aspect === 'first_job' && (item.chunk.id === 'experience-3coracoes' || item.chunk.id === 'work-and-study-duration')) {
+      aspectBoost = item.chunk.id === 'experience-3coracoes' ? 0.55 : 0.35;
+    } else if (aspect === 'current_job' && (item.chunk.id === 'experience-mais-saude' || item.chunk.id === 'work-and-study-duration')) {
+      aspectBoost = item.chunk.id === 'experience-mais-saude' ? 0.55 : 0.35;
+    } else if (
+      (aspect === 'languages_spoken' || aspect === 'differentials_pillars') &&
+      item.chunk.id === 'profile-overview'
+    ) {
+      aspectBoost = 0.55;
+    } else if (aspect === 'all_projects_list' && item.chunk.id === 'projects-catalog-overview') {
+      aspectBoost = 0.65;
+    }
 
     const signalStrength =
       Math.min(1, item.bm25Score / 8) * 0.55 + Math.min(1, item.cosineScore * 1.8) * 0.45;
@@ -360,7 +381,7 @@ export function retrieveKnowledge(
     item.finalScore =
       item.bm25Score === 0 && item.cosineScore === 0
         ? 0
-        : Number((rrf * 8 + signalStrength * 0.6).toFixed(4));
+        : Number((rrf * 8 + signalStrength * 0.6 + aspectBoost).toFixed(4));
   }
 
   const candidates = initialScores
