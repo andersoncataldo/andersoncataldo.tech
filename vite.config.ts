@@ -1,10 +1,64 @@
-import { defineConfig } from 'vite';
+import { defineConfig, type Plugin } from 'vite';
 import react from '@vitejs/plugin-react';
 import { VitePWA } from 'vite-plugin-pwa';
+
+interface DevNodeRequest {
+  method?: string;
+  on(event: 'data', listener: (chunk: unknown) => void): void;
+  on(event: 'end', listener: () => void): void;
+}
+
+interface DevNodeResponse {
+  statusCode: number;
+  setHeader(name: string, value: string): void;
+  end(data?: string): void;
+}
+
+function localChatApiPlugin(): Plugin {
+  return {
+    name: 'local-edge-chat-api',
+    configureServer(server) {
+      server.middlewares.use('/api/chat', (rawReq, rawRes) => {
+        const req = rawReq as unknown as DevNodeRequest;
+        const res = rawRes as unknown as DevNodeResponse;
+        const chunks: string[] = [];
+        req.on('data', (chunk: unknown) => {
+          chunks.push(String(chunk));
+        });
+        req.on('end', () => {
+          void (async () => {
+            try {
+              const mod = (await server.ssrLoadModule('/api/chat.ts')) as {
+                default: (r: Request) => Promise<Response>;
+              };
+              const bodyText = chunks.join('');
+              const webReq = new Request('http://localhost/api/chat', {
+                method: req.method || 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: req.method === 'POST' ? bodyText : undefined,
+              });
+              const webRes = await mod.default(webReq);
+              res.statusCode = webRes.status;
+              webRes.headers.forEach((val: string, key: string) => {
+                res.setHeader(key, val);
+              });
+              const text = await webRes.text();
+              res.end(text);
+            } catch {
+              res.statusCode = 500;
+              res.end();
+            }
+          })();
+        });
+      });
+    },
+  };
+}
 
 export default defineConfig({
   plugins: [
     react(),
+    localChatApiPlugin(),
     VitePWA({
       registerType: 'autoUpdate',
       manifest: {

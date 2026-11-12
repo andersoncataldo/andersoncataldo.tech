@@ -8,6 +8,9 @@
   "scripts": {
     "dev": "vite",
     "build": "tsc -b && vite build",
+    "build:knowledge": "node scripts/build-knowledge.mjs",
+    "evals": "node scripts/run-evals.mjs",
+    "evals:live": "node scripts/run-evals.mjs --live",
     "lint": "eslint .",
     "preview": "vite preview"
   },

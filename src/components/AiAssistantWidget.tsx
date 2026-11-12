@@ -36,15 +36,26 @@ function renderInlineFormatting(text: string): React.ReactNode[] {
     const linkMatch = part.match(/^\[([^\]]+)\]\(([^)]+)\)$/);
     if (linkMatch) {
       const [, label, href] = linkMatch;
+      const isInternalAnchor = /^#[a-zA-Z0-9_-]+$/.test(href);
       const isSafeProtocol =
-        href.startsWith('https://') || href.startsWith('http://') || href.startsWith('mailto:');
+        isInternalAnchor ||
+        href.startsWith('https://') ||
+        href.startsWith('http://') ||
+        href.startsWith('mailto:');
       if (isSafeProtocol) {
         return (
           <a
             key={idx}
             href={href}
-            target={href.startsWith('mailto:') ? undefined : '_blank'}
-            rel={href.startsWith('mailto:') ? undefined : 'noopener noreferrer'}
+            target={isInternalAnchor || href.startsWith('mailto:') ? undefined : '_blank'}
+            rel={isInternalAnchor || href.startsWith('mailto:') ? undefined : 'noopener noreferrer'}
+            onClick={(e) => {
+              if (isInternalAnchor) {
+                e.preventDefault();
+                const targetEl = document.getElementById(href.slice(1));
+                targetEl?.scrollIntoView({ behavior: 'smooth' });
+              }
+            }}
             className="font-bold text-indigo-600 dark:text-indigo-400 underline hover:text-indigo-500 transition-colors"
           >
             {label}
@@ -260,8 +271,11 @@ export const AiAssistantWidget: React.FC = () => {
         throw new Error('Empty stream response');
       }
     } catch {
-      // Fallback determinístico de contingência (modo offline ou Vite dev/preview sem backend Vercel)
-      const fallbackText = queryOfflineKnowledge(query, language);
+      // Fallback com motor ML Híbrido (BM25 + Cosine Similarity + RRF + MMR + Síntese Conversacional)
+      const historyPayload = messages
+        .filter((m) => !m.id.startsWith('welcome'))
+        .map((m) => ({ role: m.role, content: m.content }));
+      const fallbackText = queryOfflineKnowledge(query, language, historyPayload);
       setMessages((prev) =>
         prev.map((msg) =>
           msg.id === assistantId

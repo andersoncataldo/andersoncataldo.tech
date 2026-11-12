@@ -1,0 +1,1782 @@
+{
+  "version": "2.0.0",
+  "generatedAt": "2026-11-12T22:37:22.494Z",
+  "embeddingModel": "hybrid-local-tfidf-bm25-v2",
+  "totalChunks": 32,
+  "canonicalMetrics": {
+    "shippedRobots": "15",
+    "maisSaudeRobots": "10",
+    "tresCoracoesRobots": "5",
+    "ftpSyncReduction": "-99%",
+    "ftpSyncBefore": "6 horas",
+    "ftpSyncAfter": "10 segundos",
+    "ftpSyncInterval": "15 min",
+    "monthlyXmls": "15.000+",
+    "sefazAccuracy": "99.85%",
+    "hoursSaved": "200+",
+    "aiAgentsCount": "9",
+    "pytestCount": "58",
+    "playwrightCount": "35",
+    "unifiedSystemsCount": "4",
+    "semester": "6º Semestre",
+    "studyDurationYears": "3 anos",
+    "studyPeriod": "2024 - 2027",
+    "workDurationYears": "~2 anos",
+    "workStart": "Janeiro de 2025",
+    "tresCoracoesDuration": "1 ano e 4 meses",
+    "certificationName": "Huawei HCIA-Storage V5.0"
+  },
+  "knownTechnologies": [
+    "python",
+    "typescript",
+    "javascript",
+    "react",
+    "next.js",
+    "nextjs",
+    "vite",
+    "tailwind",
+    "fastapi",
+    "node.js",
+    "nodejs",
+    "express",
+    "sqlalchemy",
+    "alembic",
+    "pydantic",
+    "zod",
+    "postgresql",
+    "postgres",
+    "supabase",
+    "rls",
+    "oracle",
+    "winthor",
+    "totvs",
+    "sqlite",
+    "mongodb",
+    "neon",
+    "java",
+    "spring boot",
+    "django",
+    "vue",
+    "vue.js",
+    "framer motion",
+    "recharts",
+    "lucide",
+    "playwright",
+    "pytest",
+    "selenium",
+    "pandas",
+    "lxml",
+    "beautifulsoup",
+    "openpyxl",
+    "pyinstaller",
+    "paramiko",
+    "ftplib",
+    "sftp",
+    "ftp",
+    "edi pharma link",
+    "streamlit",
+    "tkinter",
+    "claude code",
+    "mcp",
+    "gemini",
+    "openai",
+    "openspec",
+    "pm2",
+    "docker",
+    "github actions",
+    "cloudflare pages",
+    "render",
+    "vercel",
+    "huawei",
+    "hcia-storage",
+    "san",
+    "nas",
+    "raid",
+    "sha-256",
+    "jwt",
+    "sso",
+    "rbac",
+    "wcag",
+    "pwa",
+    "google sheets",
+    "apps script"
+  ],
+  "unlistedCommonTechnologies": [
+    "cobol",
+    "rust",
+    "elixir",
+    "erlang",
+    "haskell",
+    "scala",
+    "clojure",
+    "fortran",
+    "perl",
+    "ruby on rails",
+    "ruby",
+    "laravel",
+    "php",
+    "symfony",
+    "wordpress",
+    "drupal",
+    "magento",
+    "flutter",
+    "dart",
+    "swift",
+    "objective-c",
+    "kotlin",
+    "xamarin",
+    "ionic",
+    "cordova",
+    "c#",
+    ".net",
+    "aspnet",
+    "blazor",
+    "delphi",
+    "vb.net",
+    "abap",
+    "sap",
+    "salesforce",
+    "apex",
+    "solidity",
+    "web3",
+    "blockchain",
+    "ethereum",
+    "unreal engine",
+    "unity",
+    "godot",
+    "cassandra",
+    "couchbase",
+    "neo4j",
+    "dynamodb",
+    "snowflake",
+    "databricks",
+    "hadoop",
+    "spark",
+    "kafka",
+    "terraform",
+    "ansible",
+    "puppet",
+    "chef",
+    "openshift",
+    "rancher",
+    "istio"
+  ],
+  "chunks": [
+    {
+      "id": "profile-overview",
+      "category": "profile",
+      "sectionAnchor": "#sobre",
+      "sectionLabel": {
+        "pt": "Sobre Anderson Cataldo",
+        "en": "About Anderson Cataldo"
+      },
+      "title": {
+        "pt": "Perfil Profissional e Posicionamento de Anderson Cataldo",
+        "en": "Anderson Cataldo — Professional Profile & Positioning"
+      },
+      "shortAnswer": {
+        "pt": "**Anderson Viana Cataldo** é Desenvolvedor Full-Stack, especialista em **Automação Corporativa (RPA)** e **Arquitetura de Agentes de IA (LLM)** com foco em Python e TypeScript. Atua na **Distribuidora Mais Saúde** (desde Jun/2026), atuou no **Grupo 3corações** (Jan/2025 a Abr/2026) e cursa o **6º semestre de Ciência da Computação na UNIFOR**.",
+        "en": "**Anderson Viana Cataldo** is a Full-Stack Developer specializing in **Enterprise Automation (RPA)** and **AI Agent Architectures (LLM)** using Python and TypeScript. He currently works at **Distribuidora Mais Saúde** (since Jun/2026), previously worked at **Grupo 3corações** (Jan/2025 to Apr/2026), and is a **6th-semester Computer Science student at UNIFOR**."
+      },
+      "content": {
+        "pt": "Anderson Viana Cataldo projeta e entrega monorepos corporativos (Next.js 16, React 19/18, FastAPI, Node.js, PostgreSQL/Supabase RLS), orquestra squads multiagente Maker-Checker (9 agentes com Claude Code, MCP e Gemini API) e desenvolve robôs de integração em Python conectados ao ERP TOTVS WinThor (Oracle). Acumula 15 robôs em produção, redução de 99% no FTP_SYNC (de 6h para <10s), certificação internacional Huawei HCIA-Storage V5.0 e Inglês Avançado.",
+        "en": "Anderson Viana Cataldo architects and delivers corporate monorepos (Next.js 16, React 19/18, FastAPI, Node.js, PostgreSQL/Supabase RLS), orchestrates Maker-Checker multi-agent squads (9 agents with Claude Code, MCP, and Gemini API), and builds Python integration robots connected to TOTVS WinThor ERP (Oracle). He has 15 production robots, a -99% time reduction in FTP_SYNC (6h to <10s), Huawei HCIA-Storage V5.0 certification, and Advanced English."
+      },
+      "keywords": [
+        "quem e",
+        "who is",
+        "anderson",
+        "cataldo",
+        "viana",
+        "resumo",
+        "summary",
+        "bio",
+        "perfil",
+        "profile",
+        "objetivo",
+        "goal",
+        "foco",
+        "posicionamento",
+        "diferencial",
+        "full-stack",
+        "fullstack",
+        "sobre",
+        "about"
+      ],
+      "entities": [
+        "anderson_cataldo",
+        "mais_saude",
+        "3coracoes",
+        "unifor"
+      ],
+      "metrics": [
+        "15 robôs",
+        "-99%",
+        "9 agentes",
+        "6º semestre"
+      ]
+    },
+    {
+      "id": "work-and-study-duration",
+      "category": "experience",
+      "sectionAnchor": "#experiencia",
+      "sectionLabel": {
+        "pt": "Experiência e Formação",
+        "en": "Experience & Education"
+      },
+      "title": {
+        "pt": "Tempo de Trabalho (~2 Anos) e Tempo de Estudo (3 Anos — 6º Semestre)",
+        "en": "Work Duration (~2 Years) & Study Duration (3 Years — 6th Semester)"
+      },
+      "shortAnswer": {
+        "pt": "Anderson possui **~2 anos de experiência corporativa contínua em produção** (desde **Janeiro de 2025**, somando **15 robôs corporativos** e **4 sistemas web unificados**, passando pelo **Grupo 3corações** por **1 ano e 4 meses** e atualmente na **Distribuidora Mais Saúde** desde Jun/2026) e **3 anos de estudos acadêmicos dedicados (2024 – 2027)** no **Bacharelado em Ciência da Computação na UNIFOR (6º Semestre)**.",
+        "en": "Anderson has **~2 years of continuous corporate production experience** (since **January 2025**, totaling **15 production robots** and **4 unified web systems**, spanning **1 year and 4 months at Grupo 3corações** and currently at **Distribuidora Mais Saúde** since Jun/2026) alongside **3 years of dedicated academic study (2024 – 2027)** in **Computer Science at UNIFOR (6th Semester)**."
+      },
+      "content": {
+        "pt": "Cronologia completa: (1) Tempo de Trabalho: Iniciou em Janeiro de 2025 no Grupo 3corações (Jan/2025 a Abr/2026 — 1 ano e 4 meses no Setor Fiscal desenvolvendo 5 robôs RPA para 15.000+ XMLs/mês e CNDs) e atua desde Junho de 2026 na Distribuidora Mais Saúde (Full-Stack, Automação WinThor com 10 robôs, FTP_SYNC -99%, Central Grupo Mais 4 sistemas SSO e 9 agentes de IA). (2) Tempo de Estudo: 3 anos (2024 a 2027) em Ciência da Computação na UNIFOR, cursando o 6º semestre, além da certificação Huawei HCIA-Storage V5.0 (Jun/2026) e Inglês Avançado.",
+        "en": "Full timeline: (1) Work Duration: Started in January 2025 at Grupo 3corações (Jan/2025 to Apr/2026 — 1 year and 4 months in Tax RPA building 5 robots for 15,000+ XMLs/mo and CNDs) and works since June 2026 at Distribuidora Mais Saúde (Full-Stack, 10 WinThor robots, FTP_SYNC -99%, Central Grupo Mais 4 SSO systems, and 9 AI agents). (2) Study Duration: 3 years (2024 to 2027) in Computer Science at UNIFOR, currently in the 6th semester, plus Huawei HCIA-Storage V5.0 certification (Jun/2026) and Advanced English."
+      },
+      "keywords": [
+        "tempo de trabalho",
+        "tempo de experiencia",
+        "anos de experiencia",
+        "quanto tempo trabalha",
+        "tempo de estudo",
+        "tempo de faculdade",
+        "work duration",
+        "study duration",
+        "how long worked",
+        "how long studied",
+        "experiencia profissional",
+        "carreira",
+        "historico",
+        "cronologia",
+        "janeiro de 2025"
+      ],
+      "entities": [
+        "anderson_cataldo",
+        "mais_saude",
+        "3coracoes",
+        "unifor"
+      ],
+      "metrics": [
+        "Janeiro de 2025",
+        "1 ano e 4 meses",
+        "3 anos",
+        "2024",
+        "2027",
+        "6º Semestre",
+        "15 robôs"
+      ]
+    },
+    {
+      "id": "education-unifor",
+      "category": "education",
+      "sectionAnchor": "#experiencia",
+      "sectionLabel": {
+        "pt": "Formação Acadêmica",
+        "en": "Academic Education"
+      },
+      "title": {
+        "pt": "Graduação em Ciência da Computação na UNIFOR (6º Semestre)",
+        "en": "B.Sc. in Computer Science at UNIFOR (6th Semester)"
+      },
+      "shortAnswer": {
+        "pt": "Anderson cursa o **6º Semestre** do **Bacharelado em Ciência da Computação** na **Universidade de Fortaleza (UNIFOR)**, no período de **2024 a 2027 (3 anos de estudo)**, com foco em Estruturas de Dados Avançadas, Complexidade de Algoritmos (Big-O), Engenharia de Software, Bancos Relacionais (PostgreSQL/Oracle) e Inteligência Artificial Aplicada.",
+        "en": "Anderson is in the **6th Semester** of his **Bachelor of Science in Computer Science** at the **University of Fortaleza (UNIFOR)** (**2024 – 2027, 3 years of study**), focusing on Advanced Data Structures, Algorithmic Complexity (Big-O), Software Engineering, Relational Databases (PostgreSQL/Oracle), and Applied AI."
+      },
+      "content": {
+        "pt": "Na UNIFOR, conduz projetos interdisciplinares utilizando React, TypeScript, Java (Spring Boot), Python (FastAPI), modelagem relacional em PostgreSQL e Oracle, Clean Code e Spec-Driven Development. Mantém inglês avançado e certificação internacional Huawei HCIA-Storage V5.0.",
+        "en": "At UNIFOR, he leads interdisciplinary projects using React, TypeScript, Java (Spring Boot), Python (FastAPI), relational modeling on PostgreSQL and Oracle, Clean Code, and Spec-Driven Development. He also holds Advanced English proficiency and the Huawei HCIA-Storage V5.0 certification."
+      },
+      "keywords": [
+        "faculdade",
+        "universidade",
+        "unifor",
+        "ciencia da computacao",
+        "computer science",
+        "semestre",
+        "semester",
+        "6 semestre",
+        "6º semestre",
+        "6th semester",
+        "graduacao",
+        "degree",
+        "college",
+        "university",
+        "estudo",
+        "estuda",
+        "formacao",
+        "academico",
+        "big-o",
+        "estruturas de dados"
+      ],
+      "entities": [
+        "unifor",
+        "ciencia_da_computacao"
+      ],
+      "metrics": [
+        "3 anos",
+        "2024",
+        "2027",
+        "6º Semestre"
+      ]
+    },
+    {
+      "id": "certification-huawei-hcia",
+      "category": "certification",
+      "sectionAnchor": "#experiencia",
+      "sectionLabel": {
+        "pt": "Certificações Oficiais",
+        "en": "Official Certifications"
+      },
+      "title": {
+        "pt": "Certificação Internacional Huawei HCIA-Storage V5.0",
+        "en": "Huawei HCIA-Storage V5.0 International Certification"
+      },
+      "shortAnswer": {
+        "pt": "Anderson possui a certificação internacional **Huawei Certified ICT Associate - Storage V5.0 (HCIA-Storage)**, emitida em **Junho de 2026** pela **Huawei ICT Academy**, comprovando domínio em arquiteturas corporativas **SAN (Fibre Channel / IP-SAN) e NAS**, níveis **RAID**, virtualização de storage, snapshots e **Disaster Recovery**.",
+        "en": "Anderson holds the international **Huawei Certified ICT Associate - Storage V5.0 (HCIA-Storage)** certification, issued in **June 2026** by **Huawei ICT Academy**, validating expertise in enterprise **SAN (Fibre Channel / IP-SAN) and NAS** architectures, **RAID** parity, storage virtualization, snapshots, and **Disaster Recovery**."
+      },
+      "content": {
+        "pt": "A certificação Huawei HCIA-Storage V5.0 é a única certificação internacional oficial declarada no portfólio (ele não declara certificações AWS, Azure ou Kubernetes como possuídas). Ela fundamenta sua atuação em infraestrutura de armazenamento corporativo, resiliência de dados e continuidade de negócios.",
+        "en": "The Huawei HCIA-Storage V5.0 certification is the official international certification in his portfolio (he does not claim AWS, Azure, or Kubernetes certifications). It backs his work in enterprise storage infrastructure, data resilience, and business continuity."
+      },
+      "keywords": [
+        "certificacao",
+        "certificacoes",
+        "certificado",
+        "certification",
+        "certifications",
+        "huawei",
+        "hcia",
+        "hcia-storage",
+        "v5.0",
+        "storage",
+        "san",
+        "nas",
+        "raid",
+        "disaster recovery",
+        "armazenamento"
+      ],
+      "entities": [
+        "huawei",
+        "hcia_storage"
+      ],
+      "metrics": [
+        "HCIA-Storage V5.0",
+        "Jun/2026"
+      ]
+    },
+    {
+      "id": "profile-languages",
+      "category": "profile",
+      "sectionAnchor": "#sobre",
+      "sectionLabel": {
+        "pt": "Idiomas",
+        "en": "Languages"
+      },
+      "title": {
+        "pt": "Idiomas: Português, Inglês Avançado e Espanhol",
+        "en": "Languages: Native Portuguese, Advanced English & Spanish"
+      },
+      "shortAnswer": {
+        "pt": "Anderson fala **Português (Nativo)**, **Inglês (Avançado)** — apto para leitura de documentação técnica, comunicação com equipes globais e entrevistas — e possui conhecimentos em **Espanhol**.",
+        "en": "Anderson speaks **Portuguese (Native)**, **English (Advanced)** — ready for technical documentation, global engineering collaboration, and interviews — as well as **Spanish**."
+      },
+      "content": {
+        "pt": "O portfólio e o currículo em PDF são integralmente bilíngues (PT-BR e EN), refletindo sua fluência técnica em inglês avançado.",
+        "en": "Both his portfolio and PDF resume are fully bilingual (PT-BR and EN), reflecting his advanced technical English proficiency."
+      },
+      "keywords": [
+        "idioma",
+        "idiomas",
+        "lingua",
+        "linguas",
+        "ingles",
+        "english",
+        "espanhol",
+        "spanish",
+        "portugues",
+        "fluente",
+        "avancado",
+        "language",
+        "languages",
+        "speak",
+        "fala"
+      ],
+      "entities": [
+        "idiomas",
+        "ingles_avancado"
+      ]
+    },
+    {
+      "id": "rpa-ftp-sync-detail",
+      "category": "rpa",
+      "sectionAnchor": "#rpa",
+      "sectionLabel": {
+        "pt": "Automação & RPA",
+        "en": "Automation & RPA"
+      },
+      "title": {
+        "pt": "Pipeline FTP_SYNC: Redução de 6 Horas para Menos de 10 Segundos (-99%)",
+        "en": "FTP_SYNC Pipeline: From 6 Hours to Under 10 Seconds (-99%)"
+      },
+      "shortAnswer": {
+        "pt": "O **FTP_SYNC** é uma ponte autônoma desenvolvida em **Python 3.11+** (**Paramiko SFTP** + **ftplib**) na **Distribuidora Mais Saúde** que sincroniza a cada **15 minutos** os servidores FTP de operadores farmacêuticos (**EDI Pharma Link**: Eurofarma, Eurofarma Genérico, Smartped e Momenta) com o **SFTP do ERP TOTVS WinThor Cloud (Oracle)**, reduzindo um processo manual de **6 horas para menos de 10 segundos (-99%)**.",
+        "en": "**FTP_SYNC** is an autonomous **Python 3.11+** bridge (**Paramiko SFTP** + **ftplib**) built at **Distribuidora Mais Saúde** that syncs pharmaceutical partner FTPs (**EDI Pharma Link**: Eurofarma, Eurofarma Generic, Smartped, Momenta) with **TOTVS WinThor Cloud SFTP (Oracle)** every **15 minutes**, slashing a **6-hour manual process to under 10 seconds (-99%)**."
+      },
+      "content": {
+        "pt": "Como a otimização de -99% foi alcançada no FTP_SYNC: antes, a operação baixava arquivos manualmente em múltiplos FTPs, convertia layouts e importava no WinThor (6 horas/dia). Anderson implementou varredura agendada a cada 15 min via Windows Task Scheduler e executável PyInstaller, verificação de integridade por hash/checksum para idempotência (evitando reprocessar arquivos duplicados), parsing posicional EDI Pharma Link e transferência direta via SFTP (Paramiko) para o WinThor Cloud conectado ao banco Oracle, com logs estruturados e painel de monitoramento em Streamlit.",
+        "en": "How the -99% optimization in FTP_SYNC was achieved: previously, staff manually downloaded files from partner FTPs, converted layouts, and imported them into WinThor (6 hours/day). Anderson engineered a scheduled 15-minute worker packaged with PyInstaller, checksum hash verification for file idempotency, fixed-width EDI Pharma Link parsing, and direct Paramiko SFTP transfer into WinThor Cloud (Oracle DB), monitored via a Streamlit dashboard."
+      },
+      "keywords": [
+        "ftp_sync",
+        "ftp sync",
+        "ftpsync",
+        "sftp",
+        "ftp",
+        "paramiko",
+        "ftplib",
+        "6 horas",
+        "6h",
+        "10 segundos",
+        "10s",
+        "99%",
+        "-99%",
+        "15 minutos",
+        "15 min",
+        "pharma link",
+        "edi",
+        "eurofarma",
+        "smartped",
+        "momenta",
+        "winthor",
+        "oracle",
+        "totvs",
+        "otimizou",
+        "reduziu"
+      ],
+      "entities": [
+        "ftp_sync",
+        "winthor",
+        "oracle",
+        "edi_pharma_link",
+        "mais_saude"
+      ],
+      "metrics": [
+        "6 horas",
+        "10 segundos",
+        "-99%",
+        "15 min",
+        "10 robôs"
+      ]
+    },
+    {
+      "id": "ai-agents-squad-maker-checker",
+      "category": "ai_agents",
+      "sectionAnchor": "#experiencia",
+      "sectionLabel": {
+        "pt": "Squad de 9 Agentes de IA",
+        "en": "9-Agent AI Squad"
+      },
+      "title": {
+        "pt": "Squad de 9 Agentes de IA & Governança Maker-Checker",
+        "en": "9-Agent AI Squad & Maker-Checker Governance"
+      },
+      "shortAnswer": {
+        "pt": "Na **Distribuidora Mais Saúde**, Anderson implementou um **escritório com 9 agentes de IA** sob arquitetura **Maker-Checker** utilizando **Claude Code**, **MCP (Model Context Protocol)**, **Gemini API** e **Spec-Driven Development (OpenSpec)**: composto por **1 Orquestrador**, **5 Executores Especialistas (Makers)** e **3 Validadores Independentes (Checkers)**.",
+        "en": "At **Distribuidora Mais Saúde**, Anderson implemented a **9-agent AI engineering squad** under a **Maker-Checker** architecture using **Claude Code**, **MCP (Model Context Protocol)**, **Gemini API**, and **OpenSpec**: structured as **1 Orchestrator**, **5 specialized Makers**, and **3 independent Checkers**."
+      },
+      "content": {
+        "pt": "Regra de ouro do modelo Maker-Checker: quem desenvolve o código (Front-End, Back-End, Automação, Banco de Dados, Documentação) NUNCA valida a própria entrega. Os 3 agentes validadores independentes (QA, Segurança AppSec/LGPD e Compliance de Design System) exigem aprovação em 58 testes automatizados em Pytest (E2E, autenticação e LGPD) e 35 asserções visuais em Playwright antes do go-live, operando com menor privilégio e protocolo anti-alucinação.",
+        "en": "Golden rule of the Maker-Checker model: the agent that writes the code (Front-End, Back-End, Automation, Database, Documentation) NEVER validates its own work. The 3 independent validator agents (QA, AppSec/LGPD Security, and Design System Compliance) enforce 58 automated Pytest tests and 35 Playwright visual assertions before go-live, operating under least privilege and anti-hallucination guardrails."
+      },
+      "keywords": [
+        "9 agentes",
+        "9 agents",
+        "squad",
+        "maker-checker",
+        "maker checker",
+        "claude code",
+        "mcp",
+        "model context protocol",
+        "orquestrador",
+        "orchestrator",
+        "openspec",
+        "agentes de ia",
+        "ai agents",
+        "multiagente",
+        "multi-agent",
+        "anti-alucinacao",
+        "validadores",
+        "checkers"
+      ],
+      "entities": [
+        "9_agentes",
+        "maker_checker",
+        "claude_code",
+        "mcp",
+        "pytest",
+        "playwright",
+        "mais_saude"
+      ],
+      "metrics": [
+        "9 agentes",
+        "58 testes Pytest",
+        "35 asserções Playwright"
+      ]
+    },
+    {
+      "id": "qa-testing-pytest-playwright",
+      "category": "skill",
+      "sectionAnchor": "#habilidades",
+      "sectionLabel": {
+        "pt": "Qualidade de Software & Testes",
+        "en": "Software Quality & Testing"
+      },
+      "title": {
+        "pt": "Engenharia de Qualidade: 58 Testes Pytest e 35 Asserções Playwright",
+        "en": "Quality Engineering: 58 Pytest Suites & 35 Playwright Assertions"
+      },
+      "shortAnswer": {
+        "pt": "Anderson instituiu qualidade como gate obrigatório de go-live, entregando **58 testes automatizados em Pytest** (cobrindo fluxos E2E de API, autenticação JWT/SSO e anonimização LGPD) e **35 asserções em Playwright** (regressão visual, acessibilidade WCAG 2.1 AA e verificação de drift do design system), com **100% de aprovação**.",
+        "en": "Anderson established automated quality gates in production, delivering **58 automated Pytest tests** (covering API E2E flows, JWT/SSO auth, and LGPD anonymization) and **35 Playwright assertions** (visual regression, WCAG 2.1 AA accessibility, and design system drift checks), achieving a **100% pass rate**."
+      },
+      "content": {
+        "pt": "Os gates de qualidade rodam integrados ao CI/CD (GitHub Actions), combinando lint estrito (ESLint 9 + TypeScript strict mode), auditoria de contraste WCAG AA e homologação independente Maker-Checker.",
+        "en": "Quality gates run continuously in CI/CD (GitHub Actions), combining strict linting (ESLint 9 + TypeScript strict mode), WCAG AA contrast verification, and independent Maker-Checker sign-off."
+      },
+      "keywords": [
+        "pytest",
+        "playwright",
+        "teste",
+        "testes",
+        "testing",
+        "qa",
+        "qualidade",
+        "58",
+        "35",
+        "e2e",
+        "unitario",
+        "integracao",
+        "regressao visual",
+        "go-live",
+        "auditoria",
+        "ci/cd"
+      ],
+      "entities": [
+        "pytest",
+        "playwright",
+        "qa"
+      ],
+      "metrics": [
+        "58 testes Pytest",
+        "35 asserções Playwright"
+      ]
+    },
+    {
+      "id": "contact-and-hiring",
+      "category": "contact",
+      "sectionAnchor": "#contato",
+      "sectionLabel": {
+        "pt": "Contato & Oportunidades",
+        "en": "Contact & Inquiries"
+      },
+      "title": {
+        "pt": "Canais de Contato Direto, Disponibilidade e Download de Currículo",
+        "en": "Direct Contact Channels, Availability & Resume Download"
+      },
+      "shortAnswer": {
+        "pt": "Anderson reside em **Fortaleza, CE** e está disponível para oportunidades **Remotas, Híbridas ou Presenciais**. Você pode falar diretamente com ele pelo e-mail **[andersonvcataldo@gmail.com](mailto:andersonvcataldo@gmail.com)**, **[LinkedIn](https://linkedin.com/in/andersonnviana)**, **[WhatsApp (+55 85 99225-8794)](https://wa.me/5585992258794?text=Ol%C3%A1%20Anderson,%20vi%20seu%20portf%C3%B3lio%20e%20gostaria%20de%20conversar!)** ou **[GitHub](https://github.com/andersoncataldo)**, além de baixar o **Currículo em PDF (PT/EN)** no topo da página.",
+        "en": "Anderson is based in **Fortaleza, CE, Brazil** and is available for **Remote, Hybrid, or On-Site** roles. You can reach him directly via email at **[andersonvcataldo@gmail.com](mailto:andersonvcataldo@gmail.com)**, **[LinkedIn](https://linkedin.com/in/andersonnviana)**, **[WhatsApp (+55 85 99225-8794)](https://wa.me/5585992258794?text=Ol%C3%A1%20Anderson,%20vi%20seu%20portf%C3%B3lio%20e%20gostaria%20de%20conversar!)**, or **[GitHub](https://github.com/andersoncataldo)**, and download his **PDF Resume (PT/EN)** from the top navigation."
+      },
+      "content": {
+        "pt": "Canais oficiais verificados de Anderson Cataldo: E-mail: andersonvcataldo@gmail.com | LinkedIn: https://linkedin.com/in/andersonnviana | GitHub: https://github.com/andersoncataldo | WhatsApp: +55 85 99225-8794 | Localização: Fortaleza, CE - Brasil (Remoto / Híbrido). Para propostas de contratação, entrevistas técnicas ou projetos de Engenharia Full-Stack, Automação RPA e Agentes de IA, basta acionar qualquer um dos canais acima.",
+        "en": "Verified official contact channels for Anderson Cataldo: Email: andersonvcataldo@gmail.com | LinkedIn: https://linkedin.com/in/andersonnviana | GitHub: https://github.com/andersoncataldo | WhatsApp: +55 85 99225-8794 | Location: Fortaleza, CE - Brasil (Remoto / Híbrido). For hiring inquiries, technical interviews, or Full-Stack, RPA, and AI Engineering opportunities, reach out through any channel above."
+      },
+      "keywords": [
+        "contato",
+        "contact",
+        "email",
+        "e-mail",
+        "linkedin",
+        "github",
+        "whatsapp",
+        "telefone",
+        "celular",
+        "contratar",
+        "contratacao",
+        "hire",
+        "hiring",
+        "entrevista",
+        "interview",
+        "vaga",
+        "disponibilidade",
+        "disponivel",
+        "remoto",
+        "remote",
+        "hibrido",
+        "presencial",
+        "fortaleza",
+        "ceara",
+        "curriculo",
+        "cv",
+        "resume",
+        "pdf",
+        "falar com"
+      ],
+      "entities": [
+        "contato",
+        "email",
+        "linkedin",
+        "github",
+        "whatsapp",
+        "curriculo"
+      ]
+    },
+    {
+      "id": "experience-mais-saude",
+      "category": "experience",
+      "sectionAnchor": "#experiencia",
+      "sectionLabel": {
+        "pt": "Experiência Profissional",
+        "en": "Work Experience"
+      },
+      "title": {
+        "pt": "Distribuidora Mais Saúde — Estagiário de T.I. — Full-Stack, Automação & IA (Jun/2026 - Presente)",
+        "en": "Distribuidora Mais Saúde — IT Intern — Full-Stack, Automation & AI (Jun/2026 - Present)"
+      },
+      "shortAnswer": {
+        "pt": "Na **Distribuidora Mais Saúde** (Jun/2026 - Presente, Fortaleza, CE - Híbrido / Presencial), atuando como **Estagiário de T.I. — Full-Stack, Automação & IA**: Projeta e desenvolve a Central Grupo Mais (monorepo com SSO que unifica 4 sistemas internos), robôs de integração Python conectados ao ERP TOTVS WinThor (Oracle) e arquitetura de agentes de IA em modelo maker-checker com governança rigorosa.",
+        "en": "At **Distribuidora Mais Saúde** (Jun/2026 - Present, Fortaleza, CE - Hybrid / On-site), serving as **IT Intern — Full-Stack, Automation & AI**: Architects and builds Central Grupo Mais (corporate SSO monorepo unifying 4 internal systems), Python integration robots connected to TOTVS WinThor ERP (Oracle) and maker-checker AI multi-agent architecture with strict quality gates."
+      },
+      "content": {
+        "pt": "Distribuidora Mais Saúde (Jun/2026 - Presente) — Engenharia de Software, Agentes de IA & Integrações WinThor.\nPrincipais entregas:\n- Projetou e desenvolve a Central Grupo Mais, monorepo corporativo com SSO (JWT) unificando 4 sistemas internos (Central, Chamados, Devolução e Ativos) em Next.js 16/React 19, Vite, Node.js/Express, Python/FastAPI, Supabase (RLS) e deploy Cloudflare Pages + Render.\n- Implementou escritório de 9 agentes de IA (orquestrador, 5 executores especialistas e 3 validadores independentes) no modelo maker-checker com Claude Code, menor privilégio, protocolo anti-alucinação e escalonamento para revisão humana.\n- Instituiu qualidade como gate de entrega: 58 testes Pytest (E2E, autenticação e LGPD) e 35 asserções Playwright de regressão visual, lint e checagem de drift do design system em 5 pacotes (100% aprovados na auditoria de go-live).\n- Desenvolveu 10 automações Python integradas ao WinThor (Oracle), incluindo 4 robôs de estoque EDI Pharma Link (Eurofarma, Eurofarma Genérico, Smartped, Momenta) via FTP/SFTP, empacotados com PyInstaller e agendados.\n- Criou o FTP_SYNC, ponte autônoma entre servidores FTP de parceiros e o SFTP do WinThor Cloud (TOTVS) com sincronização a cada 15 min, reduzindo o tempo de coleta e lançamento de 6 horas para menos de 10 segundos (−99%).\n- Construiu motor de IA no Sistema de Devolução: diagnóstico executivo com LLM (Gemini/OpenAI), curva de Pareto de causas-raiz e detecção de anomalias com fallback local (< 1s), timeout de inferência e anonimização de dados (LGPD).\n- Entregou ferramentas internas estratégicas: painel de automações em Streamlit para monitoramento de robôs, controle de inventário de TI (Google Sheets + Apps Script) e atualizador de catálogo Tkinter com consulta em lote ao Oracle.\nStack utilizada: Next.js 16, React 19, Python, FastAPI, Node.js, Agentes de IA, Claude Code, Supabase, PostgreSQL, TOTVS WinThor (Oracle), Pytest, Playwright, Cloudflare Pages.",
+        "en": "Distribuidora Mais Saúde (Jun/2026 - Present) — Software Engineering, AI Agents & WinThor Integrations.\nKey deliveries:\n- Architected and develops Central Grupo Mais, a corporate monorepo with SSO (JWT) unifying 4 internal systems (Central, Service Desk, Returns, IT Assets) using Next.js 16/React 19, Vite, Node.js/Express, Python/FastAPI, Supabase (RLS), and Cloudflare Pages + Render deployment.\n- Implemented a 9 AI agent squad (orchestrator, 5 specialized implementers, 3 independent validators) in a maker-checker model with Claude Code: least privilege, anti-hallucination protocols, and human review escalation.\n- Established quality as a delivery gate: 58 Pytest suites (E2E flows, authentication, LGPD) and 35 Playwright visual regression assertions, linting, and design system drift checks across 5 packages (100% approved in go-live audit).\n- Built 10 Python automations integrated with WinThor (Oracle), including 4 inventory integration robots for pharmaceutical operators (Eurofarma, Eurofarma Generic, Smartped, Momenta) via EDI Pharma Link and FTP/SFTP.\n- Created FTP_SYNC, an autonomous bridge between partner FTP servers and WinThor Cloud SFTP syncing every 15 min, reducing ingestion and registration time from 6 hours to under 10 seconds (-99%).\n- Built an AI engine in the Returns System: executive diagnostics with LLM (Gemini/OpenAI), Pareto root-cause curve, and anomaly detection with local heuristic fallback (< 1s) and LGPD data anonymization.\n- Delivered strategic internal tooling: Streamlit automation dashboard to monitor robot executions, IT asset inventory control (Google Sheets + Apps Script), and Tkinter inventory updater with batch Oracle SQL queries.\nStack used: Next.js 16, React 19, Python, FastAPI, Node.js, Agentes de IA, Claude Code, Supabase, PostgreSQL, TOTVS WinThor (Oracle), Pytest, Playwright, Cloudflare Pages."
+      },
+      "keywords": [
+        "distribuidora mais saúde",
+        "mais saude",
+        "next.js 16",
+        "react 19",
+        "python",
+        "fastapi",
+        "node.js",
+        "agentes de ia",
+        "claude code",
+        "supabase",
+        "postgresql",
+        "totvs winthor (oracle)",
+        "pytest",
+        "playwright",
+        "cloudflare pages",
+        "experiencia",
+        "experience",
+        "empresa",
+        "company",
+        "trabalho",
+        "cargo",
+        "role"
+      ],
+      "entities": [
+        "mais_saude",
+        "next.js 16",
+        "react 19",
+        "python",
+        "fastapi",
+        "node.js",
+        "agentes de ia",
+        "claude code",
+        "supabase",
+        "postgresql",
+        "totvs winthor (oracle)",
+        "pytest",
+        "playwright",
+        "cloudflare pages"
+      ]
+    },
+    {
+      "id": "experience-3coracoes",
+      "category": "experience",
+      "sectionAnchor": "#experiencia",
+      "sectionLabel": {
+        "pt": "Experiência Profissional",
+        "en": "Work Experience"
+      },
+      "title": {
+        "pt": "Grupo 3corações — Aprendiz — Setor Fiscal (Sistemas e Projetos) (Jan/2025 - Abr/2026)",
+        "en": "Grupo 3corações — Apprentice — Tax Department (Systems & Projects) (Jan/2025 - Apr/2026)"
+      },
+      "shortAnswer": {
+        "pt": "Na **Grupo 3corações** (Jan/2025 - Abr/2026, Eusébio / Fortaleza, CE - Presencial), atuando como **Aprendiz — Setor Fiscal (Sistemas e Projetos)**: Desenvolvimento e sustentação de 5 robôs RPA em Python para renovação automática de CNDs em portais web, extração massiva de XML fiscais (15.000+/mês) e integração automatizada com planilhas corporativas.",
+        "en": "At **Grupo 3corações** (Jan/2025 - Apr/2026, Eusébio / Fortaleza, CE - On-site), serving as **Apprentice — Tax Department (Systems & Projects)**: Development and maintenance of 5 Python RPA robots for automated renewal of tax clearance certificates (CNDs) across web portals, bulk XML extraction (15,000+/mo), and automated corporate spreadsheet integration."
+      },
+      "content": {
+        "pt": "Grupo 3corações (Jan/2025 - Abr/2026) — Desenvolvedor de Robôs RPA & Automação de Processos.\nPrincipais entregas:\n- Desenvolveu 5 robôs RPA em Python para renovação automática de CNDs (Certidões Negativas de Débitos) em portais governamentais, extração massiva de dados de XML fiscais e manipulação de arquivos.\n- Processou continuamente mais de 15.000 arquivos XML de NFe/CTe por mês com 99.85% de precisão de extração e validação contra schemas da SEFAZ.\n- Poupou mais de 200 horas acumuladas de trabalho operacional manual da equipe fiscal, eliminando falhas humanas de digitação e conciliação.\n- Automatizou a interação com sistemas web e o preenchimento de planilhas corporativas a partir dos dados extraídos, eliminando retrabalho no setor fiscal.\n- Elaborou documentação técnica aprofundada dos robôs e operou controle ágil de chamados técnicos com lideranças.\nStack utilizada: Python, RPA, Pandas, Selenium, lxml, BeautifulSoup, Excel Avançado, Scrum.",
+        "en": "Grupo 3corações (Jan/2025 - Apr/2026) — RPA Robot Developer & Process Automation.\nKey deliveries:\n- Developed 5 Python RPA robots for automatic renewal of tax clearance certificates (CNDs) across government portals, bulk fiscal XML data extraction, and automated file handling.\n- Continuously processed over 15,000 NFe/CTe XML files monthly with 99.85% extraction accuracy and schema validation against SEFAZ.\n- Saved over 200 cumulative hours of manual operational work for the tax team, eradicating human data-entry errors.\n- Automated web portal interaction and corporate spreadsheet population from extracted data, eliminating manual rework in the tax department.\n- Authored thorough technical documentation for robots and ran agile technical ticketing with leadership.\nStack used: Python, RPA, Pandas, Selenium, lxml, BeautifulSoup, Excel Avançado, Scrum."
+      },
+      "keywords": [
+        "grupo 3corações",
+        "3coracoes",
+        "python",
+        "rpa",
+        "pandas",
+        "selenium",
+        "lxml",
+        "beautifulsoup",
+        "excel avançado",
+        "scrum",
+        "experiencia",
+        "experience",
+        "empresa",
+        "company",
+        "trabalho",
+        "cargo",
+        "role"
+      ],
+      "entities": [
+        "3coracoes",
+        "python",
+        "rpa",
+        "pandas",
+        "selenium",
+        "lxml",
+        "beautifulsoup",
+        "excel avançado",
+        "scrum"
+      ]
+    },
+    {
+      "id": "project-central-grupo-mais",
+      "category": "project",
+      "sectionAnchor": "#projetos",
+      "sectionLabel": {
+        "pt": "Seção Projetos",
+        "en": "Projects Section"
+      },
+      "title": {
+        "pt": "Central Grupo Mais & SSO Corporativo — Monorepo Corporativo Unificando 4 Sistemas Internos com Autenticação Centralizada",
+        "en": "Central Grupo Mais & Corporate SSO — Corporate Monorepo Unifying 4 Internal Systems with Centralized SSO"
+      },
+      "shortAnswer": {
+        "pt": "**Central Grupo Mais & SSO Corporativo**: Ecossistema corporativo monorepo com Single Sign-On (JWT) que unifica 4 plataformas críticas da Distribuidora Mais Saúde: Portal Central, Sistema de Chamados, Devoluções e Gestão de Ativos. **Solução:** Projeto de arquitetura monorepo unificada com front-ends em Next.js 16/React 19 e Vite, back-ends desacoplados em Node.js/Express (TypeScript) e Python/FastAPI, banco PostgreSQL/Supabase com Row-Level Security e esteira de deploy contínuo em Cloudflare Pages + Render. **Resultado:** Unificação de 4 fluxos corporativos com login único seguro, zero fricção de acesso para colaboradores e isolamento multi-tenant por RLS.",
+        "en": "**Central Grupo Mais & Corporate SSO**: Corporate monorepo ecosystem with Single Sign-On (JWT) unifying 4 mission-critical platforms at Distribuidora Mais Saúde: Central Portal, Service Desk, Returns, and IT Asset Management. **Solution:** Architected a unified monorepo with front-ends in Next.js 16/React 19 and Vite, decoupled back-ends in Node.js/Express (TypeScript) and Python/FastAPI, PostgreSQL/Supabase with Row-Level Security, and CI/CD on Cloudflare Pages + Render. **Result:** Unified 4 corporate workflows under a single secure login, zero access friction for employees, and strict multi-tenant isolation via RLS."
+      },
+      "content": {
+        "pt": "Projeto: Central Grupo Mais & SSO Corporativo (Full-Stack & Cloud).\nDesafio: A organização operava múltiplos silos de informação, com credenciais dispersas, lentidão no fluxo operacional e ausência de padronização arquitetural entre os setores da empresa.\nPapel: Arquiteto de Software & Engenheiro Full-Stack\nSolução Técnica: Projeto de arquitetura monorepo unificada com front-ends em Next.js 16/React 19 e Vite, back-ends desacoplados em Node.js/Express (TypeScript) e Python/FastAPI, banco PostgreSQL/Supabase com Row-Level Security e esteira de deploy contínuo em Cloudflare Pages + Render.\nArquitetura:\n- Front-End: Next.js 16 (App Router), React 19, Vite, Tailwind CSS 4\n- Back-End: Node.js (Express/TS), Python (FastAPI), Pydantic v2\n- Autenticação & Segurança: SSO corporativo via JWT, Row-Level Security (RLS) no PostgreSQL\n- DevOps & Deploy: Monorepo estruturado, Cloudflare Pages e Render com gates de CI/CD\nResultado e Impacto: Unificação de 4 fluxos corporativos com login único seguro, zero fricção de acesso para colaboradores e isolamento multi-tenant por RLS. Eliminação de duplicidade de cadastros e ganho massivo de governança operacional e de segurança em toda a empresa.\nMétricas: Sistemas Unificados: 4 em 1 | Autenticação: SSO (JWT) | Segurança: Supabase RLS\nTecnologias: Next.js 16, React 19, TypeScript, FastAPI, Node.js, PostgreSQL, Supabase, Cloudflare Pages.",
+        "en": "Project: Central Grupo Mais & Corporate SSO (Full-Stack & Cloud).\nChallenge: The company operated across fragmented information silos, disjointed credentials, slow operational workflows, and a lack of architectural standardization across business units.\nRole: Software Architect & Full-Stack Engineer\nTechnical Solution: Architected a unified monorepo with front-ends in Next.js 16/React 19 and Vite, decoupled back-ends in Node.js/Express (TypeScript) and Python/FastAPI, PostgreSQL/Supabase with Row-Level Security, and CI/CD on Cloudflare Pages + Render.\nArchitecture:\n- Front-End: Next.js 16 (App Router), React 19, Vite, Tailwind CSS 4\n- Back-End: Node.js (Express/TS), Python (FastAPI), Pydantic v2\n- Auth & Security: Corporate SSO via JWT, Row-Level Security (RLS) on PostgreSQL\n- DevOps & Deploy: Structured monorepo, Cloudflare Pages and Render with CI/CD gates\nResult & Impact: Unified 4 corporate workflows under a single secure login, zero access friction for employees, and strict multi-tenant isolation via RLS. Eradicated duplicate user profiles and delivered massive operational governance and security compliance across the enterprise.\nMetrics: Systems Unified: 4 em 1 | Authentication: SSO (JWT) | Security: Supabase RLS\nTechnologies: Next.js 16, React 19, TypeScript, FastAPI, Node.js, PostgreSQL, Supabase, Cloudflare Pages."
+      },
+      "keywords": [
+        "central-grupo-mais",
+        "central",
+        "grupo",
+        "mais",
+        "central grupo mais & sso corporativo",
+        "central grupo mais & corporate sso",
+        "next.js 16",
+        "react 19",
+        "typescript",
+        "fastapi",
+        "node.js",
+        "postgresql",
+        "supabase",
+        "cloudflare pages",
+        "projeto",
+        "project",
+        "arquitetura",
+        "architecture",
+        "como funciona",
+        "how it works"
+      ],
+      "entities": [
+        "central_grupo_mais",
+        "next.js 16",
+        "react 19",
+        "typescript",
+        "fastapi",
+        "node.js",
+        "postgresql",
+        "supabase",
+        "cloudflare pages"
+      ]
+    },
+    {
+      "id": "project-sistema-chamados-mais-saude",
+      "category": "project",
+      "sectionAnchor": "#projetos",
+      "sectionLabel": {
+        "pt": "Seção Projetos",
+        "en": "Projects Section"
+      },
+      "title": {
+        "pt": "Sistema de Chamados Corporativo — Plataforma Multinível de Atendimento com RBAC Granular e BI com Recharts",
+        "en": "Corporate Service Desk System — Multi-Tier Service Desk Platform with Granular RBAC and Recharts BI"
+      },
+      "shortAnswer": {
+        "pt": "**Sistema de Chamados Corporativo**: Plataforma enterprise de atendimento técnico e operacional com 4 níveis de hierarquia (solicitante → atendente → gestor → admin), cálculo de SLA preditivo, métricas de MTTR, BI interativo e e-mails transacionais. **Solução:** Desenvolvimento do sistema ponta a ponta com Next.js 16, React 19, Tailwind CSS 4, Supabase (PostgreSQL com RLS e Auth Hooks), dashboards em Recharts, ações em lote e relatórios automatizados em PDF. **Resultado:** Adoção integral pela empresa com redução drástica no tempo de resposta a incidentes e relatórios gerenciais em tempo real para tomada de decisão.",
+        "en": "**Corporate Service Desk System**: Enterprise IT and operational ticketing platform featuring 4 hierarchical tiers (requester → agent → manager → admin), predictive SLA tracking, MTTR metrics, interactive BI dashboards, and transactional emails. **Solution:** Engineered end-to-end with Next.js 16, React 19, Tailwind CSS 4, Supabase (PostgreSQL with RLS and Auth Hooks), Recharts dashboards, batch ticketing actions, and automated PDF exports. **Result:** 100% adoption across the company with drastic incident turnaround time reduction and real-time management BI reports for decision makers."
+      },
+      "content": {
+        "pt": "Projeto: Sistema de Chamados Corporativo (Full-Stack & BI).\nDesafio: O atendimento de chamados internos sofria com desorganização em conversas informais e ausência de visibilidade de SLAs e tempos médios de resolução (MTTR).\nPapel: Engenheiro Full-Stack (Levantamento ao Deploy)\nSolução Técnica: Desenvolvimento do sistema ponta a ponta com Next.js 16, React 19, Tailwind CSS 4, Supabase (PostgreSQL com RLS e Auth Hooks), dashboards em Recharts, ações em lote e relatórios automatizados em PDF.\nArquitetura:\n- Front-End: Next.js 16, React 19, Tailwind CSS 4, Recharts, Lucide Icons\n- BaaS & DB: Supabase (PostgreSQL), Custom Auth Hooks, Row-Level Security\n- Negócio: Motor de cálculo preditivo de SLA e medição contínua de MTTR\n- Comunicação: E-mails transacionais assíncronos e notificações automáticas de status\nResultado e Impacto: Adoção integral pela empresa com redução drástica no tempo de resposta a incidentes e relatórios gerenciais em tempo real para tomada de decisão. Rastreabilidade total dos chamados da organização com conformidade rigorosa aos SLAs estabelecidos.\nMétricas: Hierarquia RBAC: 4 Níveis | Monitoramento SLA: Preditivo | Geração Relatórios: PDF Instantâneo\nTecnologias: Next.js 16, React 19, TypeScript, Tailwind CSS 4, Supabase, PostgreSQL, Recharts.",
+        "en": "Project: Corporate Service Desk System (Full-Stack & BI).\nChallenge: Internal incident handling suffered from disorganized informal chats and zero visibility into operational SLAs and Mean Time to Resolution (MTTR).\nRole: Full-Stack Engineer (Requirements to Deploy)\nTechnical Solution: Engineered end-to-end with Next.js 16, React 19, Tailwind CSS 4, Supabase (PostgreSQL with RLS and Auth Hooks), Recharts dashboards, batch ticketing actions, and automated PDF exports.\nArchitecture:\n- Front-End: Next.js 16, React 19, Tailwind CSS 4, Recharts, Lucide Icons\n- BaaS & DB: Supabase (PostgreSQL), Custom Auth Hooks, Row-Level Security\n- Business Logic: Predictive SLA calculation engine and continuous MTTR tracking\n- Communication: Asynchronous transactional emails and automated status pings\nResult & Impact: 100% adoption across the company with drastic incident turnaround time reduction and real-time management BI reports for decision makers. Full enterprise incident traceability with strict compliance to established corporate SLAs.\nMetrics: RBAC Levels: 4 Níveis | SLA Tracking: Preditivo | Reporting: PDF Instantâneo\nTechnologies: Next.js 16, React 19, TypeScript, Tailwind CSS 4, Supabase, PostgreSQL, Recharts."
+      },
+      "keywords": [
+        "sistema-chamados-mais-saude",
+        "sistema",
+        "chamados",
+        "mais",
+        "saude",
+        "sistema de chamados corporativo",
+        "corporate service desk system",
+        "next.js 16",
+        "react 19",
+        "typescript",
+        "tailwind css 4",
+        "supabase",
+        "postgresql",
+        "recharts",
+        "projeto",
+        "project",
+        "arquitetura",
+        "architecture",
+        "como funciona",
+        "how it works"
+      ],
+      "entities": [
+        "sistema_chamados_mais_saude",
+        "next.js 16",
+        "react 19",
+        "typescript",
+        "tailwind css 4",
+        "supabase",
+        "postgresql",
+        "recharts"
+      ]
+    },
+    {
+      "id": "project-sistema-devolucoes-ia",
+      "category": "project",
+      "sectionAnchor": "#projetos",
+      "sectionLabel": {
+        "pt": "Seção Projetos",
+        "en": "Projects Section"
+      },
+      "title": {
+        "pt": "Sistema de Devolução com Diagnóstico por IA — Logística Reversa Inteligente com LLM, Análise de Pareto e Modo TV",
+        "en": "AI-Powered Returns & Reverse Logistics — Intelligent Reverse Logistics with LLM Diagnostics, Pareto Curve & TV Mode"
+      },
+      "shortAnswer": {
+        "pt": "**Sistema de Devolução com Diagnóstico por IA**: Sistema corporativo de logística reversa que substituiu formulários e planilhas por triagem automatizada, validação de NF duplicada, Modo TV para a expedição e motor de IA com diagnósticos executivos. **Solução:** Construção da plataforma com React + Vite, API robusta em Python/FastAPI (SQLAlchemy, Alembic, Pydantic v2), testes com Pytest e motor de IA (Gemini/OpenAI) com curva de Pareto, fallback local (< 1s) e sanitização de dados conforme a LGPD. **Resultado:** Eliminação completa de NFs duplicadas, visibilidade de devoluções em tela cheia na expedição e relatórios de IA que apontam as principais causas de avaria de carga.",
+        "en": "**AI-Powered Returns & Reverse Logistics**: Enterprise reverse logistics system replacing Google Forms and spreadsheets with automated triage, duplicate invoice validation, warehouse TV Mode, and an AI diagnostic engine. **Solution:** Built with React + Vite, Python/FastAPI backend (SQLAlchemy, Alembic, Pydantic v2), Pytest test suites, and an AI diagnostic engine (Gemini/OpenAI) with Pareto curve, sub-second heuristic fallback, and LGPD anonymization. **Result:** 100% eradication of duplicate invoices, full-screen live visibility in shipping, and AI reports pinpointing primary causes of cargo damage."
+      },
+      "content": {
+        "pt": "Projeto: Sistema de Devolução com Diagnóstico por IA (IA & Logística).\nDesafio: O controle manual de devoluções gerava notas duplicadas, falta de rastreio em tempo real no estoque e ausência de análise preditiva das causas-raiz de devolução de produtos.\nPapel: Engenheiro de Software & Arquiteto de IA\nSolução Técnica: Construção da plataforma com React + Vite, API robusta em Python/FastAPI (SQLAlchemy, Alembic, Pydantic v2), testes com Pytest e motor de IA (Gemini/OpenAI) com curva de Pareto, fallback local (< 1s) e sanitização de dados conforme a LGPD.\nArquitetura:\n- Front-End: React 19, Vite, Tailwind CSS, Modo TV para painel de expedição\n- Back-End: Python, FastAPI, SQLAlchemy, Alembic, Pydantic v2, Pytest\n- Motor de IA: Diagnóstico executivo (Gemini/OpenAI) com Pareto, detecção de anomalias e fallback < 1s\n- Segurança & LGPD: Anonimização automática de dados de clientes antes da inferência de IA\nResultado e Impacto: Eliminação completa de NFs duplicadas, visibilidade de devoluções em tela cheia na expedição e relatórios de IA que apontam as principais causas de avaria de carga. Redução de perdas financeiras na logística reversa e insights imediatos para negociação com transportadoras e fabricantes.\nMétricas: Fallback de IA: < 1 segundo | NFs Duplicadas: Zero falhas | Conformidade: LGPD Sanitized\nTecnologias: Python, FastAPI, React, Gemini API, OpenAI, SQLAlchemy, PostgreSQL, Pytest.",
+        "en": "Project: AI-Powered Returns & Reverse Logistics (AI & Logistics).\nChallenge: Manual returns processing caused duplicate credit notes, lack of real-time warehouse visibility, and zero systematic root-cause analytics on product returns.\nRole: Software Engineer & AI Architect\nTechnical Solution: Built with React + Vite, Python/FastAPI backend (SQLAlchemy, Alembic, Pydantic v2), Pytest test suites, and an AI diagnostic engine (Gemini/OpenAI) with Pareto curve, sub-second heuristic fallback, and LGPD anonymization.\nArchitecture:\n- Front-End: React 19, Vite, Tailwind CSS, TV Mode for warehouse displays\n- Back-End: Python, FastAPI, SQLAlchemy, Alembic, Pydantic v2, Pytest\n- AI Engine: Executive diagnosis (Gemini/OpenAI), Pareto curves, anomaly detection & < 1s fallback\n- Security & LGPD: Automatic PII anonymization prior to LLM inference\nResult & Impact: 100% eradication of duplicate invoices, full-screen live visibility in shipping, and AI reports pinpointing primary causes of cargo damage. Reduced financial shrinkage in reverse logistics and generated immediate insights for vendor and freight carrier negotiations.\nMetrics: AI Fallback: < 1 segundo | Duplicate Invoices: Zero falhas | Compliance: LGPD Sanitized\nTechnologies: Python, FastAPI, React, Gemini API, OpenAI, SQLAlchemy, PostgreSQL, Pytest."
+      },
+      "keywords": [
+        "sistema-devolucoes-ia",
+        "sistema",
+        "devolucoes",
+        "ia",
+        "sistema de devolução com diagnóstico por ia",
+        "ai-powered returns & reverse logistics",
+        "python",
+        "fastapi",
+        "react",
+        "gemini api",
+        "openai",
+        "sqlalchemy",
+        "postgresql",
+        "pytest",
+        "projeto",
+        "project",
+        "arquitetura",
+        "architecture",
+        "como funciona",
+        "how it works"
+      ],
+      "entities": [
+        "sistema_devolucoes_ia",
+        "python",
+        "fastapi",
+        "react",
+        "gemini api",
+        "openai",
+        "sqlalchemy",
+        "postgresql",
+        "pytest"
+      ]
+    },
+    {
+      "id": "project-ftp-sync-edi-winthor",
+      "category": "project",
+      "sectionAnchor": "#projetos",
+      "sectionLabel": {
+        "pt": "Seção Projetos",
+        "en": "Projects Section"
+      },
+      "title": {
+        "pt": "FTP_SYNC & Motor EDI WinThor (Oracle) — Ponte Autônoma SFTP e Robôs de Integração Farmacêutica com ERP TOTVS",
+        "en": "FTP_SYNC & WinThor EDI Engine — Autonomous SFTP Bridge & Pharma EDI Integration Robots with TOTVS ERP"
+      },
+      "shortAnswer": {
+        "pt": "**FTP_SYNC & Motor EDI WinThor (Oracle)**: Pipeline autônomo em Python de integração de estoque e faturamento conectando 4 gigantes farmacêuticos (Eurofarma, Eurofarma Genérico, Smartped e Momenta) ao ERP TOTVS WinThor (Oracle) no padrão EDI Pharma Link via FTP/SFTP. **Solução:** Desenvolvimento do FTP_SYNC com Paramiko e ftplib rodando a cada 15 min de forma autônoma, com validação de hash, tratamento de layout EDI Pharma Link, empacotamento com PyInstaller e execução agendada. **Resultado:** Processo que levava 6 horas manuais passou a ser executado em menos de 10 segundos (−99%), com zero interferência humana e dados 100% sincronizados a cada 15 minutos.",
+        "en": "**FTP_SYNC & WinThor EDI Engine**: Autonomous Python pipeline for inventory and billing integration connecting 4 pharmaceutical giants (Eurofarma, Eurofarma Generic, Smartped, Momenta) to TOTVS WinThor ERP (Oracle) in EDI Pharma Link format via FTP/SFTP. **Solution:** Developed FTP_SYNC using Paramiko and ftplib running autonomously every 15 minutes, with hash validation, EDI Pharma Link parsing, PyInstaller packaging, and scheduled Windows tasks. **Result:** A process that previously took 6 manual hours was reduced to under 10 seconds (-99%), running 24/7 with zero human intervention and refreshed data every 15 minutes."
+      },
+      "content": {
+        "pt": "Projeto: FTP_SYNC & Motor EDI WinThor (Oracle) (Automação & ERP).\nDesafio: O download manual de arquivos em servidores FTP, conversão de layout e importação no ERP WinThor Cloud consumia 6 horas diárias de trabalho operacional e estava sujeito a atrasos críticos na liberação de pedidos.\nPapel: Engenheiro de Automação & Integração ERP\nSolução Técnica: Desenvolvimento do FTP_SYNC com Paramiko e ftplib rodando a cada 15 min de forma autônoma, com validação de hash, tratamento de layout EDI Pharma Link, empacotamento com PyInstaller e execução agendada.\nArquitetura:\n- Core: Python 3.11+, Paramiko (SFTP), ftplib, PyInstaller\n- Protocolos & Formatos: EDI Pharma Link, SFTP WinThor Cloud, FTP de Parceiros\n- Resiliência: Idempotência de arquivos, logs estruturados com rotação e notificações automáticas\n- ERP Integrado: TOTVS WinThor (Banco de Dados Oracle)\nResultado e Impacto: Processo que levava 6 horas manuais passou a ser executado em menos de 10 segundos (−99%), com zero interferência humana e dados 100% sincronizados a cada 15 minutos. Liberação acelerada de cargas hospitalares e farmacêuticas de alta prioridade sem risco de divergência de estoque.\nMétricas: Tempo de Processo: 6h ➔ < 10s | Ganho de Eficiência: -99% | Frequência de Sync: A cada 15 min\nTecnologias: Python, SFTP / FTP, EDI Pharma Link, TOTVS WinThor, Oracle SQL, Paramiko, PyInstaller.",
+        "en": "Project: FTP_SYNC & WinThor EDI Engine (Automation & ERP).\nChallenge: Manual downloading from partner FTPs, layout transformation, and manual import into WinThor Cloud took 6 daily hours of operational work and caused severe shipping delays.\nRole: Automation & ERP Integration Engineer\nTechnical Solution: Developed FTP_SYNC using Paramiko and ftplib running autonomously every 15 minutes, with hash validation, EDI Pharma Link parsing, PyInstaller packaging, and scheduled Windows tasks.\nArchitecture:\n- Core: Python 3.11+, Paramiko (SFTP), ftplib, PyInstaller\n- Protocols & Layouts: EDI Pharma Link, WinThor Cloud SFTP, Partner FTPs\n- Resilience: File idempotency, rotated structured logging, and automatic alert webhooks\n- Integrated ERP: TOTVS WinThor (Oracle Database)\nResult & Impact: A process that previously took 6 manual hours was reduced to under 10 seconds (-99%), running 24/7 with zero human intervention and refreshed data every 15 minutes. Accelerated dispatch of high-priority hospital and pharmaceutical cargo with zero inventory divergence.\nMetrics: Process Time: 6h ➔ < 10s | Efficiency Gain: -99% | Sync Interval: A cada 15 min\nTechnologies: Python, SFTP / FTP, EDI Pharma Link, TOTVS WinThor, Oracle SQL, Paramiko, PyInstaller."
+      },
+      "keywords": [
+        "ftp-sync-edi-winthor",
+        "ftp",
+        "sync",
+        "edi",
+        "winthor",
+        "ftp_sync & motor edi winthor (oracle)",
+        "ftp_sync & winthor edi engine",
+        "python",
+        "sftp / ftp",
+        "edi pharma link",
+        "totvs winthor",
+        "oracle sql",
+        "paramiko",
+        "pyinstaller",
+        "projeto",
+        "project",
+        "arquitetura",
+        "architecture",
+        "como funciona",
+        "how it works"
+      ],
+      "entities": [
+        "ftp_sync_edi_winthor",
+        "python",
+        "sftp / ftp",
+        "edi pharma link",
+        "totvs winthor",
+        "oracle sql",
+        "paramiko",
+        "pyinstaller"
+      ]
+    },
+    {
+      "id": "project-rpa-fiscal-3coracoes",
+      "category": "project",
+      "sectionAnchor": "#projetos",
+      "sectionLabel": {
+        "pt": "Seção Projetos",
+        "en": "Projects Section"
+      },
+      "title": {
+        "pt": "Motor RPA & Extração Fiscal (Grupo 3corações) — 5 Robôs em Python para Extração de 15.000 XMLs/mês e Emissão Automática de CNDs",
+        "en": "RPA Engine & Tax Data Extraction — 5 Python Robots for 15,000 XMLs/mo Extraction and Automated CND Certification"
+      },
+      "shortAnswer": {
+        "pt": "**Motor RPA & Extração Fiscal (Grupo 3corações)**: Conjunto de 5 robôs RPA em Python em produção no Grupo 3corações para renovação automática de CNDs em portais do governo, extração massiva de XML fiscais (15.000+/mês) e integração direta com planilhas corporativas. **Solução:** Criação de scripts com Selenium, lxml, BeautifulSoup e Pandas para navegação headless, captura assíncrona, validação rigorosa de schemas fiscais e geração automatizada de relatórios executivos. **Resultado:** Mais de 15.000 XMLs processados mensalmente com 99.85% de precisão e mais de 200 horas operacionais poupadas para a equipe fiscal.",
+        "en": "**RPA Engine & Tax Data Extraction**: Suite of 5 production Python RPA robots at Grupo 3corações for automated CND renewals on tax portals, bulk XML extraction (15,000+/mo), and direct corporate spreadsheet reconciliation. **Solution:** Built workers using Selenium, lxml, BeautifulSoup, and Pandas for headless browsing, async downloading, strict schema validation, and automated executive report generation. **Result:** Over 15,000 XMLs processed monthly with 99.85% precision and 200+ manual hours saved for the tax department."
+      },
+      "content": {
+        "pt": "Projeto: Motor RPA & Extração Fiscal (Grupo 3corações) (Automação & RPA).\nDesafio: A equipe fiscal gastava centenas de horas manuais conferindo notas em portais da SEFAZ e preenchendo planilhas linha a linha, com alto risco de autuações por erro de digitação.\nPapel: Desenvolvedor RPA & Analista de Automação\nSolução Técnica: Criação de scripts com Selenium, lxml, BeautifulSoup e Pandas para navegação headless, captura assíncrona, validação rigorosa de schemas fiscais e geração automatizada de relatórios executivos.\nArquitetura:\n- Parsing & XML: lxml, BeautifulSoup4, Schemas SEFAZ\n- Automação Web: Selenium Headless, Requests, Captura de CNDs\n- ETL & Dados: Pandas, OpenPyXL, exportação para conciliação contábil\nResultado e Impacto: Mais de 15.000 XMLs processados mensalmente com 99.85% de precisão e mais de 200 horas operacionais poupadas para a equipe fiscal. Risco de inconsistência tributária zerado e produtividade da equipe direcionada para análise estratégica.\nMétricas: Volume Mensal: 15.000+ XMLs | Horas Poupadas: 200h+ | Acurácia SEFAZ: 99.85%\nTecnologias: Python, RPA, Pandas, Selenium, lxml, BeautifulSoup, Excel Automation.",
+        "en": "Project: RPA Engine & Tax Data Extraction (Automation & RPA).\nChallenge: The tax team spent hundreds of manual hours downloading invoices from government portals and typing data into spreadsheets, with severe compliance and penalty risks.\nRole: RPA Developer & Automation Analyst\nTechnical Solution: Built workers using Selenium, lxml, BeautifulSoup, and Pandas for headless browsing, async downloading, strict schema validation, and automated executive report generation.\nArchitecture:\n- Parsing & XML: lxml, BeautifulSoup4, SEFAZ Schemas\n- Web Automation: Headless Selenium, Requests, CND Capture\n- ETL & Data: Pandas, OpenPyXL, export for accounting reconciliation\nResult & Impact: Over 15,000 XMLs processed monthly with 99.85% precision and 200+ manual hours saved for the tax department. Tax inconsistency risk eradicated and team productivity redirected to strategic financial planning.\nMetrics: Monthly Volume: 15.000+ XMLs | Hours Saved: 200h+ | SEFAZ Accuracy: 99.85%\nTechnologies: Python, RPA, Pandas, Selenium, lxml, BeautifulSoup, Excel Automation."
+      },
+      "keywords": [
+        "rpa-fiscal-3coracoes",
+        "rpa",
+        "fiscal",
+        "3coracoes",
+        "motor rpa & extração fiscal (grupo 3corações)",
+        "rpa engine & tax data extraction",
+        "python",
+        "rpa",
+        "pandas",
+        "selenium",
+        "lxml",
+        "beautifulsoup",
+        "excel automation",
+        "projeto",
+        "project",
+        "arquitetura",
+        "architecture",
+        "como funciona",
+        "how it works"
+      ],
+      "entities": [
+        "rpa_fiscal_3coracoes",
+        "python",
+        "rpa",
+        "pandas",
+        "selenium",
+        "lxml",
+        "beautifulsoup",
+        "excel automation"
+      ]
+    },
+    {
+      "id": "project-squad-agentes-ia",
+      "category": "project",
+      "sectionAnchor": "#projetos",
+      "sectionLabel": {
+        "pt": "Seção Projetos",
+        "en": "Projects Section"
+      },
+      "title": {
+        "pt": "Squad de Agentes de IA Autônomos — Arquitetura Multiagente com Memória Compartilhada e Orquestrador 24/7",
+        "en": "Autonomous AI Agent Squad — Multi-Agent Architecture with Shared Memory and 24/7 Orchestrator"
+      },
+      "shortAnswer": {
+        "pt": "**Squad de Agentes de IA Autônomos**: Arquitetura de sistemas multiagente construída do zero para dominar os fundamentos de orquestração de LLMs: personas especializadas por papel, memória e contexto compartilhado em JSON, e gerenciamento de processos via PM2. **Solução:** Implementação em Node.js com a API do Google Gemini, sistema de arquivos como barramento de memória compartilhada, máquina de estados finitos para delegação entre agentes e daemon de supervisão com PM2. **Resultado:** Operação autônoma estável 24/7 com execução de tarefas distribuídas e relatórios analíticos de alta consistência.",
+        "en": "**Autonomous AI Agent Squad**: Multi-agent architecture built from scratch to master the foundational mechanics of LLM orchestration: specialized role-based personas, shared JSON context memory, and 24/7 PM2 process management. **Solution:** Implemented in Node.js using Google Gemini API, filesystem-based shared context bus, finite state machine for agent handoffs, and PM2 process supervision. **Result:** Stable 24/7 autonomous execution with distributed task handling and highly consistent analytical reporting."
+      },
+      "content": {
+        "pt": "Projeto: Squad de Agentes de IA Autônomos (IA & Sistemas Multiagente).\nDesafio: Construir um sistema multiagente resiliente capaz de colaborar na resolução de problemas complexos sem perder contexto ou entrar em loops infinitos de alucinação.\nPapel: Pesquisador & Engenheiro de IA\nSolução Técnica: Implementação em Node.js com a API do Google Gemini, sistema de arquivos como barramento de memória compartilhada, máquina de estados finitos para delegação entre agentes e daemon de supervisão com PM2.\nArquitetura:\n- Core: Node.js, Google Gemini API, PM2 Daemon\n- Memória: Context Bus compartilhado em JSON com histórico conversacional\n- Orquestração: Padrão maker-checker e validação de contratos de saída com Zod\nResultado e Impacto: Operação autônoma estável 24/7 com execução de tarefas distribuídas e relatórios analíticos de alta consistência. Base teórica e prática sólida aplicada diretamente no desenvolvimento corporativo assistido por IA e na criação do ecossistema de 9 agentes da Mais Saúde.\nMétricas: Disponibilidade: 24/7 (PM2) | Modelo: Google Gemini | Orquestração: Multiagente\nTecnologias: Node.js, Google Gemini API, PM2, Multi-Agent, Prompt Engineering, TypeScript.",
+        "en": "Project: Autonomous AI Agent Squad (AI & Multi-Agent Systems).\nChallenge: Build a resilient multi-agent collective capable of collaborating on complex tasks without losing context or entering hallucination loops.\nRole: AI Researcher & Engineer\nTechnical Solution: Implemented in Node.js using Google Gemini API, filesystem-based shared context bus, finite state machine for agent handoffs, and PM2 process supervision.\nArchitecture:\n- Core: Node.js, Google Gemini API, PM2 Daemon\n- Memory: Shared JSON Context Bus with conversational memory buffers\n- Orchestration: Maker-checker pattern and output contract enforcement via Zod\nResult & Impact: Stable 24/7 autonomous execution with distributed task handling and highly consistent analytical reporting. Solid foundational mastery applied directly to AI-assisted corporate engineering and the 9-agent squad at Mais Saúde.\nMetrics: Uptime: 24/7 (PM2) | LLM Model: Google Gemini | Orchestration: Multiagente\nTechnologies: Node.js, Google Gemini API, PM2, Multi-Agent, Prompt Engineering, TypeScript."
+      },
+      "keywords": [
+        "squad-agentes-ia",
+        "squad",
+        "agentes",
+        "ia",
+        "squad de agentes de ia autônomos",
+        "autonomous ai agent squad",
+        "node.js",
+        "google gemini api",
+        "pm2",
+        "multi-agent",
+        "prompt engineering",
+        "typescript",
+        "projeto",
+        "project",
+        "arquitetura",
+        "architecture",
+        "como funciona",
+        "how it works"
+      ],
+      "entities": [
+        "squad_agentes_ia",
+        "node.js",
+        "google gemini api",
+        "pm2",
+        "multi-agent",
+        "prompt engineering",
+        "typescript"
+      ]
+    },
+    {
+      "id": "project-sistema-ativos-ti",
+      "category": "project",
+      "sectionAnchor": "#projetos",
+      "sectionLabel": {
+        "pt": "Seção Projetos",
+        "en": "Projects Section"
+      },
+      "title": {
+        "pt": "Sistema de Ativos de TI & Termos SHA-256 — Gestão de Inventário com Aprovação em 2 Níveis e Integridade Criptográfica",
+        "en": "IT Asset Management & SHA-256 Custody — Inventory Management with 2-Step Approval and Cryptographic Integrity"
+      },
+      "shortAnswer": {
+        "pt": "**Sistema de Ativos de TI & Termos SHA-256**: Sistema corporativo para controle de inventário e custódia de equipamentos de informática com esteira de aprovação em 2 níveis, histórico auditado por triggers no PostgreSQL e geração de termos (.docx) com assinatura de hash SHA-256. **Solução:** Desenvolvimento com Next.js, Node.js e Supabase/PostgreSQL. Implementação de triggers de auditoria imutável e automação de emissão de documentos com cálculo de hash SHA-256 gravado no banco de dados. **Resultado:** 100% dos ativos corporativos inventariados e termos digitais gerados com prova de integridade antifraude.",
+        "en": "**IT Asset Management & SHA-256 Custody**: Corporate IT equipment custody and inventory platform with a 2-tier approval flow, audit history via PostgreSQL triggers, and automated .docx Responsibility Term generation signed with SHA-256 cryptographic hashes. **Solution:** Engineered with Next.js, Node.js, and Supabase/PostgreSQL. Implemented immutable database audit triggers and document generator hashing every signed term with SHA-256. **Result:** 100% of enterprise assets inventoried and digital sign-offs issued with tamper-proof integrity proofs."
+      },
+      "content": {
+        "pt": "Projeto: Sistema de Ativos de TI & Termos SHA-256 (Full-Stack & Segurança).\nDesafio: O controle de empréstimo de notebooks e periféricos carecia de governança, gerando perdas patrimoniais e termos de responsabilidade em papel sem rastreabilidade legal.\nPapel: Engenheiro Full-Stack\nSolução Técnica: Desenvolvimento com Next.js, Node.js e Supabase/PostgreSQL. Implementação de triggers de auditoria imutável e automação de emissão de documentos com cálculo de hash SHA-256 gravado no banco de dados.\nArquitetura:\n- Front-End: Next.js (App Router), React, Tailwind CSS\n- Back-End & DB: Node.js, Supabase, Triggers SQL imutáveis de auditoria\n- Criptografia: Hash SHA-256 para verificação de integridade de termos\nResultado e Impacto: 100% dos ativos corporativos inventariados e termos digitais gerados com prova de integridade antifraude. Compliance total do departamento de TI com normas de patrimônio e segurança da informação.\nMétricas: Aprovação: 2 Níveis | Integridade: Hash SHA-256 | Auditoria: Triggers SQL\nTecnologias: Next.js, Node.js, PostgreSQL, Supabase, Tailwind CSS, SHA-256.",
+        "en": "Project: IT Asset Management & SHA-256 Custody (Full-Stack & Security).\nChallenge: Hardware checkout lacked governance, leading to corporate asset loss and untracked paper sign-offs lacking digital proof of tamper resistance.\nRole: Full-Stack Engineer\nTechnical Solution: Engineered with Next.js, Node.js, and Supabase/PostgreSQL. Implemented immutable database audit triggers and document generator hashing every signed term with SHA-256.\nArchitecture:\n- Front-End: Next.js (App Router), React, Tailwind CSS\n- Back-End & DB: Node.js, Supabase, Immutable SQL audit triggers\n- Cryptography: SHA-256 hashing for tamper-evident document verification\nResult & Impact: 100% of enterprise assets inventoried and digital sign-offs issued with tamper-proof integrity proofs. Full IT department compliance with internal asset governance and information security regulations.\nMetrics: Approval: 2 Níveis | Integrity: Hash SHA-256 | Audit: Triggers SQL\nTechnologies: Next.js, Node.js, PostgreSQL, Supabase, Tailwind CSS, SHA-256."
+      },
+      "keywords": [
+        "sistema-ativos-ti",
+        "sistema",
+        "ativos",
+        "ti",
+        "sistema de ativos de ti & termos sha-256",
+        "it asset management & sha-256 custody",
+        "next.js",
+        "node.js",
+        "postgresql",
+        "supabase",
+        "tailwind css",
+        "sha-256",
+        "projeto",
+        "project",
+        "arquitetura",
+        "architecture",
+        "como funciona",
+        "how it works"
+      ],
+      "entities": [
+        "sistema_ativos_ti",
+        "next.js",
+        "node.js",
+        "postgresql",
+        "supabase",
+        "tailwind css",
+        "sha-256"
+      ]
+    },
+    {
+      "id": "project-carlo-acutis",
+      "category": "project",
+      "sectionAnchor": "#projetos",
+      "sectionLabel": {
+        "pt": "Seção Projetos",
+        "en": "Projects Section"
+      },
+      "title": {
+        "pt": "Plataforma Gamificada São Carlo Acutis — Engenharia Full-Stack & Gamificação Educacional Interativa",
+        "en": "São Carlo Acutis Gamified Platform — Full-Stack Engineering & Interactive Educational Gamification"
+      },
+      "shortAnswer": {
+        "pt": "**Plataforma Gamificada São Carlo Acutis**: Sistema web educacional gamificado com missões interativas, quizzes em tempo real e sistema de pontuação e progresso para o público jovem. **Solução:** Desenvolvimento do front-end em React + TypeScript com componentização modular. Back-end robusto com persistência relacional no Supabase/PostgreSQL e deploy otimizado na Vercel. **Resultado:** Interface fluida com tempo de carregamento inferior a 1.2s e 100% de precisão no cálculo de rankings e conquistas.",
+        "en": "**São Carlo Acutis Gamified Platform**: Gamified educational web system with interactive missions, real-time quizzes and a scoring/progress system aimed at a young audience. **Solution:** Front-end built with React + TypeScript using modular componentization. Robust back-end with relational persistence on Supabase/PostgreSQL and optimized deployment on Vercel. **Result:** Smooth interface with load time under 1.2s and 100% accuracy in ranking and achievement calculations."
+      },
+      "content": {
+        "pt": "Projeto: Plataforma Gamificada São Carlo Acutis (Full-Stack).\nDesafio: Construir uma arquitetura desacoplada e responsiva capaz de processar respostas em tempo real com validação no backend sem engasgos na UI.\nPapel: Engenheiro Full-Stack & UI/UX Designer\nSolução Técnica: Desenvolvimento do front-end em React + TypeScript com componentização modular. Back-end robusto com persistência relacional no Supabase/PostgreSQL e deploy otimizado na Vercel.\nArquitetura:\n- Front-End: React 18, TypeScript, Tailwind CSS, Lucide Icons\n- Banco de Dados: Supabase / PostgreSQL com modelagem relacional de usuários e pontuações\n- Infraestrutura & Deploy: Vercel com CI/CD contínuo\nResultado e Impacto: Interface fluida com tempo de carregamento inferior a 1.2s e 100% de precisão no cálculo de rankings e conquistas. Alta adesão de usuários, gamificação imersiva e arquitetura pronta para escalabilidade horizontal.\nMétricas: Tempo de Carregamento: < 1.2s | Disponibilidade: 100% | Deploy: Vercel Edge\nTecnologias: React, TypeScript, PostgreSQL, Supabase, Tailwind CSS, Vercel.",
+        "en": "Project: São Carlo Acutis Gamified Platform (Full-Stack).\nChallenge: Build a decoupled, responsive architecture capable of processing real-time answers with backend validation without any UI lag.\nRole: Full-Stack Engineer & UI/UX Designer\nTechnical Solution: Front-end built with React + TypeScript using modular componentization. Robust back-end with relational persistence on Supabase/PostgreSQL and optimized deployment on Vercel.\nArchitecture:\n- Front-End: React 18, TypeScript, Tailwind CSS, Lucide Icons\n- Database: Supabase / PostgreSQL with relational modeling of users and scores\n- Infrastructure & Deploy: Vercel with continuous CI/CD\nResult & Impact: Smooth interface with load time under 1.2s and 100% accuracy in ranking and achievement calculations. High user adoption, immersive gamification and an architecture ready for horizontal scalability.\nMetrics: Load Time: < 1.2s | Availability: 100% | Deploy: Vercel Edge\nTechnologies: React, TypeScript, PostgreSQL, Supabase, Tailwind CSS, Vercel."
+      },
+      "keywords": [
+        "carlo-acutis",
+        "carlo",
+        "acutis",
+        "plataforma gamificada são carlo acutis",
+        "são carlo acutis gamified platform",
+        "react",
+        "typescript",
+        "postgresql",
+        "supabase",
+        "tailwind css",
+        "vercel",
+        "projeto",
+        "project",
+        "arquitetura",
+        "architecture",
+        "como funciona",
+        "how it works"
+      ],
+      "entities": [
+        "carlo_acutis",
+        "react",
+        "typescript",
+        "postgresql",
+        "supabase",
+        "tailwind css",
+        "vercel"
+      ]
+    },
+    {
+      "id": "project-portfolio-web-tech",
+      "category": "project",
+      "sectionAnchor": "#projetos",
+      "sectionLabel": {
+        "pt": "Seção Projetos",
+        "en": "Projects Section"
+      },
+      "title": {
+        "pt": "Portfólio Web SaaS de Alta Performance — Arquitetura Front-End Moderna com Acessibilidade WCAG AA, Terminal CLI e Command Palette",
+        "en": "High-Performance SaaS Web Portfolio — Modern Front-End Architecture with WCAG AA Accessibility, Interactive CLI & Command Palette"
+      },
+      "shortAnswer": {
+        "pt": "**Portfólio Web SaaS de Alta Performance**: Interface pessoal projetada no mais alto padrão de craft de engenharia (estilo Linear e Raycast), implementando tokens Tailwind v4, modo escuro/claro perfeito, Command Palette global, simulador de ROI e terminal executável. **Solução:** Construção com React 18, TypeScript, Tailwind CSS v4, Framer Motion respeitando prefers-reduced-motion, atalhos de teclado e arquitetura modular. **Resultado:** 100% de conformidade com TypeScript estrito, carregamento instantâneo e nota máxima em qualidade técnica.",
+        "en": "**High-Performance SaaS Web Portfolio**: Personal engineering showcase built to Silicon Valley craft standards (Linear and Raycast style), featuring Tailwind v4 tokens, flawless dark/light mode, global Command Palette, ROI calculator, and interactive CLI. **Solution:** Crafted with React 18, TypeScript, Tailwind CSS v4, Framer Motion honoring prefers-reduced-motion, keyboard accessibility, and modular architecture. **Result:** 100% strict TypeScript compliance, instant loading, and maximum technical quality rating."
+      },
+      "content": {
+        "pt": "Projeto: Portfólio Web SaaS de Alta Performance (Front-End & Craft).\nDesafio: Construir uma vitrine que combine velocidade instantânea (<1.5s), 100% em SEO e Acessibilidade (WCAG 2.1 AA) e interatividade de software de ponta.\nPapel: Lead Front-End & UI/UX Engineer\nSolução Técnica: Construção com React 18, TypeScript, Tailwind CSS v4, Framer Motion respeitando prefers-reduced-motion, atalhos de teclado e arquitetura modular.\nArquitetura:\n- Bundler: Vite 6 com code-splitting e tree-shaking agressivo\n- Design: Tailwind CSS v4 com tokens nativos no @theme\n- Acessibilidade: WCAG 2.1 AA, navegação via teclado, focus trap em modais e leitores de tela\n- Interatividade: Command Palette (Ctrl+K), Terminal CLI executável e simulador de ROI\nResultado e Impacto: 100% de conformidade com TypeScript estrito, carregamento instantâneo e nota máxima em qualidade técnica. Apresentação técnica impecável que atrai recrutadores e lideranças técnicas de alto nível.\nMétricas: Lighthouse Score: 98+ | Acessibilidade: WCAG AA | Padrão Visual: SaaS Craft\nTecnologias: React 18, TypeScript, Tailwind CSS v4, Framer Motion, Vite, SEO.",
+        "en": "Project: High-Performance SaaS Web Portfolio (Front-End & Craft).\nChallenge: Build a showcase blending sub-1.5s load speeds, 100% SEO and WCAG 2.1 AA accessibility, and deep software-like interactivity.\nRole: Lead Front-End & UI/UX Engineer\nTechnical Solution: Crafted with React 18, TypeScript, Tailwind CSS v4, Framer Motion honoring prefers-reduced-motion, keyboard accessibility, and modular architecture.\nArchitecture:\n- Bundler: Vite 6 with aggressive code-splitting and tree-shaking\n- Design: Tailwind CSS v4 with native tokens via @theme\n- Accessibility: WCAG 2.1 AA, keyboard navigation, modal focus traps, and screen-readers\n- Interactivity: Command Palette (Ctrl+K), executable CLI terminal, and ROI calculator\nResult & Impact: 100% strict TypeScript compliance, instant loading, and maximum technical quality rating. Flawless engineering presentation engaging high-caliber tech recruiters and engineering leadership.\nMetrics: Lighthouse Score: 98+ | Accessibility: WCAG AA | Design Standard: SaaS Craft\nTechnologies: React 18, TypeScript, Tailwind CSS v4, Framer Motion, Vite, SEO."
+      },
+      "keywords": [
+        "portfolio-web-tech",
+        "portfolio",
+        "web",
+        "tech",
+        "portfólio web saas de alta performance",
+        "high-performance saas web portfolio",
+        "react 18",
+        "typescript",
+        "tailwind css v4",
+        "framer motion",
+        "vite",
+        "seo",
+        "projeto",
+        "project",
+        "arquitetura",
+        "architecture",
+        "como funciona",
+        "how it works"
+      ],
+      "entities": [
+        "portfolio_web_tech",
+        "react 18",
+        "typescript",
+        "tailwind css v4",
+        "framer motion",
+        "vite",
+        "seo"
+      ]
+    },
+    {
+      "id": "rpa-step-01",
+      "category": "rpa",
+      "sectionAnchor": "#rpa",
+      "sectionLabel": {
+        "pt": "Pipeline de Automação & RPA",
+        "en": "Automation & RPA Pipeline"
+      },
+      "title": {
+        "pt": "Etapa 01 do Pipeline RPA: FTP_SYNC & Coleta Autônoma",
+        "en": "RPA Pipeline Step 01: FTP_SYNC & Autonomous Ingestion"
+      },
+      "shortAnswer": {
+        "pt": "Na **Etapa 01 (FTP_SYNC & Coleta Autônoma)** do pipeline de automação: Ponte autônoma conectando servidores FTP/SFTP de parceiros farmacêuticos (Eurofarma, Smartped, Momenta) e portais fiscais a cada 15 minutos. (**Métrica:** Varredura a cada 15 min | **Stack:** Python 3.11+, Paramiko, ftplib, WinSCP, Task Scheduler).",
+        "en": "In **Step 01 (FTP_SYNC & Autonomous Ingestion)** of the automation pipeline: Autonomous bridge connecting partner pharmaceutical FTP/SFTP servers (Eurofarma, Smartped, Momenta) and tax portals every 15 minutes. (**Metric:** Scan every 15 min | **Stack:** Python 3.11+, Paramiko, ftplib, WinSCP, Task Scheduler)."
+      },
+      "content": {
+        "pt": "FTP_SYNC & Coleta Autônoma: Ponte autônoma conectando servidores FTP/SFTP de parceiros farmacêuticos (Eurofarma, Smartped, Momenta) e portais fiscais a cada 15 minutos.\nDetalhes técnicos:\n- Sincronização bidirecional entre parceiros e SFTP do WinThor Cloud\n- Download assíncrono de arquivos EDI Pharma Link e lotes de NFe/CTe\n- Validação de integridade e descompressão segura de arquivos\nTecnologias: Python 3.11+, Paramiko, ftplib, WinSCP, Task Scheduler.",
+        "en": "FTP_SYNC & Autonomous Ingestion: Autonomous bridge connecting partner pharmaceutical FTP/SFTP servers (Eurofarma, Smartped, Momenta) and tax portals every 15 minutes.\nTechnical details:\n- Bidirectional sync between partners and WinThor Cloud SFTP\n- Asynchronous download of EDI Pharma Link files and NFe batches\n- File integrity checksum verification and secure decompression\nTechnologies: Python 3.11+, Paramiko, ftplib, WinSCP, Task Scheduler."
+      },
+      "keywords": [
+        "ftp_sync & coleta autônoma",
+        "ftp_sync & autonomous ingestion",
+        "python 3.11+",
+        "paramiko",
+        "ftplib",
+        "winscp",
+        "task scheduler",
+        "rpa",
+        "pipeline",
+        "automacao",
+        "automation",
+        "robo",
+        "robot"
+      ],
+      "entities": [
+        "rpa_pipeline",
+        "python 3.11+",
+        "paramiko",
+        "ftplib",
+        "winscp",
+        "task scheduler"
+      ]
+    },
+    {
+      "id": "rpa-step-02",
+      "category": "rpa",
+      "sectionAnchor": "#rpa",
+      "sectionLabel": {
+        "pt": "Pipeline de Automação & RPA",
+        "en": "Automation & RPA Pipeline"
+      },
+      "title": {
+        "pt": "Etapa 02 do Pipeline RPA: Parsing & Validação de Schemas",
+        "en": "RPA Pipeline Step 02: Parsing & Schema Validation"
+      },
+      "shortAnswer": {
+        "pt": "Na **Etapa 02 (Parsing & Validação de Schemas)** do pipeline de automação: Extração segura de dados, validação contra layouts EDI Pharma Link e schemas oficiais da SEFAZ com verificação de notas canceladas. (**Métrica:** 99.85% de precisão | **Stack:** lxml, BeautifulSoup, Regex, Schema Validator).",
+        "en": "In **Step 02 (Parsing & Schema Validation)** of the automation pipeline: Secure data extraction, compliance validation against EDI Pharma Link layouts and official SEFAZ schemas with cancellation checks. (**Metric:** 99.85% accuracy | **Stack:** lxml, BeautifulSoup, Regex, Schema Validator)."
+      },
+      "content": {
+        "pt": "Parsing & Validação de Schemas: Extração segura de dados, validação contra layouts EDI Pharma Link e schemas oficiais da SEFAZ com verificação de notas canceladas.\nDetalhes técnicos:\n- Validação rigorosa contra esquemas XML oficiais da SEFAZ\n- Parsing estruturado de layouts posicionais EDI Pharma Link\n- Tratamento de exceções e logs de auditoria imutáveis\nTecnologias: lxml, BeautifulSoup, Regex, Schema Validator.",
+        "en": "Parsing & Schema Validation: Secure data extraction, compliance validation against EDI Pharma Link layouts and official SEFAZ schemas with cancellation checks.\nTechnical details:\n- Rigorous validation against official SEFAZ XML schemas\n- Structured parsing of fixed-width EDI Pharma Link layouts\n- Exception handling and immutable audit logging\nTechnologies: lxml, BeautifulSoup, Regex, Schema Validator."
+      },
+      "keywords": [
+        "parsing & validação de schemas",
+        "parsing & schema validation",
+        "lxml",
+        "beautifulsoup",
+        "regex",
+        "schema validator",
+        "rpa",
+        "pipeline",
+        "automacao",
+        "automation",
+        "robo",
+        "robot"
+      ],
+      "entities": [
+        "rpa_pipeline",
+        "lxml",
+        "beautifulsoup",
+        "regex",
+        "schema validator"
+      ]
+    },
+    {
+      "id": "rpa-step-03",
+      "category": "rpa",
+      "sectionAnchor": "#rpa",
+      "sectionLabel": {
+        "pt": "Pipeline de Automação & RPA",
+        "en": "Automation & RPA Pipeline"
+      },
+      "title": {
+        "pt": "Etapa 03 do Pipeline RPA: Integração WinThor ERP (Oracle) & ETL",
+        "en": "RPA Pipeline Step 03: WinThor ERP (Oracle) & ETL Integration"
+      },
+      "shortAnswer": {
+        "pt": "Na **Etapa 03 (Integração WinThor ERP (Oracle) & ETL)** do pipeline de automação: Lançamento automatizado no banco de dados Oracle do ERP TOTVS WinThor com conciliação contábil via Pandas e verificação de duplicidade. (**Métrica:** 10 robôs WinThor | **Stack:** Oracle SQL, Pandas, OpenPyXL, SQLAlchemy).",
+        "en": "In **Step 03 (WinThor ERP (Oracle) & ETL Integration)** of the automation pipeline: Automated loading into TOTVS WinThor ERP Oracle database with automated Pandas reconciliation and duplicate invoice checks. (**Metric:** 10 WinThor robots | **Stack:** Oracle SQL, Pandas, OpenPyXL, SQLAlchemy)."
+      },
+      "content": {
+        "pt": "Integração WinThor ERP (Oracle) & ETL: Lançamento automatizado no banco de dados Oracle do ERP TOTVS WinThor com conciliação contábil via Pandas e verificação de duplicidade.\nDetalhes técnicos:\n- Atualização instantânea de lotes de estoque farmacêutico\n- Cruzamento contábil e conciliação de faturamento sem erro humano\n- Detecção preventiva de duplicidades de notas fiscais\nTecnologias: Oracle SQL, Pandas, OpenPyXL, SQLAlchemy.",
+        "en": "WinThor ERP (Oracle) & ETL Integration: Automated loading into TOTVS WinThor ERP Oracle database with automated Pandas reconciliation and duplicate invoice checks.\nTechnical details:\n- Instant batch update of pharmaceutical inventory lots\n- Accounting cross-matching and billing reconciliation with zero human error\n- Preventative detection of duplicate invoice access keys\nTechnologies: Oracle SQL, Pandas, OpenPyXL, SQLAlchemy."
+      },
+      "keywords": [
+        "integração winthor erp (oracle) & etl",
+        "winthor erp (oracle) & etl integration",
+        "oracle sql",
+        "pandas",
+        "openpyxl",
+        "sqlalchemy",
+        "rpa",
+        "pipeline",
+        "automacao",
+        "automation",
+        "robo",
+        "robot"
+      ],
+      "entities": [
+        "rpa_pipeline",
+        "oracle sql",
+        "pandas",
+        "openpyxl",
+        "sqlalchemy"
+      ]
+    },
+    {
+      "id": "rpa-step-04",
+      "category": "rpa",
+      "sectionAnchor": "#rpa",
+      "sectionLabel": {
+        "pt": "Pipeline de Automação & RPA",
+        "en": "Automation & RPA Pipeline"
+      },
+      "title": {
+        "pt": "Etapa 04 do Pipeline RPA: Entrega Executiva & Monitoramento",
+        "en": "RPA Pipeline Step 04: Executive Delivery & Monitoring"
+      },
+      "shortAnswer": {
+        "pt": "Na **Etapa 04 (Entrega Executiva & Monitoramento)** do pipeline de automação: Painéis em Streamlit para supervisão em tempo real, relatórios gerenciais e redução de processos de 6 horas para menos de 10 segundos. (**Métrica:** De 6h para < 10s (−99%) | **Stack:** Streamlit, Notificações Webhook, PyInstaller Standalone).",
+        "en": "In **Step 04 (Executive Delivery & Monitoring)** of the automation pipeline: Streamlit dashboards for real-time robot supervision, executive reporting, and workflows reduced from 6 hours to under 10 seconds. (**Metric:** From 6h to < 10s (-99%) | **Stack:** Streamlit, Notificações Webhook, PyInstaller Standalone)."
+      },
+      "content": {
+        "pt": "Entrega Executiva & Monitoramento: Painéis em Streamlit para supervisão em tempo real, relatórios gerenciais e redução de processos de 6 horas para menos de 10 segundos.\nDetalhes técnicos:\n- Painel Streamlit com histórico detalhado de execuções de robôs\n- Alertas automáticos em caso de indisponibilidade de servidores parceiros\n- Eliminação massiva de trabalho braçal e risco fiscal zerado\nTecnologias: Streamlit, Notificações Webhook, PyInstaller Standalone.",
+        "en": "Executive Delivery & Monitoring: Streamlit dashboards for real-time robot supervision, executive reporting, and workflows reduced from 6 hours to under 10 seconds.\nTechnical details:\n- Streamlit dashboard tracking detailed robot run history\n- Automated webhook alerts on partner server downtime\n- Massive reduction of manual burden and eradicated tax risks\nTechnologies: Streamlit, Notificações Webhook, PyInstaller Standalone."
+      },
+      "keywords": [
+        "entrega executiva & monitoramento",
+        "executive delivery & monitoring",
+        "streamlit",
+        "notificações webhook",
+        "pyinstaller standalone",
+        "rpa",
+        "pipeline",
+        "automacao",
+        "automation",
+        "robo",
+        "robot"
+      ],
+      "entities": [
+        "rpa_pipeline",
+        "streamlit",
+        "notificações webhook",
+        "pyinstaller standalone"
+      ]
+    },
+    {
+      "id": "skills-ai-agents",
+      "category": "skill",
+      "sectionAnchor": "#habilidades",
+      "sectionLabel": {
+        "pt": "Habilidades & Tecnologias",
+        "en": "Skills & Technologies"
+      },
+      "title": {
+        "pt": "Competências em IA & Sistemas Multiagente",
+        "en": "Skills in AI & Multi-Agent Systems"
+      },
+      "shortAnswer": {
+        "pt": "Em **IA & Sistemas Multiagente**, Anderson domina: **Agentes de IA & Multiagente** (Arquitetura Maker-Checker, Orquestração 24/7); **Claude Code & Subagentes** (Desenvolvimento Assistido por IA, Fluxos Autônomos); **MCP (Model Context Protocol)** (Servidores MCP, Conectores de Ferramentas); **Google Gemini API & OpenAI** (Diagnóstico por IA, Embeddings, Structured JSON); **Guardrails & Anti-Alucinação** (Validação Zod/Pydantic, Fallback Local < 1s); **Engenharia de Prompt & RAG** (System Prompts, Context Bus, Saídas Estruturadas).",
+        "en": "In **AI & Multi-Agent Systems**, Anderson specializes in: **Agentes de IA & Multiagente** (Maker-Checker Architecture, 24/7 Orchestration); **Claude Code & Subagentes** (AI-Assisted Engineering, Autonomous Workflows); **MCP (Model Context Protocol)** (MCP Servers, Tool Integration Connectors); **Google Gemini API & OpenAI** (AI Diagnostics, Embeddings, Structured JSON); **Guardrails & Anti-Alucinação** (Zod/Pydantic Contracts, < 1s Local Fallback); **Engenharia de Prompt & RAG** (System Prompts, Context Bus, Structured Outputs)."
+      },
+      "content": {
+        "pt": "IA & Sistemas Multiagente: Orquestração avançada de agentes autônomos, engenharia de prompt rigorosa e integração com LLMs.\nHabilidades detalhadas:\n- Agentes de IA & Multiagente [advanced]: Arquitetura Maker-Checker, Orquestração 24/7\n- Claude Code & Subagentes [advanced]: Desenvolvimento Assistido por IA, Fluxos Autônomos\n- MCP (Model Context Protocol) [advanced]: Servidores MCP, Conectores de Ferramentas\n- Google Gemini API & OpenAI [advanced]: Diagnóstico por IA, Embeddings, Structured JSON\n- Guardrails & Anti-Alucinação [advanced]: Validação Zod/Pydantic, Fallback Local < 1s\n- Engenharia de Prompt & RAG [advanced]: System Prompts, Context Bus, Saídas Estruturadas",
+        "en": "AI & Multi-Agent Systems: Advanced autonomous agent orchestration, strict prompt engineering, and production LLM integrations.\nDetailed skills:\n- Agentes de IA & Multiagente [advanced]: Maker-Checker Architecture, 24/7 Orchestration\n- Claude Code & Subagentes [advanced]: AI-Assisted Engineering, Autonomous Workflows\n- MCP (Model Context Protocol) [advanced]: MCP Servers, Tool Integration Connectors\n- Google Gemini API & OpenAI [advanced]: AI Diagnostics, Embeddings, Structured JSON\n- Guardrails & Anti-Alucinação [advanced]: Zod/Pydantic Contracts, < 1s Local Fallback\n- Engenharia de Prompt & RAG [advanced]: System Prompts, Context Bus, Structured Outputs"
+      },
+      "keywords": [
+        "ai-agents",
+        "ia & sistemas multiagente",
+        "ai & multi-agent systems",
+        "agentes de ia & multiagente",
+        "claude code & subagentes",
+        "mcp (model context protocol)",
+        "google gemini api & openai",
+        "guardrails & anti-alucinação",
+        "engenharia de prompt & rag",
+        "skill",
+        "skills",
+        "habilidade",
+        "habilidades",
+        "stack",
+        "tecnologia",
+        "dominadas"
+      ],
+      "entities": [
+        "ai_agents",
+        "agentes de ia & multiagente",
+        "claude code & subagentes",
+        "mcp (model context protocol)",
+        "google gemini api & openai",
+        "guardrails & anti-alucinação",
+        "engenharia de prompt & rag"
+      ]
+    },
+    {
+      "id": "skills-automation",
+      "category": "skill",
+      "sectionAnchor": "#habilidades",
+      "sectionLabel": {
+        "pt": "Habilidades & Tecnologias",
+        "en": "Skills & Technologies"
+      },
+      "title": {
+        "pt": "Competências em Automação & RPA Industrial",
+        "en": "Skills in Automation & Industrial RPA"
+      },
+      "shortAnswer": {
+        "pt": "Em **Automação & RPA Industrial**, Anderson domina: **Python RPA & Automação** (15 Robôs Entregues, Redução de Horas para Segundos); **Integração WinThor ERP (Oracle)** (Consultas em Lote, Atualização de Catálogos e Estoque); **EDI Pharma Link & FTP/SFTP** (Paramiko, ftplib, Sync a cada 15 min, -99% tempo); **Parsing XML / NFe & Schemas SEFAZ** (lxml, BeautifulSoup, Validação de Esquemas Fiscais); **Playwright & Selenium Headless** (Web Scraping, Emissão de CNDs, Portais Governamentais); **Pandas, ETL & OpenPyXL** (Conciliação Contábil Automatizada, DataFrames); **PyInstaller & Windows Task Scheduler** (Executáveis Standalone, Tarefas Agendadas).",
+        "en": "In **Automation & Industrial RPA**, Anderson specializes in: **Python RPA & Automação** (15 Shipped Robots, Hours Reduced to Seconds); **Integração WinThor ERP (Oracle)** (Batch Queries, Inventory & Catalog Sync); **EDI Pharma Link & FTP/SFTP** (Paramiko, ftplib, 15-min Sync Intervals, -99% time); **Parsing XML / NFe & Schemas SEFAZ** (lxml, BeautifulSoup, Tax Schema Compliance); **Playwright & Selenium Headless** (Web Scraping, CND Certificates, Gov Portals); **Pandas, ETL & OpenPyXL** (Automated Ledger Reconciliation, DataFrames); **PyInstaller & Windows Task Scheduler** (Standalone Executables, Scheduled Tasks)."
+      },
+      "content": {
+        "pt": "Automação & RPA Industrial: Eliminação de gargalos operacionais com robôs Python conectados a ERPs e portais corporativos.\nHabilidades detalhadas:\n- Python RPA & Automação [advanced]: 15 Robôs Entregues, Redução de Horas para Segundos\n- Integração WinThor ERP (Oracle) [advanced]: Consultas em Lote, Atualização de Catálogos e Estoque\n- EDI Pharma Link & FTP/SFTP [advanced]: Paramiko, ftplib, Sync a cada 15 min, -99% tempo\n- Parsing XML / NFe & Schemas SEFAZ [advanced]: lxml, BeautifulSoup, Validação de Esquemas Fiscais\n- Playwright & Selenium Headless [advanced]: Web Scraping, Emissão de CNDs, Portais Governamentais\n- Pandas, ETL & OpenPyXL [advanced]: Conciliação Contábil Automatizada, DataFrames\n- PyInstaller & Windows Task Scheduler [intermediate]: Executáveis Standalone, Tarefas Agendadas",
+        "en": "Automation & Industrial RPA: Eliminating operational bottlenecks with Python robots connected to ERPs and corporate portals.\nDetailed skills:\n- Python RPA & Automação [advanced]: 15 Shipped Robots, Hours Reduced to Seconds\n- Integração WinThor ERP (Oracle) [advanced]: Batch Queries, Inventory & Catalog Sync\n- EDI Pharma Link & FTP/SFTP [advanced]: Paramiko, ftplib, 15-min Sync Intervals, -99% time\n- Parsing XML / NFe & Schemas SEFAZ [advanced]: lxml, BeautifulSoup, Tax Schema Compliance\n- Playwright & Selenium Headless [advanced]: Web Scraping, CND Certificates, Gov Portals\n- Pandas, ETL & OpenPyXL [advanced]: Automated Ledger Reconciliation, DataFrames\n- PyInstaller & Windows Task Scheduler [intermediate]: Standalone Executables, Scheduled Tasks"
+      },
+      "keywords": [
+        "automation",
+        "automação & rpa industrial",
+        "automation & industrial rpa",
+        "python rpa & automação",
+        "integração winthor erp (oracle)",
+        "edi pharma link & ftp/sftp",
+        "parsing xml / nfe & schemas sefaz",
+        "playwright & selenium headless",
+        "pandas, etl & openpyxl",
+        "pyinstaller & windows task scheduler",
+        "skill",
+        "skills",
+        "habilidade",
+        "habilidades",
+        "stack",
+        "tecnologia",
+        "dominadas"
+      ],
+      "entities": [
+        "automation",
+        "python rpa & automação",
+        "integração winthor erp (oracle)",
+        "edi pharma link & ftp/sftp",
+        "parsing xml / nfe & schemas sefaz",
+        "playwright & selenium headless",
+        "pandas, etl & openpyxl",
+        "pyinstaller & windows task scheduler"
+      ]
+    },
+    {
+      "id": "skills-backend",
+      "category": "skill",
+      "sectionAnchor": "#habilidades",
+      "sectionLabel": {
+        "pt": "Habilidades & Tecnologias",
+        "en": "Skills & Technologies"
+      },
+      "title": {
+        "pt": "Competências em Back-End & Arquitetura de APIs",
+        "en": "Skills in Back-End & API Architecture"
+      },
+      "shortAnswer": {
+        "pt": "Em **Back-End & Arquitetura de APIs**, Anderson domina: **Node.js & Express (TypeScript)** (APIs RESTful, Middlewares, Clean Architecture); **Python & FastAPI** (Pydantic v2, SQLAlchemy, Alembic, Alta Concorrência); **Autenticação JWT, SSO & RBAC** (Single Sign-On Corporativo, 4 Níveis de Acesso); **Java & Spring Boot** (Spring Data JPA, Hibernate, Maven, REST APIs); **Django & REST Framework** (ORM, Painel Admin, Endpoints Seguros); **Zod & Pydantic Validation** (Tipagem Estrita em Tempo de Execução).",
+        "en": "In **Back-End & API Architecture**, Anderson specializes in: **Node.js & Express (TypeScript)** (RESTful APIs, Middlewares, Clean Architecture); **Python & FastAPI** (Pydantic v2, SQLAlchemy, Alembic, High Concurrency); **Autenticação JWT, SSO & RBAC** (Corporate Single Sign-On, 4 Role Tiers); **Java & Spring Boot** (Spring Data JPA, Hibernate, Maven, REST APIs); **Django & REST Framework** (ORM, Admin Panel, Secure Endpoints); **Zod & Pydantic Validation** (Strict Runtime Type Validation)."
+      },
+      "content": {
+        "pt": "Back-End & Arquitetura de APIs: Serviços escaláveis, microsserviços desacoplados, segurança enterprise e autenticação segura.\nHabilidades detalhadas:\n- Node.js & Express (TypeScript) [advanced]: APIs RESTful, Middlewares, Clean Architecture\n- Python & FastAPI [advanced]: Pydantic v2, SQLAlchemy, Alembic, Alta Concorrência\n- Autenticação JWT, SSO & RBAC [advanced]: Single Sign-On Corporativo, 4 Níveis de Acesso\n- Java & Spring Boot [intermediate]: Spring Data JPA, Hibernate, Maven, REST APIs\n- Django & REST Framework [intermediate]: ORM, Painel Admin, Endpoints Seguros\n- Zod & Pydantic Validation [advanced]: Tipagem Estrita em Tempo de Execução",
+        "en": "Back-End & API Architecture: Scalable services, decoupled microservices, enterprise application security, and robust auth.\nDetailed skills:\n- Node.js & Express (TypeScript) [advanced]: RESTful APIs, Middlewares, Clean Architecture\n- Python & FastAPI [advanced]: Pydantic v2, SQLAlchemy, Alembic, High Concurrency\n- Autenticação JWT, SSO & RBAC [advanced]: Corporate Single Sign-On, 4 Role Tiers\n- Java & Spring Boot [intermediate]: Spring Data JPA, Hibernate, Maven, REST APIs\n- Django & REST Framework [intermediate]: ORM, Admin Panel, Secure Endpoints\n- Zod & Pydantic Validation [advanced]: Strict Runtime Type Validation"
+      },
+      "keywords": [
+        "backend",
+        "back-end & arquitetura de apis",
+        "back-end & api architecture",
+        "node.js & express (typescript)",
+        "python & fastapi",
+        "autenticação jwt, sso & rbac",
+        "java & spring boot",
+        "django & rest framework",
+        "zod & pydantic validation",
+        "skill",
+        "skills",
+        "habilidade",
+        "habilidades",
+        "stack",
+        "tecnologia",
+        "dominadas"
+      ],
+      "entities": [
+        "backend",
+        "node.js & express (typescript)",
+        "python & fastapi",
+        "autenticação jwt, sso & rbac",
+        "java & spring boot",
+        "django & rest framework",
+        "zod & pydantic validation"
+      ]
+    },
+    {
+      "id": "skills-frontend",
+      "category": "skill",
+      "sectionAnchor": "#habilidades",
+      "sectionLabel": {
+        "pt": "Habilidades & Tecnologias",
+        "en": "Skills & Technologies"
+      },
+      "title": {
+        "pt": "Competências em Front-End & UI SaaS",
+        "en": "Skills in Front-End & SaaS UI"
+      },
+      "shortAnswer": {
+        "pt": "Em **Front-End & UI SaaS**, Anderson domina: **React 19 / 18** (Custom Hooks, Context API, Suspense, ErrorBoundary); **Next.js 16 (App Router)** (Server Actions, SSR, SSG, Edge Runtime); **TypeScript** (Strict Mode, Generics, Type Safety Ponta a Ponta); **Tailwind CSS 4** (Design Tokens, CSS Variables, Dark/Light Mode); **Recharts & Dashboards de BI** (Gráficos Interativos, MTTR, SLAs Preditivos); **Framer Motion** (Micro-interações, Prefers-Reduced-Motion); **Acessibilidade WCAG 2.1 AA** (Focus Trap, WAI-ARIA, Leitores de Tela, Contraste); **Vue.js** (Composition API, Reatividade).",
+        "en": "In **Front-End & SaaS UI**, Anderson specializes in: **React 19 / 18** (Custom Hooks, Context API, Suspense, ErrorBoundary); **Next.js 16 (App Router)** (Server Actions, SSR, SSG, Edge Runtime); **TypeScript** (Strict Mode, Generics, End-to-End Type Safety); **Tailwind CSS 4** (Design Tokens, CSS Variables, Dark/Light Mode); **Recharts & Dashboards de BI** (Interactive Charts, MTTR, Predictive SLAs); **Framer Motion** (Micro-interactions, Prefers-Reduced-Motion); **Acessibilidade WCAG 2.1 AA** (Focus Trap, WAI-ARIA, Screen Readers, Contrast); **Vue.js** (Composition API, Reactivity)."
+      },
+      "content": {
+        "pt": "Front-End & UI SaaS: Aplicações web ultra-rápidas, design system refinado, acessibilidade total e craft visual impecável.\nHabilidades detalhadas:\n- React 19 / 18 [advanced]: Custom Hooks, Context API, Suspense, ErrorBoundary\n- Next.js 16 (App Router) [advanced]: Server Actions, SSR, SSG, Edge Runtime\n- TypeScript [advanced]: Strict Mode, Generics, Type Safety Ponta a Ponta\n- Tailwind CSS 4 [advanced]: Design Tokens, CSS Variables, Dark/Light Mode\n- Recharts & Dashboards de BI [advanced]: Gráficos Interativos, MTTR, SLAs Preditivos\n- Framer Motion [intermediate]: Micro-interações, Prefers-Reduced-Motion\n- Acessibilidade WCAG 2.1 AA [advanced]: Focus Trap, WAI-ARIA, Leitores de Tela, Contraste\n- Vue.js [growing]: Composition API, Reatividade",
+        "en": "Front-End & SaaS UI: Lightning-fast web applications, polished design systems, full accessibility, and flawless craft.\nDetailed skills:\n- React 19 / 18 [advanced]: Custom Hooks, Context API, Suspense, ErrorBoundary\n- Next.js 16 (App Router) [advanced]: Server Actions, SSR, SSG, Edge Runtime\n- TypeScript [advanced]: Strict Mode, Generics, End-to-End Type Safety\n- Tailwind CSS 4 [advanced]: Design Tokens, CSS Variables, Dark/Light Mode\n- Recharts & Dashboards de BI [advanced]: Interactive Charts, MTTR, Predictive SLAs\n- Framer Motion [intermediate]: Micro-interactions, Prefers-Reduced-Motion\n- Acessibilidade WCAG 2.1 AA [advanced]: Focus Trap, WAI-ARIA, Screen Readers, Contrast\n- Vue.js [growing]: Composition API, Reactivity"
+      },
+      "keywords": [
+        "frontend",
+        "front-end & ui saas",
+        "front-end & saas ui",
+        "react 19 / 18",
+        "next.js 16 (app router)",
+        "typescript",
+        "tailwind css 4",
+        "recharts & dashboards de bi",
+        "framer motion",
+        "acessibilidade wcag 2.1 aa",
+        "vue.js",
+        "skill",
+        "skills",
+        "habilidade",
+        "habilidades",
+        "stack",
+        "tecnologia",
+        "dominadas"
+      ],
+      "entities": [
+        "frontend",
+        "react 19 / 18",
+        "next.js 16 (app router)",
+        "typescript",
+        "tailwind css 4",
+        "recharts & dashboards de bi",
+        "framer motion",
+        "acessibilidade wcag 2.1 aa",
+        "vue.js"
+      ]
+    },
+    {
+      "id": "skills-database",
+      "category": "skill",
+      "sectionAnchor": "#habilidades",
+      "sectionLabel": {
+        "pt": "Habilidades & Tecnologias",
+        "en": "Skills & Technologies"
+      },
+      "title": {
+        "pt": "Competências em Bancos de Dados & Armazenamento",
+        "en": "Skills in Databases & Storage"
+      },
+      "shortAnswer": {
+        "pt": "Em **Bancos de Dados & Armazenamento**, Anderson domina: **PostgreSQL & Supabase BaaS** (Row-Level Security (RLS), Auth Hooks, Realtime); **Oracle SQL (TOTVS WinThor)** (Consultas em Lote, Triggers, ERP Integration); **Certificação Huawei HCIA-Storage** (SAN/NAS, RAID, Disaster Recovery, Virtualização); **SQLite & MongoDB** (Persistência Local e Document-Based NoSQL); **Google Sheets API & Apps Script** (Automação de Planilhas e Controle de Ativos); **Neon Serverless Postgres** (Database Branching, Serverless Edge Postgres).",
+        "en": "In **Databases & Storage**, Anderson specializes in: **PostgreSQL & Supabase BaaS** (Row-Level Security (RLS), Auth Hooks, Realtime); **Oracle SQL (TOTVS WinThor)** (Batch Queries, Triggers, ERP Integration); **Certificação Huawei HCIA-Storage** (SAN/NAS, RAID, Disaster Recovery, Virtualization); **SQLite & MongoDB** (Local Embedded & Document-Based NoSQL); **Google Sheets API & Apps Script** (Spreadsheet Automation & Asset Tracking); **Neon Serverless Postgres** (Database Branching, Serverless Edge Postgres)."
+      },
+      "content": {
+        "pt": "Bancos de Dados & Armazenamento: Persistência relacional otimizada, isolamento RLS, consultas enterprise e armazenamento corporativo.\nHabilidades detalhadas:\n- PostgreSQL & Supabase BaaS [advanced]: Row-Level Security (RLS), Auth Hooks, Realtime\n- Oracle SQL (TOTVS WinThor) [intermediate]: Consultas em Lote, Triggers, ERP Integration\n- Certificação Huawei HCIA-Storage [advanced]: SAN/NAS, RAID, Disaster Recovery, Virtualização\n- SQLite & MongoDB [intermediate]: Persistência Local e Document-Based NoSQL\n- Google Sheets API & Apps Script [advanced]: Automação de Planilhas e Controle de Ativos\n- Neon Serverless Postgres [intermediate]: Database Branching, Serverless Edge Postgres",
+        "en": "Databases & Storage: Optimized relational persistence, RLS isolation, enterprise queries, and corporate storage.\nDetailed skills:\n- PostgreSQL & Supabase BaaS [advanced]: Row-Level Security (RLS), Auth Hooks, Realtime\n- Oracle SQL (TOTVS WinThor) [intermediate]: Batch Queries, Triggers, ERP Integration\n- Certificação Huawei HCIA-Storage [advanced]: SAN/NAS, RAID, Disaster Recovery, Virtualization\n- SQLite & MongoDB [intermediate]: Local Embedded & Document-Based NoSQL\n- Google Sheets API & Apps Script [advanced]: Spreadsheet Automation & Asset Tracking\n- Neon Serverless Postgres [intermediate]: Database Branching, Serverless Edge Postgres"
+      },
+      "keywords": [
+        "database",
+        "bancos de dados & armazenamento",
+        "databases & storage",
+        "postgresql & supabase baas",
+        "oracle sql (totvs winthor)",
+        "certificação huawei hcia-storage",
+        "sqlite & mongodb",
+        "google sheets api & apps script",
+        "neon serverless postgres",
+        "skill",
+        "skills",
+        "habilidade",
+        "habilidades",
+        "stack",
+        "tecnologia",
+        "dominadas"
+      ],
+      "entities": [
+        "database",
+        "postgresql & supabase baas",
+        "oracle sql (totvs winthor)",
+        "certificação huawei hcia-storage",
+        "sqlite & mongodb",
+        "google sheets api & apps script",
+        "neon serverless postgres"
+      ]
+    },
+    {
+      "id": "skills-devops-quality",
+      "category": "skill",
+      "sectionAnchor": "#habilidades",
+      "sectionLabel": {
+        "pt": "Habilidades & Tecnologias",
+        "en": "Skills & Technologies"
+      },
+      "title": {
+        "pt": "Competências em Qualidade, Cloud & DevOps",
+        "en": "Skills in Quality, Cloud & DevOps"
+      },
+      "shortAnswer": {
+        "pt": "Em **Qualidade, Cloud & DevOps**, Anderson domina: **Pytest (58 Suítes Corporativas)** (Testes de Integração, E2E, LGPD e Autenticação); **Playwright (35 Asserções)** (Regressão Visual, Checagem de Drift de UI); **GitHub Actions (CI/CD)** (Pipelines Automatizados de Lint, Testes e Go-Live); **Cloudflare Pages & Render** (Deploy Contínuo de Frontends e APIs Monorepo); **Vercel Edge Platform** (Preview Deployments, Serverless Functions, Edge Cache); **AppSec & LGPD Compliance** (JWT, RLS, CSP, Prevenção contra IDOR e Anonimização); **Docker & Monorepo Git** (Containers Padronizados, Gestão Multi-Pacote).",
+        "en": "In **Quality, Cloud & DevOps**, Anderson specializes in: **Pytest (58 Suítes Corporativas)** (Integration Tests, E2E, LGPD and Authentication); **Playwright (35 Asserções)** (Visual Regression, UI Drift Verification); **GitHub Actions (CI/CD)** (Automated Lint, Test and Go-Live Pipelines); **Cloudflare Pages & Render** (Continuous Monorepo Frontend & API Deployments); **Vercel Edge Platform** (Preview Deployments, Serverless Functions, Edge Cache); **AppSec & LGPD Compliance** (JWT, RLS, CSP, IDOR Prevention & Anonymization); **Docker & Monorepo Git** (Standardized Containers, Multi-Package Management)."
+      },
+      "content": {
+        "pt": "Qualidade, Cloud & DevOps: Gates de entrega automatizados, testes rigorosos, CI/CD e segurança defensiva de aplicações.\nHabilidades detalhadas:\n- Pytest (58 Suítes Corporativas) [advanced]: Testes de Integração, E2E, LGPD e Autenticação\n- Playwright (35 Asserções) [advanced]: Regressão Visual, Checagem de Drift de UI\n- GitHub Actions (CI/CD) [advanced]: Pipelines Automatizados de Lint, Testes e Go-Live\n- Cloudflare Pages & Render [advanced]: Deploy Contínuo de Frontends e APIs Monorepo\n- Vercel Edge Platform [advanced]: Preview Deployments, Serverless Functions, Edge Cache\n- AppSec & LGPD Compliance [advanced]: JWT, RLS, CSP, Prevenção contra IDOR e Anonimização\n- Docker & Monorepo Git [intermediate]: Containers Padronizados, Gestão Multi-Pacote",
+        "en": "Quality, Cloud & DevOps: Automated delivery gates, rigorous test suites, continuous deployment, and defensive AppSec.\nDetailed skills:\n- Pytest (58 Suítes Corporativas) [advanced]: Integration Tests, E2E, LGPD and Authentication\n- Playwright (35 Asserções) [advanced]: Visual Regression, UI Drift Verification\n- GitHub Actions (CI/CD) [advanced]: Automated Lint, Test and Go-Live Pipelines\n- Cloudflare Pages & Render [advanced]: Continuous Monorepo Frontend & API Deployments\n- Vercel Edge Platform [advanced]: Preview Deployments, Serverless Functions, Edge Cache\n- AppSec & LGPD Compliance [advanced]: JWT, RLS, CSP, IDOR Prevention & Anonymization\n- Docker & Monorepo Git [intermediate]: Standardized Containers, Multi-Package Management"
+      },
+      "keywords": [
+        "devops-quality",
+        "qualidade, cloud & devops",
+        "quality, cloud & devops",
+        "pytest (58 suítes corporativas)",
+        "playwright (35 asserções)",
+        "github actions (ci/cd)",
+        "cloudflare pages & render",
+        "vercel edge platform",
+        "appsec & lgpd compliance",
+        "docker & monorepo git",
+        "skill",
+        "skills",
+        "habilidade",
+        "habilidades",
+        "stack",
+        "tecnologia",
+        "dominadas"
+      ],
+      "entities": [
+        "devops_quality",
+        "pytest (58 suítes corporativas)",
+        "playwright (35 asserções)",
+        "github actions (ci/cd)",
+        "cloudflare pages & render",
+        "vercel edge platform",
+        "appsec & lgpd compliance",
+        "docker & monorepo git"
+      ]
+    },
+    {
+      "id": "skills-methods",
+      "category": "skill",
+      "sectionAnchor": "#habilidades",
+      "sectionLabel": {
+        "pt": "Habilidades & Tecnologias",
+        "en": "Skills & Technologies"
+      },
+      "title": {
+        "pt": "Competências em Métodos & Práticas de Engenharia",
+        "en": "Skills in Methods & Engineering Practices"
+      },
+      "shortAnswer": {
+        "pt": "Em **Métodos & Práticas de Engenharia**, Anderson domina: **Spec-Driven Dev (OpenSpec & BDD)** (Especificações Antes do Código, Menor Alucinação); **Arquitetura Maker-Checker** (Quem Desenvolve Nunca Aprova o Próprio Código); **Metodologias Ágeis (Scrum / Kanban)** (Sprints, Priorização de Backlog, Trello, Jira); **Documentação Técnica & ADRs** (Guias de Contingência, Decisões de Arquitetura); **Comunicação Intersetorial** (Tradução de Dores de Negócio em Software).",
+        "en": "In **Methods & Engineering Practices**, Anderson specializes in: **Spec-Driven Dev (OpenSpec & BDD)** (Specs Before Code, Context Preservation); **Arquitetura Maker-Checker** (Executors Never Validate Their Own Deliveries); **Metodologias Ágeis (Scrum / Kanban)** (Sprints, Backlog Grooming, Trello, Jira); **Documentação Técnica & ADRs** (Contingency Manuals, Architecture Decisions); **Comunicação Intersetorial** (Translating Business Pains into Working Code)."
+      },
+      "content": {
+        "pt": "Métodos & Práticas de Engenharia: Engenharia orientada a especificações, comunicação ágil e foco implacável em entrega de valor.\nHabilidades detalhadas:\n- Spec-Driven Dev (OpenSpec & BDD) [advanced]: Especificações Antes do Código, Menor Alucinação\n- Arquitetura Maker-Checker [advanced]: Quem Desenvolve Nunca Aprova o Próprio Código\n- Metodologias Ágeis (Scrum / Kanban) [advanced]: Sprints, Priorização de Backlog, Trello, Jira\n- Documentação Técnica & ADRs [advanced]: Guias de Contingência, Decisões de Arquitetura\n- Comunicação Intersetorial [advanced]: Tradução de Dores de Negócio em Software",
+        "en": "Methods & Engineering Practices: Spec-driven development, agile communication, and a relentless focus on delivering business value.\nDetailed skills:\n- Spec-Driven Dev (OpenSpec & BDD) [advanced]: Specs Before Code, Context Preservation\n- Arquitetura Maker-Checker [advanced]: Executors Never Validate Their Own Deliveries\n- Metodologias Ágeis (Scrum / Kanban) [advanced]: Sprints, Backlog Grooming, Trello, Jira\n- Documentação Técnica & ADRs [advanced]: Contingency Manuals, Architecture Decisions\n- Comunicação Intersetorial [advanced]: Translating Business Pains into Working Code"
+      },
+      "keywords": [
+        "methods",
+        "métodos & práticas de engenharia",
+        "methods & engineering practices",
+        "spec-driven dev (openspec & bdd)",
+        "arquitetura maker-checker",
+        "metodologias ágeis (scrum / kanban)",
+        "documentação técnica & adrs",
+        "comunicação intersetorial",
+        "skill",
+        "skills",
+        "habilidade",
+        "habilidades",
+        "stack",
+        "tecnologia",
+        "dominadas"
+      ],
+      "entities": [
+        "methods",
+        "spec-driven dev (openspec & bdd)",
+        "arquitetura maker-checker",
+        "metodologias ágeis (scrum / kanban)",
+        "documentação técnica & adrs",
+        "comunicação intersetorial"
+      ]
+    },
+    {
+      "id": "metrics-official-summary",
+      "category": "metric",
+      "sectionAnchor": "#inicio",
+      "sectionLabel": {
+        "pt": "Métricas de Impacto",
+        "en": "Impact Metrics"
+      },
+      "title": {
+        "pt": "Métricas Oficiais Comprovadas em Produção",
+        "en": "Verified Production Impact Metrics"
+      },
+      "shortAnswer": {
+        "pt": "Principais métricas auditadas em produção: **15 robôs corporativos** (10 na Mais Saúde + 5 no Grupo 3corações), **-99% no tempo do FTP_SYNC** (de 6h para <10s), **15.000+ XMLs fiscais/mês** com **99,85% de precisão SEFAZ**, **200+ horas manuais poupadas**, **9 agentes de IA Maker-Checker**, **58 testes Pytest + 35 asserções Playwright** e **4 sistemas unificados com SSO**.",
+        "en": "Key verified production metrics: **15 corporate robots** (10 at Mais Saúde + 5 at Grupo 3corações), **-99% time reduction in FTP_SYNC** (from 6h to <10s), **15,000+ fiscal XMLs/month** with **99.85% SEFAZ accuracy**, **200+ manual hours saved**, **9 Maker-Checker AI agents**, **58 Pytest tests + 35 Playwright assertions**, and **4 unified SSO systems**."
+      },
+      "content": {
+        "pt": "- 15 Automações Entregues: Robôs em Python integrados ao ERP WinThor (Oracle) e portais fiscais, reduzindo processos de horas para segundos. (Produção contínua)\n- -99% Redução FTP_SYNC: Ponte autônoma entre parceiros e WinThor Cloud que reduziu o tempo de integração de 6 horas para menos de 10s. (A cada 15 min)\n- 15k+ XMLs Fiscais / Mês: Documentos fiscais processados com 99.85% de conformidade com schemas oficiais da SEFAZ. (Zero erro fiscal)\n- 9 Agentes Escritório de IA: Arquitetura multiagente maker-checker com Claude Code, MCP e protocolos estritos anti-alucinação. (Engenharia assistida)",
+        "en": "- 15 Shipped Automations: Python robots integrated with WinThor ERP (Oracle) and tax portals, slashing workflows from hours to seconds. (Continuous production)\n- -99% FTP_SYNC Slashing: Autonomous partner-to-WinThor bridge reducing sync and registration time from 6 hours to under 10 seconds. (Every 15 min)\n- 15k+ Fiscal XMLs / Month: Tax documents processed with 99.85% compliance against official SEFAZ government schemas. (Zero tax error)\n- 9 Agentes AI Agent Squad: Maker-checker multi-agent architecture with Claude Code, MCP, and strict anti-hallucination protocols. (AI-assisted delivery)"
+      },
+      "keywords": [
+        "metrica",
+        "metricas",
+        "metrics",
+        "numeros",
+        "numbers",
+        "resultados",
+        "results",
+        "impacto",
+        "impact",
+        "quantos robos",
+        "how many robots",
+        "15 robos",
+        "15.000",
+        "99.85%",
+        "200 horas"
+      ],
+      "entities": [
+        "metrics",
+        "ftp_sync",
+        "winthor",
+        "3coracoes",
+        "mais_saude"
+      ],
+      "metrics": [
+        "15",
+        "-99%",
+        "15.000+",
+        "99.85%",
+        "200+",
+        "9 Agentes",
+        "58",
+        "35",
+        "4"
+      ]
+    }
+  ]
+}

@@ -56,11 +56,14 @@ A aplicação foi desenvolvida no padrão de craft de produtos digitais Silicon 
 - 7 categorias técnicas completas: IA & Agentes, Automação & RPA, Back-End, Front-End, Bancos de Dados & Storage, Qualidade/DevOps e Métodos.
 - Filtro por busca reativa e tags de proficiência (`Avançado`, `Intermediário`, `Em expansão`).
 
-### 8. Assistente Conversacional "Pergunte ao Anderson AI" (`AiAssistantWidget.tsx` & `/api/chat`)
-- Chat conversacional inteligente integrado com streaming Server-Sent Events (SSE) via **Google Gemini Flash** no Vercel Edge Runtime.
-- **RAG Estático & Guardrails:** Grounding factual estrito na trajetória de Anderson, com defesas contra *prompt injection* e alucinações.
-- **Resiliência Local:** Motor de contingência determinístico que responde com fatos verificados instantaneamente mesmo offline ou sem chave de API.
-- Quick Prompts com 1 clique para recrutadores (FTP_SYNC -99%, squad de 9 agentes, certificação Huawei, etc.).
+### 8. Assistente Conversacional "Pergunte ao Anderson AI" (`AiAssistantWidget.tsx`, `src/lib/ai/` & `/api/chat`)
+- **Arquitetura de Machine Learning Híbrido (RAG + IR + NLG):**
+  - **Indexação Granular (`scripts/build-knowledge.mjs` → `src/data/knowledgeIndex.json`):** Extrai micro-chunks atômicos bilíngues (PT-BR e EN) a partir de `src/data/*`, com suporte a embeddings pré-calculados (`text-embedding-004` quantizados L2) e vetores locais TF-IDF + N-gramas de caracteres.
+  - **Recuperação Híbrida em Memória (`src/lib/ai/retriever.ts`):** Combina **BM25 Lexical** (cobrindo siglas como `FTP_SYNC`, `WinThor`, `HCIA-Storage`, `SHA-256`) + **Similaridade de Cosseno Semântica**, fundidos via **Reciprocal Rank Fusion (RRF)** e diversificados com **Maximal Marginal Relevance (MMR)** + resolução de correferência pronominal no histórico.
+  - **Classificador de Intenção por Centroides (`src/lib/ai/intentClassifier.ts`):** Classifica mensagens em `smalltalk`, `recrutador`, `tecnica_projeto`, `faq_portfolio`, `contato`, `fora_de_escopo` e `injecao`.
+  - **Síntese Conversacional Dinâmica (`src/lib/ai/responseSynthesizer.ts`):** Elimina "textos prontos" compondo respostas sob medida com links âncora clicáveis para as seções do portfólio (`#rpa`, `#projetos`, `#experiencia`, `#habilidades`, `#contato`) e honestidade epistêmica para tecnologias ou dados privados não listados.
+  - **Guardrails em Camadas & Fact-Checker (`src/lib/ai/guardrails.ts`):** Bloqueio de *prompt injection* na entrada e validação determinística das métricas canônicas na saída.
+  - **Suíte de 40 Evals Automatizados (`evals/dataset.json` & `scripts/run-evals.mjs`):** Integrada ao CI no GitHub Actions validando acurácia factual, 0% de alucinação, recusa correta, resistência a injection e latência p50/p95.
 
 ### 9. Progressive Web App (PWA) & Capacidade Offline (`vite-plugin-pwa`)
 - Instalação nativa como Web App no Android, iOS e Desktop.
@@ -105,56 +108,55 @@ A aplicação foi desenvolvida no padrão de craft de produtos digitais Silicon 
 ```text
 andersoncataldo.tech/
 ├── .agents/                      # Ecossistema de Agentes de IA e Governança
-├── .github/workflows/ci.yml      # CI/CD automatizado (lint + build)
+├── .github/workflows/ci.yml      # CI/CD automatizado (lint + evals + build)
+├── api/                          # Vercel Edge Functions (/api/chat.ts e /api/og.tsx)
+├── evals/
+│   └── dataset.json              # Conjunto dourado de 40 casos de teste bilíngues (PT/EN)
 ├── openspec/                     # Especificações vivas (Spec-Driven Development)
+├── prompts/anderson-ai/          # Prompts de sistema versionados (v1.md, v2.md, evals.json)
 ├── public/                       # Assets públicos (favicon, og-image, sitemap)
-├── scripts/                      # Scripts utilitários de engenharia (contrast.js)
+├── scripts/                      # Scripts de engenharia (build-knowledge.mjs, run-evals.mjs, contrast.js)
 ├── src/
 │   ├── assets/                   # Previews, fotos e currículos em PDF (PT e EN)
-│   ├── components/               # Componentes modulares UI
-│   │   ├── About.tsx             # Trajetória, formação e pilares profissionais
-│   │   ├── Automation.tsx        # Seção de RPA e simulador de ROI
-│   │   ├── CommandPalette.tsx    # Command Palette global (Ctrl+K)
-│   │   ├── Contact.tsx           # Canais de contato direto
-│   │   ├── CopyEmail.tsx         # Cópia de e-mail com toast
-│   │   ├── DevConsole.tsx        # Terminal CLI interativo executável + abas JSON
-│   │   ├── ErrorBoundary.tsx     # Tratamento resiliente de falhas
-│   │   ├── Experience.tsx        # Linha do tempo profissional e certificações
-│   │   ├── Footer.tsx            # Rodapé institucional
-│   │   ├── Hero.tsx              # Apresentação e chamada de ação
-│   │   ├── PipelineVisualizer.tsx# Visualizador interativo do fluxo RPA
-│   │   ├── ProjectModal.tsx      # Modal de projeto com navegação contínua
-│   │   ├── Projects.tsx          # Vitrine de projetos filtrável
-│   │   ├── RpaRoiCalculator.tsx  # Simulador interativo de ROI de automação
-│   │   ├── ScrollProgress.tsx    # Barra de progresso de leitura no topo
-│   │   ├── Sidebar.tsx           # Sidebar responsiva com acionador de comandos
-│   │   └── Skills.tsx            # Catálogo e busca de competências
+│   ├── components/               # Componentes modulares UI (incluindo AiAssistantWidget.tsx)
 │   ├── config/links.ts           # Links oficiais e dados de contato
 │   ├── context/LanguageContext.tsx# Provedor de idioma (PT/EN)
-│   ├── data/                     # Camada centralizada de dados tipados
+│   ├── data/                     # Camada centralizada de dados tipados + knowledgeIndex.json
 │   ├── i18n/translations.ts      # Dicionário de traduções bilíngue estrito
+│   ├── lib/ai/                   # Motor ML Híbrido (intentClassifier, retriever, responseSynthesizer, guardrails)
 │   └── styles/index.css          # Tokens Tailwind v4 e temas
 ```
 
 ---
 
-## 🚀 Como Executar Localmente
+## 🚀 Como Executar Localmente, Regenerar o Índice e Rodar Evals
 
 ```bash
-# 1. Clonar o repositório
+# 1. Clonar o repositório e instalar dependências
 git clone https://github.com/andersoncataldo/andersoncataldo.tech.git
 cd andersoncataldo.tech
-
-# 2. Instalar dependências
 npm install
 
-# 3. Iniciar servidor de desenvolvimento
+# 2. Iniciar servidor de desenvolvimento (inclui middleware local para /api/chat)
 npm run dev
 
-# 4. Executar build de produção e linter
+# 3. Regenerar o índice de conhecimento (src/data/knowledgeIndex.json)
+#    Se GEMINI_API_KEY estiver definida no ambiente, pré-calcula embeddings text-embedding-004
+npm run build:knowledge
+
+# 4. Executar a suíte de 40 Evals de IA (modo determinístico para CI, sem precisar de chave)
+npm run evals
+
+# 5. Executar Evals contra a API real do Gemini (requer GEMINI_API_KEY definida)
+GEMINI_API_KEY="sua_chave" npm run evals:live
+
+# 6. Executar linter e build de produção
 npm run lint
 npm run build
 ```
+
+### Variáveis de Ambiente (Opcional)
+- `GEMINI_API_KEY`: Chave server-side da Google Gemini API (configurada exclusivamente nas variáveis de ambiente da Vercel ou no shell local; **nunca** exposta ao front-end com prefixo `VITE_`). Sem ela, o assistente opera integralmente através do motor de Machine Learning Híbrido local (`BM25 + Cosine Similarity + RRF + MMR + Dynamic NLG`).
 
 ---
 
