@@ -7,6 +7,13 @@ import {
   type ChatMessageItem,
   type SupportedLanguage,
 } from '../src/lib/ai';
+import {
+  computeQueryHash,
+  generateTraceId,
+  logAiTelemetryNonBlocking,
+  lookupAnswerCacheL2,
+  upsertAnswerCacheL2,
+} from '../src/lib/supabase/restClient';
 
 export const config = {
   runtime: 'edge',
@@ -17,11 +24,11 @@ declare const process: { env?: Record<string, string | undefined> } | undefined;
 interface RequestPayload {
   messages: unknown;
   lang?: unknown;
+  sessionId?: unknown;
 }
 
 /**
  * Rate limiter best-effort em memória por isolate Edge (15 req / 60s por IP).
- * Limitação conhecida do Edge sem banco de dados: o estado é local à instância V8 Isolate ativa.
  */
 const RATE_LIMIT_WINDOW_MS = 60_000;
 const RATE_LIMIT_MAX_REQUESTS = 15;
@@ -45,35 +52,35 @@ function checkRateLimit(ip: string): boolean {
 }
 
 /**
- * Cache Semântico LRU em memória por instância Edge (máx. 60 entradas, TTL 10 min)
+ * Cache de Respostas L1 LRU em memória por instância Edge (máx. 60 entradas, TTL 10 min)
  */
-const SEMANTIC_CACHE_MAX = 60;
-const SEMANTIC_CACHE_TTL_MS = 10 * 60_000;
-const semanticCache = new Map<string, { reply: string; mode: 'gemini' | 'offline'; expiresAt: number }>();
+const ANSWER_CACHE_MAX = 60;
+const ANSWER_CACHE_TTL_MS = 10 * 60_000;
+const answerCache = new Map<string, { reply: string; mode: 'gemini' | 'offline'; expiresAt: number }>();
 
 function getCacheKey(lang: SupportedLanguage, aspect: string, resolvedQuery: string): string {
   return `${lang}:${aspect}:${normalizeText(resolvedQuery)}`;
 }
 
 function getCachedReply(key: string): { reply: string; mode: 'gemini' | 'offline' } | null {
-  const entry = semanticCache.get(key);
+  const entry = answerCache.get(key);
   if (!entry) return null;
   if (Date.now() > entry.expiresAt) {
-    semanticCache.delete(key);
+    answerCache.delete(key);
     return null;
   }
   return { reply: entry.reply, mode: entry.mode };
 }
 
 function setCachedReply(key: string, reply: string, mode: 'gemini' | 'offline'): void {
-  if (semanticCache.size >= SEMANTIC_CACHE_MAX) {
-    const oldestKey = semanticCache.keys().next().value;
-    if (oldestKey) semanticCache.delete(oldestKey);
+  if (answerCache.size >= ANSWER_CACHE_MAX) {
+    const oldestKey = answerCache.keys().next().value;
+    if (oldestKey) answerCache.delete(oldestKey);
   }
-  semanticCache.set(key, {
+  answerCache.set(key, {
     reply,
     mode,
-    expiresAt: Date.now() + SEMANTIC_CACHE_TTL_MS,
+    expiresAt: Date.now() + ANSWER_CACHE_TTL_MS,
   });
 }
 
@@ -108,6 +115,9 @@ async function fetchWithRetry(
 }
 
 export default async function handler(req: Request): Promise<Response> {
+  const startedAt = Date.now();
+  const traceId = generateTraceId();
+
   if (req.method !== 'POST') {
     return new Response(
       JSON.stringify({
@@ -167,6 +177,10 @@ export default async function handler(req: Request): Promise<Response> {
   }
 
   const lang: SupportedLanguage = payload.lang === 'en' ? 'en' : 'pt';
+  const sessionId =
+    typeof payload.sessionId === 'string' && payload.sessionId.trim().length > 0
+      ? payload.sessionId.trim().slice(0, 80)
+      : 'anonymous';
 
   const sanitizedMessages: ChatMessageItem[] = payload.messages
     .slice(-6)
@@ -200,7 +214,26 @@ export default async function handler(req: Request): Promise<Response> {
   const guardIn = validateInputGuardrails(lastUserMessage);
   if (!guardIn.allowed) {
     const localResult = synthesizeConversationalResponse(lastUserMessage, lang, historyBeforeLast);
-    return createStreamResponse(localResult.reply, 'offline', 'input_guardrail');
+    void logAiTelemetryNonBlocking({
+      traceId,
+      sessionId,
+      locale: lang,
+      originalQuery: lastUserMessage,
+      rewrittenQuery: guardIn.sanitizedQuery || lastUserMessage,
+      intent: localResult.intent.intent,
+      aspect: localResult.intent.aspect,
+      cragStatus: 'insufficient',
+      confidence: localResult.intent.confidence,
+      isMultiPart: false,
+      needsClarification: false,
+      usedLlm: false,
+      cacheHit: false,
+      coveRepaired: false,
+      topChunkIds: [],
+      citations: [],
+      latencyMs: Date.now() - startedAt,
+    });
+    return createStreamResponse(localResult.reply, 'offline', 'input_guardrail', traceId);
   }
 
   // 2. Classificação de intenção e pipeline de raciocínio em 5 etapas (Rewrite + Ambiguity + Decompose + Hybrid CRAG)
@@ -209,8 +242,9 @@ export default async function handler(req: Request): Promise<Response> {
     lang,
     historyBeforeLast,
   );
+  const topChunkIds = retrieval.topChunks.map((c) => c.chunk.id);
 
-  // 3. Intenções ou estados CRAG que não precisam gastar chamada ao LLM (injecao, fora_de_escopo, smalltalk, ambígua, CRAG parcial/insuficiente)
+  // 3. Intenções ou estados CRAG determinísticos (injecao, fora_de_escopo, smalltalk, ambígua, CRAG parcial/insuficiente)
   if (
     intent.intent === 'injecao' ||
     intent.intent === 'fora_de_escopo' ||
@@ -221,19 +255,87 @@ export default async function handler(req: Request): Promise<Response> {
     intent.detectedUnlistedTech.length > 0
   ) {
     const direct = synthesizeConversationalResponse(guardIn.sanitizedQuery, lang, historyBeforeLast);
-    return createStreamResponse(direct.reply, 'offline', `direct_intent_${intent.intent}`);
+    void logAiTelemetryNonBlocking({
+      traceId,
+      sessionId,
+      locale: lang,
+      originalQuery: guardIn.sanitizedQuery,
+      rewrittenQuery: plan.rewrittenQuery,
+      intent: intent.intent,
+      aspect: intent.aspect,
+      cragStatus: plan.cragStatus,
+      confidence: retrieval.maxConfidence,
+      isMultiPart: plan.isMultiPart,
+      needsClarification: plan.isAmbiguous,
+      usedLlm: false,
+      cacheHit: false,
+      coveRepaired: direct.coveRepaired,
+      topChunkIds,
+      citations: direct.citations,
+      latencyMs: Date.now() - startedAt,
+    });
+    return createStreamResponse(direct.reply, 'offline', `direct_intent_${intent.intent}`, traceId);
   }
 
-  // 4. Consulta ao Cache Semântico LRU (ignora cache se a mesma resposta já apareceu na conversa atual)
+  // 4. Consulta ao Cache de Respostas L1 (em memória) e L2 (Supabase PostgreSQL com timeout de 350ms)
   const cacheKey = getCacheKey(lang, intent.aspect, retrieval.resolvedQuery);
-  const cached = getCachedReply(cacheKey);
+  const queryHash = computeQueryHash(lang, intent.aspect, normalizeText(retrieval.resolvedQuery));
   const recentAssistantTexts = historyBeforeLast
     .filter((m) => m.role === 'assistant')
     .slice(-2)
     .map((m) => m.content)
     .join('\n');
-  if (cached && (!recentAssistantTexts || !recentAssistantTexts.includes(cached.reply.slice(0, 60)))) {
-    return createStreamResponse(cached.reply, cached.mode, 'semantic_cache_hit');
+
+  const cachedL1 = getCachedReply(cacheKey);
+  if (cachedL1 && (!recentAssistantTexts || !recentAssistantTexts.includes(cachedL1.reply.slice(0, 60)))) {
+    void logAiTelemetryNonBlocking({
+      traceId,
+      sessionId,
+      locale: lang,
+      originalQuery: guardIn.sanitizedQuery,
+      rewrittenQuery: plan.rewrittenQuery,
+      intent: intent.intent,
+      aspect: intent.aspect,
+      cragStatus: plan.cragStatus,
+      confidence: retrieval.maxConfidence,
+      isMultiPart: plan.isMultiPart,
+      needsClarification: false,
+      usedLlm: cachedL1.mode === 'gemini',
+      cacheHit: true,
+      coveRepaired: false,
+      topChunkIds,
+      citations: [],
+      latencyMs: Date.now() - startedAt,
+    });
+    return createStreamResponse(cachedL1.reply, cachedL1.mode, 'answer_cache_l1_hit', traceId);
+  }
+
+  const cachedL2 = await lookupAnswerCacheL2(queryHash, lang, 350);
+  if (
+    cachedL2 &&
+    (!recentAssistantTexts || !recentAssistantTexts.includes(cachedL2.responseText.slice(0, 60)))
+  ) {
+    setCachedReply(cacheKey, cachedL2.responseText, 'gemini');
+    void logAiTelemetryNonBlocking({
+      traceId,
+      sessionId,
+      locale: lang,
+      originalQuery: guardIn.sanitizedQuery,
+      rewrittenQuery: plan.rewrittenQuery,
+      intent: intent.intent,
+      aspect: intent.aspect,
+      cragStatus: plan.cragStatus,
+      confidence: retrieval.maxConfidence,
+      isMultiPart: plan.isMultiPart,
+      needsClarification: false,
+      usedLlm: true,
+      cacheHit: true,
+      coveRepaired: false,
+      topChunkIds,
+      citations: cachedL2.citations,
+      latencyMs: Date.now() - startedAt,
+    });
+    return createStreamResponse(cachedL2.responseText, 'gemini', 'answer_cache_l2_hit', traceId);
   }
 
   const apiKey = typeof process !== 'undefined' ? process?.env?.GEMINI_API_KEY : undefined;
@@ -246,7 +348,38 @@ export default async function handler(req: Request): Promise<Response> {
       historyBeforeLast,
     );
     setCachedReply(cacheKey, synthesized.reply, 'offline');
-    return createStreamResponse(synthesized.reply, 'offline', 'hybrid_ml_local');
+    if (plan.cragStatus === 'sufficient') {
+      void upsertAnswerCacheL2({
+        queryHash,
+        locale: lang,
+        normalizedQuery: normalizeText(retrieval.resolvedQuery),
+        intent: intent.intent,
+        aspect: intent.aspect,
+        cragStatus: 'sufficient',
+        responseText: synthesized.reply,
+        citations: synthesized.citations,
+      });
+    }
+    void logAiTelemetryNonBlocking({
+      traceId,
+      sessionId,
+      locale: lang,
+      originalQuery: guardIn.sanitizedQuery,
+      rewrittenQuery: plan.rewrittenQuery,
+      intent: intent.intent,
+      aspect: intent.aspect,
+      cragStatus: plan.cragStatus,
+      confidence: retrieval.maxConfidence,
+      isMultiPart: plan.isMultiPart,
+      needsClarification: false,
+      usedLlm: false,
+      cacheHit: false,
+      coveRepaired: synthesized.coveRepaired,
+      topChunkIds,
+      citations: synthesized.citations,
+      latencyMs: Date.now() - startedAt,
+    });
+    return createStreamResponse(synthesized.reply, 'offline', 'hybrid_ml_local', traceId);
   }
 
   // 6. Geração Fundamentada com Google Gemini 2.5 Flash recebendo apenas os top-k chunks recuperados
@@ -277,31 +410,65 @@ export default async function handler(req: Request): Promise<Response> {
       })),
     ];
 
-    const geminiUrl = `https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-flash:streamGenerateContent?key=${apiKey}&alt=sse`;
+    const geminiModels = ['gemini-2.5-flash', 'gemini-2.5-flash-lite'] as const;
+    let geminiRes: Response | null = null;
+    let usedModel: (typeof geminiModels)[number] = 'gemini-2.5-flash';
 
-    const geminiRes = await fetchWithRetry(geminiUrl, {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({
-        contents,
-        generationConfig: {
-          temperature: 0.2,
-          maxOutputTokens: plan.recommendedThinkingBudget > 0 ? 800 : 450,
-          thinkingConfig: {
-            thinkingBudget: plan.recommendedThinkingBudget,
-            includeThoughts: false,
+    for (const modelName of geminiModels) {
+      const geminiUrl = `https://generativelanguage.googleapis.com/v1beta/models/${modelName}:streamGenerateContent?key=${apiKey}&alt=sse`;
+      const candidateRes = await fetchWithRetry(geminiUrl, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          contents,
+          generationConfig: {
+            temperature: 0.2,
+            maxOutputTokens: plan.recommendedThinkingBudget > 0 ? 800 : 450,
+            ...(modelName === 'gemini-2.5-flash'
+              ? {
+                  thinkingConfig: {
+                    thinkingBudget: plan.recommendedThinkingBudget,
+                    includeThoughts: false,
+                  },
+                }
+              : {}),
           },
-        },
-      }),
-    });
+        }),
+      });
+      if (candidateRes.ok && candidateRes.body) {
+        geminiRes = candidateRes;
+        usedModel = modelName;
+        break;
+      }
+      geminiRes = candidateRes;
+    }
 
-    if (!geminiRes.ok || !geminiRes.body) {
+    if (!geminiRes || !geminiRes.ok || !geminiRes.body) {
       const fallback = synthesizeConversationalResponse(
         guardIn.sanitizedQuery,
         lang,
         historyBeforeLast,
       );
-      return createStreamResponse(fallback.reply, 'offline', 'fallback_upstream_error');
+      void logAiTelemetryNonBlocking({
+        traceId,
+        sessionId,
+        locale: lang,
+        originalQuery: guardIn.sanitizedQuery,
+        rewrittenQuery: plan.rewrittenQuery,
+        intent: intent.intent,
+        aspect: intent.aspect,
+        cragStatus: plan.cragStatus,
+        confidence: retrieval.maxConfidence,
+        isMultiPart: plan.isMultiPart,
+        needsClarification: false,
+        usedLlm: false,
+        cacheHit: false,
+        coveRepaired: false,
+        topChunkIds,
+        citations: fallback.citations,
+        latencyMs: Date.now() - startedAt,
+      });
+      return createStreamResponse(fallback.reply, 'offline', 'fallback_upstream_error', traceId);
     }
 
     const transformStream = new TransformStream();
@@ -313,7 +480,22 @@ export default async function handler(req: Request): Promise<Response> {
     (async () => {
       let buffer = '';
       let fullAccumulated = '';
+      let anyCoveRepair = false;
       try {
+        const effectiveThinkingBudget =
+          usedModel === 'gemini-2.5-flash' ? plan.recommendedThinkingBudget : 0;
+        await writer.write(
+          encoder.encode(
+            `data: ${JSON.stringify({
+              mode: 'gemini',
+              reason: 'gemini_stream',
+              traceId,
+              model: usedModel,
+              thinkingBudget: effectiveThinkingBudget,
+            })}\n\n`,
+          ),
+        );
+
         while (true) {
           const { done, value } = await reader.read();
           if (done) break;
@@ -336,9 +518,12 @@ export default async function handler(req: Request): Promise<Response> {
                   .join('');
                 if (textPart.length > 0) {
                   fullAccumulated += textPart;
-                  const checkedPart = verifyOutputMetrics(textPart, lang).sanitizedText;
+                  const metricCheck = verifyOutputMetrics(textPart, lang);
+                  if (!metricCheck.valid) anyCoveRepair = true;
                   await writer.write(
-                    encoder.encode(`data: ${JSON.stringify({ text: checkedPart, mode: 'gemini' })}\n\n`),
+                    encoder.encode(
+                      `data: ${JSON.stringify({ text: metricCheck.sanitizedText, mode: 'gemini', traceId })}\n\n`,
+                    ),
                   );
                 }
               } catch {
@@ -355,14 +540,68 @@ export default async function handler(req: Request): Promise<Response> {
             historyBeforeLast,
           );
           await writer.write(
-            encoder.encode(`data: ${JSON.stringify({ text: fallback.reply, mode: 'offline' })}\n\n`),
+            encoder.encode(
+              `data: ${JSON.stringify({ text: fallback.reply, mode: 'offline', traceId })}\n\n`,
+            ),
           );
+          void logAiTelemetryNonBlocking({
+            traceId,
+            sessionId,
+            locale: lang,
+            originalQuery: guardIn.sanitizedQuery,
+            rewrittenQuery: plan.rewrittenQuery,
+            intent: intent.intent,
+            aspect: intent.aspect,
+            cragStatus: plan.cragStatus,
+            confidence: retrieval.maxConfidence,
+            isMultiPart: plan.isMultiPart,
+            needsClarification: false,
+            usedLlm: false,
+            cacheHit: false,
+            coveRepaired: false,
+            topChunkIds,
+            citations: fallback.citations,
+            latencyMs: Date.now() - startedAt,
+          });
         } else {
-          const verifiedFull = verifyOutputMetrics(fullAccumulated, lang).sanitizedText;
+          const fullCheck = verifyOutputMetrics(fullAccumulated, lang);
+          if (!fullCheck.valid) anyCoveRepair = true;
+          const verifiedFull = fullCheck.sanitizedText;
           setCachedReply(cacheKey, verifiedFull, 'gemini');
+          if (plan.cragStatus === 'sufficient') {
+            void upsertAnswerCacheL2({
+              queryHash,
+              locale: lang,
+              normalizedQuery: normalizeText(retrieval.resolvedQuery),
+              intent: intent.intent,
+              aspect: intent.aspect,
+              cragStatus: 'sufficient',
+              responseText: verifiedFull,
+              citations: Array.from(new Set(retrieval.topChunks.map((c) => c.chunk.sectionAnchor))),
+            });
+          }
+          void logAiTelemetryNonBlocking({
+            traceId,
+            sessionId,
+            locale: lang,
+            originalQuery: guardIn.sanitizedQuery,
+            rewrittenQuery: plan.rewrittenQuery,
+            intent: intent.intent,
+            aspect: intent.aspect,
+            cragStatus: plan.cragStatus,
+            confidence: retrieval.maxConfidence,
+            isMultiPart: plan.isMultiPart,
+            needsClarification: false,
+            usedLlm: true,
+            cacheHit: false,
+            coveRepaired: anyCoveRepair,
+            topChunkIds,
+            citations: Array.from(new Set(retrieval.topChunks.map((c) => c.chunk.sectionAnchor))),
+            latencyMs: Date.now() - startedAt,
+          });
         }
       } catch {
-        // Em caso de interrupção de stream, encerra graciosamente sem expor stacktrace ou logar dados pessoais
+        // Em caso de interrupção de stream, encerra graciosamente sem expor stacktrace
       } finally {
         try {
           await writer.write(encoder.encode('data: [DONE]\n\n'));
@@ -386,7 +625,26 @@ export default async function handler(req: Request): Promise<Response> {
       lang,
       historyBeforeLast,
     );
-    return createStreamResponse(fallback.reply, 'offline', 'fallback_exception');
+    void logAiTelemetryNonBlocking({
+      traceId,
+      sessionId,
+      locale: lang,
+      originalQuery: guardIn.sanitizedQuery,
+      rewrittenQuery: plan.rewrittenQuery,
+      intent: intent.intent,
+      aspect: intent.aspect,
+      cragStatus: plan.cragStatus,
+      confidence: retrieval.maxConfidence,
+      isMultiPart: plan.isMultiPart,
+      needsClarification: false,
+      usedLlm: false,
+      cacheHit: false,
+      coveRepaired: false,
+      topChunkIds,
+      citations: fallback.citations,
+      latencyMs: Date.now() - startedAt,
+    });
+    return createStreamResponse(fallback.reply, 'offline', 'fallback_exception', traceId);
   }
 }
 
@@ -394,16 +652,17 @@ function createStreamResponse(
   text: string,
   mode: 'gemini' | 'offline',
   reason: string,
+  traceId: string,
 ): Response {
   const encoder = new TextEncoder();
   const readable = new ReadableStream({
     start(controller) {
-      controller.enqueue(encoder.encode(`data: ${JSON.stringify({ mode, reason })}\n\n`));
+      controller.enqueue(encoder.encode(`data: ${JSON.stringify({ mode, reason, traceId })}\n\n`));
 
       const words = text.split(' ');
       for (let i = 0; i < words.length; i += 4) {
         const chunk = words.slice(i, i + 4).join(' ') + (i + 4 < words.length ? ' ' : '');
-        controller.enqueue(encoder.encode(`data: ${JSON.stringify({ text: chunk, mode })}\n\n`));
+        controller.enqueue(encoder.encode(`data: ${JSON.stringify({ text: chunk, mode, traceId })}\n\n`));
       }
 
       controller.enqueue(encoder.encode('data: [DONE]\n\n'));

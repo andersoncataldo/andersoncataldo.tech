@@ -1,14 +1,31 @@
 import React, { useState, useRef, useEffect } from 'react';
 import { motion, AnimatePresence, useReducedMotion } from 'framer-motion';
-import { Bot, Sparkles, X, Send, Trash2, ArrowRight, CornerDownLeft, ShieldCheck } from 'lucide-react';
+import {
+  Bot,
+  Sparkles,
+  X,
+  Send,
+  Trash2,
+  CornerDownLeft,
+  ShieldCheck,
+  ThumbsUp,
+  ThumbsDown,
+  Briefcase,
+  Check,
+  Copy,
+  Square,
+} from 'lucide-react';
 import { useLanguage } from '../context/LanguageContext';
 import { QUICK_PROMPTS, queryOfflineKnowledge } from '../data/aiKnowledge';
+import { LeadForm } from './ai/LeadForm';
 
 interface Message {
   id: string;
   role: 'user' | 'assistant';
   content: string;
   mode?: 'gemini' | 'offline';
+  traceId?: string;
+  feedback?: 'up' | 'down' | null;
 }
 
 function getWelcomeText(lang: 'pt' | 'en'): string {
@@ -123,12 +140,17 @@ function renderFormattedContent(content: string): React.ReactNode {
   );
 }
 
-export const AiAssistantWidget: React.FC = () => {
+interface AiAssistantWidgetProps {
+  initialOpen?: boolean;
+}
+
+export const AiAssistantWidget: React.FC<AiAssistantWidgetProps> = ({ initialOpen = false }) => {
   const { language } = useLanguage();
   const shouldReduceMotion = useReducedMotion();
-  const [isOpen, setIsOpen] = useState(false);
+  const [isOpen, setIsOpen] = useState(initialOpen);
   const [inputMessage, setInputMessage] = useState('');
   const [isStreaming, setIsStreaming] = useState(false);
+  const [copiedId, setCopiedId] = useState<string | null>(null);
   const [messages, setMessages] = useState<Message[]>(() => [
     {
       id: 'welcome',
@@ -139,6 +161,13 @@ export const AiAssistantWidget: React.FC = () => {
   ]);
   const messagesEndRef = useRef<HTMLDivElement>(null);
   const inputRef = useRef<HTMLInputElement>(null);
+  const dialogRef = useRef<HTMLElement>(null);
+  const triggerRef = useRef<HTMLButtonElement>(null);
+  const abortControllerRef = useRef<AbortController | null>(null);
+  const sessionIdRef = useRef<string>(
+    `ses_${Date.now().toString(36)}_${Math.random().toString(36).slice(2, 8)}`,
+  );
+  const [showLeadForm, setShowLeadForm] = useState(false);
 
   // Atualizar mensagem de boas-vindas ao alternar idioma caso nenhuma pergunta tenha sido enviada
   useEffect(() => {
@@ -175,13 +204,34 @@ export const AiAssistantWidget: React.FC = () => {
     return () => window.removeEventListener('open-anderson-ai', handleOpenAi);
   }, []);
 
-  // Fechar com Escape
+  // Fechar com Escape e prender foco (focus trap) dentro do diálogo
   useEffect(() => {
+    if (!isOpen) return;
+
     const handleKeyDown = (e: KeyboardEvent) => {
-      if (e.key === 'Escape' && isOpen) {
+      if (e.key === 'Escape') {
         setIsOpen(false);
+        setTimeout(() => triggerRef.current?.focus(), 0);
+        return;
+      }
+
+      if (e.key === 'Tab' && dialogRef.current) {
+        const focusables = dialogRef.current.querySelectorAll<HTMLElement>(
+          'button:not([disabled]), [href], input:not([disabled]), textarea:not([disabled]), select:not([disabled]), [tabindex]:not([tabindex="-1"])',
+        );
+        if (focusables.length === 0) return;
+        const first = focusables[0];
+        const last = focusables[focusables.length - 1];
+        if (e.shiftKey && document.activeElement === first) {
+          e.preventDefault();
+          last.focus();
+        } else if (!e.shiftKey && document.activeElement === last) {
+          e.preventDefault();
+          first.focus();
+        }
       }
     };
+
     window.addEventListener('keydown', handleKeyDown);
     return () => window.removeEventListener('keydown', handleKeyDown);
   }, [isOpen]);
@@ -209,16 +259,21 @@ export const AiAssistantWidget: React.FC = () => {
     setMessages((prev) => [...prev, userMessage, initialAssistantMessage]);
     setIsStreaming(true);
 
+    const controller = new AbortController();
+    abortControllerRef.current = controller;
+
     try {
       const response = await fetch('/api/chat', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
+        signal: controller.signal,
         body: JSON.stringify({
           messages: [...messages, userMessage].map((m) => ({
             role: m.role,
             content: m.content,
           })),
           lang: language,
+          sessionId: sessionIdRef.current,
         }),
       });
 
@@ -246,9 +301,19 @@ export const AiAssistantWidget: React.FC = () => {
             const dataStr = line.slice(6).trim();
             if (dataStr === '[DONE]') continue;
             try {
-              const parsed = JSON.parse(dataStr) as { text?: string; mode?: string };
+              const parsed = JSON.parse(dataStr) as {
+                text?: string;
+                mode?: string;
+                traceId?: string;
+              };
               if (parsed.mode === 'offline') {
                 detectedMode = 'offline';
+              }
+              if (parsed.traceId) {
+                const traceId = parsed.traceId;
+                setMessages((prev) =>
+                  prev.map((msg) => (msg.id === assistantId ? { ...msg, traceId } : msg)),
+                );
               }
               if (parsed.text) {
                 accumulated += parsed.text;
@@ -270,7 +335,10 @@ export const AiAssistantWidget: React.FC = () => {
       if (!accumulated.trim()) {
         throw new Error('Empty stream response');
       }
-    } catch {
+    } catch (err) {
+      if (err instanceof DOMException && err.name === 'AbortError') {
+        return;
+      }
       // Fallback com motor ML Híbrido (BM25 + Cosine Similarity + RRF + MMR + Síntese Conversacional)
       const historyPayload = messages
         .filter((m) => !m.id.startsWith('welcome'))
@@ -284,7 +352,24 @@ export const AiAssistantWidget: React.FC = () => {
         ),
       );
     } finally {
+      abortControllerRef.current = null;
       setIsStreaming(false);
+    }
+  };
+
+  const handleStopStreaming = () => {
+    abortControllerRef.current?.abort();
+  };
+
+  const handleCopyMessage = async (messageId: string, content: string) => {
+    try {
+      await navigator.clipboard.writeText(content);
+      setCopiedId(messageId);
+      setTimeout(() => {
+        setCopiedId((prev) => (prev === messageId ? null : prev));
+      }, 2000);
+    } catch {
+      // Clipboard indisponível no contexto
     }
   };
 
@@ -299,11 +384,24 @@ export const AiAssistantWidget: React.FC = () => {
     ]);
   };
 
+  const handleFeedback = (messageId: string, traceId: string, helpful: boolean) => {
+    const rating: 'up' | 'down' = helpful ? 'up' : 'down';
+    setMessages((prev) =>
+      prev.map((msg) => (msg.id === messageId ? { ...msg, feedback: rating } : msg)),
+    );
+    void fetch('/api/feedback', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ traceId, helpful }),
+    }).catch(() => undefined);
+  };
+
   return (
     <>
       {/* Botão Flutuante (Trigger) */}
       <div className="fixed bottom-6 right-6 z-40">
         <motion.button
+          ref={triggerRef}
           type="button"
           onClick={() => setIsOpen((prev) => !prev)}
           whileHover={shouldReduceMotion ? {} : { scale: 1.05 }}
@@ -331,12 +429,14 @@ export const AiAssistantWidget: React.FC = () => {
       <AnimatePresence>
         {isOpen && (
           <motion.aside
+            ref={dialogRef}
             initial={shouldReduceMotion ? { opacity: 1 } : { opacity: 0, y: 20, scale: 0.95 }}
             animate={shouldReduceMotion ? { opacity: 1 } : { opacity: 1, y: 0, scale: 1 }}
             exit={shouldReduceMotion ? { opacity: 0 } : { opacity: 0, y: 20, scale: 0.95 }}
             transition={{ duration: 0.2 }}
             className="fixed bottom-24 right-4 sm:right-6 z-50 w-[calc(100vw-2rem)] sm:w-[420px] max-h-[80vh] h-[560px] flex flex-col rounded-2xl bg-white/95 dark:bg-slate-900/95 backdrop-blur-xl border border-slate-200 dark:border-slate-800 shadow-2xl shadow-indigo-950/40 overflow-hidden"
             role="dialog"
+            aria-modal="true"
             aria-label="Assistente Virtual Anderson AI"
           >
             {/* Header */}
@@ -369,10 +469,24 @@ export const AiAssistantWidget: React.FC = () => {
               <div className="flex items-center gap-1">
                 <button
                   type="button"
+                  onClick={() => setShowLeadForm((prev) => !prev)}
+                  title={language === 'en' ? 'Send recruiter contact' : 'Enviar contato de recrutamento'}
+                  aria-label={language === 'en' ? 'Send recruiter contact' : 'Enviar contato de recrutamento'}
+                  aria-expanded={showLeadForm}
+                  className={`p-1.5 rounded-lg transition focus:outline-none focus-visible:ring-2 focus-visible:ring-indigo-400 ${
+                    showLeadForm
+                      ? 'bg-indigo-100 dark:bg-indigo-900/60 text-indigo-700 dark:text-indigo-300'
+                      : 'text-slate-400 hover:text-indigo-600 dark:hover:text-indigo-300 hover:bg-slate-100 dark:hover:bg-slate-800'
+                  }`}
+                >
+                  <Briefcase className="w-4 h-4" />
+                </button>
+                <button
+                  type="button"
                   onClick={handleClearHistory}
                   title={language === 'en' ? 'Clear conversation' : 'Limpar conversa'}
                   aria-label={language === 'en' ? 'Clear conversation' : 'Limpar conversa'}
-                  className="p-1.5 rounded-lg text-slate-400 hover:text-slate-700 dark:hover:text-slate-200 hover:bg-slate-100 dark:hover:bg-slate-800 transition"
+                  className="p-1.5 rounded-lg text-slate-400 hover:text-slate-700 dark:hover:text-slate-200 hover:bg-slate-100 dark:hover:bg-slate-800 transition focus:outline-none focus-visible:ring-2 focus-visible:ring-indigo-400"
                 >
                   <Trash2 className="w-4 h-4" />
                 </button>
@@ -381,12 +495,21 @@ export const AiAssistantWidget: React.FC = () => {
                   onClick={() => setIsOpen(false)}
                   title={language === 'en' ? 'Close chat' : 'Fechar chat'}
                   aria-label={language === 'en' ? 'Close chat' : 'Fechar chat'}
-                  className="p-1.5 rounded-lg text-slate-400 hover:text-slate-700 dark:hover:text-slate-200 hover:bg-slate-100 dark:hover:bg-slate-800 transition"
+                  className="p-1.5 rounded-lg text-slate-400 hover:text-slate-700 dark:hover:text-slate-200 hover:bg-slate-100 dark:hover:bg-slate-800 transition focus:outline-none focus-visible:ring-2 focus-visible:ring-indigo-400"
                 >
                   <X className="w-4 h-4" />
                 </button>
               </div>
             </div>
+
+            {/* Painel Inline de Contato de Recrutadores / Leads */}
+            {showLeadForm && (
+              <LeadForm
+                language={language}
+                traceId={[...messages].reverse().find((m) => m.traceId)?.traceId}
+                onClose={() => setShowLeadForm(false)}
+              />
+            )}
 
             {/* Quick Prompts (Sugestões Rápidas para Recrutadores) */}
             <div className="px-3 py-2 bg-slate-50/50 dark:bg-slate-950/40 border-b border-slate-100 dark:border-slate-800 flex items-center gap-1.5 overflow-x-auto no-scrollbar">
@@ -440,10 +563,70 @@ export const AiAssistantWidget: React.FC = () => {
                   {msg.role === 'assistant' && msg.mode === 'offline' && (
                     <span className="text-[10px] text-amber-600 dark:text-amber-400 mt-1 flex items-center gap-1 font-mono">
                       <span>
-                        • {language === 'en' ? 'Verified Local Knowledge Base' : 'Base Factual Verificada'}
+                        •{' '}
+                        {language === 'en'
+                          ? 'Offline mode (verified local base — generative AI unavailable)'
+                          : 'Modo offline (base local verificada — IA generativa indisponível)'}
                       </span>
                     </span>
                   )}
+
+                  {msg.role === 'assistant' &&
+                    !msg.id.startsWith('welcome') &&
+                    msg.content &&
+                    !isStreaming && (
+                      <div className="mt-1 flex items-center gap-1.5 text-[11px] text-slate-400">
+                        <button
+                          type="button"
+                          onClick={() => handleCopyMessage(msg.id, msg.content)}
+                          aria-label={language === 'en' ? 'Copy response' : 'Copiar resposta'}
+                          title={language === 'en' ? 'Copy response' : 'Copiar resposta'}
+                          className="p-1 rounded hover:bg-slate-100 dark:hover:bg-slate-800 text-slate-400 hover:text-slate-600 dark:hover:text-slate-200 transition focus:outline-none focus-visible:ring-2 focus-visible:ring-indigo-400"
+                        >
+                          {copiedId === msg.id ? (
+                            <Check className="w-3.5 h-3.5 text-emerald-500" />
+                          ) : (
+                            <Copy className="w-3.5 h-3.5" />
+                          )}
+                        </button>
+                        {msg.traceId && (
+                          <>
+                            <button
+                              type="button"
+                              onClick={() => handleFeedback(msg.id, msg.traceId!, true)}
+                              aria-label={language === 'en' ? 'Helpful response' : 'Resposta útil'}
+                              aria-pressed={msg.feedback === 'up'}
+                              className={`p-1 rounded hover:bg-slate-100 dark:hover:bg-slate-800 transition focus:outline-none focus-visible:ring-2 focus-visible:ring-indigo-400 ${
+                                msg.feedback === 'up'
+                                  ? 'text-emerald-600 dark:text-emerald-400'
+                                  : 'text-slate-400 hover:text-slate-600 dark:hover:text-slate-200'
+                              }`}
+                            >
+                              <ThumbsUp className="w-3.5 h-3.5" />
+                            </button>
+                            <button
+                              type="button"
+                              onClick={() => handleFeedback(msg.id, msg.traceId!, false)}
+                              aria-label={language === 'en' ? 'Unhelpful response' : 'Resposta não útil'}
+                              aria-pressed={msg.feedback === 'down'}
+                              className={`p-1 rounded hover:bg-slate-100 dark:hover:bg-slate-800 transition focus:outline-none focus-visible:ring-2 focus-visible:ring-indigo-400 ${
+                                msg.feedback === 'down'
+                                  ? 'text-rose-600 dark:text-rose-400'
+                                  : 'text-slate-400 hover:text-slate-600 dark:hover:text-slate-200'
+                              }`}
+                            >
+                              <ThumbsDown className="w-3.5 h-3.5" />
+                            </button>
+                            {msg.feedback && (
+                              <span className="text-[10px] text-slate-500 dark:text-slate-400 flex items-center gap-0.5">
+                                <Check className="w-3 h-3 text-emerald-500" />
+                                {language === 'en' ? 'Thanks!' : 'Obrigado!'}
+                              </span>
+                            )}
+                          </>
+                        )}
+                      </div>
+                    )}
                 </div>
               ))}
               <div ref={messagesEndRef} />
@@ -477,18 +660,26 @@ export const AiAssistantWidget: React.FC = () => {
                 </span>
               </div>
 
-              <button
-                type="submit"
-                disabled={!inputMessage.trim() || isStreaming}
-                aria-label={language === 'en' ? 'Send message' : 'Enviar mensagem'}
-                className="p-2 rounded-xl bg-indigo-600 hover:bg-indigo-700 disabled:opacity-40 disabled:hover:bg-indigo-600 text-white transition shadow-sm shadow-indigo-600/30 focus:outline-none focus-visible:ring-2 focus-visible:ring-indigo-400"
-              >
-                {isStreaming ? (
-                  <ArrowRight className="w-4 h-4 animate-spin" />
-                ) : (
+              {isStreaming ? (
+                <button
+                  type="button"
+                  onClick={handleStopStreaming}
+                  aria-label={language === 'en' ? 'Stop generating' : 'Parar geração'}
+                  title={language === 'en' ? 'Stop generating' : 'Parar geração'}
+                  className="p-2 rounded-xl bg-rose-600 hover:bg-rose-700 text-white transition shadow-sm shadow-rose-600/30 focus:outline-none focus-visible:ring-2 focus-visible:ring-rose-400"
+                >
+                  <Square className="w-4 h-4 fill-current" />
+                </button>
+              ) : (
+                <button
+                  type="submit"
+                  disabled={!inputMessage.trim()}
+                  aria-label={language === 'en' ? 'Send message' : 'Enviar mensagem'}
+                  className="p-2 rounded-xl bg-indigo-600 hover:bg-indigo-700 disabled:opacity-40 disabled:hover:bg-indigo-600 text-white transition shadow-sm shadow-indigo-600/30 focus:outline-none focus-visible:ring-2 focus-visible:ring-indigo-400"
+                >
                   <Send className="w-4 h-4" />
-                )}
-              </button>
+                </button>
+              )}
             </form>
           </motion.aside>
         )}

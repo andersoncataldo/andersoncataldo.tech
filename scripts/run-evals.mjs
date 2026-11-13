@@ -54,20 +54,28 @@ async function readSseResponseText(response) {
 
 async function main() {
   const isLiveMode = process.argv.includes('--live') && Boolean(process.env.GEMINI_API_KEY);
-  console.log(
-    `\n🧪 [run-evals] Iniciando avaliação de 40 casos (Modo: ${
-      isLiveMode ? 'LIVE GEMINI API + HYBRID RAG' : 'HYBRID ML ENGINE DETERMINÍSTICO / CI'
-    })...\n`,
-  );
 
   const [aiLib, chatApi] = await Promise.all([
     loadTsModule('src/lib/ai/index.ts'),
     loadTsModule('api/chat.ts'),
   ]);
 
-  const datasetPath = path.resolve(ROOT_DIR, 'evals/dataset.json');
-  /** @type {import('../src/lib/ai/types').EvalCase[]} */
-  const dataset = JSON.parse(fs.readFileSync(datasetPath, 'utf-8'));
+  const readDataset = (file, suite) =>
+    JSON.parse(fs.readFileSync(path.resolve(ROOT_DIR, file), 'utf-8')).map((c) => ({ ...c, suite }));
+  const coreCases = readDataset('evals/dataset.json', 'core');
+  const hardCases = readDataset('evals/dataset-hard.json', 'hard');
+  /** @type {Array<import('../src/lib/ai/types').EvalCase & { suite: 'core' | 'hard' }>} */
+  const dataset = [...coreCases, ...hardCases];
+  const baselinePath = path.resolve(ROOT_DIR, 'evals/hard-baseline.json');
+  const knownHardFailures = new Set(
+    fs.existsSync(baselinePath) ? JSON.parse(fs.readFileSync(baselinePath, 'utf-8')).knownFailures : [],
+  );
+
+  console.log(
+    `\n🧪 [run-evals] Iniciando avaliação de ${dataset.length} casos (${coreCases.length} núcleo + ${hardCases.length} difíceis) (Modo: ${
+      isLiveMode ? 'LIVE GEMINI API + HYBRID RAG' : 'HYBRID ML ENGINE DETERMINÍSTICO / CI'
+    })...\n`,
+  );
 
   const latenciesMs = [];
   const tokenCounts = [];
@@ -151,6 +159,7 @@ async function main() {
       totalPassed += 1;
     } else {
       failures.push({
+        suite: testCase.suite,
         id: testCase.id,
         query: testCase.query,
         detectedIntent: intentPred.intent,
@@ -225,14 +234,39 @@ async function main() {
   console.log(`• Latência de Inferência:        p50 = ${p50} ms | p95 = ${p95} ms`);
   console.log(`• Média de Tokens por Resposta:  ~${avgTokens} tokens`);
   console.log(`• Contrato Edge SSE (/api/chat): ${edgeContractOk ? 'PASS (200 SSE & 405 Guard)' : 'FAIL'}`);
+  const coreFailures = failures.filter((f) => f.suite === 'core');
+  const hardFailures = failures.filter((f) => f.suite === 'hard');
+  const newHardRegressions = hardFailures.filter((f) => !knownHardFailures.has(f.id));
+  const fixedHard = [...knownHardFailures].filter((id) => !hardFailures.some((f) => f.id === id));
+  console.log(`• Suíte núcleo:                  ${coreCases.length - coreFailures.length}/${coreCases.length} (gate: 100%)`);
+  console.log(
+    `• Suíte difícil:                 ${hardCases.length - hardFailures.length}/${hardCases.length} (falhas conhecidas: ${knownHardFailures.size}, novas regressões: ${newHardRegressions.length})`,
+  );
   console.log('==============================================================\n');
 
-  if (failures.length > 0 || !edgeContractOk) {
-    console.error('❌ Falhas encontradas nos casos de avaliação:', JSON.stringify(failures, null, 2));
+  if (hardFailures.length > 0) {
+    console.log('⚠️ Falhas na suíte difícil:');
+    for (const f of hardFailures) {
+      console.log(
+        `  - ${f.id}${knownHardFailures.has(f.id) ? ' (conhecida)' : ' (NOVA)'} | faltando: [${f.missingKeywords.join(', ')}] | proibidas: [${f.triggeredForbidden.join(', ')}]${f.missingAnchor ? ` | âncora: ${f.missingAnchor}` : ''}`,
+      );
+    }
+  }
+  if (fixedHard.length > 0) {
+    console.log(`🎉 Casos difíceis corrigidos (remova de evals/hard-baseline.json): ${fixedHard.join(', ')}`);
+  }
+
+  if (coreFailures.length > 0 || newHardRegressions.length > 0 || !edgeContractOk) {
+    console.error(
+      '❌ Falhas bloqueantes:',
+      JSON.stringify([...coreFailures, ...newHardRegressions], null, 2),
+    );
     process.exit(1);
   }
 
-  console.log(`✅ Todos os ${dataset.length} casos de avaliação e o contrato Edge SSE passaram com 100% de precisão!`);
+  console.log(
+    `✅ Núcleo 100% (${coreCases.length}), sem regressões na suíte difícil e contrato Edge SSE OK.`,
+  );
 }
 
 main().catch((err) => {

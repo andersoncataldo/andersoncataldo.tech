@@ -1,5 +1,6 @@
-import { detectQuestionAspect } from './intentClassifier';
+import { detectQuestionAspect, VAGUE_CONTINUATION_RX } from './intentClassifier';
 import { normalizeText } from './guardrails';
+import { correctDomainTypos } from './spellfix';
 import { asksPrivateOrUnknowableFact, retrieveKnowledge } from './retriever';
 import type {
   ChatMessageItem,
@@ -27,6 +28,8 @@ export interface ReasoningPlanResult {
   subQueries: SubQueryPlan[];
   /** Etapa 2: Indica se é uma pergunta comparativa (ex.: Mais Saúde vs 3corações) */
   isComparative: boolean;
+  /** Etapa 2: Verdadeiro quando a pergunta tem várias partes ou é comparativa */
+  isMultiPart: boolean;
   /** Etapa 3: Status do avaliador Corrective RAG (CRAG) */
   cragStatus: CragSufficiencyStatus;
   /** Etapa 3: Certificações não listadas detectadas na pergunta (ex.: AWS, Azure, GCP) */
@@ -137,6 +140,15 @@ export function detectQueryAmbiguity(
   // Não marcar como ambígua se o visitante pede todos os projetos ou uma lista geral
   if (/\b(todos|quais|quantos|lista|catalogo|all|which|how many|list)\b/.test(qNorm) && /\b(projetos|sistemas|robos|projects|systems|robots)\b/.test(qNorm)) {
     return { isAmbiguous: false };
+  }
+
+  const asksVagueContinuation = VAGUE_CONTINUATION_RX.test(qNorm);
+  if (asksVagueContinuation) {
+    const clarificationReply =
+      lang === 'en'
+        ? `### 🤔 Which topic would you like to explore?\nI can go deeper on any part of Anderson's portfolio. Pick one:\n- **Experience & studies** (Distribuidora Mais Saúde, Grupo 3corações, UNIFOR)\n- **Projects & RPA robots** (FTP_SYNC, Central Grupo Mais, Service Desk)\n- **AI agents** (9-agent Maker-Checker squad)\n- **Stack & skills** or **how to contact him**\n\n📍 Just tell me the topic (or ask a specific question) and I'll answer precisely!`
+        : `### 🤔 Qual assunto você gostaria de explorar?\nPosso aprofundar qualquer parte do portfólio do Anderson. Escolha uma:\n- **Experiência e estudos** (Distribuidora Mais Saúde, Grupo 3corações, UNIFOR)\n- **Projetos e robôs RPA** (FTP_SYNC, Central Grupo Mais, Sistema de Chamados)\n- **Agentes de IA** (squad de 9 agentes Maker-Checker)\n- **Stack e habilidades** ou **como entrar em contato**\n\n📍 Basta me dizer o assunto (ou fazer uma pergunta específica) que eu respondo com precisão!`;
+    return { isAmbiguous: true, clarificationReply };
   }
 
   const asksAmbiguousProject =
@@ -267,11 +279,12 @@ export function detectUnlistedCertifications(rawQuery: string): string[] {
  * Executa as Etapas 1, 2 e 3 do Pipeline de Raciocínio (Entender -> Planejar -> Recuperar e Avaliar com CRAG)
  */
 export function runReasoningPipeline(
-  rawQuery: string,
+  originalQuery: string,
   lang: SupportedLanguage,
   history?: ChatMessageItem[],
   detectedUnlistedTech: string[] = [],
 ): ReasoningPlanResult {
+  const rawQuery = correctDomainTypos(originalQuery);
   // Etapa 1: Entender (Reescrita com contexto + Detecção de Ambiguidade)
   const rewrittenQuery = rewriteQueryWithContext(rawQuery, history);
   const ambiguity = detectQueryAmbiguity(rawQuery, lang, history);
@@ -335,6 +348,7 @@ export function runReasoningPipeline(
     clarificationReply: ambiguity.clarificationReply,
     subQueries,
     isComparative,
+    isMultiPart: subQueries.length > 1 || isComparative,
     cragStatus,
     unlistedCertifications,
     mergedRetrieval,

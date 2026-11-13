@@ -1,5 +1,6 @@
 import knowledgeData from '../../data/knowledgeIndex.json';
 import { isPromptInjectionAttempt, normalizeText, tokenize } from './guardrails';
+import { correctDomainTypos } from './spellfix';
 import type {
   ChatMessageItem,
   IntentLabel,
@@ -9,6 +10,10 @@ import type {
 } from './types';
 
 const index = knowledgeData as unknown as KnowledgeIndexFile;
+
+/** Pedidos genéricos de continuação sem assunto ("me conta mais", "tell me more") */
+export const VAGUE_CONTINUATION_RX =
+  /^((me )?(conta|fala|diz)|(pode )?(contar|falar|dizer)|conte|fale|diga)( me)?( algo| mais| mais sobre ele| sobre ele)$|^(mais|more) (detalhes|informacoes|details|info)$|^(tell me more|say more|go on|tell me about him)$/;
 
 const INTENT_EXEMPLARS: Record<IntentLabel, string[]> = {
   smalltalk: [
@@ -280,6 +285,7 @@ function hasPortfolioDomainSignal(
   detectedKnownTech: string[],
 ): boolean {
   if (detectedUnlistedTech.length > 0 || detectedKnownTech.length > 0) return true;
+  if (VAGUE_CONTINUATION_RX.test(q)) return true;
 
   const domainPatterns = [
     /\b(anderson|cataldo|viana|portifolio|portfolio|curriculo|cv|resume|perfil|profile)\b/,
@@ -319,7 +325,8 @@ function detectFollowUp(q: string, history?: ChatMessageItem[]): boolean {
   );
 }
 
-export function classifyIntent(rawQuery: string, history?: ChatMessageItem[]): IntentPrediction {
+export function classifyIntent(originalQuery: string, history?: ChatMessageItem[]): IntentPrediction {
+  const rawQuery = correctDomainTypos(originalQuery);
   const q = normalizeText(rawQuery);
   const tokens = tokenize(rawQuery, false);
   const detectedUnlistedTech = detectUnlistedTechnologies(rawQuery);

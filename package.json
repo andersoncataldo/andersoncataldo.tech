@@ -9,8 +9,11 @@
     "dev": "vite",
     "build": "tsc -b && vite build",
     "build:knowledge": "node scripts/build-knowledge.mjs",
-    "evals": "node scripts/run-evals.mjs",
-    "evals:live": "node scripts/run-evals.mjs --live",
+    "typecheck": "tsc -b",
+    "evals": "tsc -b && node scripts/run-evals.mjs",
+    "evals:live": "tsc -b && node scripts/run-evals.mjs --live",
+    "test:contracts": "node scripts/test-api-contracts.mjs",
+    "check": "npm run lint && npm run evals && npm run test:contracts",
     "lint": "eslint .",
     "preview": "vite preview"
   },

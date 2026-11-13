@@ -4,7 +4,7 @@ import Hero from './components/Hero';
 import ErrorBoundary from './components/ErrorBoundary';
 import ScrollProgress from './components/ScrollProgress';
 import CommandPalette from './components/CommandPalette';
-import AiAssistantWidget from './components/AiAssistantWidget';
+import { AiAssistantLauncher } from './components/ai/AiAssistantLauncher';
 import ReloadPrompt from './components/ReloadPrompt';
 import { LanguageProvider, useLanguage } from './context/LanguageContext';
 
@@ -91,7 +91,7 @@ const AppShell = () => {
         onThemeToggle={handleThemeToggle}
         theme={theme}
       />
-      <AiAssistantWidget />
+      <AiAssistantLauncher />
       <ReloadPrompt />
       <a
         href="#main-content"

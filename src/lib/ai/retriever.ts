@@ -293,7 +293,7 @@ export function resolveQueryWithHistory(rawQuery: string, history?: ChatMessageI
 
 export function asksPrivateOrUnknowableFact(rawQuery: string): boolean {
   const q = normalizeText(rawQuery);
-  return /\b(cpf|rg|cnh|passaporte|endereco residencial|rua onde mora|cep|numero da casa|estado civil|casado|solteiro|namorada|esposa|filhos|religiao|tipo sanguineo|altura|peso|data de nascimento exata|idade exata|quantos anos ele tem|signo|salario atual|quanto ele ganha|pretensao salarial exata|expected salary|exact salary|social security|home address|marital status|how old is he)\b/.test(
+  return /\b(cpf|rg|cnh|passaporte|endereco residencial|rua onde mora|cep|numero da casa|estado civil|casado|solteiro|namorada|esposa|filhos|religiao|tipo sanguineo|altura|peso|data de nascimento exata|idade exata|quantos anos ele tem|signo|salario atual|quanto ele ganha|pretensao salarial exata|expected salary|exact salary|social security|home address|marital status|how old is he|demitid[oa]|demissao|mandado embora|pediu demissao|motivo da saida|por que (ele )?saiu|porque (ele )?saiu|got fired|was fired|get fired|laid off|why did he leave|why he left|reason for leaving)\b/.test(
     q,
   );
 }

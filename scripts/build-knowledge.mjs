@@ -341,6 +341,10 @@ async function main() {
         en: 'Golden rule of the Maker-Checker model: the agent that writes the code (Front-End, Back-End, Automation, Database, Documentation) NEVER validates its own work. The 3 independent validator agents (QA, AppSec/LGPD Security, and Design System Compliance) enforce 58 automated Pytest tests and 35 Playwright visual assertions before go-live, operating under least privilege and anti-hallucination guardrails.',
       },
       facets: {
+        metricsSummary: {
+          pt: 'Anderson construiu um **escritório com 9 agentes de IA** (1 Orquestrador, 5 Makers e 3 Checkers) na Mais Saúde, validado por **58 testes Pytest** e **35 asserções Playwright**.',
+          en: 'Anderson built a **9-agent AI squad** (1 Orchestrator, 5 Makers, and 3 Checkers) at Mais Saúde, validated by **58 Pytest tests** and **35 Playwright assertions**.',
+        },
         architecture: {
           pt: 'A divisão exata dos **9 agentes de IA** na Mais Saúde é: **1 Orquestrador** (planeja e decompõe tarefas via OpenSpec), **5 Executores Makers** (Front-End, Back-End, Automação RPA, Banco de Dados e Documentação) e **3 Validadores Checkers independentes** (QA, Segurança/LGPD e Compliance de Design System), integrados via **Claude Code** e **MCP**.',
           en: 'The exact breakdown of the **9 AI agents** at Mais Saúde is: **1 Orchestrator** (plans and decomposes tasks via OpenSpec), **5 Maker Executors** (Front-End, Back-End, RPA Automation, Database, and Documentation), and **3 independent Checker Validators** (QA, AppSec/LGPD Security, and Design System Compliance), integrated via **Claude Code** and **MCP**.',
@@ -354,6 +358,8 @@ async function main() {
         '9 agentes', '9 agents', 'squad', 'maker-checker', 'maker checker', 'claude code', 'mcp',
         'model context protocol', 'orquestrador', 'orchestrator', 'openspec', 'agentes de ia',
         'ai agents', 'multiagente', 'multi-agent', 'anti-alucinacao', 'validadores', 'checkers',
+        'quantos agentes', 'how many agents', 'how many ai agents', 'numero de agentes',
+        'agentes construiu', 'agentes criou', 'agents built', 'agents did he build',
       ],
       entities: ['9_agentes', 'maker_checker', 'claude_code', 'mcp', 'pytest', 'playwright', 'mais_saude'],
       metrics: ['9 agentes', '58 testes Pytest', '35 asserções Playwright'],
@@ -485,6 +491,19 @@ async function main() {
             pt: `Métricas de destaque na **${exp.company}**: ${exp.metrics.map((m) => `**${m.label.pt}: ${typeof m.value === 'string' ? m.value : m.value.pt}**`).join(' • ')}.`,
             en: `Highlight metrics at **${exp.company}**: ${exp.metrics.map((m) => `**${m.label.en}: ${typeof m.value === 'string' ? m.value : m.value.en}**`).join(' • ')}.`,
           },
+          ...(slug === '3coracoes'
+            ? {
+                duration_when: {
+                  pt: `Anderson atuou no **Grupo 3corações** por **1 ano e 4 meses** (${exp.period.pt}), em formato presencial (${exp.location.pt}).`,
+                  en: `Anderson worked at **Grupo 3corações** for **1 year and 4 months** (${exp.period.en}), on-site (${exp.location.en}).`,
+                },
+              }
+            : {
+                duration_when: {
+                  pt: `Anderson trabalha na **Distribuidora Mais Saúde** desde **Jun/2026** (${exp.period.pt}), em formato ${exp.location.pt}.`,
+                  en: `Anderson has worked at **Distribuidora Mais Saúde** since **Jun/2026** (${exp.period.en}), ${exp.location.en}.`,
+                },
+              }),
           ...(slug === '3coracoes'
             ? {
                 firstJob: {

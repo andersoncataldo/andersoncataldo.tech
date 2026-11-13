@@ -11,6 +11,7 @@ import {
 } from './guardrails';
 import { runReasoningPipeline, type ReasoningPlanResult } from './reasoningPipeline';
 import { asksPrivateOrUnknowableFact } from './retriever';
+import { correctDomainTypos } from './spellfix';
 import type {
   ChatMessageItem,
   IntentPrediction,
@@ -320,8 +321,8 @@ function buildContextualFollowUp(
   return `📍 **Ver no portfólio:** ${anchorLinks}`;
 }
 
-export function synthesizeConversationalResponse(
-  rawQuery: string,
+function synthesizeCore(
+  originalQuery: string,
   lang: SupportedLanguage,
   history?: ChatMessageItem[],
 ): {
@@ -329,7 +330,9 @@ export function synthesizeConversationalResponse(
   intent: IntentPrediction;
   retrieval: RetrievalResult;
   plan?: ReasoningPlanResult;
+  coveRepaired?: boolean;
 } {
+  const rawQuery = correctDomainTypos(originalQuery);
   const guardIn = validateInputGuardrails(rawQuery);
   const intent = classifyIntent(rawQuery, history);
   const plan = runReasoningPipeline(rawQuery, lang, history, intent.detectedUnlistedTech);
@@ -389,11 +392,13 @@ export function synthesizeConversationalResponse(
       lang,
       retrieval,
     );
+    const unlistedChecked = verifyOutputMetrics(unlistedReply, lang);
     return {
-      reply: verifyOutputMetrics(unlistedReply, lang).sanitizedText,
+      reply: unlistedChecked.sanitizedText,
       intent,
       retrieval,
       plan,
+      coveRepaired: !unlistedChecked.valid,
     };
   }
 
@@ -514,7 +519,36 @@ export function synthesizeConversationalResponse(
     intent,
     retrieval,
     plan,
+    coveRepaired: !checked.valid,
   };
+}
+
+export interface SynthesizedResponse {
+  reply: string;
+  intent: IntentPrediction;
+  retrieval: RetrievalResult;
+  plan?: ReasoningPlanResult;
+  /** Âncoras de seção usadas como fonte (vazio em recusas e respostas sem contexto) */
+  citations: string[];
+  /** Verdadeiro quando o verificador de métricas precisou corrigir a resposta */
+  coveRepaired: boolean;
+}
+
+/**
+ * Resposta determinística completa, incluindo as citações reais e o resultado da verificação,
+ * para que a telemetria registre o que de fato aconteceu (sem valores fixos).
+ */
+export function synthesizeConversationalResponse(
+  rawQuery: string,
+  lang: SupportedLanguage,
+  history?: ChatMessageItem[],
+): SynthesizedResponse {
+  const core = synthesizeCore(rawQuery, lang, history);
+  const grounded = core.plan ? core.plan.cragStatus !== 'insufficient' : false;
+  const citations = grounded
+    ? Array.from(new Set(core.retrieval.topChunks.map((c) => c.chunk.sectionAnchor)))
+    : [];
+  return { ...core, citations, coveRepaired: Boolean(core.coveRepaired) };
 }
 
 export function buildGroundedLLMRequest(

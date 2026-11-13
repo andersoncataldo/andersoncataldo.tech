@@ -14,43 +14,56 @@ interface DevNodeResponse {
   end(data?: string): void;
 }
 
+function registerEdgeEndpoint(
+  server: {
+    middlewares: { use(route: string, fn: (req: unknown, res: unknown) => void): void };
+    ssrLoadModule(path: string): Promise<unknown>;
+  },
+  route: string,
+  modulePath: string,
+) {
+  server.middlewares.use(route, (rawReq, rawRes) => {
+    const req = rawReq as unknown as DevNodeRequest;
+    const res = rawRes as unknown as DevNodeResponse;
+    const chunks: string[] = [];
+    req.on('data', (chunk: unknown) => {
+      chunks.push(String(chunk));
+    });
+    req.on('end', () => {
+      void (async () => {
+        try {
+          const mod = (await server.ssrLoadModule(modulePath)) as {
+            default: (r: Request) => Promise<Response>;
+          };
+          const bodyText = chunks.join('');
+          const webReq = new Request(`http://localhost${route}`, {
+            method: req.method || 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: req.method === 'POST' ? bodyText : undefined,
+          });
+          const webRes = await mod.default(webReq);
+          res.statusCode = webRes.status;
+          webRes.headers.forEach((val: string, key: string) => {
+            res.setHeader(key, val);
+          });
+          const text = await webRes.text();
+          res.end(text);
+        } catch {
+          res.statusCode = 500;
+          res.end();
+        }
+      })();
+    });
+  });
+}
+
 function localChatApiPlugin(): Plugin {
   return {
     name: 'local-edge-chat-api',
     configureServer(server) {
-      server.middlewares.use('/api/chat', (rawReq, rawRes) => {
-        const req = rawReq as unknown as DevNodeRequest;
-        const res = rawRes as unknown as DevNodeResponse;
-        const chunks: string[] = [];
-        req.on('data', (chunk: unknown) => {
-          chunks.push(String(chunk));
-        });
-        req.on('end', () => {
-          void (async () => {
-            try {
-              const mod = (await server.ssrLoadModule('/api/chat.ts')) as {
-                default: (r: Request) => Promise<Response>;
-              };
-              const bodyText = chunks.join('');
-              const webReq = new Request('http://localhost/api/chat', {
-                method: req.method || 'POST',
-                headers: { 'Content-Type': 'application/json' },
-                body: req.method === 'POST' ? bodyText : undefined,
-              });
-              const webRes = await mod.default(webReq);
-              res.statusCode = webRes.status;
-              webRes.headers.forEach((val: string, key: string) => {
-                res.setHeader(key, val);
-              });
-              const text = await webRes.text();
-              res.end(text);
-            } catch {
-              res.statusCode = 500;
-              res.end();
-            }
-          })();
-        });
-      });
+      registerEdgeEndpoint(server, '/api/chat', '/api/chat.ts');
+      registerEdgeEndpoint(server, '/api/feedback', '/api/feedback.ts');
+      registerEdgeEndpoint(server, '/api/lead', '/api/lead.ts');
     },
   };
 }

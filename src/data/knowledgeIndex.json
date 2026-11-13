@@ -1,6 +1,6 @@
 {
   "version": "2.1.0",
-  "generatedAt": "2026-11-12T23:57:31.237Z",
+  "generatedAt": "2026-11-13T01:56:40.036Z",
   "embeddingModel": "hybrid-local-tfidf-bm25-v2.1",
   "totalChunks": 35,
   "canonicalMetrics": {
@@ -609,6 +609,10 @@
         "en": "Golden rule of the Maker-Checker model: the agent that writes the code (Front-End, Back-End, Automation, Database, Documentation) NEVER validates its own work. The 3 independent validator agents (QA, AppSec/LGPD Security, and Design System Compliance) enforce 58 automated Pytest tests and 35 Playwright visual assertions before go-live, operating under least privilege and anti-hallucination guardrails."
       },
       "facets": {
+        "metricsSummary": {
+          "pt": "Anderson construiu um **escritório com 9 agentes de IA** (1 Orquestrador, 5 Makers e 3 Checkers) na Mais Saúde, validado por **58 testes Pytest** e **35 asserções Playwright**.",
+          "en": "Anderson built a **9-agent AI squad** (1 Orchestrator, 5 Makers, and 3 Checkers) at Mais Saúde, validated by **58 Pytest tests** and **35 Playwright assertions**."
+        },
         "architecture": {
           "pt": "A divisão exata dos **9 agentes de IA** na Mais Saúde é: **1 Orquestrador** (planeja e decompõe tarefas via OpenSpec), **5 Executores Makers** (Front-End, Back-End, Automação RPA, Banco de Dados e Documentação) e **3 Validadores Checkers independentes** (QA, Segurança/LGPD e Compliance de Design System), integrados via **Claude Code** e **MCP**.",
           "en": "The exact breakdown of the **9 AI agents** at Mais Saúde is: **1 Orchestrator** (plans and decomposes tasks via OpenSpec), **5 Maker Executors** (Front-End, Back-End, RPA Automation, Database, and Documentation), and **3 independent Checker Validators** (QA, AppSec/LGPD Security, and Design System Compliance), integrated via **Claude Code** and **MCP**."
@@ -636,7 +640,15 @@
         "multi-agent",
         "anti-alucinacao",
         "validadores",
-        "checkers"
+        "checkers",
+        "quantos agentes",
+        "how many agents",
+        "how many ai agents",
+        "numero de agentes",
+        "agentes construiu",
+        "agentes criou",
+        "agents built",
+        "agents did he build"
       ],
       "entities": [
         "9_agentes",
@@ -856,6 +868,10 @@
           "pt": "Métricas de destaque na **Distribuidora Mais Saúde**: **Redução FTP_SYNC: -99% (6h ➔ 10s)** • **Robôs WinThor: 10 robôs** • **Suíte de Testes: 58 Pytest + 35 E2E** • **Sistemas Unificados: 4 em 1 (SSO)**.",
           "en": "Highlight metrics at **Distribuidora Mais Saúde**: **FTP_SYNC Reduction: -99% (6h ➔ 10s)** • **WinThor Robots: 10 robôs** • **Test Suites: 58 Pytest + 35 E2E** • **Unified Systems: 4 em 1 (SSO)**."
         },
+        "duration_when": {
+          "pt": "Anderson trabalha na **Distribuidora Mais Saúde** desde **Jun/2026** (Jun/2026 - Presente), em formato Fortaleza, CE - Híbrido / Presencial.",
+          "en": "Anderson has worked at **Distribuidora Mais Saúde** since **Jun/2026** (Jun/2026 - Present), Fortaleza, CE - Hybrid / On-site."
+        },
         "currentJob": {
           "pt": "**Emprego Atual — Distribuidora Mais Saúde (Jun/2026 - Presente):** Atualmente, Anderson trabalha na **Distribuidora Mais Saúde** como **Estagiário de T.I. — Full-Stack, Automação & IA** (Engenharia de Software, Agentes de IA & Integrações WinThor), onde projetou e desenvolve a **Central Grupo Mais (monorepo SSO com 4 sistemas internos)**, **10 robôs Python integrados ao ERP TOTVS WinThor (Oracle)** (incluindo o **FTP_SYNC com redução de 6h para <10s, -99%**), o **escritório de 9 agentes de IA (Maker-Checker com Claude Code)** e **58 testes Pytest + 35 asserções Playwright**.",
           "en": "**Current Job — Distribuidora Mais Saúde (Jun/2026 - Present):** Currently, Anderson works at **Distribuidora Mais Saúde** as **IT Intern — Full-Stack, Automation & AI** (Software Engineering, AI Agents & WinThor Integrations), where he architected and builds **Central Grupo Mais (SSO monorepo unifying 4 internal systems)**, **10 Python robots integrated with TOTVS WinThor ERP (Oracle)** (including **FTP_SYNC reducing 6h to <10s, -99%**), the **9-agent AI squad (Maker-Checker with Claude Code)**, and **58 Pytest + 35 Playwright tests**."
@@ -951,6 +967,10 @@
         "metricsSummary": {
           "pt": "Métricas de destaque na **Grupo 3corações**: **Documentos / Mês: 15.000+ XMLs** • **Horas Poupadas: 200h+** • **Robôs em Produção: 5 robôs**.",
           "en": "Highlight metrics at **Grupo 3corações**: **Documents / Month: 15.000+ XMLs** • **Hours Saved: 200h+** • **Robots Shipped: 5 robôs**."
+        },
+        "duration_when": {
+          "pt": "Anderson atuou no **Grupo 3corações** por **1 ano e 4 meses** (Jan/2025 - Abr/2026), em formato presencial (Eusébio / Fortaleza, CE - Presencial).",
+          "en": "Anderson worked at **Grupo 3corações** for **1 year and 4 months** (Jan/2025 - Apr/2026), on-site (Eusébio / Fortaleza, CE - On-site)."
         },
         "firstJob": {
           "pt": "**Primeiro Emprego Corporativo — Grupo 3corações (Jan/2025 - Abr/2026):** Anderson iniciou sua carreira corporativa no **Grupo 3corações** como **Aprendiz — Setor Fiscal (Sistemas e Projetos)** (Desenvolvedor de Robôs RPA & Automação de Processos), atuando presencialmente por **1 ano e 4 meses**. Nessa primeira experiência profissional, desenvolveu **5 robôs RPA em Python** para renovação automática de **CNDs** e processamento de **15.000+ XMLs fiscais/mês** com **99,85% de precisão SEFAZ**, poupando **200+ horas manuais**.",
