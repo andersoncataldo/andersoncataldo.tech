@@ -574,48 +574,59 @@ export default async function handler(req: Request): Promise<Response> {
             citations: fallback.citations,
             latencyMs: Date.now() - startedAt,
           });
+          await writer.write(encoder.encode('data: [DONE]\n\n'));
         } else {
           const fullCheck = verifyOutputMetrics(fullAccumulated, lang);
           if (!fullCheck.valid) anyCoveRepair = true;
           const verifiedFull = fullCheck.sanitizedText;
           setCachedReply(cacheKey, verifiedFull, 'gemini');
+          const bgTasks: Promise<unknown>[] = [];
           if (plan.cragStatus === 'sufficient') {
-            void upsertAnswerCacheL2({
-              queryHash,
+            bgTasks.push(
+              upsertAnswerCacheL2({
+                queryHash,
+                locale: lang,
+                normalizedQuery: normalizeText(retrieval.resolvedQuery),
+                intent: intent.intent,
+                aspect: intent.aspect,
+                cragStatus: 'sufficient',
+                responseText: verifiedFull,
+                citations: Array.from(new Set(retrieval.topChunks.map((c) => c.chunk.sectionAnchor))),
+              }),
+            );
+          }
+          bgTasks.push(
+            logAiTelemetryNonBlocking({
+              traceId,
+              sessionId,
               locale: lang,
-              normalizedQuery: normalizeText(retrieval.resolvedQuery),
+              originalQuery: guardIn.sanitizedQuery,
+              rewrittenQuery: plan.rewrittenQuery,
               intent: intent.intent,
               aspect: intent.aspect,
-              cragStatus: 'sufficient',
-              responseText: verifiedFull,
+              cragStatus: plan.cragStatus,
+              confidence: retrieval.maxConfidence,
+              isMultiPart: plan.isMultiPart,
+              needsClarification: false,
+              usedLlm: true,
+              cacheHit: false,
+              coveRepaired: anyCoveRepair,
+              topChunkIds,
               citations: Array.from(new Set(retrieval.topChunks.map((c) => c.chunk.sectionAnchor))),
-            });
-          }
-          void logAiTelemetryNonBlocking({
-            traceId,
-            sessionId,
-            locale: lang,
-            originalQuery: guardIn.sanitizedQuery,
-            rewrittenQuery: plan.rewrittenQuery,
-            intent: intent.intent,
-            aspect: intent.aspect,
-            cragStatus: plan.cragStatus,
-            confidence: retrieval.maxConfidence,
-            isMultiPart: plan.isMultiPart,
-            needsClarification: false,
-            usedLlm: true,
-            cacheHit: false,
-            coveRepaired: anyCoveRepair,
-            topChunkIds,
-            citations: Array.from(new Set(retrieval.topChunks.map((c) => c.chunk.sectionAnchor))),
-            latencyMs: Date.now() - startedAt,
-          });
+              latencyMs: Date.now() - startedAt,
+            }),
+          );
+          await writer.write(encoder.encode('data: [DONE]\n\n'));
+          // Aguarda gravações no Supabase antes de fechar o stream no Edge Runtime
+          await Promise.race([
+            Promise.allSettled(bgTasks),
+            new Promise((r) => setTimeout(r, 1500)),
+          ]);
         }
       } catch {
         // Em caso de interrupção de stream, encerra graciosamente sem expor stacktrace
       } finally {
         try {
-          await writer.write(encoder.encode('data: [DONE]\n\n'));
           await writer.close();
         } catch {
           // Stream já encerrado
