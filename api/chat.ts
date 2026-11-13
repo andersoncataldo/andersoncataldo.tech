@@ -410,37 +410,48 @@ export default async function handler(req: Request): Promise<Response> {
       })),
     ];
 
-    const geminiModels = ['gemini-2.5-flash', 'gemini-2.5-flash-lite'] as const;
+    const geminiModels = ['gemini-3.8-flash', 'gemini-3.5-flash-lite'] as const;
     let geminiRes: Response | null = null;
-    let usedModel: (typeof geminiModels)[number] = 'gemini-2.5-flash';
+    let usedModel: (typeof geminiModels)[number] = 'gemini-3.8-flash';
 
     for (const modelName of geminiModels) {
       const geminiUrl = `https://generativelanguage.googleapis.com/v1beta/models/${modelName}:streamGenerateContent?key=${apiKey}&alt=sse`;
-      const candidateRes = await fetchWithRetry(geminiUrl, {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({
-          contents,
-          generationConfig: {
-            temperature: 0.2,
-            maxOutputTokens: plan.recommendedThinkingBudget > 0 ? 800 : 450,
-            ...(modelName === 'gemini-2.5-flash'
-              ? {
-                  thinkingConfig: {
-                    thinkingBudget: plan.recommendedThinkingBudget,
-                    includeThoughts: false,
-                  },
-                }
-              : {}),
+      try {
+        const candidateRes = await fetchWithRetry(
+          geminiUrl,
+          {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({
+              contents,
+              generationConfig: {
+                temperature: 0.2,
+                maxOutputTokens: plan.recommendedThinkingBudget > 0 ? 800 : 450,
+                ...(modelName === 'gemini-3.8-flash'
+                  ? {
+                      thinkingConfig: {
+                        thinkingBudget: plan.recommendedThinkingBudget,
+                        includeThoughts: false,
+                      },
+                    }
+                  : {}),
+              },
+            }),
           },
-        }),
-      });
-      if (candidateRes.ok && candidateRes.body) {
+          modelName === 'gemini-3.8-flash'
+            ? { retries: 0, timeoutMs: 4500 }
+            : { retries: 1, timeoutMs: 6500 },
+        );
+        if (candidateRes.ok && candidateRes.body) {
+          geminiRes = candidateRes;
+          usedModel = modelName;
+          break;
+        }
         geminiRes = candidateRes;
-        usedModel = modelName;
-        break;
+      } catch {
+        // Falha/timeout no modelo primário: tenta o próximo modelo de fallback
+        continue;
       }
-      geminiRes = candidateRes;
     }
 
     if (!geminiRes || !geminiRes.ok || !geminiRes.body) {
@@ -483,7 +494,7 @@ export default async function handler(req: Request): Promise<Response> {
       let anyCoveRepair = false;
       try {
         const effectiveThinkingBudget =
-          usedModel === 'gemini-2.5-flash' ? plan.recommendedThinkingBudget : 0;
+          usedModel === 'gemini-3.8-flash' ? plan.recommendedThinkingBudget : 0;
         await writer.write(
           encoder.encode(
             `data: ${JSON.stringify({
