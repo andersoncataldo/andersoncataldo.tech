@@ -23,7 +23,7 @@ interface Message {
   id: string;
   role: 'user' | 'assistant';
   content: string;
-  mode?: 'gemini' | 'offline';
+  mode?: 'gemini' | 'direct' | 'offline';
   traceId?: string;
   feedback?: 'up' | 'down' | null;
 }
@@ -286,7 +286,7 @@ export const AiAssistantWidget: React.FC<AiAssistantWidgetProps> = ({ initialOpe
       const decoder = new TextDecoder();
       let buffer = '';
       let accumulated = '';
-      let detectedMode: 'gemini' | 'offline' = 'gemini';
+      let detectedMode: 'gemini' | 'direct' | 'offline' = 'gemini';
 
       while (true) {
         const { done, value } = await reader.read();
@@ -306,8 +306,8 @@ export const AiAssistantWidget: React.FC<AiAssistantWidgetProps> = ({ initialOpe
                 mode?: string;
                 traceId?: string;
               };
-              if (parsed.mode === 'offline') {
-                detectedMode = 'offline';
+              if (parsed.mode === 'offline' || parsed.mode === 'direct') {
+                detectedMode = parsed.mode;
               }
               if (parsed.traceId) {
                 const traceId = parsed.traceId;
@@ -560,6 +560,16 @@ export const AiAssistantWidget: React.FC<AiAssistantWidgetProps> = ({ initialOpe
                     </div>
                   </div>
 
+                  {msg.role === 'assistant' && msg.mode === 'direct' && (
+                    <span className="text-[10px] text-slate-500 dark:text-slate-400 mt-1 flex items-center gap-1 font-mono">
+                      <span>
+                        •{' '}
+                        {language === 'en'
+                          ? 'Direct verified response'
+                          : 'Resposta direta (base verificada)'}
+                      </span>
+                    </span>
+                  )}
                   {msg.role === 'assistant' && msg.mode === 'offline' && (
                     <span className="text-[10px] text-amber-600 dark:text-amber-400 mt-1 flex items-center gap-1 font-mono">
                       <span>

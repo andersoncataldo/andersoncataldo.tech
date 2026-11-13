@@ -233,7 +233,7 @@ export default async function handler(req: Request): Promise<Response> {
       citations: [],
       latencyMs: Date.now() - startedAt,
     });
-    return createStreamResponse(localResult.reply, 'offline', 'input_guardrail', traceId);
+    return createStreamResponse(localResult.reply, 'direct', 'input_guardrail', traceId);
   }
 
   // 2. Classificação de intenção e pipeline de raciocínio em 5 etapas (Rewrite + Ambiguity + Decompose + Hybrid CRAG)
@@ -274,7 +274,7 @@ export default async function handler(req: Request): Promise<Response> {
       citations: direct.citations,
       latencyMs: Date.now() - startedAt,
     });
-    return createStreamResponse(direct.reply, 'offline', `direct_intent_${intent.intent}`, traceId);
+    return createStreamResponse(direct.reply, 'direct', `direct_intent_${intent.intent}`, traceId);
   }
 
   // 4. Consulta ao Cache de Respostas L1 (em memória) e L2 (Supabase PostgreSQL com timeout de 350ms)
@@ -672,7 +672,7 @@ export default async function handler(req: Request): Promise<Response> {
 
 function createStreamResponse(
   text: string,
-  mode: 'gemini' | 'offline',
+  mode: 'gemini' | 'direct' | 'offline',
   reason: string,
   traceId: string,
 ): Response {
