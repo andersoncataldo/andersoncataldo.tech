@@ -57,13 +57,15 @@ A aplicação foi desenvolvida no padrão de craft de produtos digitais Silicon 
 - Filtro por busca reativa e tags de proficiência (`Avançado`, `Intermediário`, `Em expansão`).
 
 ### 8. Assistente Conversacional "Pergunte ao Anderson AI" (`AiAssistantWidget.tsx`, `src/lib/ai/` & `/api/chat`)
-- **Arquitetura de Machine Learning Híbrido (RAG + IR + NLG):**
-  - **Indexação Granular (`scripts/build-knowledge.mjs` → `src/data/knowledgeIndex.json`):** Extrai micro-chunks atômicos bilíngues (PT-BR e EN) a partir de `src/data/*`, com suporte a embeddings pré-calculados (`text-embedding-004` quantizados L2) e vetores locais TF-IDF + N-gramas de caracteres.
-  - **Recuperação Híbrida em Memória (`src/lib/ai/retriever.ts`):** Combina **BM25 Lexical** (cobrindo siglas como `FTP_SYNC`, `WinThor`, `HCIA-Storage`, `SHA-256`) + **Similaridade de Cosseno Semântica**, fundidos via **Reciprocal Rank Fusion (RRF)** e diversificados com **Maximal Marginal Relevance (MMR)** + resolução de correferência pronominal no histórico.
-  - **Classificador de Intenção por Centroides (`src/lib/ai/intentClassifier.ts`):** Classifica mensagens em `smalltalk`, `recrutador`, `tecnica_projeto`, `faq_portfolio`, `contato`, `fora_de_escopo` e `injecao`.
-  - **Síntese Conversacional Dinâmica (`src/lib/ai/responseSynthesizer.ts`):** Elimina "textos prontos" compondo respostas sob medida com links âncora clicáveis para as seções do portfólio (`#rpa`, `#projetos`, `#experiencia`, `#habilidades`, `#contato`) e honestidade epistêmica para tecnologias ou dados privados não listados.
-  - **Guardrails em Camadas & Fact-Checker (`src/lib/ai/guardrails.ts`):** Bloqueio de *prompt injection* na entrada e validação determinística das métricas canônicas na saída.
-  - **Suíte de 40 Evals Automatizados (`evals/dataset.json` & `scripts/run-evals.mjs`):** Integrada ao CI no GitHub Actions validando acurácia factual, 0% de alucinação, recusa correta, resistência a injection e latência p50/p95.
+- **Arquitetura de Machine Learning Híbrido & Pipeline de Raciocínio em 5 Etapas (RAG + CRAG + IR + NLG):**
+  - **Indexação Granular Facetada (`scripts/build-knowledge.mjs` → `src/data/knowledgeIndex.json`):** Extrai **35 micro-chunks facetados bilíngues (PT-BR e EN)** a partir de `src/data/*` (com facetas estruturadas de `challenge`, `solution`, `architecture`, `resultImpact`, `role`, `metricsSummary`, `firstJob`, `currentJob`, `languagesSpoken` e `differentials`), com suporte a embeddings pré-calculados (`text-embedding-004` quantizados L2) e vetores locais TF-IDF + N-gramas de caracteres.
+  - **Pipeline de Raciocínio em 5 Etapas (`src/lib/ai/reasoningPipeline.ts`):**
+    1. **Entender:** Reescrita conversacional e correferência contrastiva (*"e na outra empresa?"* resolve *Mais Saúde* $\leftrightarrow$ *Grupo 3corações*) + **Detector de Ambiguidade** (pede 1 esclarecimento objetivo se a pergunta não especificar qual dos 9 projetos ou 15 robôs).
+    2. **Planejar:** Decomposição automática de perguntas multi-partes e comparativas em até 3 subperguntas atômicas (`SubQueryPlan[]`).
+    3. **Recuperar e Avaliar (Corrective RAG — CRAG):** Busca híbrida **BM25 + Similaridade de Cosseno + RRF + MMR** por subpergunta e avaliação de suficiência (`sufficient`, `partial`, `insufficient`).
+    4. **Responder:** Síntese *Direct-Answer-First* com memória anti-repetição, links âncora clicáveis (`#sobre`, `#experiencia`, `#rpa`, `#habilidades`, `#projetos`, `#contato`) e orçamento adaptativo de raciocínio (`thinkingConfig: { thinkingBudget: 0 | 256, includeThoughts: false }`) no Edge.
+    5. **Verificar (Chain-of-Verification Determinístico):** Checagem de cada número e afirmação contra `canonicalMetrics` antes do envio.
+  - **Suíte de 71 Evals Automatizados (`evals/dataset.json` & `scripts/run-evals.mjs`):** Integrada ao CI no GitHub Actions validando 100% de acurácia factual, 0% de alucinação, esclarecimento em perguntas ambíguas, resolução de meia-verdade CRAG, recusa correta e resistência a injection.
 
 ### 9. Progressive Web App (PWA) & Capacidade Offline (`vite-plugin-pwa`)
 - Instalação nativa como Web App no Android, iOS e Desktop.
@@ -111,7 +113,7 @@ andersoncataldo.tech/
 ├── .github/workflows/ci.yml      # CI/CD automatizado (lint + evals + build)
 ├── api/                          # Vercel Edge Functions (/api/chat.ts e /api/og.tsx)
 ├── evals/
-│   └── dataset.json              # Conjunto dourado de 40 casos de teste bilíngues (PT/EN)
+│   └── dataset.json              # Conjunto dourado de 71 casos de teste bilíngues (PT/EN)
 ├── openspec/                     # Especificações vivas (Spec-Driven Development)
 ├── prompts/anderson-ai/          # Prompts de sistema versionados (v1.md, v2.md, evals.json)
 ├── public/                       # Assets públicos (favicon, og-image, sitemap)
@@ -123,7 +125,7 @@ andersoncataldo.tech/
 │   ├── context/LanguageContext.tsx# Provedor de idioma (PT/EN)
 │   ├── data/                     # Camada centralizada de dados tipados + knowledgeIndex.json
 │   ├── i18n/translations.ts      # Dicionário de traduções bilíngue estrito
-│   ├── lib/ai/                   # Motor ML Híbrido (intentClassifier, retriever, responseSynthesizer, guardrails)
+│   ├── lib/ai/                   # Pipeline de Raciocínio em 5 Etapas (reasoningPipeline, retriever, intentClassifier, responseSynthesizer, guardrails)
 │   └── styles/index.css          # Tokens Tailwind v4 e temas
 ```
 
@@ -144,7 +146,7 @@ npm run dev
 #    Se GEMINI_API_KEY estiver definida no ambiente, pré-calcula embeddings text-embedding-004
 npm run build:knowledge
 
-# 4. Executar a suíte de 40 Evals de IA (modo determinístico para CI, sem precisar de chave)
+# 4. Executar a suíte de 71 Evals de IA (modo determinístico para CI, sem precisar de chave)
 npm run evals
 
 # 5. Executar Evals contra a API real do Gemini (requer GEMINI_API_KEY definida)
