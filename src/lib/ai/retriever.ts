@@ -34,7 +34,7 @@ const SYNONYM_GROUPS: string[][] = [
   ['unifor', 'unifro', 'faculdade', 'universidade', 'ciencia da computacao', 'computer science', '6 semestre', 'estudo', 'graduacao', 'quando se forma', 'formatura', 'previsao de conclusao', '2027'],
   ['huawei', 'huwei', 'hcia', 'hcia-storage', 'v5.0', 'certificacao', 'certificado', 'storage', 'san', 'nas', 'raid', 'disaster recovery'],
   ['banco de dados', 'database', 'db', 'sgbd', 'postgresql', 'postgres', 'supabase', 'rls', 'oracle', 'sql'],
-  ['contato', 'email', 'linkedin', 'github', 'whatsapp', 'telefone', 'contratar', 'vaga', 'remoto', 'hibrido', 'fortaleza', 'curriculo', 'cv'],
+  ['contato', 'email', 'linkedin', 'github', 'whatsapp', 'telefone', 'como contratar', 'quero contratar', 'vaga', 'remoto', 'hibrido', 'fortaleza', 'curriculo', 'cv'],
   ['experiencia', 'trabalho', 'emprego', 'carreira', 'empresas', 'mais saude', 'janeiro de 2025', '2 anos'],
   ['primeiro emprego', 'primeira experiencia', 'primeira empresa', 'onde comecou', 'comecou a trabalhar', 'emprego anterior', 'ultimo emprego', 'aprendiz', 'jovem aprendiz', 'first job', 'previous job', 'started working', 'apprentice'],
   ['emprego atual', 'trabalho atual', 'onde trabalha hoje', 'trabalha atualmente', 'onde ele trabalha', 'empresa atual', 'cargo atual', 'estagio atual', 'estagiario', 'current job', 'current role', 'where does he work', 'intern'],
@@ -363,29 +363,29 @@ export function retrieveKnowledge(
 
     let aspectBoost = 0;
     if (aspect === 'first_job' && (item.chunk.id === 'experience-3coracoes' || item.chunk.id === 'work-and-study-duration')) {
-      aspectBoost = item.chunk.id === 'experience-3coracoes' ? 0.55 : 0.35;
+      aspectBoost = item.chunk.id === 'experience-3coracoes' ? 0.65 : 0.35;
     } else if (aspect === 'current_job' && (item.chunk.id === 'experience-mais-saude' || item.chunk.id === 'work-and-study-duration')) {
-      aspectBoost = item.chunk.id === 'experience-mais-saude' ? 0.55 : 0.35;
+      aspectBoost = item.chunk.id === 'experience-mais-saude' ? 0.65 : 0.35;
     } else if (
       (aspect === 'languages_spoken' || aspect === 'differentials_pillars') &&
       item.chunk.id === 'profile-overview'
     ) {
-      aspectBoost = 0.55;
+      aspectBoost = 0.85;
     } else if (aspect === 'all_projects_list' && item.chunk.id === 'projects-catalog-overview') {
-      aspectBoost = 0.65;
+      aspectBoost = 0.85;
     }
 
     const signalStrength =
       Math.min(1, item.bm25Score / 8) * 0.55 + Math.min(1, item.cosineScore * 1.8) * 0.45;
     item.rrfScore = rrf;
     item.finalScore =
-      item.bm25Score === 0 && item.cosineScore === 0
+      item.bm25Score === 0 && item.cosineScore === 0 && aspectBoost === 0
         ? 0
         : Number((rrf * 8 + signalStrength * 0.6 + aspectBoost).toFixed(4));
   }
 
   const candidates = initialScores
-    .filter((item) => item.bm25Score > 0 || item.cosineScore >= 0.08)
+    .filter((item) => item.bm25Score > 0 || item.cosineScore >= 0.08 || item.finalScore >= 0.8)
     .sort((a, b) => b.finalScore - a.finalScore);
 
   const lambda = 0.78;

@@ -9,7 +9,8 @@ import {
   validateInputGuardrails,
   verifyOutputMetrics,
 } from './guardrails';
-import { asksPrivateOrUnknowableFact, retrieveKnowledge } from './retriever';
+import { runReasoningPipeline, type ReasoningPlanResult } from './reasoningPipeline';
+import { asksPrivateOrUnknowableFact } from './retriever';
 import type {
   ChatMessageItem,
   IntentPrediction,
@@ -74,11 +75,32 @@ function synthesizeSmalltalk(
 
 function synthesizeUnlistedTechResponse(
   unlistedTechs: string[],
+  unlistedCerts: string[],
   lang: SupportedLanguage,
   retrieval: RetrievalResult,
 ): string {
+  if (unlistedCerts.length > 0 && unlistedTechs.length === 0) {
+    const certList = unlistedCerts.map((c) => `**${c}**`).join(', ');
+    if (lang === 'en') {
+      return `To be completely transparent, **Anderson Cataldo does not hold a ${certList} certification** in his official portfolio records.
+
+His verified international certification is:
+- **Huawei Certified ICT Associate - Storage V5.0 (HCIA-Storage)** — issued in **June 2026** by **Huawei ICT Academy**, covering enterprise **SAN (Fibre Channel / IP-SAN) and NAS** architectures, **RAID** parity, storage virtualization, snapshots, and **Disaster Recovery**.
+
+📍 **Explore on page:** [Official Certifications](#experiencia) • Or reach out at **[${EMAIL}](mailto:${EMAIL})**.`;
+    }
+    return `Sendo totalmente transparente, **Anderson Cataldo não possui certificação ${certList}** registrada na base oficial deste portfólio.
+
+A certificação internacional oficial que ele possui é:
+- **Huawei Certified ICT Associate - Storage V5.0 (HCIA-Storage)** — emitida em **Junho de 2026** pela **Huawei ICT Academy**, comprovando domínio em arquiteturas corporativas **SAN (Fibre Channel / IP-SAN) e NAS**, níveis **RAID**, virtualização de storage, snapshots e **Disaster Recovery**.
+
+📍 **Ver no portfólio:** [Certificações Oficiais](#experiencia) • Ou fale com ele em **[${EMAIL}](mailto:${EMAIL})**.`;
+  }
+
   const techList = unlistedTechs.map((t) => `**${t.toUpperCase()}**`).join(', ');
   const topSupplemental = retrieval.topChunks[0]?.chunk;
+  const archDetailPt = topSupplemental?.facets?.architecture?.pt ? `\n- **Arquitetura Real do Projeto:** ${topSupplemental.facets.architecture.pt}` : '';
+  const archDetailEn = topSupplemental?.facets?.architecture?.en ? `\n- **Actual Project Architecture:** ${topSupplemental.facets.architecture.en}` : '';
 
   if (lang === 'en') {
     return `To be completely transparent, **Anderson Cataldo does not list production experience with ${techList}** in his portfolio knowledge base.
@@ -86,7 +108,7 @@ function synthesizeUnlistedTechResponse(
 His core production engineering stack focuses on:
 - **Languages & Back-End:** **Python 3.11+** (FastAPI, SQLAlchemy, Pydantic v2), **TypeScript / JavaScript** (Node.js, Express), **SQL** (Oracle PL/SQL, PostgreSQL), and **Java (Spring Boot)**.
 - **Front-End & Cloud:** **React 19 / 18**, **Next.js 16**, **Vite**, **Tailwind CSS v4**, **Supabase (RLS)**, **Cloudflare Pages**, **Render**, and **Vercel Edge**.
-${topSupplemental ? `\n- **Related Portfolio Context:** ${topSupplemental.shortAnswer.en}` : ''}
+${topSupplemental ? `\n- **Related Portfolio Context (${topSupplemental.title.en}):** ${topSupplemental.shortAnswer.en}${archDetailEn}` : ''}
 
 📍 **Explore on page:** [Skills & Technologies](#habilidades) • Or reach out at **[${EMAIL}](mailto:${EMAIL})**.`;
   }
@@ -96,7 +118,7 @@ ${topSupplemental ? `\n- **Related Portfolio Context:** ${topSupplemental.shortA
 O foco principal e comprovado de atuação dele concentra-se em:
 - **Linguagens & Back-End:** **Python 3.11+** (FastAPI, SQLAlchemy, Pydantic v2), **TypeScript / JavaScript** (Node.js, Express), **SQL** (Oracle PL/SQL, PostgreSQL) e **Java (Spring Boot)**.
 - **Front-End & Cloud:** **React 19 / 18**, **Next.js 16**, **Vite**, **Tailwind CSS v4**, **Supabase (RLS)**, **Cloudflare Pages**, **Render** e **Vercel Edge**.
-${topSupplemental ? `\n- **Contexto Relacionado no Portfólio:** ${topSupplemental.shortAnswer.pt}` : ''}
+${topSupplemental ? `\n- **Contexto Real Relacionado (${topSupplemental.title.pt}):** ${topSupplemental.shortAnswer.pt}${archDetailPt}` : ''}
 
 📍 **Ver no portfólio:** [Habilidades & Tecnologias](#habilidades) • Ou fale com ele em **[${EMAIL}](mailto:${EMAIL})**.`;
 }
@@ -306,16 +328,19 @@ export function synthesizeConversationalResponse(
   reply: string;
   intent: IntentPrediction;
   retrieval: RetrievalResult;
+  plan?: ReasoningPlanResult;
 } {
   const guardIn = validateInputGuardrails(rawQuery);
   const intent = classifyIntent(rawQuery, history);
-  const retrieval = retrieveKnowledge(rawQuery, lang, { topK: 4, history });
+  const plan = runReasoningPipeline(rawQuery, lang, history, intent.detectedUnlistedTech);
+  const retrieval = plan.mergedRetrieval;
 
   if (!guardIn.allowed && guardIn.reason === 'prompt_injection') {
     return {
       reply: getPromptInjectionResponse(lang),
       intent,
       retrieval,
+      plan,
     };
   }
 
@@ -324,6 +349,7 @@ export function synthesizeConversationalResponse(
       reply: getPromptInjectionResponse(lang),
       intent,
       retrieval,
+      plan,
     };
   }
 
@@ -332,6 +358,7 @@ export function synthesizeConversationalResponse(
       reply: getOutOfScopeResponse(lang),
       intent,
       retrieval,
+      plan,
     };
   }
 
@@ -340,23 +367,43 @@ export function synthesizeConversationalResponse(
       reply: synthesizeSmalltalk(rawQuery, lang, history),
       intent,
       retrieval,
+      plan,
     };
   }
 
-  if (intent.detectedUnlistedTech.length > 0) {
-    const unlistedReply = synthesizeUnlistedTechResponse(intent.detectedUnlistedTech, lang, retrieval);
+  // Etapa 1B: Se a pergunta for ambígua sem histórico ("Como funciona esse projeto?"), pede esclarecimento em vez de adivinhar
+  if (plan.isAmbiguous && plan.clarificationReply) {
+    return {
+      reply: plan.clarificationReply,
+      intent,
+      retrieval,
+      plan,
+    };
+  }
+
+  // Etapa 3 (CRAG Parcial): Tecnologia ou certificação não listada combinada com pergunta técnica
+  if (plan.cragStatus === 'partial') {
+    const unlistedReply = synthesizeUnlistedTechResponse(
+      intent.detectedUnlistedTech,
+      plan.unlistedCertifications,
+      lang,
+      retrieval,
+    );
     return {
       reply: verifyOutputMetrics(unlistedReply, lang).sanitizedText,
       intent,
       retrieval,
+      plan,
     };
   }
 
-  if (asksPrivateOrUnknowableFact(rawQuery) || retrieval.belowThreshold) {
+  // Etapa 3 (CRAG Insuficiente): Fato privado ou ausente no índice
+  if (plan.cragStatus === 'insufficient' || retrieval.topChunks.length === 0) {
     return {
       reply: synthesizeUnknownFactResponse(rawQuery, lang),
       intent,
       retrieval,
+      plan,
     };
   }
 
@@ -366,43 +413,64 @@ export function synthesizeConversationalResponse(
     .map((m) => m.content.toLowerCase())
     .join('\n');
 
-  const topScore = retrieval.topChunks[0].finalScore;
-  const qNorm = normalizeText(rawQuery);
-  const isMultiTopicQuery =
-    /\b(e tambem|alem de|alem disso|tempo de trabalho.*estudo|work.*and.*study|experiencia.*formacao|mais saude.*3coracoes)\b/.test(
-      qNorm,
-    ) || (qNorm.includes(' e ') && qNorm.split(' ').length >= 8 && intent.aspect === 'general');
-
-  const relevantChunks = retrieval.topChunks.filter((item, idx) => {
-    if (idx === 0) return true;
-    if (idx === 1 && isMultiTopicQuery && item.finalScore >= topScore * 0.68) return true;
-    if (idx === 1 && intent.aspect === 'general' && item.finalScore >= topScore * 0.90) return true;
-    return false;
-  });
-
   const greetingPrefix = hasLeadingGreeting(rawQuery)
     ? lang === 'en'
       ? 'Hello! Glad to help. '
       : 'Olá! Com certeza. '
     : '';
 
-  const primaryChunk = relevantChunks[0].chunk;
-  const paragraphs = relevantChunks.map((scored, idx) => {
-    const { body } = buildAspectAwareParagraph(
-      scored,
-      rawQuery,
-      intent.aspect,
-      intent.detectedKnownTech,
-      lang,
-      previousAssistantText,
-    );
-    return idx === 0 ? `${greetingPrefix}${body}` : body;
-  });
+  let paragraphs: string[] = [];
+  let usedScoredChunks: ScoredChunk[] = [];
 
+  // Etapa 4: Se o planejador decompôs a pergunta em múltiplas subperguntas ou comparação, responde cada uma com sua faceta!
+  if (plan.subQueryMatches.length > 1) {
+    usedScoredChunks = plan.subQueryMatches.map((m) => m.topScored);
+    paragraphs = plan.subQueryMatches.map((m, idx) => {
+      const { body } = buildAspectAwareParagraph(
+        m.topScored,
+        m.subQuery.query,
+        m.subQuery.aspect,
+        intent.detectedKnownTech,
+        lang,
+        previousAssistantText,
+      );
+      return idx === 0 ? `${greetingPrefix}${body}` : body;
+    });
+  } else {
+    const topScore = retrieval.topChunks[0].finalScore;
+    const qNorm = normalizeText(plan.rewrittenQuery);
+    const isMultiTopicQuery =
+      /\b(e tambem|alem de|alem disso|tempo de trabalho.*estudo|work.*and.*study|experiencia.*formacao|mais saude.*3coracoes)\b/.test(
+        qNorm,
+      ) ||
+      (qNorm.includes(' e ') && qNorm.split(' ').length >= 8 && intent.aspect === 'general');
+
+    usedScoredChunks = retrieval.topChunks.filter((item, idx) => {
+      if (idx === 0) return true;
+      if (idx === 1 && isMultiTopicQuery && item.finalScore >= topScore * 0.65) return true;
+      if (idx === 1 && intent.aspect === 'general' && item.finalScore >= topScore * 0.9) return true;
+      return false;
+    });
+
+    paragraphs = usedScoredChunks.map((scored, idx) => {
+      const { body } = buildAspectAwareParagraph(
+        scored,
+        plan.rewrittenQuery,
+        intent.aspect,
+        intent.detectedKnownTech,
+        lang,
+        previousAssistantText,
+      );
+      return idx === 0 ? `${greetingPrefix}${body}` : body;
+    });
+  }
+
+  const primaryChunk = usedScoredChunks[0].chunk;
+  const topScore = retrieval.topChunks[0].finalScore;
   const seenAnchors = new Set<string>();
   const anchors: { label: string; href: string }[] = [];
   const anchorCandidates = [
-    ...relevantChunks,
+    ...usedScoredChunks,
     ...retrieval.topChunks.slice(0, 2).filter((c) => c.finalScore >= topScore * 0.6),
   ];
   for (const item of anchorCandidates) {
@@ -445,6 +513,7 @@ export function synthesizeConversationalResponse(
     reply: checked.sanitizedText,
     intent,
     retrieval,
+    plan,
   };
 }
 
@@ -457,9 +526,11 @@ export function buildGroundedLLMRequest(
   retrievedContextBlock: string;
   intent: IntentPrediction;
   retrieval: RetrievalResult;
+  plan: ReasoningPlanResult;
 } {
   const intent = classifyIntent(rawQuery, history);
-  const retrieval = retrieveKnowledge(rawQuery, lang, { topK: 4, history });
+  const plan = runReasoningPipeline(rawQuery, lang, history, intent.detectedUnlistedTech);
+  const retrieval = plan.mergedRetrieval;
 
   const chunksXml = retrieval.topChunks
     .map((s, i) => {
@@ -518,5 +589,6 @@ ${chunksXml || 'Nenhum chunk específico encontrado acima do limiar.'}
     retrievedContextBlock,
     intent,
     retrieval,
+    plan,
   };
 }

@@ -673,8 +673,8 @@ async function main() {
       en: 'Verified Production Impact Metrics',
     },
     shortAnswer: {
-      pt: 'Principais métricas auditadas em produção: **15 robôs corporativos** (10 na Mais Saúde + 5 no Grupo 3corações), **-99% no tempo do FTP_SYNC** (de 6h para <10s), **15.000+ XMLs fiscais/mês** com **99,85% de precisão SEFAZ**, **200+ horas manuais poupadas**, **9 agentes de IA Maker-Checker**, **58 testes Pytest + 35 asserções Playwright** e **4 sistemas unificados com SSO**.',
-      en: 'Key verified production metrics: **15 corporate robots** (10 at Mais Saúde + 5 at Grupo 3corações), **-99% time reduction in FTP_SYNC** (from 6h to <10s), **15,000+ fiscal XMLs/month** with **99.85% SEFAZ accuracy**, **200+ manual hours saved**, **9 Maker-Checker AI agents**, **58 Pytest tests + 35 Playwright assertions**, and **4 unified SSO systems**.',
+      pt: 'Principais métricas e dores de negócio resolvidas em produção: **15 robôs corporativos** (10 na Mais Saúde + 5 no Grupo 3corações), **-99% no tempo do FTP_SYNC** (de **6 horas para menos de 10 segundos**), **15.000+ XMLs fiscais/mês** com **99,85% de precisão SEFAZ**, **200+ horas manuais poupadas**, **9 agentes de IA Maker-Checker**, **58 testes Pytest + 35 asserções Playwright** e **4 sistemas unificados com SSO**.',
+      en: 'Key verified production metrics and business problems solved: **15 corporate robots** (10 at Mais Saúde + 5 at Grupo 3corações), **-99% time reduction in FTP_SYNC** (from **6 hours to under 10 seconds**), **15,000+ fiscal XMLs/month** with **99.85% SEFAZ accuracy**, **200+ manual hours saved**, **9 Maker-Checker AI agents**, **58 Pytest tests + 35 Playwright assertions**, and **4 unified SSO systems**.',
     },
     content: {
       pt: keyMetrics.map((m) => `- ${m.value} ${m.label.pt}: ${m.description.pt} (${m.trend.pt})`).join('\n'),
@@ -683,6 +683,7 @@ async function main() {
     keywords: [
       'metrica', 'metricas', 'metrics', 'numeros', 'numbers', 'resultados', 'results', 'impacto',
       'impact', 'quantos robos', 'how many robots', '15 robos', '15.000', '99.85%', '200 horas',
+      'dores', 'dores reais', 'dores de negocio', 'problemas reais', 'resolveu na pratica',
     ],
     entities: ['metrics', 'ftp_sync', 'winthor', '3coracoes', 'mais_saude'],
     metrics: ['15', '-99%', '15.000+', '99.85%', '200+', '9 Agentes', '58', '35', '4'],
@@ -757,10 +758,10 @@ async function main() {
       'cobol', 'rust', 'elixir', 'erlang', 'haskell', 'scala', 'clojure', 'fortran', 'perl',
       'ruby on rails', 'ruby', 'laravel', 'php', 'symfony', 'wordpress', 'drupal', 'magento',
       'flutter', 'dart', 'swift', 'objective-c', 'kotlin', 'xamarin', 'ionic', 'cordova',
-      'c#', '.net', 'aspnet', 'blazor', 'delphi', 'vb.net', 'abap', 'sap', 'salesforce', 'apex',
+      'c#', 'csharp', 'c++', 'cplusplus', '.net', 'dotnet', 'aspnet', 'blazor', 'delphi', 'vb.net', 'abap', 'sap', 'salesforce', 'apex',
       'solidity', 'web3', 'blockchain', 'ethereum', 'unreal engine', 'unity', 'godot',
       'cassandra', 'couchbase', 'neo4j', 'dynamodb', 'snowflake', 'databricks', 'hadoop', 'spark', 'kafka',
-      'terraform', 'ansible', 'puppet', 'chef', 'openshift', 'rancher', 'istio', 'cypress', 'jest', 'angular', 'svelte',
+      'kubernetes', 'k8s', 'terraform', 'ansible', 'puppet', 'chef', 'openshift', 'rancher', 'istio', 'cypress', 'jest', 'angular', 'svelte',
     ],
     chunks,
   };

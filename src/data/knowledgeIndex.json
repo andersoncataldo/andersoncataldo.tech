@@ -1,6 +1,6 @@
 {
   "version": "2.1.0",
-  "generatedAt": "2026-11-12T23:46:01.838Z",
+  "generatedAt": "2026-11-12T23:57:31.237Z",
   "embeddingModel": "hybrid-local-tfidf-bm25-v2.1",
   "totalChunks": 35,
   "canonicalMetrics": {
@@ -128,7 +128,11 @@
     "ionic",
     "cordova",
     "c#",
+    "csharp",
+    "c++",
+    "cplusplus",
     ".net",
+    "dotnet",
     "aspnet",
     "blazor",
     "delphi",
@@ -153,6 +157,8 @@
     "hadoop",
     "spark",
     "kafka",
+    "kubernetes",
+    "k8s",
     "terraform",
     "ansible",
     "puppet",
@@ -2205,8 +2211,8 @@
         "en": "Verified Production Impact Metrics"
       },
       "shortAnswer": {
-        "pt": "Principais métricas auditadas em produção: **15 robôs corporativos** (10 na Mais Saúde + 5 no Grupo 3corações), **-99% no tempo do FTP_SYNC** (de 6h para <10s), **15.000+ XMLs fiscais/mês** com **99,85% de precisão SEFAZ**, **200+ horas manuais poupadas**, **9 agentes de IA Maker-Checker**, **58 testes Pytest + 35 asserções Playwright** e **4 sistemas unificados com SSO**.",
-        "en": "Key verified production metrics: **15 corporate robots** (10 at Mais Saúde + 5 at Grupo 3corações), **-99% time reduction in FTP_SYNC** (from 6h to <10s), **15,000+ fiscal XMLs/month** with **99.85% SEFAZ accuracy**, **200+ manual hours saved**, **9 Maker-Checker AI agents**, **58 Pytest tests + 35 Playwright assertions**, and **4 unified SSO systems**."
+        "pt": "Principais métricas e dores de negócio resolvidas em produção: **15 robôs corporativos** (10 na Mais Saúde + 5 no Grupo 3corações), **-99% no tempo do FTP_SYNC** (de **6 horas para menos de 10 segundos**), **15.000+ XMLs fiscais/mês** com **99,85% de precisão SEFAZ**, **200+ horas manuais poupadas**, **9 agentes de IA Maker-Checker**, **58 testes Pytest + 35 asserções Playwright** e **4 sistemas unificados com SSO**.",
+        "en": "Key verified production metrics and business problems solved: **15 corporate robots** (10 at Mais Saúde + 5 at Grupo 3corações), **-99% time reduction in FTP_SYNC** (from **6 hours to under 10 seconds**), **15,000+ fiscal XMLs/month** with **99.85% SEFAZ accuracy**, **200+ manual hours saved**, **9 Maker-Checker AI agents**, **58 Pytest tests + 35 Playwright assertions**, and **4 unified SSO systems**."
       },
       "content": {
         "pt": "- 15 Automações Entregues: Robôs em Python integrados ao ERP WinThor (Oracle) e portais fiscais, reduzindo processos de horas para segundos. (Produção contínua)\n- -99% Redução FTP_SYNC: Ponte autônoma entre parceiros e WinThor Cloud que reduziu o tempo de integração de 6 horas para menos de 10s. (A cada 15 min)\n- 15k+ XMLs Fiscais / Mês: Documentos fiscais processados com 99.85% de conformidade com schemas oficiais da SEFAZ. (Zero erro fiscal)\n- 9 Agentes Escritório de IA: Arquitetura multiagente maker-checker com Claude Code, MCP e protocolos estritos anti-alucinação. (Engenharia assistida)",
@@ -2227,7 +2233,12 @@
         "15 robos",
         "15.000",
         "99.85%",
-        "200 horas"
+        "200 horas",
+        "dores",
+        "dores reais",
+        "dores de negocio",
+        "problemas reais",
+        "resolveu na pratica"
       ],
       "entities": [
         "metrics",

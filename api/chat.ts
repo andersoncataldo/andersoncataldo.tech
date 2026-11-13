@@ -203,18 +203,21 @@ export default async function handler(req: Request): Promise<Response> {
     return createStreamResponse(localResult.reply, 'offline', 'input_guardrail');
   }
 
-  // 2. Classificação de intenção e recuperação híbrida (BM25 + Cosine Similarity + RRF + MMR)
-  const { systemInstruction, retrievedContextBlock, intent, retrieval } = buildGroundedLLMRequest(
+  // 2. Classificação de intenção e pipeline de raciocínio em 5 etapas (Rewrite + Ambiguity + Decompose + Hybrid CRAG)
+  const { systemInstruction, retrievedContextBlock, intent, retrieval, plan } = buildGroundedLLMRequest(
     guardIn.sanitizedQuery,
     lang,
     historyBeforeLast,
   );
 
-  // 3. Intenções que não precisam gastar chamada ao LLM (injecao, fora_de_escopo, smalltalk, tecnologia não listada)
+  // 3. Intenções ou estados CRAG que não precisam gastar chamada ao LLM (injecao, fora_de_escopo, smalltalk, ambígua, CRAG parcial/insuficiente)
   if (
     intent.intent === 'injecao' ||
     intent.intent === 'fora_de_escopo' ||
     intent.intent === 'smalltalk' ||
+    plan.isAmbiguous ||
+    plan.cragStatus === 'partial' ||
+    plan.cragStatus === 'insufficient' ||
     intent.detectedUnlistedTech.length > 0
   ) {
     const direct = synthesizeConversationalResponse(guardIn.sanitizedQuery, lang, historyBeforeLast);
@@ -282,8 +285,12 @@ export default async function handler(req: Request): Promise<Response> {
       body: JSON.stringify({
         contents,
         generationConfig: {
-          temperature: 0.25,
-          maxOutputTokens: 450,
+          temperature: 0.2,
+          maxOutputTokens: plan.recommendedThinkingBudget > 0 ? 800 : 450,
+          thinkingConfig: {
+            thinkingBudget: plan.recommendedThinkingBudget,
+            includeThoughts: false,
+          },
         },
       }),
     });
@@ -321,8 +328,13 @@ export default async function handler(req: Request): Promise<Response> {
               if (jsonStr === '[DONE]') continue;
               try {
                 const parsed = JSON.parse(jsonStr);
-                const textPart = parsed.candidates?.[0]?.content?.parts?.[0]?.text;
-                if (typeof textPart === 'string' && textPart.length > 0) {
+                const parts: Array<{ text?: string; thought?: boolean }> =
+                  parsed.candidates?.[0]?.content?.parts || [];
+                const textPart = parts
+                  .filter((p) => !p.thought && typeof p.text === 'string')
+                  .map((p) => p.text)
+                  .join('');
+                if (textPart.length > 0) {
                   fullAccumulated += textPart;
                   const checkedPart = verifyOutputMetrics(textPart, lang).sanitizedText;
                   await writer.write(

@@ -8,6 +8,9 @@ export function normalizeText(input: string): string {
     .toLowerCase()
     .normalize('NFD')
     .replace(/[\u0300-\u036f]/g, '')
+    .replace(/c#/g, ' csharp ')
+    .replace(/c\+\+/g, ' cplusplus ')
+    .replace(/\.net\b/g, ' dotnet ')
     .replace(/[^\w\s%-]/g, ' ')
     .replace(/\s+/g, ' ')
     .trim();

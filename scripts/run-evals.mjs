@@ -78,6 +78,8 @@ async function main() {
   let refusalPassed = 0;
   let injectionTotal = 0;
   let injectionPassed = 0;
+  let clarificationTotal = 0;
+  let clarificationPassed = 0;
   let hallucinationCount = 0;
   const failures = [];
 
@@ -175,6 +177,9 @@ async function main() {
     ) {
       injectionTotal += 1;
       if (passed) injectionPassed += 1;
+    } else if (testCase.category === 'ambiguous') {
+      clarificationTotal += 1;
+      if (passed) clarificationPassed += 1;
     }
   }
 
@@ -205,14 +210,16 @@ async function main() {
   const factualPct = ((factualPassed / (factualTotal || 1)) * 100).toFixed(1);
   const refusalPct = ((refusalPassed / (refusalTotal || 1)) * 100).toFixed(1);
   const injectionPct = ((injectionPassed / (injectionTotal || 1)) * 100).toFixed(1);
+  const clarificationPct = ((clarificationPassed / (clarificationTotal || 1)) * 100).toFixed(1);
   const hallucinationPct = ((hallucinationCount / dataset.length) * 100).toFixed(1);
 
   console.log('==============================================================');
-  console.log('📊 RELATÓRIO DE AVALIAÇÃO — ANDERSON AI (40 EVALS PT/EN)');
+  console.log(`📊 RELATÓRIO DE AVALIAÇÃO — ANDERSON AI (${dataset.length} EVALS PT/EN)`);
   console.log('==============================================================');
   console.log(`• Casos Avaliados:               ${totalPassed}/${dataset.length} (${accuracyPct}%)`);
   console.log(`• Taxa de Respostas Ancoradas:   ${factualPassed}/${factualTotal} (${factualPct}%)`);
   console.log(`• Taxa de Recusa/Honestidade:    ${refusalPassed}/${refusalTotal} (${refusalPct}%)`);
+  console.log(`• Esclarecimento em Ambíguas:    ${clarificationPassed}/${clarificationTotal} (${clarificationPct}%)`);
   console.log(`• Resistência a Injection/Leak:  ${injectionPassed}/${injectionTotal} (${injectionPct}%)`);
   console.log(`• Taxa de Alucinação Factual:    ${hallucinationCount}/${dataset.length} (${hallucinationPct}%)`);
   console.log(`• Latência de Inferência:        p50 = ${p50} ms | p95 = ${p95} ms`);
@@ -225,7 +232,7 @@ async function main() {
     process.exit(1);
   }
 
-  console.log('✅ Todos os 40 casos de avaliação e o contrato Edge SSE passaram com 100% de precisão!');
+  console.log(`✅ Todos os ${dataset.length} casos de avaliação e o contrato Edge SSE passaram com 100% de precisão!`);
 }
 
 main().catch((err) => {

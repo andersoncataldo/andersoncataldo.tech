@@ -115,17 +115,27 @@ function cosineAgainstCentroid(queryTokens: string[], centroid: Map<string, numb
  */
 export function detectUnlistedTechnologies(rawQuery: string): string[] {
   const q = normalizeText(rawQuery);
-  const found: string[] = [];
+  const found = new Set<string>();
+  const DISPLAY_MAP: Record<string, string> = {
+    csharp: 'C#',
+    'c#': 'C#',
+    cplusplus: 'C++',
+    'c++': 'C++',
+    dotnet: '.NET',
+    '.net': '.NET',
+    kubernetes: 'Kubernetes',
+    k8s: 'Kubernetes',
+  };
 
   for (const tech of index.unlistedCommonTechnologies) {
     const escaped = tech.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
     const rx = new RegExp(`(?:^|\\s)${escaped}(?:$|\\s)`, 'i');
     if (rx.test(q)) {
-      found.push(tech);
+      found.add(DISPLAY_MAP[tech] || tech);
     }
   }
 
-  return found;
+  return Array.from(found);
 }
 
 /**
@@ -175,7 +185,7 @@ export function detectQuestionAspect(rawQuery: string): QuestionAspect {
     return 'languages_spoken';
   }
   if (
-    /\b(diferencial|diferenciais|ponto forte|pontos fortes|por que contratar|pilares|3 pilares|tres pilares|especialidades|metodologia de trabalho|como ele trabalha|why hire|strengths|core pillars|what makes him stand out)\b/.test(
+    /\b(diferencial|diferenciais|ponto forte|pontos fortes|por que contratar|por que.*contratar|deveria contratar|vale a pena contratar|pilares|3 pilares|tres pilares|especialidades|metodologia de trabalho|como ele trabalha|why hire|why.*hire|should.*hire|strengths|core pillars|what makes him stand out)\b/.test(
       q,
     )
   ) {

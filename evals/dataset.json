@@ -610,5 +610,167 @@
     "forbiddenKeywords": [],
     "expectedAnchor": "#projetos",
     "description": "Listar todos os 9 projetos principais do catálogo do portfólio."
+  },
+  {
+    "id": "eval-57-recruiter-why-hire-engineering",
+    "lang": "pt",
+    "category": "factual",
+    "query": "Por que uma empresa deveria contratar o Anderson para o time de engenharia?",
+    "expectedIntent": "recrutador",
+    "expectedKeywords": ["15 robôs", "Maker-Checker", "9 agentes", "58 testes"],
+    "forbiddenKeywords": [],
+    "expectedAnchor": "#sobre",
+    "description": "(a) Intenção/Recrutador: responder com proposta de valor executiva e métricas reais."
+  },
+  {
+    "id": "eval-58-recruiter-production-vs-academic",
+    "lang": "pt",
+    "category": "factual",
+    "query": "Ele tem experiência real em produção ou são apenas projetos de faculdade?",
+    "expectedIntent": "recrutador",
+    "expectedKeywords": ["produção", "Distribuidora Mais Saúde", "Grupo 3corações", "15 robôs"],
+    "forbiddenKeywords": [],
+    "expectedAnchor": "#experiencia",
+    "description": "(a) Intenção/Recrutador: comprovar experiência real em produção corporativa nas duas empresas."
+  },
+  {
+    "id": "eval-59-business-problems-solved",
+    "lang": "pt",
+    "category": "factual",
+    "query": "Quais dores reais de negócio o Anderson já resolveu na prática?",
+    "expectedIntent": "recrutador",
+    "expectedKeywords": ["6 horas", "10 segundos", "15.000+", "4 sistemas"],
+    "forbiddenKeywords": [],
+    "description": "(a) Intenção/Impacto: sintetizar problemas reais resolvidos com métricas de ROI."
+  },
+  {
+    "id": "eval-60-contrastive-other-company-pt",
+    "lang": "pt",
+    "category": "follow_up",
+    "query": "E na outra empresa, o que ele fez?",
+    "history": [
+      { "role": "user", "content": "O que o Anderson faz na Distribuidora Mais Saúde?" },
+      { "role": "assistant", "content": "Na **Distribuidora Mais Saúde** (Jun/2026 - Presente), atuando como **Estagiário de T.I. — Full-Stack, Automação & IA**, projeta a Central Grupo Mais e 10 robôs WinThor." }
+    ],
+    "expectedIntent": "faq_portfolio",
+    "expectedKeywords": ["Grupo 3corações", "15.000+", "99.85%", "CNDs"],
+    "forbiddenKeywords": [],
+    "expectedAnchor": "#experiencia",
+    "description": "(b) Recuperação/Correferência Contrastiva: resolver 'na outra empresa' para Grupo 3corações quando o histórico falava da Mais Saúde."
+  },
+  {
+    "id": "eval-61-contrastive-other-company-reverse-pt",
+    "lang": "pt",
+    "category": "follow_up",
+    "query": "E na outra empresa onde ele trabalha atualmente?",
+    "history": [
+      { "role": "user", "content": "Qual foi o primeiro emprego do Anderson?" },
+      { "role": "assistant", "content": "O primeiro emprego corporativo foi no **Grupo 3corações** (Jan/2025 - Abr/2026) como Aprendiz no Setor Fiscal." }
+    ],
+    "expectedIntent": "faq_portfolio",
+    "expectedKeywords": ["Distribuidora Mais Saúde", "Central Grupo Mais", "WinThor"],
+    "forbiddenKeywords": [],
+    "expectedAnchor": "#experiencia",
+    "description": "(b) Recuperação/Correferência Contrastiva: resolver 'na outra empresa' para Distribuidora Mais Saúde quando o histórico falava da 3corações."
+  },
+  {
+    "id": "eval-62-comparative-robots-companies",
+    "lang": "pt",
+    "category": "multi_topic",
+    "query": "Qual a diferença entre os robôs da Mais Saúde e os robôs do Grupo 3corações?",
+    "expectedIntent": "tecnica_projeto",
+    "expectedKeywords": ["WinThor", "10 robôs", "Grupo 3corações", "15.000+", "SEFAZ"],
+    "forbiddenKeywords": [],
+    "description": "(b) Recuperação Comparativa: recuperar e contrastar os 10 robôs WinThor/Oracle da Mais Saúde com os 5 robôs fiscais SEFAZ da 3corações."
+  },
+  {
+    "id": "eval-63-crag-partial-truth-k8s-chamados",
+    "lang": "pt",
+    "category": "factual",
+    "query": "Como o Anderson configurou Kubernetes no Sistema de Chamados da Mais Saúde?",
+    "expectedIntent": "tecnica_projeto",
+    "expectedKeywords": ["Kubernetes", "não", "Sistema de Chamados", "FastAPI"],
+    "forbiddenKeywords": ["EKS", " GKE "],
+    "description": "(c) Alucinação/CRAG Parcial: negar o uso de Kubernetes mantendo a explicação real do Sistema de Chamados."
+  },
+  {
+    "id": "eval-64-crag-fake-aws-certification",
+    "lang": "pt",
+    "category": "unknown_fact",
+    "query": "Em que ano o Anderson tirou a certificação AWS Solutions Architect?",
+    "expectedIntent": "faq_portfolio",
+    "expectedKeywords": ["Huawei", "HCIA-Storage", "não"],
+    "forbiddenKeywords": ["tirou a certificação AWS em"],
+    "description": "(c) Alucinação/CRAG Certificação: negar certificação AWS e informar a certificação real Huawei HCIA-Storage V5.0."
+  },
+  {
+    "id": "eval-65-crag-fake-csharp-3coracoes",
+    "lang": "pt",
+    "category": "factual",
+    "query": "Quantos robôs em C# o Anderson desenvolveu no Grupo 3corações?",
+    "expectedIntent": "tecnica_projeto",
+    "expectedKeywords": ["C#", "não", "Python", "Grupo 3corações"],
+    "forbiddenKeywords": ["desenvolveu 5 robôs em C#"],
+    "description": "(c) Alucinação/CRAG Linguagem: corrigir que não usa C# e informar que os 5 robôs da 3corações foram feitos em Python."
+  },
+  {
+    "id": "eval-66-decompose-three-part-query",
+    "lang": "pt",
+    "category": "multi_topic",
+    "query": "Qual foi o primeiro emprego do Anderson, onde ele trabalha atualmente e em qual semestre da faculdade ele está?",
+    "expectedIntent": "faq_portfolio",
+    "expectedKeywords": ["Grupo 3corações", "Distribuidora Mais Saúde", "6º Semestre", "UNIFOR"],
+    "forbiddenKeywords": [],
+    "description": "(d) Decomposição Multi-Partes: responder às 3 subperguntas (primeiro emprego + emprego atual + semestre da UNIFOR) sem omitir nenhuma."
+  },
+  {
+    "id": "eval-67-decompose-ftpsync-and-contact",
+    "lang": "pt",
+    "category": "multi_topic",
+    "query": "Como funciona o FTP_SYNC e qual é o e-mail de contato do Anderson?",
+    "expectedIntent": "tecnica_projeto",
+    "expectedKeywords": ["FTP_SYNC", "10 segundos", "andersonvcataldo@gmail.com"],
+    "forbiddenKeywords": [],
+    "description": "(d) Decomposição Multi-Partes: responder sobre o funcionamento do FTP_SYNC e fornecer o e-mail oficial na mesma resposta."
+  },
+  {
+    "id": "eval-68-decompose-cert-and-languages",
+    "lang": "pt",
+    "category": "multi_topic",
+    "query": "Qual certificação internacional o Anderson possui e quais idiomas ele fala?",
+    "expectedIntent": "faq_portfolio",
+    "expectedKeywords": ["Huawei", "HCIA-Storage", "Português", "Inglês", "Avançado"],
+    "forbiddenKeywords": [],
+    "description": "(d) Decomposição Multi-Partes: responder sobre a certificação Huawei HCIA-Storage e sobre os idiomas falados."
+  },
+  {
+    "id": "eval-69-ambiguous-which-project-pt",
+    "lang": "pt",
+    "category": "ambiguous",
+    "query": "Como funciona esse projeto e qual foi o desafio dele?",
+    "expectedIntent": "tecnica_projeto",
+    "expectedKeywords": ["Qual", "Central Grupo Mais", "Sistema de Chamados", "FTP_SYNC"],
+    "forbiddenKeywords": [],
+    "description": "(e) Pergunta Ambígua (PT): sem histórico, deve pedir esclarecimento indicando os projetos disponíveis em vez de adivinhar."
+  },
+  {
+    "id": "eval-70-ambiguous-which-system-db-pt",
+    "lang": "pt",
+    "category": "ambiguous",
+    "query": "Qual foi o resultado desse sistema?",
+    "expectedIntent": "tecnica_projeto",
+    "expectedKeywords": ["Qual", "Central Grupo Mais", "Sistema de Chamados", "Devolução"],
+    "forbiddenKeywords": [],
+    "description": "(e) Pergunta Ambígua Sistema (PT): sem histórico, deve perguntar a qual sistema o visitante se refere."
+  },
+  {
+    "id": "eval-71-ambiguous-which-robot-en",
+    "lang": "en",
+    "category": "ambiguous",
+    "query": "How does that robot work and what was its impact?",
+    "expectedIntent": "tecnica_projeto",
+    "expectedKeywords": ["Which", "FTP_SYNC", "EDI Pharma Link", "3corações"],
+    "forbiddenKeywords": [],
+    "description": "(e) Ambiguous Query (EN): without history, ask a single clarifying question listing the main robot groups."
   }
 ]

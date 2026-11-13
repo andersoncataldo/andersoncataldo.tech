@@ -172,7 +172,8 @@ export interface EvalCase {
     | 'smalltalk'
     | 'out_of_scope'
     | 'prompt_injection'
-    | 'system_prompt_leak';
+    | 'system_prompt_leak'
+    | 'ambiguous';
   query: string;
   history?: ChatMessageItem[];
   expectedIntent: IntentLabel;
