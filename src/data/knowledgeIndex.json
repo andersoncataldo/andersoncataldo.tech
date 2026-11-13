@@ -1,6 +1,6 @@
 {
   "version": "2.1.0",
-  "generatedAt": "2026-11-13T03:29:34.091Z",
+  "generatedAt": "2026-11-13T03:38:22.220Z",
   "embeddingModel": "hybrid-local-tfidf-bm25-v2.1",
   "totalChunks": 35,
   "canonicalMetrics": {

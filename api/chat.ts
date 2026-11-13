@@ -170,6 +170,62 @@ function parseAgentAction(name: unknown, args: Record<string, unknown> | undefin
   return null;
 }
 
+async function tryCrossProviderFallback(params: {
+  systemInstruction: string;
+  retrievedContextBlock: string;
+  sanitizedMessages: Array<{ role: string; content: string }>;
+  maxOutputTokens: number;
+}): Promise<{ text: string; model: string } | null> {
+  const openaiKey = typeof process !== 'undefined' ? process?.env?.OPENAI_API_KEY : undefined;
+  if (!openaiKey) return null;
+
+  const baseUrl = (
+    (typeof process !== 'undefined' ? process?.env?.OPENAI_BASE_URL : undefined) ||
+    'https://api.openai.com/v1'
+  ).replace(/\/+$/, '');
+  const model =
+    (typeof process !== 'undefined' ? process?.env?.OPENAI_FALLBACK_MODEL : undefined) ||
+    'gpt-4o-mini';
+
+  const controller = new AbortController();
+  const timer = setTimeout(() => controller.abort(), 6000);
+  try {
+    const res = await fetch(`${baseUrl}/chat/completions`, {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+        Authorization: `Bearer ${openaiKey}`,
+      },
+      signal: controller.signal,
+      body: JSON.stringify({
+        model,
+        temperature: 0.2,
+        max_tokens: params.maxOutputTokens,
+        messages: [
+          {
+            role: 'system',
+            content: `${params.systemInstruction}\n\n${params.retrievedContextBlock}`,
+          },
+          ...params.sanitizedMessages.slice(-6).map((m) => ({
+            role: m.role === 'assistant' ? 'assistant' : 'user',
+            content: m.content,
+          })),
+        ],
+      }),
+    });
+    if (!res.ok) return null;
+    const data = (await res.json()) as {
+      choices?: Array<{ message?: { content?: string } }>;
+    };
+    const text = data.choices?.[0]?.message?.content?.trim();
+    return text ? { text, model } : null;
+  } catch {
+    return null;
+  } finally {
+    clearTimeout(timer);
+  }
+}
+
 /**
  * Fetch com timeout e retry com backoff exponencial para resiliência no Edge
  */
@@ -562,6 +618,60 @@ export default async function handler(req: Request): Promise<Response> {
     }
 
     if (!geminiRes || !geminiRes.ok || !geminiRes.body) {
+      const crossFallback = await tryCrossProviderFallback({
+        systemInstruction,
+        retrievedContextBlock,
+        sanitizedMessages,
+        maxOutputTokens: plan.recommendedThinkingBudget > 0 ? 800 : 450,
+      });
+
+      if (crossFallback) {
+        const verified = verifyOutputMetrics(crossFallback.text, lang);
+        setCachedReply(cacheKey, verified.sanitizedText, 'gemini');
+        const pendingWrites: Promise<unknown>[] = [
+          logAiTelemetryNonBlocking({
+            traceId,
+            sessionId,
+            locale: lang,
+            originalQuery: guardIn.sanitizedQuery,
+            rewrittenQuery: plan.rewrittenQuery,
+            intent: intent.intent,
+            aspect: intent.aspect,
+            cragStatus: plan.cragStatus,
+            confidence: retrieval.maxConfidence,
+            isMultiPart: plan.isMultiPart,
+            needsClarification: false,
+            usedLlm: true,
+            cacheHit: false,
+            coveRepaired: !verified.valid,
+            topChunkIds,
+            citations: Array.from(new Set(retrieval.topChunks.map((c) => c.chunk.sectionAnchor))),
+            latencyMs: Date.now() - startedAt,
+          }),
+        ];
+        if (plan.cragStatus === 'sufficient') {
+          pendingWrites.push(
+            upsertAnswerCacheL2({
+              queryHash,
+              locale: lang,
+              normalizedQuery: normalizeText(retrieval.resolvedQuery),
+              intent: intent.intent,
+              aspect: intent.aspect,
+              cragStatus: 'sufficient',
+              responseText: verified.sanitizedText,
+              citations: Array.from(new Set(retrieval.topChunks.map((c) => c.chunk.sectionAnchor))),
+            }),
+          );
+        }
+        return createStreamResponse(
+          verified.sanitizedText,
+          'gemini',
+          `cross_provider_fallback:${crossFallback.model}`,
+          traceId,
+          pendingWrites,
+        );
+      }
+
       const fallback = synthesizeConversationalResponse(
         guardIn.sanitizedQuery,
         lang,

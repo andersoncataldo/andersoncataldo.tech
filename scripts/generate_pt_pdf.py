@@ -118,7 +118,7 @@ def build_pdf():
         "<font color='#2563eb'>andersonvcataldo@gmail.com</font><br/>"
         "<font color='#2563eb'>LinkedIn</font>: linkedin.com/in/andersonnviana · "
         "<font color='#2563eb'>GitHub</font>: github.com/andersoncataldo · "
-        "<font color='#2563eb'>Portfólio</font>: andersoncataldo.tech"
+        "<font color='#2563eb'>Portfólio</font>: andersoncataldotech.vercel.app"
     )
     story.append(Paragraph(contacts, contact_style))
     story.append(Spacer(1, 4))

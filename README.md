@@ -8,7 +8,7 @@
 
 > Portfólio de alta performance e vitrine técnica profissional de nível **SaaS** de **Anderson Cataldo**, Desenvolvedor Full-Stack | Automação & RPA | Agentes de IA (LLM) | Python · TypeScript.
 
-🔗 **Live Demo:** [https://andersoncataldo.tech](https://andersoncataldo.tech)  
+🔗 **Live Demo:** [https://andersoncataldotech.vercel.app](https://andersoncataldotech.vercel.app)  
 📁 **Repositório:** [https://github.com/andersoncataldo/andersoncataldo.tech](https://github.com/andersoncataldo/andersoncataldo.tech)
 
 ---
@@ -174,6 +174,7 @@ npm run build
 
 ### Variáveis de Ambiente (Servidor / Vercel)
 - `GEMINI_API_KEY`: Chave server-side da Google Gemini API (nunca exposta ao front-end com prefixo `VITE_`). Sem ela, o assistente opera integralmente através do motor híbrido local (`BM25 + Cosine Similarity + RRF + MMR + Dynamic NLG`).
+- `OPENAI_API_KEY` *(opcional)*: Chave de fallback *cross-provider* (OpenAI ou endpoint compatível via `OPENAI_BASE_URL` / `OPENAI_FALLBACK_MODEL`) acionada automaticamente caso toda a cadeia Gemini falhe.
 - `SUPABASE_URL` e `SUPABASE_ANON_KEY`: Conexão com o projeto Supabase para leitura/escrita via RPCs seguras.
 - `AI_WRITE_SECRET`: Segredo server-side (mínimo 32 caracteres) validado pelas RPCs `SECURITY DEFINER` do Supabase para gravar telemetria, cache L2, feedback e leads sem expor `service_role`.
 

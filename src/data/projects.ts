@@ -410,7 +410,7 @@ export const projects: Project[] = [
     techStack: ['React 18', 'TypeScript', 'Tailwind CSS v4', 'Vite 6', 'Vercel Edge', 'Gemini 3.8/3.5', 'Supabase RLS', 'CRAG + CoVe'],
     icon: 'BookOpen',
     github: 'https://github.com/andersoncataldo/andersoncataldo.tech',
-    liveDemo: 'https://andersoncataldo.tech',
+    liveDemo: 'https://andersoncataldotech.vercel.app',
     featured: false,
   },
 ];
