@@ -1,0 +1,39 @@
+name: AI Smoke Test & LGPD Retention
+
+on:
+  schedule:
+    - cron: '0 9 * * *'
+  workflow_dispatch:
+
+jobs:
+  smoke-and-retention:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+
+      - name: Run Production AI Smoke Test
+        env:
+          PROD_URL: ${{ vars.PROD_URL || 'https://andersoncataldotech.vercel.app' }}
+        run: node scripts/smoke-ai-prod.mjs
+
+      - name: Trigger LGPD Data Retention Purge (if configured)
+        env:
+          SUPABASE_URL: ${{ secrets.SUPABASE_URL }}
+          SUPABASE_ANON_KEY: ${{ secrets.SUPABASE_ANON_KEY }}
+          AI_WRITE_SECRET: ${{ secrets.AI_WRITE_SECRET }}
+        run: |
+          if [ -z "$SUPABASE_URL" ] || [ -z "$SUPABASE_ANON_KEY" ]; then
+            echo "Supabase secrets not set in GitHub Actions; skipping remote purge."
+            exit 0
+          fi
+          curl -sfS -X POST "${SUPABASE_URL%/}/rest/v1/rpc/purge_expired_ai_data" \
+            -H "apikey: ${SUPABASE_ANON_KEY}" \
+            -H "Authorization: Bearer ${SUPABASE_ANON_KEY}" \
+            -H "Content-Type: application/json" \
+            -d "{}" && echo "LGPD retention purge completed."
