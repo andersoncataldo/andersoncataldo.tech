@@ -65,7 +65,14 @@ A aplicação foi desenvolvida no padrão de craft de produtos digitais Silicon 
     3. **Recuperar e Avaliar (Corrective RAG — CRAG):** Busca híbrida **BM25 + Similaridade de Cosseno + RRF + MMR** por subpergunta e avaliação de suficiência (`sufficient`, `partial`, `insufficient`).
     4. **Responder:** Síntese *Direct-Answer-First* com memória anti-repetição, links âncora clicáveis (`#sobre`, `#experiencia`, `#rpa`, `#habilidades`, `#projetos`, `#contato`) e orçamento adaptativo de raciocínio (`thinkingConfig: { thinkingBudget: 0 | 256, includeThoughts: false }`) no Edge.
     5. **Verificar (Chain-of-Verification Determinístico):** Checagem de cada número e afirmação contra `canonicalMetrics` antes do envio.
-  - **Suíte de 71 Evals Automatizados (`evals/dataset.json` & `scripts/run-evals.mjs`):** Integrada ao CI no GitHub Actions validando 100% de acurácia factual, 0% de alucinação, esclarecimento em perguntas ambíguas, resolução de meia-verdade CRAG, recusa correta e resistência a injection.
+  - **Agente Anderson AI com Tool Calling & Streaming em 2 Estágios (`gemini-3.8-flash` → `gemini-3.5-flash-lite`):**
+    - Fallback automático multi-modelo no Edge com indicador de estágio antes do primeiro token (*Consultando base verificada* → *Gerando resposta com IA*).
+    - **Function Calling** nativo para ações reais no portfólio: abertura automática do `LeadForm` (`open_lead_form`), rolagem para seções (`navigate_to_section`) e download direto de CV (`offer_cv_download`), diferenciando respostas diretas (`mode: 'direct'`) de fallback offline real (`mode: 'offline'`).
+  - **Persistência, Cache L2 e Segurança LGPD (Supabase PostgreSQL):**
+    - Cache em 2 camadas: L1 em memória + L2 persistente (`public.ai_answer_cache`), com invalidação automática via `api/feedback.ts` quando o usuário marca feedback negativo (`helpful: false`).
+    - Telemetria completa com flush no Edge (`public.ai_telemetry_logs`) e captação de leads (`public.ai_leads` via `/api/lead`).
+    - Zero exposição de `service_role` no Edge: todas as escritas passam por RPCs `SECURITY DEFINER` autenticadas por `AI_WRITE_SECRET` e política de retenção LGPD (`purge_expired_ai_data()`).
+  - **Suíte de 95 Evals Automatizados (`evals/dataset.json`, `evals/dataset-hard.json` & `scripts/run-evals.mjs`) + Contratos + Smoke Test:** Integrada ao CI validando 100% de acurácia factual (71 núcleo + 24 difíceis), 0% de alucinação, contratos HTTP/RFC 7807 (`/api/chat`, `/api/feedback`, `/api/lead`) e smoke test diário em produção (`npm run smoke:prod`).
 
 ### 9. Progressive Web App (PWA) & Capacidade Offline (`vite-plugin-pwa`)
 - Instalação nativa como Web App no Android, iOS e Desktop.
@@ -110,14 +117,18 @@ A aplicação foi desenvolvida no padrão de craft de produtos digitais Silicon 
 ```text
 andersoncataldo.tech/
 ├── .agents/                      # Ecossistema de Agentes de IA e Governança
-├── .github/workflows/ci.yml      # CI/CD automatizado (lint + evals + build)
-├── api/                          # Vercel Edge Functions (/api/chat.ts e /api/og.tsx)
+├── .github/workflows/
+│   ├── ci.yml                     # CI/CD automatizado (lint + 95 evals + contratos + build)
+│   └── ai-smoke-and-retention.yml # Smoke test diário em produção + retenção LGPD
+├── api/                           # Vercel Edge Functions (/api/chat.ts, /api/feedback.ts, /api/lead.ts, /api/og.tsx)
 ├── evals/
-│   └── dataset.json              # Conjunto dourado de 71 casos de teste bilíngues (PT/EN)
-├── openspec/                     # Especificações vivas (Spec-Driven Development)
-├── prompts/anderson-ai/          # Prompts de sistema versionados (v1.md, v2.md, evals.json)
-├── public/                       # Assets públicos (favicon, og-image, sitemap)
-├── scripts/                      # Scripts de engenharia (build-knowledge.mjs, run-evals.mjs, contrast.js)
+│   ├── dataset.json               # 71 casos de teste núcleo bilíngues (PT/EN)
+│   └── dataset-hard.json          # 24 casos difíceis (injeção, ambiguidade, cross-company)
+├── openspec/                      # Especificações vivas (Spec-Driven Development)
+├── prompts/anderson-ai/           # Prompts de sistema versionados (v1.md, v2.md, evals.json)
+├── public/                        # Assets públicos (favicon, og-image, sitemap)
+├── scripts/                       # build-knowledge.mjs, run-evals.mjs, test-api-contracts.mjs, smoke-ai-prod.mjs, generate_*_pdf.py
+├── supabase/migrations/           # Migrations SQL (RLS, RPCs AI_WRITE_SECRET, cache L2, retenção LGPD)
 ├── src/
 │   ├── assets/                   # Previews, fotos e currículos em PDF (PT e EN)
 │   ├── components/               # Componentes modulares UI (incluindo AiAssistantWidget.tsx)
@@ -146,19 +157,25 @@ npm run dev
 #    Se GEMINI_API_KEY estiver definida no ambiente, pré-calcula embeddings text-embedding-004
 npm run build:knowledge
 
-# 4. Executar a suíte de 71 Evals de IA (modo determinístico para CI, sem precisar de chave)
-npm run evals
+# 4. Executar a suíte completa de qualidade (lint + 95 Evals + contratos de API)
+npm run check
 
-# 5. Executar Evals contra a API real do Gemini (requer GEMINI_API_KEY definida)
+# 5. Executar Evals contra a API real do Gemini ou Smoke Test em produção
 GEMINI_API_KEY="sua_chave" npm run evals:live
+npm run smoke:prod
 
-# 6. Executar linter e build de produção
-npm run lint
+# 6. Gerar novamente os currículos em PDF (PT-BR e EN)
+python scripts/generate_pt_pdf.py
+python scripts/generate_en_pdf.py
+
+# 7. Executar build de produção
 npm run build
 ```
 
-### Variáveis de Ambiente (Opcional)
-- `GEMINI_API_KEY`: Chave server-side da Google Gemini API (configurada exclusivamente nas variáveis de ambiente da Vercel ou no shell local; **nunca** exposta ao front-end com prefixo `VITE_`). Sem ela, o assistente opera integralmente através do motor de Machine Learning Híbrido local (`BM25 + Cosine Similarity + RRF + MMR + Dynamic NLG`).
+### Variáveis de Ambiente (Servidor / Vercel)
+- `GEMINI_API_KEY`: Chave server-side da Google Gemini API (nunca exposta ao front-end com prefixo `VITE_`). Sem ela, o assistente opera integralmente através do motor híbrido local (`BM25 + Cosine Similarity + RRF + MMR + Dynamic NLG`).
+- `SUPABASE_URL` e `SUPABASE_ANON_KEY`: Conexão com o projeto Supabase para leitura/escrita via RPCs seguras.
+- `AI_WRITE_SECRET`: Segredo server-side (mínimo 32 caracteres) validado pelas RPCs `SECURITY DEFINER` do Supabase para gravar telemetria, cache L2, feedback e leads sem expor `service_role`.
 
 ---
 

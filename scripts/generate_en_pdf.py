@@ -146,7 +146,7 @@ def build_pdf():
     # Technical Skills
     story.append(Paragraph("Technical Skills", section_heading))
     skills = [
-        ("AI & Agents", "AI Agents, Multi-Agent Systems, LLM Orchestration, Prompt Engineering, Generative AI, Claude Code, MCP (Model Context Protocol), Google Gemini API, OpenAI API, Guardrails, Fallback & Anti-hallucination, AI-Assisted Engineering."),
+        ("AI & Agents", "AI Agents, Multi-Agent Systems, LLM Orchestration, Prompt Engineering, Generative AI, Corrective RAG (CRAG), Function Calling, Evals (95/95), Claude Code, MCP (Model Context Protocol), Google Gemini API, OpenAI API, Guardrails, Fallback & Anti-hallucination, AI-Assisted Engineering."),
         ("Automation & RPA", "Python, Selenium, Playwright, PyAutoGUI, Web Scraping, ETL, Systems Integration, EDI (Pharma Link), FTP/SFTP (Paramiko, ftplib, WinSCP), Pandas, Tkinter, PyInstaller, Windows Task Scheduler, n8n."),
         ("Back-end", "Node.js, Express, TypeScript, Python, FastAPI, SQLAlchemy, Alembic, Pydantic v2, Zod, RESTful APIs, JWT, SSO, RBAC; also Java (Spring Boot) and Django."),
         ("Front-end", "React 19, Next.js 16 (App Router, Server Actions), Vite, Tailwind CSS 4, Recharts, Design Systems, Vue.js, HTML5, CSS3, WCAG 2.1 AA."),
@@ -209,7 +209,7 @@ def build_pdf():
         ("IT Asset Management & SHA-256 Custody (Corporate)", "Hardware inventory tracking with 2-tier approval flow, database audit triggers, and automated .docx Responsibility Term generation signed with SHA-256 cryptographic hashes. Next.js, Node.js, PostgreSQL (Supabase)."),
         ("Autonomous AI Agent Squad (Applied Research)", "Multi-agent architecture built from scratch: role personas, shared JSON memory bus, finite state machine orchestrator, and PM2 daemon for continuous 24/7 operation. Node.js, Google Gemini API, PM2."),
         ("Gamified Educational Platform — São Carlo Acutis (Personal)", "Full-stack web application featuring interactive quizzes, real-time scoring, and educational gamification. React, TypeScript, Tailwind CSS, Supabase, Vercel."),
-        ("High-Performance SaaS Portfolio (Personal)", "Silicon Valley craft standard personal engineering showcase with global Command Palette (Ctrl+K), executable CLI terminal, interactive RPA ROI simulator, WCAG 2.1 AA accessibility, and sub-1.5s loading. React, TypeScript, Tailwind CSS 4, Vite, Vercel.")
+        ("SaaS Web Portfolio & Anderson AI Agent (Personal)", "Full-stack showcase built to Silicon Valley craft standards with global Command Palette (Ctrl+K), executable CLI, RPA ROI simulator, lazy-loaded AI assistant (hybrid 5-stage CRAG + CoVe, 95/95 evals, Gemini 3.8/3.5 with Function Calling, L1/L2 Supabase cache with negative-feedback invalidation, AI_WRITE_SECRET RPCs, LGPD purge), WCAG 2.1 AA, and PWA. React, TypeScript, Tailwind CSS 4, Vite 6, Vercel Edge, Supabase.")
     ]
     for p_title, p_desc in projects:
         story.append(Paragraph(f"• <b>{p_title}:</b> {p_desc}", bullet_style))
