@@ -84,6 +84,92 @@ function setCachedReply(key: string, reply: string, mode: 'gemini' | 'offline'):
   });
 }
 
+export type AgentAction =
+  | { type: 'open_lead_form'; reason?: string }
+  | { type: 'navigate_to_section'; section: 'sobre' | 'experiencia' | 'projetos' | 'automacao' | 'skills' | 'contato' }
+  | { type: 'offer_cv_download'; language: 'pt' | 'en' };
+
+const ALLOWED_SECTIONS = new Set([
+  'sobre',
+  'experiencia',
+  'projetos',
+  'automacao',
+  'skills',
+  'contato',
+]);
+
+const GEMINI_TOOLS = [
+  {
+    functionDeclarations: [
+      {
+        name: 'open_lead_form',
+        description:
+          'Abre o formulário de contato/recrutamento dentro do chat quando o usuário demonstrar interesse em contratar Anderson, solicitar orçamento, agendar entrevista ou deixar contato.',
+        parameters: {
+          type: 'OBJECT',
+          properties: {
+            reason: {
+              type: 'STRING',
+              description: 'Breve motivo do contato (ex: Recrutamento, Projeto RPA, Consultoria IA).',
+            },
+          },
+        },
+      },
+      {
+        name: 'navigate_to_section',
+        description:
+          'Oferece navegação rápida até uma seção do portfólio quando o usuário pedir para ver projetos, experiência, automações, skills ou contato.',
+        parameters: {
+          type: 'OBJECT',
+          properties: {
+            section: {
+              type: 'STRING',
+              enum: ['sobre', 'experiencia', 'projetos', 'automacao', 'skills', 'contato'],
+            },
+          },
+          required: ['section'],
+        },
+      },
+      {
+        name: 'offer_cv_download',
+        description:
+          'Exibe botão direto para baixar o currículo (CV) em PDF quando o usuário solicitar o currículo de Anderson.',
+        parameters: {
+          type: 'OBJECT',
+          properties: {
+            language: {
+              type: 'STRING',
+              enum: ['pt', 'en'],
+            },
+          },
+        },
+      },
+    ],
+  },
+];
+
+function parseAgentAction(name: unknown, args: Record<string, unknown> | undefined, defaultLang: 'pt' | 'en'): AgentAction | null {
+  if (name === 'open_lead_form') {
+    const reason = typeof args?.reason === 'string' ? args.reason.trim().slice(0, 120) : undefined;
+    return { type: 'open_lead_form', reason };
+  }
+  if (name === 'navigate_to_section') {
+    const section = typeof args?.section === 'string' ? args.section.trim().toLowerCase() : '';
+    if (ALLOWED_SECTIONS.has(section)) {
+      return {
+        type: 'navigate_to_section',
+        section: section as 'sobre' | 'experiencia' | 'projetos' | 'automacao' | 'skills' | 'contato',
+      };
+    }
+    return null;
+  }
+  if (name === 'offer_cv_download') {
+    const lang = args?.language === 'en' ? 'en' : args?.language === 'pt' ? 'pt' : defaultLang;
+    return { type: 'offer_cv_download', language: lang };
+  }
+  return null;
+}
+
 /**
  * Fetch com timeout e retry com backoff exponencial para resiliência no Edge
  */
@@ -214,26 +300,33 @@ export default async function handler(req: Request): Promise<Response> {
   const guardIn = validateInputGuardrails(lastUserMessage);
   if (!guardIn.allowed) {
     const localResult = synthesizeConversationalResponse(lastUserMessage, lang, historyBeforeLast);
-    void logAiTelemetryNonBlocking({
+    return createStreamResponse(
+      localResult.reply,
+      'direct',
+      'input_guardrail',
       traceId,
-      sessionId,
-      locale: lang,
-      originalQuery: lastUserMessage,
-      rewrittenQuery: guardIn.sanitizedQuery || lastUserMessage,
-      intent: localResult.intent.intent,
-      aspect: localResult.intent.aspect,
-      cragStatus: 'insufficient',
-      confidence: localResult.intent.confidence,
-      isMultiPart: false,
-      needsClarification: false,
-      usedLlm: false,
-      cacheHit: false,
-      coveRepaired: false,
-      topChunkIds: [],
-      citations: [],
-      latencyMs: Date.now() - startedAt,
-    });
-    return createStreamResponse(localResult.reply, 'direct', 'input_guardrail', traceId);
+      [
+        logAiTelemetryNonBlocking({
+          traceId,
+          sessionId,
+          locale: lang,
+          originalQuery: lastUserMessage,
+          rewrittenQuery: guardIn.sanitizedQuery || lastUserMessage,
+          intent: localResult.intent.intent,
+          aspect: localResult.intent.aspect,
+          cragStatus: 'insufficient',
+          confidence: localResult.intent.confidence,
+          isMultiPart: false,
+          needsClarification: false,
+          usedLlm: false,
+          cacheHit: false,
+          coveRepaired: false,
+          topChunkIds: [],
+          citations: [],
+          latencyMs: Date.now() - startedAt,
+        }),
+      ],
+    );
   }
 
   // 2. Classificação de intenção e pipeline de raciocínio em 5 etapas (Rewrite + Ambiguity + Decompose + Hybrid CRAG)
@@ -255,26 +348,33 @@ export default async function handler(req: Request): Promise<Response> {
     intent.detectedUnlistedTech.length > 0
   ) {
     const direct = synthesizeConversationalResponse(guardIn.sanitizedQuery, lang, historyBeforeLast);
-    void logAiTelemetryNonBlocking({
+    return createStreamResponse(
+      direct.reply,
+      'direct',
+      `direct_intent_${intent.intent}`,
       traceId,
-      sessionId,
-      locale: lang,
-      originalQuery: guardIn.sanitizedQuery,
-      rewrittenQuery: plan.rewrittenQuery,
-      intent: intent.intent,
-      aspect: intent.aspect,
-      cragStatus: plan.cragStatus,
-      confidence: retrieval.maxConfidence,
-      isMultiPart: plan.isMultiPart,
-      needsClarification: plan.isAmbiguous,
-      usedLlm: false,
-      cacheHit: false,
-      coveRepaired: direct.coveRepaired,
-      topChunkIds,
-      citations: direct.citations,
-      latencyMs: Date.now() - startedAt,
-    });
-    return createStreamResponse(direct.reply, 'direct', `direct_intent_${intent.intent}`, traceId);
+      [
+        logAiTelemetryNonBlocking({
+          traceId,
+          sessionId,
+          locale: lang,
+          originalQuery: guardIn.sanitizedQuery,
+          rewrittenQuery: plan.rewrittenQuery,
+          intent: intent.intent,
+          aspect: intent.aspect,
+          cragStatus: plan.cragStatus,
+          confidence: retrieval.maxConfidence,
+          isMultiPart: plan.isMultiPart,
+          needsClarification: plan.isAmbiguous,
+          usedLlm: false,
+          cacheHit: false,
+          coveRepaired: direct.coveRepaired,
+          topChunkIds,
+          citations: direct.citations,
+          latencyMs: Date.now() - startedAt,
+        }),
+      ],
+    );
   }
 
   // 4. Consulta ao Cache de Respostas L1 (em memória) e L2 (Supabase PostgreSQL com timeout de 350ms)
@@ -288,26 +388,27 @@ export default async function handler(req: Request): Promise<Response> {
 
   const cachedL1 = getCachedReply(cacheKey);
   if (cachedL1 && (!recentAssistantTexts || !recentAssistantTexts.includes(cachedL1.reply.slice(0, 60)))) {
-    void logAiTelemetryNonBlocking({
-      traceId,
-      sessionId,
-      locale: lang,
-      originalQuery: guardIn.sanitizedQuery,
-      rewrittenQuery: plan.rewrittenQuery,
-      intent: intent.intent,
-      aspect: intent.aspect,
-      cragStatus: plan.cragStatus,
-      confidence: retrieval.maxConfidence,
-      isMultiPart: plan.isMultiPart,
-      needsClarification: false,
-      usedLlm: cachedL1.mode === 'gemini',
-      cacheHit: true,
-      coveRepaired: false,
-      topChunkIds,
-      citations: [],
-      latencyMs: Date.now() - startedAt,
-    });
-    return createStreamResponse(cachedL1.reply, cachedL1.mode, 'answer_cache_l1_hit', traceId);
+    return createStreamResponse(cachedL1.reply, cachedL1.mode, 'answer_cache_l1_hit', traceId, [
+      logAiTelemetryNonBlocking({
+        traceId,
+        sessionId,
+        locale: lang,
+        originalQuery: guardIn.sanitizedQuery,
+        rewrittenQuery: plan.rewrittenQuery,
+        intent: intent.intent,
+        aspect: intent.aspect,
+        cragStatus: plan.cragStatus,
+        confidence: retrieval.maxConfidence,
+        isMultiPart: plan.isMultiPart,
+        needsClarification: false,
+        usedLlm: cachedL1.mode === 'gemini',
+        cacheHit: true,
+        coveRepaired: false,
+        topChunkIds,
+        citations: [],
+        latencyMs: Date.now() - startedAt,
+      }),
+    ]);
   }
 
   const cachedL2 = await lookupAnswerCacheL2(queryHash, lang, 350);
@@ -316,26 +417,27 @@ export default async function handler(req: Request): Promise<Response> {
     (!recentAssistantTexts || !recentAssistantTexts.includes(cachedL2.responseText.slice(0, 60)))
   ) {
     setCachedReply(cacheKey, cachedL2.responseText, 'gemini');
-    void logAiTelemetryNonBlocking({
-      traceId,
-      sessionId,
-      locale: lang,
-      originalQuery: guardIn.sanitizedQuery,
-      rewrittenQuery: plan.rewrittenQuery,
-      intent: intent.intent,
-      aspect: intent.aspect,
-      cragStatus: plan.cragStatus,
-      confidence: retrieval.maxConfidence,
-      isMultiPart: plan.isMultiPart,
-      needsClarification: false,
-      usedLlm: true,
-      cacheHit: true,
-      coveRepaired: false,
-      topChunkIds,
-      citations: cachedL2.citations,
-      latencyMs: Date.now() - startedAt,
-    });
-    return createStreamResponse(cachedL2.responseText, 'gemini', 'answer_cache_l2_hit', traceId);
+    return createStreamResponse(cachedL2.responseText, 'gemini', 'answer_cache_l2_hit', traceId, [
+      logAiTelemetryNonBlocking({
+        traceId,
+        sessionId,
+        locale: lang,
+        originalQuery: guardIn.sanitizedQuery,
+        rewrittenQuery: plan.rewrittenQuery,
+        intent: intent.intent,
+        aspect: intent.aspect,
+        cragStatus: plan.cragStatus,
+        confidence: retrieval.maxConfidence,
+        isMultiPart: plan.isMultiPart,
+        needsClarification: false,
+        usedLlm: true,
+        cacheHit: true,
+        coveRepaired: false,
+        topChunkIds,
+        citations: cachedL2.citations,
+        latencyMs: Date.now() - startedAt,
+      }),
+    ]);
   }
 
   const apiKey = typeof process !== 'undefined' ? process?.env?.GEMINI_API_KEY : undefined;
@@ -348,38 +450,42 @@ export default async function handler(req: Request): Promise<Response> {
       historyBeforeLast,
     );
     setCachedReply(cacheKey, synthesized.reply, 'offline');
-    if (plan.cragStatus === 'sufficient') {
-      void upsertAnswerCacheL2({
-        queryHash,
+    const pendingWrites: Promise<unknown>[] = [
+      logAiTelemetryNonBlocking({
+        traceId,
+        sessionId,
         locale: lang,
-        normalizedQuery: normalizeText(retrieval.resolvedQuery),
+        originalQuery: guardIn.sanitizedQuery,
+        rewrittenQuery: plan.rewrittenQuery,
         intent: intent.intent,
         aspect: intent.aspect,
-        cragStatus: 'sufficient',
-        responseText: synthesized.reply,
+        cragStatus: plan.cragStatus,
+        confidence: retrieval.maxConfidence,
+        isMultiPart: plan.isMultiPart,
+        needsClarification: false,
+        usedLlm: false,
+        cacheHit: false,
+        coveRepaired: synthesized.coveRepaired,
+        topChunkIds,
         citations: synthesized.citations,
-      });
+        latencyMs: Date.now() - startedAt,
+      }),
+    ];
+    if (plan.cragStatus === 'sufficient') {
+      pendingWrites.push(
+        upsertAnswerCacheL2({
+          queryHash,
+          locale: lang,
+          normalizedQuery: normalizeText(retrieval.resolvedQuery),
+          intent: intent.intent,
+          aspect: intent.aspect,
+          cragStatus: 'sufficient',
+          responseText: synthesized.reply,
+          citations: synthesized.citations,
+        }),
+      );
     }
-    void logAiTelemetryNonBlocking({
-      traceId,
-      sessionId,
-      locale: lang,
-      originalQuery: guardIn.sanitizedQuery,
-      rewrittenQuery: plan.rewrittenQuery,
-      intent: intent.intent,
-      aspect: intent.aspect,
-      cragStatus: plan.cragStatus,
-      confidence: retrieval.maxConfidence,
-      isMultiPart: plan.isMultiPart,
-      needsClarification: false,
-      usedLlm: false,
-      cacheHit: false,
-      coveRepaired: synthesized.coveRepaired,
-      topChunkIds,
-      citations: synthesized.citations,
-      latencyMs: Date.now() - startedAt,
-    });
-    return createStreamResponse(synthesized.reply, 'offline', 'hybrid_ml_local', traceId);
+    return createStreamResponse(synthesized.reply, 'offline', 'hybrid_ml_local', traceId, pendingWrites);
   }
 
   // 6. Geração Fundamentada com Google Gemini 2.5 Flash recebendo apenas os top-k chunks recuperados
@@ -424,6 +530,7 @@ export default async function handler(req: Request): Promise<Response> {
             headers: { 'Content-Type': 'application/json' },
             body: JSON.stringify({
               contents,
+              tools: GEMINI_TOOLS,
               generationConfig: {
                 temperature: 0.2,
                 maxOutputTokens: plan.recommendedThinkingBudget > 0 ? 800 : 450,
@@ -460,26 +567,27 @@ export default async function handler(req: Request): Promise<Response> {
         lang,
         historyBeforeLast,
       );
-      void logAiTelemetryNonBlocking({
-        traceId,
-        sessionId,
-        locale: lang,
-        originalQuery: guardIn.sanitizedQuery,
-        rewrittenQuery: plan.rewrittenQuery,
-        intent: intent.intent,
-        aspect: intent.aspect,
-        cragStatus: plan.cragStatus,
-        confidence: retrieval.maxConfidence,
-        isMultiPart: plan.isMultiPart,
-        needsClarification: false,
-        usedLlm: false,
-        cacheHit: false,
-        coveRepaired: false,
-        topChunkIds,
-        citations: fallback.citations,
-        latencyMs: Date.now() - startedAt,
-      });
-      return createStreamResponse(fallback.reply, 'offline', 'fallback_upstream_error', traceId);
+      return createStreamResponse(fallback.reply, 'offline', 'fallback_upstream_error', traceId, [
+        logAiTelemetryNonBlocking({
+          traceId,
+          sessionId,
+          locale: lang,
+          originalQuery: guardIn.sanitizedQuery,
+          rewrittenQuery: plan.rewrittenQuery,
+          intent: intent.intent,
+          aspect: intent.aspect,
+          cragStatus: plan.cragStatus,
+          confidence: retrieval.maxConfidence,
+          isMultiPart: plan.isMultiPart,
+          needsClarification: false,
+          usedLlm: false,
+          cacheHit: false,
+          coveRepaired: false,
+          topChunkIds,
+          citations: fallback.citations,
+          latencyMs: Date.now() - startedAt,
+        }),
+      ]);
     }
 
     const transformStream = new TransformStream();
@@ -492,6 +600,7 @@ export default async function handler(req: Request): Promise<Response> {
       let buffer = '';
       let fullAccumulated = '';
       let anyCoveRepair = false;
+      const emittedActions: AgentAction[] = [];
       try {
         const effectiveThinkingBudget =
           usedModel === 'gemini-3.8-flash' ? plan.recommendedThinkingBudget : 0;
@@ -521,8 +630,24 @@ export default async function handler(req: Request): Promise<Response> {
               if (jsonStr === '[DONE]') continue;
               try {
                 const parsed = JSON.parse(jsonStr);
-                const parts: Array<{ text?: string; thought?: boolean }> =
-                  parsed.candidates?.[0]?.content?.parts || [];
+                const parts: Array<{
+                  text?: string;
+                  thought?: boolean;
+                  functionCall?: { name?: string; args?: Record<string, unknown> };
+                }> = parsed.candidates?.[0]?.content?.parts || [];
+                for (const p of parts) {
+                  if (p.functionCall) {
+                    const action = parseAgentAction(p.functionCall.name, p.functionCall.args, lang);
+                    if (action) {
+                      emittedActions.push(action);
+                      await writer.write(
+                        encoder.encode(
+                          `data: ${JSON.stringify({ action, mode: 'gemini', traceId })}\n\n`,
+                        ),
+                      );
+                    }
+                  }
+                }
                 const textPart = parts
                   .filter((p) => !p.thought && typeof p.text === 'string')
                   .map((p) => p.text)
@@ -542,6 +667,19 @@ export default async function handler(req: Request): Promise<Response> {
               }
             }
           }
+        }
+
+        if (!fullAccumulated.trim() && emittedActions.length > 0) {
+          const actionConfirm =
+            lang === 'en'
+              ? 'Done! I prepared the requested action below.'
+              : 'Pronto! Preparei a ação solicitada abaixo.';
+          fullAccumulated = actionConfirm;
+          await writer.write(
+            encoder.encode(
+              `data: ${JSON.stringify({ text: actionConfirm, mode: 'gemini', traceId })}\n\n`,
+            ),
+          );
         }
 
         if (!fullAccumulated.trim()) {
@@ -647,26 +785,27 @@ export default async function handler(req: Request): Promise<Response> {
       lang,
       historyBeforeLast,
     );
-    void logAiTelemetryNonBlocking({
-      traceId,
-      sessionId,
-      locale: lang,
-      originalQuery: guardIn.sanitizedQuery,
-      rewrittenQuery: plan.rewrittenQuery,
-      intent: intent.intent,
-      aspect: intent.aspect,
-      cragStatus: plan.cragStatus,
-      confidence: retrieval.maxConfidence,
-      isMultiPart: plan.isMultiPart,
-      needsClarification: false,
-      usedLlm: false,
-      cacheHit: false,
-      coveRepaired: false,
-      topChunkIds,
-      citations: fallback.citations,
-      latencyMs: Date.now() - startedAt,
-    });
-    return createStreamResponse(fallback.reply, 'offline', 'fallback_exception', traceId);
+    return createStreamResponse(fallback.reply, 'offline', 'fallback_exception', traceId, [
+      logAiTelemetryNonBlocking({
+        traceId,
+        sessionId,
+        locale: lang,
+        originalQuery: guardIn.sanitizedQuery,
+        rewrittenQuery: plan.rewrittenQuery,
+        intent: intent.intent,
+        aspect: intent.aspect,
+        cragStatus: plan.cragStatus,
+        confidence: retrieval.maxConfidence,
+        isMultiPart: plan.isMultiPart,
+        needsClarification: false,
+        usedLlm: false,
+        cacheHit: false,
+        coveRepaired: false,
+        topChunkIds,
+        citations: fallback.citations,
+        latencyMs: Date.now() - startedAt,
+      }),
+    ]);
   }
 }
 
@@ -675,10 +814,11 @@ function createStreamResponse(
   mode: 'gemini' | 'direct' | 'offline',
   reason: string,
   traceId: string,
+  pendingWrites: Promise<unknown>[] = [],
 ): Response {
   const encoder = new TextEncoder();
   const readable = new ReadableStream({
-    start(controller) {
+    async start(controller) {
       controller.enqueue(encoder.encode(`data: ${JSON.stringify({ mode, reason, traceId })}\n\n`));
 
       const words = text.split(' ');
@@ -688,6 +828,12 @@ function createStreamResponse(
       }
 
       controller.enqueue(encoder.encode('data: [DONE]\n\n'));
+      if (pendingWrites.length > 0) {
+        await Promise.race([
+          Promise.allSettled(pendingWrites),
+          new Promise((r) => setTimeout(r, 1500)),
+        ]);
+      }
       controller.close();
     },
   });

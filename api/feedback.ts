@@ -87,11 +87,18 @@ export default async function handler(req: Request): Promise<Response> {
 
   const recorded = await submitAiFeedback({ traceId, helpful, comment });
 
-  return new Response(JSON.stringify({ ok: true, recorded }), {
-    status: 200,
-    headers: {
-      'Content-Type': 'application/json; charset=utf-8',
-      'Cache-Control': 'no-store',
+  return new Response(
+    JSON.stringify({
+      ok: true,
+      recorded,
+      cacheInvalidated: recorded && helpful === false,
+    }),
+    {
+      status: 200,
+      headers: {
+        'Content-Type': 'application/json; charset=utf-8',
+        'Cache-Control': 'no-store',
+      },
     },
-  });
+  );
 }

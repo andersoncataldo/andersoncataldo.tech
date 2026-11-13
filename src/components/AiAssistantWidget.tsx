@@ -19,6 +19,11 @@ import { useLanguage } from '../context/LanguageContext';
 import { QUICK_PROMPTS, queryOfflineKnowledge } from '../data/aiKnowledge';
 import { LeadForm } from './ai/LeadForm';
 
+export type AgentAction =
+  | { type: 'open_lead_form'; reason?: string }
+  | { type: 'navigate_to_section'; section: 'sobre' | 'experiencia' | 'projetos' | 'automacao' | 'skills' | 'contato' }
+  | { type: 'offer_cv_download'; language: 'pt' | 'en' };
+
 interface Message {
   id: string;
   role: 'user' | 'assistant';
@@ -26,6 +31,7 @@ interface Message {
   mode?: 'gemini' | 'direct' | 'offline';
   traceId?: string;
   feedback?: 'up' | 'down' | null;
+  actions?: AgentAction[];
 }
 
 function getWelcomeText(lang: 'pt' | 'en'): string {
@@ -145,11 +151,12 @@ interface AiAssistantWidgetProps {
 }
 
 export const AiAssistantWidget: React.FC<AiAssistantWidgetProps> = ({ initialOpen = false }) => {
-  const { language } = useLanguage();
+  const { language, currentResume } = useLanguage();
   const shouldReduceMotion = useReducedMotion();
   const [isOpen, setIsOpen] = useState(initialOpen);
   const [inputMessage, setInputMessage] = useState('');
   const [isStreaming, setIsStreaming] = useState(false);
+  const [streamingStage, setStreamingStage] = useState<'retrieving' | 'generating' | null>(null);
   const [copiedId, setCopiedId] = useState<string | null>(null);
   const [messages, setMessages] = useState<Message[]>(() => [
     {
@@ -258,6 +265,7 @@ export const AiAssistantWidget: React.FC<AiAssistantWidgetProps> = ({ initialOpe
 
     setMessages((prev) => [...prev, userMessage, initialAssistantMessage]);
     setIsStreaming(true);
+    setStreamingStage('retrieving');
 
     const controller = new AbortController();
     abortControllerRef.current = controller;
@@ -281,6 +289,7 @@ export const AiAssistantWidget: React.FC<AiAssistantWidgetProps> = ({ initialOpe
       if (!response.ok || !response.body || !contentType.includes('text/event-stream')) {
         throw new Error(`Invalid SSE response (${response.status})`);
       }
+      setStreamingStage('generating');
 
       const reader = response.body.getReader();
       const decoder = new TextDecoder();
@@ -305,9 +314,26 @@ export const AiAssistantWidget: React.FC<AiAssistantWidgetProps> = ({ initialOpe
                 text?: string;
                 mode?: string;
                 traceId?: string;
+                action?: AgentAction;
               };
               if (parsed.mode === 'offline' || parsed.mode === 'direct') {
                 detectedMode = parsed.mode;
+              }
+              if (parsed.action) {
+                const action = parsed.action;
+                if (action.type === 'open_lead_form') {
+                  setShowLeadForm(true);
+                }
+                setMessages((prev) =>
+                  prev.map((msg) =>
+                    msg.id === assistantId
+                      ? {
+                          ...msg,
+                          actions: msg.actions ? [...msg.actions, action] : [action],
+                        }
+                      : msg,
+                  ),
+                );
               }
               if (parsed.traceId) {
                 const traceId = parsed.traceId;
@@ -354,6 +380,7 @@ export const AiAssistantWidget: React.FC<AiAssistantWidgetProps> = ({ initialOpe
     } finally {
       abortControllerRef.current = null;
       setIsStreaming(false);
+      setStreamingStage(null);
     }
   };
 
@@ -555,10 +582,68 @@ export const AiAssistantWidget: React.FC<AiAssistantWidgetProps> = ({ initialOpe
                           <span className="w-1.5 h-1.5 rounded-full bg-slate-400 animate-pulse" />
                           <span className="w-1.5 h-1.5 rounded-full bg-slate-400 animate-pulse delay-100" />
                           <span className="w-1.5 h-1.5 rounded-full bg-slate-400 animate-pulse delay-200" />
+                          {streamingStage && (
+                            <span className="ml-1.5 text-[11px] font-mono text-slate-500 dark:text-slate-400">
+                              {streamingStage === 'retrieving'
+                                ? language === 'en'
+                                  ? 'Searching verified base...'
+                                  : 'Consultando base verificada...'
+                                : language === 'en'
+                                  ? 'Generating AI response...'
+                                  : 'Gerando resposta com IA...'}
+                            </span>
+                          )}
                         </span>
                       )}
                     </div>
                   </div>
+
+                  {msg.role === 'assistant' && msg.actions && msg.actions.length > 0 && (
+                    <div className="mt-1.5 flex flex-wrap gap-1.5">
+                      {msg.actions.map((action, idx) => {
+                        if (action.type === 'open_lead_form') {
+                          return (
+                            <button
+                              key={`${msg.id}-act-${idx}`}
+                              type="button"
+                              onClick={() => setShowLeadForm(true)}
+                              className="text-xs px-2.5 py-1 rounded-full bg-indigo-50 dark:bg-indigo-950/60 text-indigo-700 dark:text-indigo-300 border border-indigo-200 dark:border-indigo-800 hover:bg-indigo-100 dark:hover:bg-indigo-900/70 transition font-medium"
+                            >
+                              {language === 'en' ? 'Open Contact Form' : 'Abrir Formulário de Contato'}
+                            </button>
+                          );
+                        }
+                        if (action.type === 'navigate_to_section') {
+                          return (
+                            <button
+                              key={`${msg.id}-act-${idx}`}
+                              type="button"
+                              onClick={() => {
+                                const el = document.getElementById(action.section);
+                                el?.scrollIntoView({ behavior: 'smooth' });
+                              }}
+                              className="text-xs px-2.5 py-1 rounded-full bg-slate-100 dark:bg-slate-800 text-slate-700 dark:text-slate-200 border border-slate-200 dark:border-slate-700 hover:bg-slate-200 dark:hover:bg-slate-700 transition font-medium"
+                            >
+                              {language === 'en' ? `Go to #${action.section}` : `Ir para #${action.section}`}
+                            </button>
+                          );
+                        }
+                        if (action.type === 'offer_cv_download') {
+                          return (
+                            <a
+                              key={`${msg.id}-act-${idx}`}
+                              href={currentResume}
+                              download={`curriculo-anderson-cataldo-${action.language}.pdf`}
+                              className="text-xs px-2.5 py-1 rounded-full bg-emerald-50 dark:bg-emerald-950/60 text-emerald-700 dark:text-emerald-300 border border-emerald-200 dark:border-emerald-800 hover:bg-emerald-100 dark:hover:bg-emerald-900/70 transition font-medium"
+                            >
+                              {language === 'en' ? 'Download Resume (PDF)' : 'Baixar Currículo (PDF)'}
+                            </a>
+                          );
+                        }
+                        return null;
+                      })}
+                    </div>
+                  )}
 
                   {msg.role === 'assistant' && msg.mode === 'direct' && (
                     <span className="text-[10px] text-slate-500 dark:text-slate-400 mt-1 flex items-center gap-1 font-mono">
