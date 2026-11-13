@@ -40,7 +40,7 @@ const pt = {
     introLead: 'Olá, sou',
     introMiddle:
       '. Graduando em Ciência da Computação (UNIFOR, 6º semestre), focado em IA aplicada ao desenvolvimento de software, arquiteturas multiagente maker-checker e robôs de integração Python com o ERP WinThor (Oracle) que alcançaram',
-    introHours: 'redução de 6h para 10s (−99%)',
+    introHours: 'redução de 6 h para < 10 s (>99,9%)',
     ctaProjects: 'Ver Projetos',
     ctaResume: 'Baixar Currículo',
     ctaWhatsapp: 'WhatsApp',
@@ -79,7 +79,7 @@ const pt = {
     paragraphs: [
       'Desenvolvedor Full-Stack e de Automação focado em <strong>IA aplicada ao desenvolvimento de software</strong>. Projeto e entrego sistemas web corporativos de ponta a ponta (Next.js 16, React 19, Node.js, FastAPI, PostgreSQL/Supabase) e robôs de integração em Python conectados ao <strong>ERP TOTVS WinThor (Oracle)</strong>.',
       'Meu diferencial é orquestrar <strong>agentes de IA (Claude Code, MCP, Gemini API)</strong> em uma arquitetura multiagente <em>maker-checker</em>, combinando <strong>Spec-Driven Development (OpenSpec)</strong> e testes automatizados rigorosos (58 testes Pytest, 35 asserções Playwright) para entregar com extrema velocidade sem abrir mão de qualidade, tipagem estrita e conformidade com a LGPD.',
-      'Possuo <strong>15 automações corporativas desenvolvidas</strong> em produção — incluindo o pipeline FTP_SYNC, que reduziu o tempo de integração de 6 horas para menos de 10 segundos (−99%). Graduando em <strong>Ciência da Computação na UNIFOR (6º semestre)</strong>, certificado internacional <strong>Huawei HCIA-Storage V5.0</strong> e inglês avançado.',
+      'Possuo <strong>15 automações corporativas desenvolvidas</strong> em produção — incluindo o pipeline FTP_SYNC, que reduziu o tempo de integração de 6 h para menos de 10 s por ciclo (mediana; redução superior a 99,9%). Graduando em <strong>Ciência da Computação na UNIFOR (6º semestre)</strong>, certificado internacional <strong>Huawei HCIA-Storage V5.0</strong> e inglês avançado.',
     ],
     pillars: [
       {
@@ -277,7 +277,7 @@ const en = {
     introLead: "Hi, I'm",
     introMiddle:
       '. Computer Science student (UNIFOR, 6th semester), focused on applied AI in software development, maker-checker multi-agent systems, and Python integration robots connected to WinThor ERP (Oracle) achieving',
-    introHours: 'slashing from 6h to 10s (−99%)',
+    introHours: 'slashing from 6 h to < 10 s (>99.9%)',
     ctaProjects: 'View Projects',
     ctaResume: 'Download Resume',
     ctaWhatsapp: 'WhatsApp',
@@ -315,8 +315,8 @@ const en = {
     photoRole: 'Full-Stack Dev, RPA & AI Specialist',
     paragraphs: [
       'Full-Stack and Automation Developer focused on <strong>AI applied to software engineering</strong>. I architect and deliver end-to-end corporate web systems (Next.js 16, React 19, Node.js, FastAPI, PostgreSQL/Supabase) and Python integration robots connected to <strong>TOTVS WinThor ERP (Oracle)</strong>.',
-      'My competitive edge is orchestrating <strong>AI agents (Claude Code, MCP, Gemini API)</strong> in a <em>maker-checker</em> multi-agent architecture, combining <strong>Spec-Driven Development (OpenSpec)</strong> and rigorous automated testing (58 Pytest suites, 35 Playwright assertions) to ship at high speed while maintaining quality, strict typing, and LGPD data privacy.',
-      'I have <strong>15 corporate automations delivered</strong> in production — including FTP_SYNC, an autonomous bridge that reduced partner integration time from 6 hours to under 10 seconds (−99%). Currently pursuing a <strong>B.Sc. in Computer Science at UNIFOR (6th semester)</strong>, hold an international <strong>Huawei HCIA-Storage V5.0</strong> certification, with advanced English.',
+      'My competitive edge is orchestrating <strong>AI agents (Claude Code, MCP, Gemini API)</strong> in a <em>maker-checker</em> multi-agent architecture, combining <strong>Spec-Driven Development (OpenSpec)</strong> and rigorous automated testing (58 Pytest tests, 35 Playwright assertions) to ship at high speed while maintaining quality, strict typing, and LGPD data privacy.',
+      'I have <strong>15 corporate automations delivered</strong> in production — including FTP_SYNC, an autonomous bridge that reduced partner integration time from 6 h to under 10 s per cycle (median; >99.9% reduction). Currently pursuing a <strong>B.Sc. in Computer Science at UNIFOR (6th semester)</strong>, hold an international <strong>Huawei HCIA-Storage V5.0</strong> certification, with advanced English.',
     ],
     pillars: [
       {

@@ -27,16 +27,16 @@ export const experiences: Experience[] = [
         en: 'Implemented a 9 AI agent squad (orchestrator, 5 specialized implementers, 3 independent validators) in a maker-checker model with Claude Code: least privilege, anti-hallucination protocols, and human review escalation.',
       },
       {
-        pt: 'Instituiu qualidade como gate de entrega: 58 testes Pytest (E2E, autenticação e LGPD) e 35 asserções Playwright de regressão visual, lint e checagem de drift do design system em 5 pacotes (100% aprovados na auditoria de go-live).',
-        en: 'Established quality as a delivery gate: 58 Pytest suites (E2E flows, authentication, LGPD) and 35 Playwright visual regression assertions, linting, and design system drift checks across 5 packages (100% approved in go-live audit).',
+        pt: 'Instituiu qualidade como gate de entrega: 58 testes Pytest (E2E, autenticação e LGPD) e 35 asserções Playwright de regressão visual, lint e checagem de drift do design system em 5 pacotes.',
+        en: 'Established quality as a delivery gate: 58 Pytest tests (E2E flows, authentication, LGPD) and 35 Playwright visual regression assertions, linting, and design system drift checks across 5 packages.',
       },
       {
         pt: 'Desenvolveu 10 automações Python integradas ao WinThor (Oracle), incluindo 4 robôs de estoque EDI Pharma Link (Eurofarma, Eurofarma Genérico, Smartped, Momenta) via FTP/SFTP, empacotados com PyInstaller e agendados.',
         en: 'Built 10 Python automations integrated with WinThor (Oracle), including 4 inventory integration robots for pharmaceutical operators (Eurofarma, Eurofarma Generic, Smartped, Momenta) via EDI Pharma Link and FTP/SFTP.',
       },
       {
-        pt: 'Criou o FTP_SYNC, ponte autônoma entre servidores FTP de parceiros e o SFTP do WinThor Cloud (TOTVS) com sincronização a cada 15 min, reduzindo o tempo de coleta e lançamento de 6 horas para menos de 10 segundos (−99%).',
-        en: 'Created FTP_SYNC, an autonomous bridge between partner FTP servers and WinThor Cloud SFTP syncing every 15 min, reducing ingestion and registration time from 6 hours to under 10 seconds (-99%).',
+        pt: 'Criou o FTP_SYNC, ponte autônoma entre servidores FTP de parceiros e o SFTP do WinThor Cloud (TOTVS) com sincronização a cada 15 min, reduzindo o tempo de coleta e lançamento de 6 h para menos de 10 s por ciclo (mediana; redução superior a 99,9%).',
+        en: 'Created FTP_SYNC, an autonomous bridge between partner FTP servers and WinThor Cloud SFTP syncing every 15 min, reducing ingestion and registration time from 6 h to under 10 s per cycle (median; >99.9% reduction).',
       },
       {
         pt: 'Construiu motor de IA no Sistema de Devolução: diagnóstico executivo com LLM (Gemini/OpenAI), curva de Pareto de causas-raiz e detecção de anomalias com fallback local (< 1s), timeout de inferência e anonimização de dados (LGPD).',
@@ -48,7 +48,7 @@ export const experiences: Experience[] = [
       },
     ],
     metrics: [
-      { label: { pt: 'Redução FTP_SYNC', en: 'FTP_SYNC Reduction' }, value: '-99% (6h ➔ 10s)' },
+      { label: { pt: 'Redução FTP_SYNC', en: 'FTP_SYNC Reduction' }, value: '>99.9% (6h ➔ <10s)' },
       { label: { pt: 'Robôs WinThor', en: 'WinThor Robots' }, value: '10 robôs' },
       { label: { pt: 'Suíte de Testes', en: 'Test Suites' }, value: '58 Pytest + 35 E2E' },
       { label: { pt: 'Sistemas Unificados', en: 'Unified Systems' }, value: '4 em 1 (SSO)' },

@@ -161,13 +161,13 @@ export function verifyOutputMetrics(outputText: string, lang: SupportedLanguage)
     violations.push('stripped_internal_xml_tags');
   }
 
-  // 2. Verificar distorção da métrica de redução do FTP_SYNC (deve ser -99% / 99%, nunca outro percentual associado ao FTP_SYNC)
-  const ftpPercentMatch = sanitizedText.match(/FTP_SYNC[^.\n]{0,40}?(-?\d{1,2}(?:[.,]\d+)?%)/i);
+  // 2. Verificar distorção da métrica de redução do FTP_SYNC (deve ser >99,9% / 99,9% / -99%, nunca outro percentual associado ao FTP_SYNC)
+  const ftpPercentMatch = sanitizedText.match(/FTP_SYNC[^.\n]{0,40}?([><-]?\d{1,2}(?:[.,]\d+)?%)/i);
   if (ftpPercentMatch) {
     const val = ftpPercentMatch[1].replace(',', '.');
     if (!val.includes('99')) {
       sanitizedText = sanitizedText.replace(ftpPercentMatch[1], index.canonicalMetrics.ftpSyncReduction);
-      violations.push(`corrected_ftp_sync_percentage:${ftpPercentMatch[1]}->-99%`);
+      violations.push(`corrected_ftp_sync_percentage:${ftpPercentMatch[1]}->${index.canonicalMetrics.ftpSyncReduction}`);
     }
   }
 
@@ -200,13 +200,13 @@ export function getPromptInjectionResponse(lang: SupportedLanguage): string {
     return `### 🛡️ Security & Scope Guardrail Active
 As the official technical assistant for **Anderson Cataldo**, I operate under strict governance rules: I cannot ignore system instructions, adopt external personas, or expose internal prompts and API credentials.
 
-How can I help you evaluate Anderson's **projects**, **enterprise automations (FTP_SYNC -99%)**, **9-agent AI squad**, or **academic background** today?`;
+How can I help you evaluate Anderson's **projects**, **enterprise automations (FTP_SYNC >99.9%)**, **9-agent AI squad**, or **academic background** today?`;
   }
 
   return `### 🛡️ Guardrail de Segurança e Escopo Ativo
 Como assistente técnico oficial de **Anderson Cataldo**, opero sob diretrizes estritas de governança: não posso ignorar instruções de sistema, assumir outras personas ou expor prompts internos e chaves de API.
 
-Como posso ajudá-lo a conhecer os **projetos**, **automações corporativas (FTP_SYNC -99%)**, o **squad de 9 agentes de IA** ou a **formação acadêmica** de Anderson hoje?`;
+Como posso ajudá-lo a conhecer os **projetos**, **automações corporativas (FTP_SYNC >99,9%)**, o **squad de 9 agentes de IA** ou a **formação acadêmica** de Anderson hoje?`;
 }
 
 export function getOutOfScopeResponse(lang: SupportedLanguage): string {
@@ -216,7 +216,7 @@ I am **Anderson AI**, the official assistant strictly dedicated to **Anderson Ca
 
 You can ask me, for example:
 - **Work & Study Duration:** How long he has worked in production and his Computer Science degree at UNIFOR ([Experience Section](#experiencia)).
-- **Automation & RPA:** How he reduced **FTP_SYNC** from 6 hours to under 10 seconds (-99%) ([Automation Section](#rpa)).
+- **Automation & RPA:** How he reduced **FTP_SYNC** from 6 h to under 10 s per cycle (>99.9% reduction) ([Automation Section](#rpa)).
 - **Projects & AI:** How **Central Grupo Mais** or the **9-agent Maker-Checker AI squad** work ([Projects Section](#projetos)).`;
   }
 
@@ -225,6 +225,6 @@ Sou o **Anderson AI**, assistente oficial dedicado exclusivamente ao portfólio 
 
 Você pode me perguntar, por exemplo:
 - **Experiência e Estudo:** Quanto tempo de experiência ele possui e detalhes da graduação na UNIFOR ([Seção Experiência](#experiencia)).
-- **Automação & RPA:** Como ele reduziu o **FTP_SYNC** de 6 horas para menos de 10 segundos (-99%) ([Seção Automação & RPA](#rpa)).
+- **Automação & RPA:** Como ele reduziu o **FTP_SYNC** de 6 h para menos de 10 s por ciclo (redução >99,9%) ([Seção Automação & RPA](#rpa)).
 - **Projetos e IA:** Como funcionam a **Central Grupo Mais** ou o **squad de 9 agentes de IA** ([Seção Projetos](#projetos)).`;
 }

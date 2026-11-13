@@ -11,11 +11,11 @@ export const keyMetrics: MetricItem[] = [
     trend: { pt: 'Produção contínua', en: 'Continuous production' },
   },
   {
-    value: '-99%',
+    value: '>99.9%',
     label: { pt: 'Redução FTP_SYNC', en: 'FTP_SYNC Slashing' },
     description: {
-      pt: 'Ponte autônoma entre parceiros e WinThor Cloud que reduziu o tempo de integração de 6 horas para menos de 10s.',
-      en: 'Autonomous partner-to-WinThor bridge reducing sync and registration time from 6 hours to under 10 seconds.',
+      pt: 'Ponte autônoma entre parceiros e WinThor Cloud que reduziu o tempo de integração de 6 h para menos de 10 s (mediana).',
+      en: 'Autonomous partner-to-WinThor bridge reducing sync and registration time from 6 h to under 10 s (median).',
     },
     trend: { pt: 'A cada 15 min', en: 'Every 15 min' },
   },

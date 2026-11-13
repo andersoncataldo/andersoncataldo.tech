@@ -89,7 +89,7 @@ async function main() {
       },
       content: {
         pt: 'Seus 3 pilares centrais são: (1) IA Aplicada & Agentes Autônomos (arquitetura Maker-Checker com 9 agentes, Claude Code, MCP e Gemini API); (2) Automação & Integração ERP Industrial (15 robôs Python integrados ao WinThor/Oracle e SEFAZ, incluindo o FTP_SYNC com redução de 99%); e (3) Engenharia Full-Stack & Qualidade Rigorosa (monorepos com SSO JWT, Next.js 16, React 19/18, FastAPI, Supabase RLS, 58 testes Pytest e 35 asserções Playwright).',
-        en: 'His 3 core pillars are: (1) Applied AI & Autonomous Agents (9-agent Maker-Checker architecture with Claude Code, MCP, and Gemini API); (2) Industrial ERP Automation (15 Python robots integrated with WinThor/Oracle and SEFAZ, including FTP_SYNC with -99% time reduction); and (3) Full-Stack Engineering & Strict Quality (SSO JWT monorepos, Next.js 16, React 19/18, FastAPI, Supabase RLS, 58 Pytest suites, and 35 Playwright assertions).',
+        en: 'His 3 core pillars are: (1) Applied AI & Autonomous Agents (9-agent Maker-Checker architecture with Claude Code, MCP, and Gemini API); (2) Industrial ERP Automation (15 Python robots integrated with WinThor/Oracle and SEFAZ, including FTP_SYNC with >99.9% time reduction); and (3) Full-Stack Engineering & Strict Quality (SSO JWT monorepos, Next.js 16, React 19/18, FastAPI, Supabase RLS, 58 Pytest tests, and 35 Playwright assertions).',
       },
       facets: {
         role: {
@@ -105,8 +105,8 @@ async function main() {
           en: 'In real production, he has shipped **15 corporate robots**, unified **4 internal systems under SSO**, slashed the **FTP_SYNC pipeline by 99% (6h to <10s)**, and saved **over 200 manual hours**.',
         },
         differentials: {
-          pt: '**Diferencial e 3 Pilares de Anderson Cataldo:** (1) **IA Aplicada & Agentes Autônomos** — orquestração de um squad de **9 agentes de IA no modelo Maker-Checker** (Claude Code, MCP e Gemini API) com Spec-Driven Development (OpenSpec); (2) **Automação & Integração ERP Industrial** — **15 robôs Python** em produção integrados ao **WinThor (Oracle)** e **SEFAZ** (incluindo o **FTP_SYNC com -99% de tempo**); e (3) **Engenharia Full-Stack & Qualidade Rigorosa** — monorepo com **SSO JWT (4 sistemas)**, **58 testes Pytest**, **35 asserções Playwright** e conformidade **LGPD**.',
-          en: '**Anderson Cataldo’s Core Differentials & 3 Pillars:** (1) **Applied AI & Autonomous Agents** — orchestrating a **9-agent Maker-Checker AI squad** (Claude Code, MCP, Gemini API) with Spec-Driven Development (OpenSpec); (2) **Industrial ERP Automation** — **15 production Python robots** integrated with **WinThor (Oracle)** and **SEFAZ** (including **FTP_SYNC with -99% time**); and (3) **Full-Stack Engineering & Strict Quality** — **SSO JWT monorepo (4 systems)**, **58 Pytest tests**, **35 Playwright assertions**, and **LGPD** compliance.',
+          pt: '**Diferencial e 3 Pilares de Anderson Cataldo:** (1) **IA Aplicada & Agentes Autônomos** — orquestração de um squad de **9 agentes de IA no modelo Maker-Checker** (Claude Code, MCP e Gemini API) com Spec-Driven Development (OpenSpec); (2) **Automação & Integração ERP Industrial** — **15 robôs Python** em produção integrados ao **WinThor (Oracle)** e **SEFAZ** (incluindo o **FTP_SYNC com >99.9% de tempo**); e (3) **Engenharia Full-Stack & Qualidade Rigorosa** — monorepo com **SSO JWT (4 sistemas)**, **58 testes Pytest**, **35 asserções Playwright** e conformidade **LGPD**.',
+          en: '**Anderson Cataldo’s Core Differentials & 3 Pillars:** (1) **Applied AI & Autonomous Agents** — orchestrating a **9-agent Maker-Checker AI squad** (Claude Code, MCP, Gemini API) with Spec-Driven Development (OpenSpec); (2) **Industrial ERP Automation** — **15 production Python robots** integrated with **WinThor (Oracle)** and **SEFAZ** (including **FTP_SYNC with >99.9% time**); and (3) **Full-Stack Engineering & Strict Quality** — **SSO JWT monorepo (4 systems)**, **58 Pytest tests**, **35 Playwright assertions**, and **LGPD** compliance.',
         },
         languagesSpoken: {
           pt: '**Idiomas falados por Anderson Cataldo:** **Português (Nativo)**, **Inglês (Avançado)** — leitura técnica fluente, documentação arquitetural, escrita de código e comunicação profissional bilíngue (PT/EN) — além de conhecimentos em **Espanhol**.',
@@ -118,7 +118,7 @@ async function main() {
         'objetivo', 'goal', 'foco', 'posicionamento', 'diferencial', 'pilares', 'pillars', 'sobre', 'about',
       ],
       entities: ['anderson_cataldo', 'mais_saude', '3coracoes', 'unifor'],
-      metrics: ['15 robôs', '-99%', '9 agentes', '6º semestre'],
+      metrics: ['15 robôs', '>99.9%', '9 agentes', '6º semestre'],
     },
 
     // 2. Tempo Combinado de Trabalho e Estudo
@@ -136,8 +136,8 @@ async function main() {
         en: 'Anderson has **~2 years of continuous corporate production experience** (since **January 2025**, totaling **15 production robots** and **4 unified web systems**, spanning **1 year and 4 months at Grupo 3corações** and currently at **Distribuidora Mais Saúde** since Jun/2026) alongside **3 years of dedicated academic study (2024 – 2027)** in **Computer Science at UNIFOR (6th Semester)**.',
       },
       content: {
-        pt: 'Cronologia completa: (1) Tempo de Trabalho: Iniciou em Janeiro de 2025 no Grupo 3corações (Jan/2025 a Abr/2026 — 1 ano e 4 meses no Setor Fiscal desenvolvendo 5 robôs RPA para 15.000+ XMLs/mês e CNDs) e atua desde Junho de 2026 na Distribuidora Mais Saúde (Full-Stack, Automação WinThor com 10 robôs, FTP_SYNC -99%, Central Grupo Mais 4 sistemas SSO e 9 agentes de IA). (2) Tempo de Estudo: 3 anos (2024 a 2027) em Ciência da Computação na UNIFOR, cursando o 6º semestre, além da certificação Huawei HCIA-Storage V5.0 (Jun/2026) e Inglês Avançado.',
-        en: 'Full timeline: (1) Work Duration: Started in January 2025 at Grupo 3corações (Jan/2025 to Apr/2026 — 1 year and 4 months in Tax RPA building 5 robots for 15,000+ XMLs/mo and CNDs) and works since June 2026 at Distribuidora Mais Saúde (Full-Stack, 10 WinThor robots, FTP_SYNC -99%, Central Grupo Mais 4 SSO systems, and 9 AI agents). (2) Study Duration: 3 years (2024 to 2027) in Computer Science at UNIFOR, currently in the 6th semester, plus Huawei HCIA-Storage V5.0 certification (Jun/2026) and Advanced English.',
+        pt: 'Cronologia completa: (1) Tempo de Trabalho: Iniciou em Janeiro de 2025 no Grupo 3corações (Jan/2025 a Abr/2026 — 1 ano e 4 meses no Setor Fiscal desenvolvendo 5 robôs RPA para 15.000+ XMLs/mês e CNDs) e atua desde Junho de 2026 na Distribuidora Mais Saúde (Full-Stack, Automação WinThor com 10 robôs, FTP_SYNC >99.9%, Central Grupo Mais 4 sistemas SSO e 9 agentes de IA). (2) Tempo de Estudo: 3 anos (2024 a 2027) em Ciência da Computação na UNIFOR, cursando o 6º semestre, além da certificação Huawei HCIA-Storage V5.0 (Jun/2026) e Inglês Avançado.',
+        en: 'Full timeline: (1) Work Duration: Started in January 2025 at Grupo 3corações (Jan/2025 to Apr/2026 — 1 year and 4 months in Tax RPA building 5 robots for 15,000+ XMLs/mo and CNDs) and works since June 2026 at Distribuidora Mais Saúde (Full-Stack, 10 WinThor robots, FTP_SYNC >99.9%, Central Grupo Mais 4 SSO systems, and 9 AI agents). (2) Study Duration: 3 years (2024 to 2027) in Computer Science at UNIFOR, currently in the 6th semester, plus Huawei HCIA-Storage V5.0 certification (Jun/2026) and Advanced English.',
       },
       facets: {
         duration_when: {
@@ -149,8 +149,8 @@ async function main() {
           en: '**Anderson Cataldo’s First Job:** His first corporate position was at **Grupo 3corações** (**January 2025 to April 2026 — 1 year and 4 months**, in Eusébio/Fortaleza, CE) as **Apprentice — Tax Department (Systems & Projects)** (`RPA Robot Developer & Process Automation`), where he built **5 Python RPA robots** for automated **CND** renewals and processing **15,000+ monthly tax XMLs (NF-e/CT-e)** with **99.85% SEFAZ accuracy**, saving **200+ manual hours**.',
         },
         currentJob: {
-          pt: '**Emprego atual de Anderson Cataldo:** Atualmente (**Jun/2026 – Presente**), Anderson trabalha na **Distribuidora Mais Saúde** (Fortaleza, CE — Híbrido/Presencial) como **Estagiário de T.I. — Full-Stack, Automação & IA**, liderando o desenvolvimento da **Central Grupo Mais (4 sistemas unificados com SSO JWT)**, **10 robôs RPA integrados ao ERP TOTVS WinThor (Oracle)** (incluindo o **FTP_SYNC com -99% de tempo**) e o **squad de 9 agentes de IA (Maker-Checker com Claude Code)**.',
-          en: '**Anderson Cataldo’s Current Job:** Currently (**Jun/2026 – Present**), Anderson works at **Distribuidora Mais Saúde** (Fortaleza, CE — Hybrid/On-site) as **IT Intern — Full-Stack, Automation & AI**, leading the development of **Central Grupo Mais (4 unified SSO JWT systems)**, **10 Python RPA robots integrated with TOTVS WinThor ERP (Oracle)** (including **FTP_SYNC with -99% time**), and the **9-agent AI squad (Maker-Checker with Claude Code)**.',
+          pt: '**Emprego atual de Anderson Cataldo:** Atualmente (**Jun/2026 – Presente**), Anderson trabalha na **Distribuidora Mais Saúde** (Fortaleza, CE — Híbrido/Presencial) como **Estagiário de T.I. — Full-Stack, Automação & IA**, liderando o desenvolvimento da **Central Grupo Mais (4 sistemas unificados com SSO JWT)**, **10 robôs RPA integrados ao ERP TOTVS WinThor (Oracle)** (incluindo o **FTP_SYNC com >99.9% de tempo**) e o **squad de 9 agentes de IA (Maker-Checker com Claude Code)**.',
+          en: '**Anderson Cataldo’s Current Job:** Currently (**Jun/2026 – Present**), Anderson works at **Distribuidora Mais Saúde** (Fortaleza, CE — Hybrid/On-site) as **IT Intern — Full-Stack, Automation & AI**, leading the development of **Central Grupo Mais (4 unified SSO JWT systems)**, **10 Python RPA robots integrated with TOTVS WinThor ERP (Oracle)** (including **FTP_SYNC with >99.9% time**), and the **9-agent AI squad (Maker-Checker with Claude Code)**.',
         },
       },
       keywords: [
@@ -263,16 +263,16 @@ async function main() {
       sectionAnchor: '#rpa',
       sectionLabel: { pt: 'Automação & RPA', en: 'Automation & RPA' },
       title: {
-        pt: 'Pipeline FTP_SYNC: Redução de 6 Horas para Menos de 10 Segundos (-99%)',
-        en: 'FTP_SYNC Pipeline: From 6 Hours to Under 10 Seconds (-99%)',
+        pt: 'Pipeline FTP_SYNC: Redução de 6 Horas para Menos de 10 Segundos (>99.9%)',
+        en: 'FTP_SYNC Pipeline: From 6 Hours to Under 10 Seconds (>99.9%)',
       },
       shortAnswer: {
-        pt: 'O **FTP_SYNC** é uma ponte autônoma desenvolvida em **Python 3.11+** (**Paramiko SFTP** + **ftplib**) na **Distribuidora Mais Saúde** que sincroniza a cada **15 minutos** os servidores FTP de operadores farmacêuticos (**EDI Pharma Link**: Eurofarma, Eurofarma Genérico, Smartped e Momenta) com o **SFTP do ERP TOTVS WinThor Cloud (Oracle)**, reduzindo um processo manual de **6 horas para menos de 10 segundos (-99%)**.',
-        en: '**FTP_SYNC** is an autonomous **Python 3.11+** bridge (**Paramiko SFTP** + **ftplib**) built at **Distribuidora Mais Saúde** that syncs pharmaceutical partner FTPs (**EDI Pharma Link**: Eurofarma, Eurofarma Generic, Smartped, Momenta) with **TOTVS WinThor Cloud SFTP (Oracle)** every **15 minutes**, slashing a **6-hour manual process to under 10 seconds (-99%)**.',
+        pt: 'O **FTP_SYNC** é uma ponte autônoma desenvolvida em **Python 3.11+** (**Paramiko SFTP** + **ftplib**) na **Distribuidora Mais Saúde** que sincroniza a cada **15 minutos** os servidores FTP de operadores farmacêuticos (**EDI Pharma Link**: Eurofarma, Eurofarma Genérico, Smartped e Momenta) com o **SFTP do ERP TOTVS WinThor Cloud (Oracle)**, reduzindo um processo manual de **6 horas para menos de 10 segundos (>99.9%)**.',
+        en: '**FTP_SYNC** is an autonomous **Python 3.11+** bridge (**Paramiko SFTP** + **ftplib**) built at **Distribuidora Mais Saúde** that syncs pharmaceutical partner FTPs (**EDI Pharma Link**: Eurofarma, Eurofarma Generic, Smartped, Momenta) with **TOTVS WinThor Cloud SFTP (Oracle)** every **15 minutes**, slashing a **6-hour manual process to under 10 seconds (>99.9%)**.',
       },
       content: {
-        pt: 'Como a otimização de -99% foi alcançada no FTP_SYNC: antes, a operação baixava arquivos manualmente em múltiplos FTPs, convertia layouts e importava no WinThor (6 horas/dia). Anderson implementou varredura agendada a cada 15 min via Windows Task Scheduler e executável PyInstaller, verificação de integridade por hash/checksum para idempotência (evitando reprocessar arquivos duplicados), parsing posicional EDI Pharma Link e transferência direta via SFTP (Paramiko) para o WinThor Cloud conectado ao banco Oracle, com logs estruturados e painel de monitoramento em Streamlit.',
-        en: 'How the -99% optimization in FTP_SYNC was achieved: previously, staff manually downloaded files from partner FTPs, converted layouts, and imported them into WinThor (6 hours/day). Anderson engineered a scheduled 15-minute worker packaged with PyInstaller, checksum hash verification for file idempotency, fixed-width EDI Pharma Link parsing, and direct Paramiko SFTP transfer into WinThor Cloud (Oracle DB), monitored via a Streamlit dashboard.',
+        pt: 'Como a otimização de >99.9% foi alcançada no FTP_SYNC: antes, a operação baixava arquivos manualmente em múltiplos FTPs, convertia layouts e importava no WinThor (6 horas/dia). Anderson implementou varredura agendada a cada 15 min via Windows Task Scheduler e executável PyInstaller, verificação de integridade por hash/checksum para idempotência (evitando reprocessar arquivos duplicados), parsing posicional EDI Pharma Link e transferência direta via SFTP (Paramiko) para o WinThor Cloud conectado ao banco Oracle, com logs estruturados e painel de monitoramento em Streamlit.',
+        en: 'How the >99.9% optimization in FTP_SYNC was achieved: previously, staff manually downloaded files from partner FTPs, converted layouts, and imported them into WinThor (6 hours/day). Anderson engineered a scheduled 15-minute worker packaged with PyInstaller, checksum hash verification for file idempotency, fixed-width EDI Pharma Link parsing, and direct Paramiko SFTP transfer into WinThor Cloud (Oracle DB), monitored via a Streamlit dashboard.',
       },
       facets: {
         challenge: {
@@ -284,17 +284,17 @@ async function main() {
           en: 'To solve this, Anderson built **FTP_SYNC** in **Python 3.11+** using **Paramiko (SFTP)** and **ftplib**, running autonomously every **15 minutes** with checksum hash validation (idempotency), **EDI Pharma Link** parsing (Eurofarma, Smartped, Momenta), **PyInstaller** packaging, and a **Streamlit** monitoring dashboard.',
         },
         resultImpact: {
-          pt: 'O resultado direto do **FTP_SYNC** foi a redução do tempo de processo de **6 horas para menos de 10 segundos (-99%)**, operando 24/7 a cada 15 minutos com zero erro humano no banco **Oracle do TOTVS WinThor**.',
-          en: 'The direct result of **FTP_SYNC** was slashing execution time from **6 hours to under 10 seconds (-99%)**, running 24/7 every 15 minutes with zero human error into the **TOTVS WinThor Oracle** database.',
+          pt: 'O resultado direto do **FTP_SYNC** foi a redução do tempo de processo de **6 horas para menos de 10 segundos (>99.9%)**, operando 24/7 a cada 15 minutos com zero erro humano no banco **Oracle do TOTVS WinThor**.',
+          en: 'The direct result of **FTP_SYNC** was slashing execution time from **6 hours to under 10 seconds (>99.9%)**, running 24/7 every 15 minutes with zero human error into the **TOTVS WinThor Oracle** database.',
         },
       },
       keywords: [
         'ftp_sync', 'ftp sync', 'ftpsync', 'sftp', 'ftp', 'paramiko', 'ftplib', '6 horas', '6h',
-        '10 segundos', '10s', '99%', '-99%', '15 minutos', '15 min', 'pharma link', 'edi',
+        '10 segundos', '10s', '99%', '>99.9%', '15 minutos', '15 min', 'pharma link', 'edi',
         'eurofarma', 'smartped', 'momenta', 'winthor', 'oracle', 'totvs', 'otimizou', 'reduziu',
       ],
       entities: ['ftp_sync', 'winthor', 'oracle', 'edi_pharma_link', 'mais_saude'],
-      metrics: ['6 horas', '10 segundos', '-99%', '15 min', '10 robôs'],
+      metrics: ['6 horas', '10 segundos', '>99.9%', '15 min', '10 robôs'],
     },
 
     // 7. Ferramentas Internas Mais Saúde (Streamlit, Tkinter, Google Sheets)
@@ -513,8 +513,8 @@ async function main() {
               }
             : {
                 currentJob: {
-                  pt: `**Emprego Atual — ${exp.company} (${exp.period.pt}):** Atualmente, Anderson trabalha na **Distribuidora Mais Saúde** como **${exp.title.pt}** (${exp.companyRole.pt}), onde projetou e desenvolve a **Central Grupo Mais (monorepo SSO com 4 sistemas internos)**, **10 robôs Python integrados ao ERP TOTVS WinThor (Oracle)** (incluindo o **FTP_SYNC com redução de 6h para <10s, -99%**), o **escritório de 9 agentes de IA (Maker-Checker com Claude Code)** e **58 testes Pytest + 35 asserções Playwright**.`,
-                  en: `**Current Job — ${exp.company} (${exp.period.en}):** Currently, Anderson works at **Distribuidora Mais Saúde** as **${exp.title.en}** (${exp.companyRole.en}), where he architected and builds **Central Grupo Mais (SSO monorepo unifying 4 internal systems)**, **10 Python robots integrated with TOTVS WinThor ERP (Oracle)** (including **FTP_SYNC reducing 6h to <10s, -99%**), the **9-agent AI squad (Maker-Checker with Claude Code)**, and **58 Pytest + 35 Playwright tests**.`,
+                  pt: `**Emprego Atual — ${exp.company} (${exp.period.pt}):** Atualmente, Anderson trabalha na **Distribuidora Mais Saúde** como **${exp.title.pt}** (${exp.companyRole.pt}), onde projetou e desenvolve a **Central Grupo Mais (monorepo SSO com 4 sistemas internos)**, **10 robôs Python integrados ao ERP TOTVS WinThor (Oracle)** (incluindo o **FTP_SYNC com redução de 6h para <10s, >99.9%**), o **escritório de 9 agentes de IA (Maker-Checker com Claude Code)** e **58 testes Pytest + 35 asserções Playwright**.`,
+                  en: `**Current Job — ${exp.company} (${exp.period.en}):** Currently, Anderson works at **Distribuidora Mais Saúde** as **${exp.title.en}** (${exp.companyRole.en}), where he architected and builds **Central Grupo Mais (SSO monorepo unifying 4 internal systems)**, **10 Python robots integrated with TOTVS WinThor ERP (Oracle)** (including **FTP_SYNC reducing 6h to <10s, >99.9%**), the **9-agent AI squad (Maker-Checker with Claude Code)**, and **58 Pytest + 35 Playwright tests**.`,
                 },
               }),
         },
@@ -692,8 +692,8 @@ async function main() {
       en: 'Verified Production Impact Metrics',
     },
     shortAnswer: {
-      pt: 'Principais métricas e dores de negócio resolvidas em produção: **15 robôs corporativos** (10 na Mais Saúde + 5 no Grupo 3corações), **-99% no tempo do FTP_SYNC** (de **6 horas para menos de 10 segundos**), **15.000+ XMLs fiscais/mês** com **99,85% de precisão SEFAZ**, **200+ horas manuais poupadas**, **9 agentes de IA Maker-Checker**, **58 testes Pytest + 35 asserções Playwright** e **4 sistemas unificados com SSO**.',
-      en: 'Key verified production metrics and business problems solved: **15 corporate robots** (10 at Mais Saúde + 5 at Grupo 3corações), **-99% time reduction in FTP_SYNC** (from **6 hours to under 10 seconds**), **15,000+ fiscal XMLs/month** with **99.85% SEFAZ accuracy**, **200+ manual hours saved**, **9 Maker-Checker AI agents**, **58 Pytest tests + 35 Playwright assertions**, and **4 unified SSO systems**.',
+      pt: 'Principais métricas e dores de negócio resolvidas em produção: **15 robôs corporativos** (10 na Mais Saúde + 5 no Grupo 3corações), **>99.9% no tempo do FTP_SYNC** (de **6 horas para menos de 10 segundos**), **15.000+ XMLs fiscais/mês** com **99,85% de precisão SEFAZ**, **200+ horas manuais poupadas**, **9 agentes de IA Maker-Checker**, **58 testes Pytest + 35 asserções Playwright** e **4 sistemas unificados com SSO**.',
+      en: 'Key verified production metrics and business problems solved: **15 corporate robots** (10 at Mais Saúde + 5 at Grupo 3corações), **>99.9% time reduction in FTP_SYNC** (from **6 hours to under 10 seconds**), **15,000+ fiscal XMLs/month** with **99.85% SEFAZ accuracy**, **200+ manual hours saved**, **9 Maker-Checker AI agents**, **58 Pytest tests + 35 Playwright assertions**, and **4 unified SSO systems**.',
     },
     content: {
       pt: keyMetrics.map((m) => `- ${m.value} ${m.label.pt}: ${m.description.pt} (${m.trend.pt})`).join('\n'),
@@ -705,7 +705,7 @@ async function main() {
       'dores', 'dores reais', 'dores de negocio', 'problemas reais', 'resolveu na pratica',
     ],
     entities: ['metrics', 'ftp_sync', 'winthor', '3coracoes', 'mais_saude'],
-    metrics: ['15', '-99%', '15.000+', '99.85%', '200+', '9 Agentes', '58', '35', '4'],
+    metrics: ['15', '>99.9%', '15.000+', '99.85%', '200+', '9 Agentes', '58', '35', '4'],
   });
 
   const apiKey = process.env.GEMINI_API_KEY;
@@ -743,7 +743,7 @@ async function main() {
       shippedRobots: '15',
       maisSaudeRobots: '10',
       tresCoracoesRobots: '5',
-      ftpSyncReduction: '-99%',
+      ftpSyncReduction: '>99.9%',
       ftpSyncBefore: '6 horas',
       ftpSyncAfter: '10 segundos',
       ftpSyncInterval: '15 min',

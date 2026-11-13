@@ -47,7 +47,7 @@ A aplicação foi desenvolvida no padrão de craft de produtos digitais Silicon 
 
 ### 6. Pipeline de 15 Automações & FTP_SYNC (`PipelineVisualizer.tsx`)
 - Demonstração visual e técnica em 4 etapas do pipeline corporativo:
-  1. **FTP_SYNC & Coleta Autônoma:** Ponte com servidores FTP/SFTP a cada 15 min (−99% de tempo, de 6h para < 10s).
+  1. **FTP_SYNC & Coleta Autônoma:** Ponte com servidores FTP/SFTP a cada 15 min (redução >99,9%, de 6 h para < 10 s por ciclo).
   2. **Parsing & Validação de Schemas:** Validação SEFAZ e EDI Pharma Link com 99.85% de precisão.
   3. **Integração WinThor ERP (Oracle) & ETL:** Atualização de lotes e conciliação contábil via Pandas.
   4. **Entrega Executiva & Monitoramento:** Painel Streamlit e alertas em tempo real.
@@ -70,7 +70,7 @@ A aplicação foi desenvolvida no padrão de craft de produtos digitais Silicon 
     - **Function Calling** nativo para ações reais no portfólio: abertura automática do `LeadForm` (`open_lead_form`), rolagem para seções (`navigate_to_section`) e download direto de CV (`offer_cv_download`), diferenciando respostas diretas (`mode: 'direct'`) de fallback offline real (`mode: 'offline'`).
   - **Persistência, Cache L2 e Segurança LGPD (Supabase PostgreSQL):**
     - Cache em 2 camadas: L1 em memória + L2 persistente (`public.ai_answer_cache`), com invalidação automática via `api/feedback.ts` quando o usuário marca feedback negativo (`helpful: false`).
-    - Telemetria completa com flush no Edge (`public.ai_telemetry_logs`) e captação de leads (`public.ai_leads` via `/api/lead`).
+    - Telemetria completa com flush no Edge (`public.ai_telemetry_logs`) e captação de leads (`public.recruiter_leads` via `/api/lead`).
     - Zero exposição de `service_role` no Edge: todas as escritas passam por RPCs `SECURITY DEFINER` autenticadas por `AI_WRITE_SECRET` e política de retenção LGPD (`purge_expired_ai_data()`).
   - **Suíte de 95 Evals Automatizados (`evals/dataset.json`, `evals/dataset-hard.json` & `scripts/run-evals.mjs`) + Contratos + Smoke Test:** Integrada ao CI validando 100% de acurácia factual (71 núcleo + 24 difíceis), 0% de alucinação, contratos HTTP/RFC 7807 (`/api/chat`, `/api/feedback`, `/api/lead`) e smoke test diário em produção (`npm run smoke:prod`).
 
@@ -79,9 +79,9 @@ A aplicação foi desenvolvida no padrão de craft de produtos digitais Silicon 
 - Service Worker com estratégias de cache Workbox (*Stale-While-Revalidate* e *Cache-First*) para carregamento instantâneo sem conexão.
 - Prompt discreto de atualização com notificação não intrusiva (`ReloadPrompt.tsx`).
 
-### 10. Geração Dinâmica de Cartões OpenGraph (`api/og.tsx` Edge Runtime)
-- Endpoint Edge de geração de imagens sociais 1200x630 via `@vercel/og`.
-- Renderização em tempo real de métricas corporativas (*15 Robôs, -99.1% FTP_SYNC, 9 Agentes Maker-Checker, Huawei HCIA-Storage*).
+### 10. Geração Dinâmica de Cartões OpenGraph (`api/og.ts` Edge Runtime)
+- Endpoint Edge de geração de imagens sociais 1200x630 via SVG dinâmico no Edge.
+- Renderização em tempo real de métricas corporativas (*15 Robôs, >99,9% FTP_SYNC, 9 Agentes Maker-Checker, Huawei HCIA-Storage*).
 - Suporte a internacionalização dinâmica (`?lang=pt` e `?lang=en`) e cache CDN global.
 
 ---
@@ -95,14 +95,14 @@ A aplicação foi desenvolvida no padrão de craft de produtos digitais Silicon 
 | **Automação & RPA**         | Python 3.11+, Paramiko (SFTP), ftplib, Playwright, Selenium, Pandas, lxml, BeautifulSoup, PyInstaller |
 | **Back-End & APIs**         | Node.js (Express), Python (FastAPI), SQLAlchemy, Alembic, Pydantic v2, Zod, JWT SSO |
 | **Bancos de Dados & Storage**| PostgreSQL, Supabase (RLS), Oracle SQL (TOTVS WinThor), Huawei HCIA-Storage, Neon  |
-| **DevOps & Qualidade**      | Pytest (58 suítes), Playwright E2E (35 testes), GitHub Actions CI/CD, Cloudflare, Render, Vercel |
+| **DevOps & Qualidade**      | Pytest (58 testes), Playwright E2E (35 asserções), GitHub Actions, Cloudflare, Render, Vercel |
 
 ---
 
 ## 📊 Métricas de Impacto Comprovadas
 
 - **15** Automações corporativas entregues em produção.
-- **-99%** no tempo de processo com o FTP_SYNC (reduzido de 6 horas para menos de 10 segundos).
+- **>99,9%** de redução no tempo de processo com o FTP_SYNC (de 6 h para menos de 10 s por ciclo, mediana).
 - **15.000+** Documentos fiscais (XML/NFe) processados de forma autônoma por mês (Grupo 3corações).
 - **200+** Horas acumuladas de retrabalho manual eliminadas para equipes de negócios.
 - **9 Agentes de IA** operando no modelo maker-checker com Claude Code e menor privilégio.
@@ -118,9 +118,8 @@ A aplicação foi desenvolvida no padrão de craft de produtos digitais Silicon 
 andersoncataldo.tech/
 ├── .agents/                      # Ecossistema de Agentes de IA e Governança
 ├── .github/workflows/
-│   ├── ci.yml                     # CI/CD automatizado (lint + 95 evals + contratos + build)
 │   └── ai-smoke-and-retention.yml # Smoke test diário em produção + retenção LGPD
-├── api/                           # Vercel Edge Functions (/api/chat.ts, /api/feedback.ts, /api/lead.ts, /api/og.tsx)
+├── api/                           # Vercel Edge Functions (/api/chat.ts, /api/feedback.ts, /api/lead.ts, /api/og.ts)
 ├── evals/
 │   ├── dataset.json               # 71 casos de teste núcleo bilíngues (PT/EN)
 │   └── dataset-hard.json          # 24 casos difíceis (injeção, ambiguidade, cross-company)

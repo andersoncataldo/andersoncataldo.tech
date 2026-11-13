@@ -63,7 +63,7 @@ export const automationPipeline: PipelineStep[] = [
       en: 'Streamlit dashboards for real-time robot supervision, executive reporting, and workflows reduced from 6 hours to under 10 seconds.',
     },
     technologies: ['Streamlit', 'Notificações Webhook', 'PyInstaller Standalone'],
-    metrics: { pt: 'De 6h para < 10s (−99%)', en: 'From 6h to < 10s (-99%)' },
+    metrics: { pt: 'De 6 h para < 10 s (>99,9%)', en: 'From 6 h to < 10 s (>99.9%)' },
     details: [
       { pt: 'Painel Streamlit com histórico detalhado de execuções de robôs', en: 'Streamlit dashboard tracking detailed robot run history' },
       { pt: 'Alertas automáticos em caso de indisponibilidade de servidores parceiros', en: 'Automated webhook alerts on partner server downtime' },
@@ -74,8 +74,8 @@ export const automationPipeline: PipelineStep[] = [
 
 export const rpaHighlights: { title: LocalizedText; subtitle: LocalizedText; description: LocalizedText }[] = [
   {
-    title: { pt: '-99% no Tempo do FTP_SYNC', en: '-99% Slashing in FTP_SYNC' },
-    subtitle: { pt: 'De 6 horas para < 10 segundos', en: 'From 6 hours to < 10 seconds' },
+    title: { pt: '>99,9% no Tempo do FTP_SYNC', en: '>99.9% Slashing in FTP_SYNC' },
+    subtitle: { pt: 'De 6 h para < 10 s (mediana)', en: 'From 6 h to < 10 s (median)' },
     description: {
       pt: 'Ponte autônoma entre parceiros logísticos e o SFTP do WinThor Cloud que processa pedidos e notas fiscais a cada 15 minutos sem intervenção humana.',
       en: 'Autonomous bridge between logistics partners and WinThor Cloud SFTP processing orders and invoices every 15 minutes with zero human intervention.',

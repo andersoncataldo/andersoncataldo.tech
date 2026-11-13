@@ -168,8 +168,8 @@ export const projects: Project[] = [
       { pt: 'ERP Integrado: TOTVS WinThor (Banco de Dados Oracle)', en: 'Integrated ERP: TOTVS WinThor (Oracle Database)' },
     ],
     result: {
-      pt: 'Processo que levava 6 horas manuais passou a ser executado em menos de 10 segundos (−99%), com zero interferência humana e dados 100% sincronizados a cada 15 minutos.',
-      en: 'A process that previously took 6 manual hours was reduced to under 10 seconds (-99%), running 24/7 with zero human intervention and refreshed data every 15 minutes.',
+      pt: 'Processo que levava 6 h manuais passou a ser executado em menos de 10 s por ciclo (mediana; redução superior a 99,9%), sem interferência humana e com dados sincronizados a cada 15 minutos.',
+      en: 'A process that previously took 6 manual hours was reduced to under 10 s per cycle (median; >99.9% reduction), running 24/7 with zero human intervention and refreshed data every 15 minutes.',
     },
     impact: {
       pt: 'Liberação acelerada de cargas hospitalares e farmacêuticas de alta prioridade sem risco de divergência de estoque.',
@@ -177,7 +177,7 @@ export const projects: Project[] = [
     },
     metrics: [
       { label: { pt: 'Tempo de Processo', en: 'Process Time' }, value: '6h ➔ < 10s' },
-      { label: { pt: 'Ganho de Eficiência', en: 'Efficiency Gain' }, value: '-99%' },
+      { label: { pt: 'Ganho de Eficiência', en: 'Efficiency Gain' }, value: '>99.9%' },
       { label: { pt: 'Frequência de Sync', en: 'Sync Interval' }, value: 'A cada 15 min' },
     ],
     techStack: ['Python', 'SFTP / FTP', 'EDI Pharma Link', 'TOTVS WinThor', 'Oracle SQL', 'Paramiko', 'PyInstaller'],

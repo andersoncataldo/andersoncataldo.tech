@@ -28,8 +28,8 @@ export const QUICK_PROMPTS: QuickPrompt[] = [
   {
     id: 'ftp-sync',
     label: {
-      pt: '⚡ Como otimizou o FTP_SYNC em 99%?',
-      en: '⚡ How did you optimize FTP_SYNC by 99%?',
+      pt: '⚡ Como otimizou o FTP_SYNC em >99,9%?',
+      en: '⚡ How did you optimize FTP_SYNC by >99.9%?',
     },
     query: {
       pt: 'Como você reduziu o tempo do pipeline FTP_SYNC de 6 horas para menos de 10 segundos?',

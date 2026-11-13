@@ -544,7 +544,7 @@ export default async function handler(req: Request): Promise<Response> {
     return createStreamResponse(synthesized.reply, 'offline', 'hybrid_ml_local', traceId, pendingWrites);
   }
 
-  // 6. Geração Fundamentada com Google Gemini 2.5 Flash recebendo apenas os top-k chunks recuperados
+  // 6. Geração Fundamentada com Google Gemini 3.8 Flash / 3.5 Flash-Lite recebendo apenas os top-k chunks recuperados
   try {
     const contents = [
       {

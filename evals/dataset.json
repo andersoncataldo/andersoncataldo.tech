@@ -5,10 +5,10 @@
     "category": "factual",
     "query": "Como o Anderson reduziu o tempo do FTP_SYNC de 6 horas para 10 segundos?",
     "expectedIntent": "tecnica_projeto",
-    "expectedKeywords": ["6 horas", "10 segundos", "-99%", "WinThor", "Oracle", "SFTP"],
+    "expectedKeywords": ["6 horas", "10 segundos", ">99.9%", "WinThor", "Oracle", "SFTP"],
     "forbiddenKeywords": ["Kafka", "Kubernetes", "Escopo Restrito"],
     "expectedAnchor": "#rpa",
-    "description": "Explicar com exatidão a redução de 6h para <10s (-99%) no FTP_SYNC com SFTP e WinThor/Oracle."
+    "description": "Explicar com exatidão a redução de 6h para <10s (>99.9%) no FTP_SYNC com SFTP e WinThor/Oracle."
   },
   {
     "id": "eval-02-ftp-sync-en",
@@ -16,10 +16,10 @@
     "category": "factual",
     "query": "How did Anderson reduce the FTP_SYNC pipeline from 6 hours to under 10 seconds?",
     "expectedIntent": "tecnica_projeto",
-    "expectedKeywords": ["6 hours", "10 seconds", "-99%", "WinThor", "Oracle", "SFTP"],
+    "expectedKeywords": ["6 hours", "10 seconds", ">99.9%", "WinThor", "Oracle", "SFTP"],
     "forbiddenKeywords": ["Kafka", "Scope Restricted"],
     "expectedAnchor": "#rpa",
-    "description": "Explain the -99% FTP_SYNC optimization in English with #rpa anchor."
+    "description": "Explain the >99.9% FTP_SYNC optimization in English with #rpa anchor."
   },
   {
     "id": "eval-03-winthor-db-pt",
@@ -240,10 +240,10 @@
       { "role": "assistant", "content": "O FTP_SYNC é uma ponte SFTP em Python integrada ao WinThor Oracle." }
     ],
     "expectedIntent": "faq_portfolio",
-    "expectedKeywords": ["-99%", "6 horas", "10 segundos"],
+    "expectedKeywords": [">99.9%", "6 horas", "10 segundos"],
     "forbiddenKeywords": ["Escopo Restrito"],
     "expectedAnchor": "#rpa",
-    "description": "Resolver o pronome 'nele' usando o histórico sobre FTP_SYNC e responder -99% (6h para <10s)."
+    "description": "Resolver o pronome 'nele' usando o histórico sobre FTP_SYNC e responder >99.9% (6h para <10s)."
   },
   {
     "id": "eval-23-followup-assets-en",
@@ -464,7 +464,7 @@
     "query": "Me fale mais detalhes técnicos sobre o FTP_SYNC.",
     "history": [
       { "role": "user", "content": "Como funciona o FTP_SYNC?" },
-      { "role": "assistant", "content": "### Automação & RPA — FTP_SYNC (Sincronização SFTP em < 10 Segundos)\nO **FTP_SYNC** é um motor de sincronização SFTP incremental desenvolvido em **Python (Paramiko)** na **Distribuidora Mais Saúde** que reduziu o ciclo de atualização de arquivos comerciais de **6 horas para menos de 10 segundos (-99%)**, rodando automaticamente a cada **15 minutos** com **99,1% de estabilidade**." }
+      { "role": "assistant", "content": "### Automação & RPA — FTP_SYNC (Sincronização SFTP em < 10 Segundos)\nO **FTP_SYNC** é um motor de sincronização SFTP incremental desenvolvido em **Python (Paramiko)** na **Distribuidora Mais Saúde** que reduziu o ciclo de atualização de arquivos comerciais de **6 horas para menos de 10 segundos (>99.9%)**, rodando automaticamente a cada **15 minutos** com **99,1% de estabilidade**." }
     ],
     "expectedIntent": "tecnica_projeto",
     "expectedKeywords": ["Complementando", "Paramiko", "WinThor"],

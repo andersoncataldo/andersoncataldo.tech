@@ -38,8 +38,8 @@ export default function handler(req: Request): Response {
 
     const subtitle = escapeXml(
       isEn
-        ? '15 Corporate Automations • -99% FTP_SYNC • 9 Maker-Checker Agents • Huawei HCIA-Storage'
-        : '15 Robôs Corporativos • -99% FTP_SYNC • 9 Agentes Maker-Checker • Huawei HCIA-Storage',
+        ? '15 Corporate Automations • >99.9% FTP_SYNC • 9 Maker-Checker Agents • Huawei HCIA-Storage'
+        : '15 Robôs Corporativos • >99,9% FTP_SYNC • 9 Agentes Maker-Checker • Huawei HCIA-Storage',
     );
 
     const badgeText = escapeXml(
@@ -98,12 +98,12 @@ export default function handler(req: Request): Response {
 
   <!-- Metric Card 1 -->
   <rect x="80" y="430" width="242" height="126" rx="16" fill="#0f172a" fill-opacity="0.85" stroke="#334155" stroke-opacity="0.6" stroke-width="1.5" />
-  <text x="104" y="488" fill="#818cf8" font-family="system-ui, -apple-system, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif" font-size="36" font-weight="800">15+</text>
+  <text x="104" y="488" fill="#818cf8" font-family="system-ui, -apple-system, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif" font-size="36" font-weight="800">15</text>
   <text x="104" y="524" fill="#94a3b8" font-family="system-ui, -apple-system, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif" font-size="16" font-weight="500">${metric1Label}</text>
 
   <!-- Metric Card 2 -->
   <rect x="346" y="430" width="242" height="126" rx="16" fill="#0f172a" fill-opacity="0.85" stroke="#334155" stroke-opacity="0.6" stroke-width="1.5" />
-  <text x="370" y="488" fill="#34d399" font-family="system-ui, -apple-system, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif" font-size="36" font-weight="800">-99%</text>
+  <text x="370" y="488" fill="#34d399" font-family="system-ui, -apple-system, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif" font-size="36" font-weight="800">&gt;99.9%</text>
   <text x="370" y="524" fill="#94a3b8" font-family="system-ui, -apple-system, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif" font-size="16" font-weight="500">${metric2Label}</text>
 
   <!-- Metric Card 3 -->
