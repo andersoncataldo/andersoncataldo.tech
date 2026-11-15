@@ -46,7 +46,7 @@ export default function handler(req: Request): Response {
       isEn ? 'ENGINEERING & AI PORTFOLIO' : 'PORTFÓLIO DE ENGENHARIA & IA',
     );
     const statusText = escapeXml(
-      isEn ? 'Available for new challenges' : 'Disponível para novos desafios',
+      isEn ? 'Building Full-Stack & AI' : 'Em atividade · Full-Stack & IA',
     );
 
     const metric1Label = escapeXml(isEn ? 'Robots in Production' : 'Robôs em Produção');

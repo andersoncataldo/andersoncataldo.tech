@@ -201,12 +201,12 @@
     "id": "eval-19-hiring-availability-en",
     "lang": "en",
     "category": "factual",
-    "query": "Is Anderson available for remote or hybrid software engineering roles, and how can I contact him?",
+    "query": "Where does Anderson currently work, what is his work mode, and how can I contact him?",
     "expectedIntent": "contato",
-    "expectedKeywords": ["Fortaleza", "Remote", "Hybrid", "andersonvcataldo@gmail.com", "linkedin.com/in/andersonnviana"],
-    "forbiddenKeywords": ["Scope Restricted"],
+    "expectedKeywords": ["Fortaleza", "100% On-site", "Mais Saúde", "andersonvcataldo@gmail.com", "linkedin.com/in/andersonnviana"],
+    "forbiddenKeywords": ["Scope Restricted", "Hybrid", "Remoto / Híbrido"],
     "expectedAnchor": "#contato",
-    "description": "Confirm availability for Remote/Hybrid/On-Site roles and provide official contact links."
+    "description": "Confirm 100% On-site work mode at Mais Saúde in Fortaleza and provide official contact links without claiming recruitment availability."
   },
   {
     "id": "eval-20-multi-work-study-pt",

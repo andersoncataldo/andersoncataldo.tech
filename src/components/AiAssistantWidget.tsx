@@ -497,8 +497,8 @@ export const AiAssistantWidget: React.FC<AiAssistantWidgetProps> = ({ initialOpe
                 <button
                   type="button"
                   onClick={() => setShowLeadForm((prev) => !prev)}
-                  title={language === 'en' ? 'Send recruiter contact' : 'Enviar contato de recrutamento'}
-                  aria-label={language === 'en' ? 'Send recruiter contact' : 'Enviar contato de recrutamento'}
+                  title={language === 'en' ? 'Send direct message' : 'Enviar contato direto'}
+                  aria-label={language === 'en' ? 'Send direct message' : 'Enviar contato direto'}
                   aria-expanded={showLeadForm}
                   className={`p-1.5 rounded-lg transition focus:outline-none focus-visible:ring-2 focus-visible:ring-indigo-400 ${
                     showLeadForm

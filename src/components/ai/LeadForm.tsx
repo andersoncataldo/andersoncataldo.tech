@@ -81,7 +81,7 @@ export const LeadForm: React.FC<LeadFormProps> = ({ language, traceId, onClose }
     >
       <div className="flex items-center justify-between">
         <span className="text-xs font-semibold text-slate-800 dark:text-slate-100">
-          {en ? 'Direct Contact / Opportunity' : 'Contato Direto / Oportunidade'}
+          {en ? 'Direct Contact / Networking' : 'Contato Direto / Networking'}
         </span>
         <button
           type="button"
@@ -159,7 +159,7 @@ export const LeadForm: React.FC<LeadFormProps> = ({ language, traceId, onClose }
             value={message}
             onChange={(e) => setMessage(e.target.value)}
             placeholder={
-              en ? 'Brief note about the role or project *' : 'Breve mensagem sobre a vaga ou projeto *'
+              en ? 'Brief note about your topic or project *' : 'Breve mensagem sobre o assunto ou projeto *'
             }
             aria-label={en ? 'Message' : 'Mensagem'}
             className={`${FIELD_CLASS} resize-none`}
@@ -189,8 +189,8 @@ export const LeadForm: React.FC<LeadFormProps> = ({ language, traceId, onClose }
             />
             <span>
               {en
-                ? 'I authorize Anderson to use this information only to reply to this opportunity. Data is kept for up to 6 months (LGPD).'
-                : 'Autorizo o Anderson a usar estas informações apenas para responder a esta oportunidade. Os dados são mantidos por até 6 meses (LGPD).'}
+                ? 'I authorize Anderson to use this information only to reply to this contact message. Data is kept for up to 6 months (LGPD).'
+                : 'Autorizo o Anderson a usar estas informações apenas para responder a este contato. Os dados são mantidos por até 6 meses (LGPD).'}
             </span>
           </label>
 

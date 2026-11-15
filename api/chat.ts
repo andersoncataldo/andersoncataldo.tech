@@ -104,13 +104,13 @@ const GEMINI_TOOLS = [
       {
         name: 'open_lead_form',
         description:
-          'Abre o formulário de contato/recrutamento dentro do chat quando o usuário demonstrar interesse em contratar Anderson, solicitar orçamento, agendar entrevista ou deixar contato.',
+          'Abre o formulário de contato direto dentro do chat quando o usuário demonstrar interesse em conversar com Anderson, trocar contatos técnicos ou deixar uma mensagem.',
         parameters: {
           type: 'OBJECT',
           properties: {
             reason: {
               type: 'STRING',
-              description: 'Breve motivo do contato (ex: Recrutamento, Projeto RPA, Consultoria IA).',
+              description: 'Breve motivo do contato (ex: Networking Técnico, Projeto RPA, Consultoria IA, Contato Direto).',
             },
           },
         },

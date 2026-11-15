@@ -114,7 +114,7 @@ export const DevConsole = () => {
             <p><span className="text-emerald-400 font-bold">contact</span> — {language === 'pt' ? 'Canais oficiais de contato direto' : 'Direct official contact channels'}</p>
             <p><span className="text-emerald-400 font-bold">cv</span> — {language === 'pt' ? 'Baixar o currículo oficial em PDF' : 'Download official PDF resume'}</p>
             <p><span className="text-emerald-400 font-bold">clear</span> — {language === 'pt' ? 'Limpar histórico do terminal' : 'Clear terminal history'}</p>
-            <p><span className="text-emerald-400 font-bold">sudo hire</span> — {language === 'pt' ? 'Proposta de contratação direta' : 'Direct hiring fast-track'}</p>
+            <p><span className="text-emerald-400 font-bold">sudo connect</span> — {language === 'pt' ? 'Canal direto de networking técnico' : 'Direct technical networking shortcut'}</p>
           </div>
         );
         break;
@@ -214,14 +214,14 @@ export const DevConsole = () => {
         return;
 
       case 'sudo':
-        if (parts[1] === 'hire') {
+        if (parts[1] === 'connect' || parts[1] === 'hire') {
           output = (
             <div className="p-3 rounded-xl bg-gradient-to-r from-emerald-950 to-indigo-950 border border-emerald-500/50 space-y-1.5">
-              <p className="text-emerald-400 font-bold text-sm">🎉 PERMISSION GRANTED: Fast-Track Activated!</p>
+              <p className="text-emerald-400 font-bold text-sm">🤝 DIRECT CHANNEL: Networking & Technical Exchange!</p>
               <p className="text-slate-200">
                 {language === 'pt'
-                  ? 'Obrigado pelo interesse! Anderson Cataldo está pronto para agregar valor imediato à sua equipe de engenharia com foco em Full-Stack, Automação e IA.'
-                  : 'Thank you for your interest! Anderson Cataldo is ready to bring immediate impact to your engineering organization with Full-Stack, Automation, and AI.'}
+                  ? 'Conecte-se com Anderson Cataldo para trocar ideias sobre arquitetura Full-Stack, automação RPA e engenharia de agentes de IA.'
+                  : 'Connect with Anderson Cataldo to exchange ideas on Full-Stack architecture, RPA automation, and AI agent engineering.'}
               </p>
               <a
                 href={WHATSAPP_URL}
@@ -234,7 +234,7 @@ export const DevConsole = () => {
             </div>
           );
         } else {
-          output = <p className="text-rose-400">sudo: command not found. Try: sudo hire</p>;
+          output = <p className="text-rose-400">sudo: command not found. Try: sudo connect</p>;
         }
         break;
 

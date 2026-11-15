@@ -66,10 +66,10 @@ async function notifyLeadWebhook(lead: RecruiterLeadInput): Promise<void> {
   if (!url || !/^https:\/\//i.test(url)) return;
 
   const text = [
-    '📩 Novo contato de recrutador no portfólio',
+    '📩 Novo contato direto recebido no portfólio',
     `Nome: ${lead.recruiterName}${lead.company ? ` (${lead.company})` : ''}`,
     `Contato: ${lead.contactChannel}`,
-    lead.roleTitle ? `Vaga: ${lead.roleTitle}` : '',
+    lead.roleTitle ? `Assunto: ${lead.roleTitle}` : '',
     `Mensagem: ${lead.message.slice(0, 500)}`,
   ]
     .filter(Boolean)
@@ -134,7 +134,7 @@ export default async function handler(req: Request): Promise<Response> {
   const consent = payload.consent === true;
 
   if (recruiterName.length < 2 || message.length < 5) {
-    return problem(400, 'Bad Request', 'Preencha seu nome e os detalhes da oportunidade.');
+    return problem(400, 'Bad Request', 'Preencha seu nome e os detalhes da mensagem.');
   }
   if (!isValidContactChannel(contactChannel)) {
     return problem(

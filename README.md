@@ -30,7 +30,7 @@ A aplicação foi desenvolvida no padrão de craft de produtos digitais Silicon 
 
 ### 2. Terminal CLI Interativo Executável (`DevConsole.tsx`)
 - Terminal executável com histórico de comandos (navegável com setas `↑` e `↓`) e prompt `visitor@cataldo-tech:~$`.
-- Comandos implementados: `help`, `bio`, `stack`, `rpa`, `ai-agents`, `projects`, `contact`, `cv`, `clear` e o comando especial `sudo hire`.
+- Comandos implementados: `help`, `bio`, `stack`, `rpa`, `ai-agents`, `projects`, `contact`, `cv`, `clear` e o atalho interativo `sudo connect`.
 - Abas gráficas de inspeção JSON (`profile.json`, `stack.json`, `metrics.json`) com botão de cópia instantânea.
 
 ### 3. Calculadora Interativa de ROI de Automação (`RpaRoiCalculator.tsx`)
@@ -70,7 +70,7 @@ A aplicação foi desenvolvida no padrão de craft de produtos digitais Silicon 
     - **Function Calling** nativo para ações reais no portfólio: abertura automática do `LeadForm` (`open_lead_form`), rolagem para seções (`navigate_to_section`) e download direto de CV (`offer_cv_download`), diferenciando respostas diretas (`mode: 'direct'`) de fallback offline real (`mode: 'offline'`).
   - **Persistência, Cache L2 e Segurança LGPD (Supabase PostgreSQL):**
     - Cache em 2 camadas: L1 em memória + L2 persistente (`public.ai_answer_cache`), com invalidação automática via `api/feedback.ts` quando o usuário marca feedback negativo (`helpful: false`).
-    - Telemetria completa com flush no Edge (`public.ai_telemetry_logs`) e captação de leads (`public.recruiter_leads` via `/api/lead`).
+    - Telemetria completa com flush no Edge (`public.ai_telemetry_logs`) e formulário de contato direto (`public.recruiter_leads` via `/api/lead`).
     - Zero exposição de `service_role` no Edge: todas as escritas passam por RPCs `SECURITY DEFINER` autenticadas por `AI_WRITE_SECRET` e política de retenção LGPD (`purge_expired_ai_data()`).
   - **Suíte de 95 Evals Automatizados (`evals/dataset.json`, `evals/dataset-hard.json` & `scripts/run-evals.mjs`) + Contratos + Smoke Test:** Integrada ao CI validando 100% de acurácia factual (71 núcleo + 24 difíceis), 0% de alucinação, contratos HTTP/RFC 7807 (`/api/chat`, `/api/feedback`, `/api/lead`) e smoke test diário em produção (`npm run smoke:prod`).
 

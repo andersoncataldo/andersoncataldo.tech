@@ -12,7 +12,7 @@ export const experiences: Experience[] = [
       en: 'Software Engineering, AI Agents & WinThor Integrations',
     },
     period: { pt: 'Jun/2026 - Presente', en: 'Jun/2026 - Present' },
-    location: { pt: 'Fortaleza, CE - Híbrido / Presencial', en: 'Fortaleza, CE - Hybrid / On-site' },
+    location: { pt: 'Fortaleza, CE - 100% Presencial', en: 'Fortaleza, CE - 100% On-site' },
     summary: {
       pt: 'Projeta e desenvolve a Central Grupo Mais (monorepo com SSO que unifica 4 sistemas internos), robôs de integração Python conectados ao ERP TOTVS WinThor (Oracle) e arquitetura de agentes de IA em modelo maker-checker com governança rigorosa.',
       en: 'Architects and builds Central Grupo Mais (corporate SSO monorepo unifying 4 internal systems), Python integration robots connected to TOTVS WinThor ERP (Oracle) and maker-checker AI multi-agent architecture with strict quality gates.',

@@ -5,4 +5,4 @@ export const WHATSAPP_URL = 'https://wa.me/5585992258794?text=Ol%C3%A1%20Anderso
 export const SITE_URL = 'https://andersoncataldotech.vercel.app';
 export const SITE_TITLE = 'Anderson Cataldo | Full-Stack Developer & Automação';
 export const SITE_DESCRIPTION = 'Portfólio de Anderson Cataldo, Desenvolvedor Full-Stack (React, TypeScript, Next.js, Python, Node) e especialista em automação RPA.';
-export const LOCATION = 'Fortaleza, CE - Brasil (Remoto / Híbrido)';
+export const LOCATION = 'Fortaleza, CE - Brasil';

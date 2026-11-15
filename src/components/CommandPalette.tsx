@@ -126,7 +126,7 @@ export const CommandPalette = ({ isOpen, onClose, onThemeToggle, theme }: Comman
     {
       id: 'nav-contact',
       category: language === 'pt' ? 'Navegação' : 'Navigation',
-      title: language === 'pt' ? 'Contato & Oportunidades' : 'Contact & Inquiries',
+      title: language === 'pt' ? 'Contato & Networking' : 'Contact & Networking',
       subtitle: language === 'pt' ? 'Conectar via e-mail ou WhatsApp' : 'Get in touch via email or WhatsApp',
       icon: <Mail className="w-4 h-4 text-indigo-500" />,
       action: () => scrollTo('contato'),

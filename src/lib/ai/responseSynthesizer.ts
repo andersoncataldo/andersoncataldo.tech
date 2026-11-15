@@ -48,7 +48,7 @@ function synthesizeSmalltalk(
   if (/\b(tchau|ate logo|ate mais|bye|see you|bom descanso)\b/.test(q)) {
     return lang === 'en'
       ? `Thank you for visiting **Anderson Cataldo's** portfolio! 👋 Whenever you want to connect, feel free to reach out via **[${EMAIL}](mailto:${EMAIL})** or **[LinkedIn](${LINKEDIN_URL})**. Have a great day!`
-      : `Muito obrigado por visitar o portfólio de **Anderson Cataldo**! 👋 Sempre que quiser conversar ou discutir oportunidades, você pode falar diretamente com ele pelo **[${EMAIL}](mailto:${EMAIL})** ou **[LinkedIn](${LINKEDIN_URL})**. Até breve!`;
+      : `Muito obrigado por visitar o portfólio de **Anderson Cataldo**! 👋 Sempre que quiser conversar ou trocar ideias sobre engenharia de software, você pode falar diretamente com ele pelo **[${EMAIL}](mailto:${EMAIL})** ou **[LinkedIn](${LINKEDIN_URL})**. Até breve!`;
   }
 
   if (/\b(quem e voce|who are you|ajuda|help|menu|comandos|o que voce faz|what can you do|o que posso)\b/.test(q)) {
@@ -130,15 +130,15 @@ function synthesizeUnknownFactResponse(rawQuery: string, lang: SupportedLanguage
 
   if (asksSalary) {
     return lang === 'en'
-      ? `Anderson's specific **salary expectations or compensation details** are aligned directly according to the role's scope, seniority, and work model (**Remote, Hybrid, or On-Site in Fortaleza/CE**).
+      ? `**Anderson Cataldo** currently works **100% On-site** at **Distribuidora Mais Saúde** (Fortaleza/CE) and does not publish **salary expectations or private compensation details** in this public portfolio.
 
-You can contact him directly to discuss an opportunity:
+For technical networking or direct professional contact:
 - **Email:** [${EMAIL}](mailto:${EMAIL})
 - **LinkedIn:** [linkedin.com/in/andersonnviana](${LINKEDIN_URL})
 - **WhatsApp:** [+55 85 99225-8794](${WHATSAPP_URL}) ([Contact Section](#contato))`
-      : `Os detalhes específicos sobre **pretensão salarial ou formato de remuneração** são alinhados diretamente conforme o escopo da vaga, senioridade e modelo de atuação (**Remoto, Híbrido ou Presencial em Fortaleza/CE**).
+      : `**Anderson Cataldo** atua atualmente em regime **100% presencial** na **Distribuidora Mais Saúde** (Fortaleza/CE) e não divulga dados privados ou **pretensão salarial** neste portfólio público.
 
-Você pode falar diretamente com o Anderson para alinhar uma oportunidade:
+Para networking técnico ou contato profissional direto:
 - **E-mail:** [${EMAIL}](mailto:${EMAIL})
 - **LinkedIn:** [linkedin.com/in/andersonnviana](${LINKEDIN_URL})
 - **WhatsApp:** [+55 85 99225-8794](${WHATSAPP_URL}) ([Seção Contato](#contato))`;

@@ -212,7 +212,7 @@ Como posso ajudá-lo a conhecer os **projetos**, **automações corporativas (FT
 export function getOutOfScopeResponse(lang: SupportedLanguage): string {
   if (lang === 'en') {
     return `### 🔒 Scope Restricted to Anderson's Portfolio
-I am **Anderson AI**, the official assistant strictly dedicated to **Anderson Cataldo's** professional portfolio. By governance rules, I only answer questions related to his software engineering career, work and study duration, projects, tech stack, certifications, or hiring contact.
+I am **Anderson AI**, the official assistant strictly dedicated to **Anderson Cataldo's** professional portfolio. By governance rules, I only answer questions related to his software engineering career, work and study duration, projects, tech stack, certifications, or direct contact.
 
 You can ask me, for example:
 - **Work & Study Duration:** How long he has worked in production and his Computer Science degree at UNIFOR ([Experience Section](#experiencia)).
@@ -221,7 +221,7 @@ You can ask me, for example:
   }
 
   return `### 🔒 Escopo Restrito ao Portfólio Profissional
-Sou o **Anderson AI**, assistente oficial dedicado exclusivamente ao portfólio de **Anderson Cataldo**. Por regra de governança, respondo apenas sobre sua trajetória profissional, tempo de trabalho e estudo, projetos, stack tecnológica, certificações e contato para oportunidades.
+Sou o **Anderson AI**, assistente oficial dedicado exclusivamente ao portfólio de **Anderson Cataldo**. Por regra de governança, respondo apenas sobre sua trajetória profissional, tempo de trabalho e estudo, projetos, stack tecnológica, certificações e canais de contato direto.
 
 Você pode me perguntar, por exemplo:
 - **Experiência e Estudo:** Quanto tempo de experiência ele possui e detalhes da graduação na UNIFOR ([Seção Experiência](#experiencia)).

@@ -149,8 +149,8 @@ async function main() {
           en: '**Anderson Cataldo’s First Job:** His first corporate position was at **Grupo 3corações** (**January 2025 to April 2026 — 1 year and 4 months**, in Eusébio/Fortaleza, CE) as **Apprentice — Tax Department (Systems & Projects)** (`RPA Robot Developer & Process Automation`), where he built **5 Python RPA robots** for automated **CND** renewals and processing **15,000+ monthly tax XMLs (NF-e/CT-e)** with **99.85% SEFAZ accuracy**, saving **200+ manual hours**.',
         },
         currentJob: {
-          pt: '**Emprego atual de Anderson Cataldo:** Atualmente (**Jun/2026 – Presente**), Anderson trabalha na **Distribuidora Mais Saúde** (Fortaleza, CE — Híbrido/Presencial) como **Estagiário de T.I. — Full-Stack, Automação & IA**, liderando o desenvolvimento da **Central Grupo Mais (4 sistemas unificados com SSO JWT)**, **10 robôs RPA integrados ao ERP TOTVS WinThor (Oracle)** (incluindo o **FTP_SYNC com >99.9% de tempo**) e o **squad de 9 agentes de IA (Maker-Checker com Claude Code)**.',
-          en: '**Anderson Cataldo’s Current Job:** Currently (**Jun/2026 – Present**), Anderson works at **Distribuidora Mais Saúde** (Fortaleza, CE — Hybrid/On-site) as **IT Intern — Full-Stack, Automation & AI**, leading the development of **Central Grupo Mais (4 unified SSO JWT systems)**, **10 Python RPA robots integrated with TOTVS WinThor ERP (Oracle)** (including **FTP_SYNC with >99.9% time**), and the **9-agent AI squad (Maker-Checker with Claude Code)**.',
+          pt: '**Emprego atual de Anderson Cataldo:** Atualmente (**Jun/2026 – Presente**), Anderson trabalha na **Distribuidora Mais Saúde** (Fortaleza, CE — **100% Presencial**) como **Estagiário de T.I. — Full-Stack, Automação & IA**, liderando o desenvolvimento da **Central Grupo Mais (4 sistemas unificados com SSO JWT)**, **10 robôs RPA integrados ao ERP TOTVS WinThor (Oracle)** (incluindo o **FTP_SYNC com >99.9% de tempo**) e o **squad de 9 agentes de IA (Maker-Checker com Claude Code)**.',
+          en: '**Anderson Cataldo’s Current Job:** Currently (**Jun/2026 – Present**), Anderson works at **Distribuidora Mais Saúde** (Fortaleza, CE — **100% On-site**) as **IT Intern — Full-Stack, Automation & AI**, leading the development of **Central Grupo Mais (4 unified SSO JWT systems)**, **10 Python RPA robots integrated with TOTVS WinThor ERP (Oracle)** (including **FTP_SYNC with >99.9% time**), and the **9-agent AI squad (Maker-Checker with Claude Code)**.',
         },
       },
       keywords: [
@@ -398,16 +398,16 @@ async function main() {
       sectionAnchor: '#projetos',
       sectionLabel: { pt: 'Recursos Interativos do Portfólio', en: 'Interactive Portfolio Features' },
       title: {
-        pt: 'Funcionalidades SaaS do Portfólio: Terminal CLI (sudo hire), Command Palette (Ctrl+K), Simulador de ROI e PWA',
-        en: 'Portfolio SaaS Features: Interactive CLI (sudo hire), Command Palette (Ctrl+K), ROI Simulator & PWA',
+        pt: 'Funcionalidades SaaS do Portfólio: Terminal CLI (sudo connect / sudo hire), Command Palette (Ctrl+K), Simulador de ROI e PWA',
+        en: 'Portfolio SaaS Features: Interactive CLI (sudo connect / sudo hire), Command Palette (Ctrl+K), ROI Simulator & PWA',
       },
       shortAnswer: {
-        pt: 'Este portfólio (`andersoncataldo.tech`) foi construído como uma aplicação SaaS interativa contendo: **Command Palette Global (`Ctrl+K` / `Cmd+K`)**, **Terminal CLI Executável (`DevConsole`)** com comandos como `help`, `bio`, `stack`, `rpa`, `ai-agents`, `projects`, `cv` e o easter egg `sudo hire`, **Simulador Interativo de ROI de Automação RPA**, suporte **PWA Offline (`vite-plugin-pwa`)** e geração dinâmica de imagens **OpenGraph no Edge (`/api/og`)**.',
-        en: 'This portfolio (`andersoncataldo.tech`) is engineered as an interactive SaaS application featuring: **Global Command Palette (`Ctrl+K` / `Cmd+K`)**, **Executable CLI Terminal (`DevConsole`)** supporting commands like `help`, `bio`, `stack`, `rpa`, `ai-agents`, `projects`, `cv`, and the `sudo hire` easter egg, **Interactive RPA ROI Calculator**, **Offline PWA support (`vite-plugin-pwa`)**, and **Dynamic Edge OpenGraph generation (`/api/og`)**.',
+        pt: 'Este portfólio (`andersoncataldo.tech`) foi construído como uma aplicação SaaS interativa contendo: **Command Palette Global (`Ctrl+K` / `Cmd+K`)**, **Terminal CLI Executável (`DevConsole`)** com comandos como `help`, `bio`, `stack`, `rpa`, `ai-agents`, `projects`, `cv` e o easter egg `sudo connect` (compatível também com `sudo hire`), **Simulador Interativo de ROI de Automação RPA**, suporte **PWA Offline (`vite-plugin-pwa`)** e geração dinâmica de imagens **OpenGraph no Edge (`/api/og`)**.',
+        en: 'This portfolio (`andersoncataldo.tech`) is engineered as an interactive SaaS application featuring: **Global Command Palette (`Ctrl+K` / `Cmd+K`)**, **Executable CLI Terminal (`DevConsole`)** supporting commands like `help`, `bio`, `stack`, `rpa`, `ai-agents`, `projects`, `cv`, and the `sudo connect` (and `sudo hire` alias) easter egg, **Interactive RPA ROI Calculator**, **Offline PWA support (`vite-plugin-pwa`)**, and **Dynamic Edge OpenGraph generation (`/api/og`)**.',
       },
       content: {
-        pt: 'Detalhes das features do site: (1) No Terminal CLI do topo (Hero), digitar "sudo hire" ativa um fast-track de contratação com link direto para o WhatsApp de Anderson, além de abas JSON copiáveis (profile.json, stack.json, metrics.json). (2) A Calculadora de ROI de RPA na seção Automação permite simular volume mensal de documentos, tempo manual por item e custo/hora para calcular horas poupadas e economia anual em R$. (3) O Command Palette (Ctrl+K) permite navegar por seções, baixar o currículo em PT ou EN, alternar tema claro/escuro, mudar idioma e abrir o Anderson AI.',
-        en: 'Site feature details: (1) In the Hero CLI Terminal, typing "sudo hire" triggers a hiring fast-track with a direct WhatsApp CTA, alongside copyable JSON tabs (profile.json, stack.json, metrics.json). (2) The RPA ROI Calculator in the Automation section lets visitors adjust sliders for monthly volume, manual time per item, and hourly rate to compute saved hours and annual savings. (3) The Command Palette (Ctrl+K) enables quick navigation, PT/EN resume downloads, theme/language toggling, and launching Anderson AI.',
+        pt: 'Detalhes das features do site: (1) No Terminal CLI do topo (Hero), digitar "sudo connect" (ou o alias legado "sudo hire") ativa um atalho de networking e contato direto via WhatsApp de Anderson, além de abas JSON copiáveis (profile.json, stack.json, metrics.json). (2) A Calculadora de ROI de RPA na seção Automação permite simular volume mensal de documentos, tempo manual por item e custo/hora para calcular horas poupadas e economia anual em R$. (3) O Command Palette (Ctrl+K) permite navegar por seções, baixar o currículo em PT ou EN, alternar tema claro/escuro, mudar idioma e abrir o Anderson AI.',
+        en: 'Site feature details: (1) In the Hero CLI Terminal, typing "sudo connect" (or legacy alias "sudo hire") triggers a direct networking shortcut to Anderson\'s WhatsApp, alongside copyable JSON tabs (profile.json, stack.json, metrics.json). (2) The RPA ROI Calculator in the Automation section lets visitors adjust sliders for monthly volume, manual time per item, and hourly rate to compute saved hours and annual savings. (3) The Command Palette (Ctrl+K) enables quick navigation, PT/EN resume downloads, theme/language toggling, and launching Anderson AI.',
       },
       keywords: [
         'sudo hire', 'terminal', 'cli', 'devconsole', 'command palette', 'ctrl+k', 'cmd+k',
@@ -417,28 +417,28 @@ async function main() {
       entities: ['portfolio_web_tech', 'dev_console', 'command_palette', 'rpa_roi_calculator', 'pwa'],
     },
 
-    // 11. Contato, Contratação, Disponibilidade e Currículo
+    // 11. Contato, Atuação Atual, Networking e Currículo
     {
       id: 'contact-and-hiring',
       category: 'contact',
       sectionAnchor: '#contato',
-      sectionLabel: { pt: 'Contato & Oportunidades', en: 'Contact & Inquiries' },
+      sectionLabel: { pt: 'Contato & Networking', en: 'Contact & Networking' },
       title: {
-        pt: 'Canais de Contato Direto, Disponibilidade e Download de Currículo',
-        en: 'Direct Contact Channels, Availability & Resume Download',
+        pt: 'Canais de Contato Direto, Atuação Atual e Download de Currículo',
+        en: 'Direct Contact Channels, Current Role & Resume Download',
       },
       shortAnswer: {
-        pt: `Anderson reside em **Fortaleza, CE** e está disponível para oportunidades **Remotas, Híbridas ou Presenciais**. Você pode falar diretamente com ele pelo e-mail **[${EMAIL}](mailto:${EMAIL})**, **[LinkedIn](${LINKEDIN_URL})**, **[WhatsApp (+55 85 99225-8794)](${WHATSAPP_URL})** ou **[GitHub](${GITHUB_URL})**, além de baixar o **Currículo em PDF (PT/EN)** no topo da página.`,
-        en: `Anderson is based in **Fortaleza, CE, Brazil** and is available for **Remote, Hybrid, or On-Site** roles. You can reach him directly via email at **[${EMAIL}](mailto:${EMAIL})**, **[LinkedIn](${LINKEDIN_URL})**, **[WhatsApp (+55 85 99225-8794)](${WHATSAPP_URL})**, or **[GitHub](${GITHUB_URL})**, and download his **PDF Resume (PT/EN)** from the top navigation.`,
+        pt: `Anderson atua atualmente **100% presencial na Distribuidora Mais Saúde** em **Fortaleza, CE** e mantém seus canais abertos para **networking técnico e troca de experiências em engenharia**. Você pode falar diretamente com ele pelo e-mail **[${EMAIL}](mailto:${EMAIL})**, **[LinkedIn](${LINKEDIN_URL})**, **[WhatsApp (+55 85 99225-8794)](${WHATSAPP_URL})** ou **[GitHub](${GITHUB_URL})**, além de baixar o **Currículo em PDF (PT/EN)** no topo da página.`,
+        en: `Anderson currently works **100% On-site at Distribuidora Mais Saúde** in **Fortaleza, CE, Brazil** and shares his channels for **technical networking and software engineering exchange**. You can reach him directly via email at **[${EMAIL}](mailto:${EMAIL})**, **[LinkedIn](${LINKEDIN_URL})**, **[WhatsApp (+55 85 99225-8794)](${WHATSAPP_URL})**, or **[GitHub](${GITHUB_URL})**, and download his **PDF Resume (PT/EN)** from the top navigation.`,
       },
       content: {
-        pt: `Canais oficiais verificados de Anderson Cataldo: E-mail: ${EMAIL} | LinkedIn: ${LINKEDIN_URL} | GitHub: ${GITHUB_URL} | WhatsApp: +55 85 99225-8794 | Localização: ${LOCATION}. Para propostas de contratação, entrevistas técnicas ou projetos de Engenharia Full-Stack, Automação RPA e Agentes de IA, basta acionar qualquer um dos canais acima.`,
-        en: `Verified official contact channels for Anderson Cataldo: Email: ${EMAIL} | LinkedIn: ${LINKEDIN_URL} | GitHub: ${GITHUB_URL} | WhatsApp: +55 85 99225-8794 | Location: ${LOCATION}. For hiring inquiries, technical interviews, or Full-Stack, RPA, and AI Engineering opportunities, reach out through any channel above.`,
+        pt: `Canais oficiais verificados de Anderson Cataldo: E-mail: ${EMAIL} | LinkedIn: ${LINKEDIN_URL} | GitHub: ${GITHUB_URL} | WhatsApp: +55 85 99225-8794 | Localização: ${LOCATION}. Atualmente trabalha presencialmente na Distribuidora Mais Saúde. Aberto a networking técnico e discussões sobre Engenharia Full-Stack, Automação RPA e Agentes de IA pelos canais acima.`,
+        en: `Verified official contact channels for Anderson Cataldo: Email: ${EMAIL} | LinkedIn: ${LINKEDIN_URL} | GitHub: ${GITHUB_URL} | WhatsApp: +55 85 99225-8794 | Location: ${LOCATION}. Currently working 100% On-site at Distribuidora Mais Saúde. Open to technical networking and discussions on Full-Stack Engineering, RPA, and AI Agents through any channel above.`,
       },
       facets: {
         location_where: {
-          pt: `Anderson mora em **Fortaleza, Ceará, Brasil**, e possui disponibilidade imediata para trabalho **Remoto, Híbrido ou Presencial**.`,
-          en: `Anderson is located in **Fortaleza, Ceará, Brazil**, with immediate availability for **Remote, Hybrid, or On-Site** work.`,
+          pt: `Anderson mora em **Fortaleza, Ceará, Brasil**, onde atua atualmente em regime **100% presencial** na Distribuidora Mais Saúde.`,
+          en: `Anderson is located in **Fortaleza, Ceará, Brazil**, where he currently works **100% On-site** at Distribuidora Mais Saúde.`,
         },
       },
       keywords: [
@@ -500,8 +500,8 @@ async function main() {
               }
             : {
                 duration_when: {
-                  pt: `Anderson trabalha na **Distribuidora Mais Saúde** desde **Jun/2026** (${exp.period.pt}), em formato ${exp.location.pt}.`,
-                  en: `Anderson has worked at **Distribuidora Mais Saúde** since **Jun/2026** (${exp.period.en}), ${exp.location.en}.`,
+                  pt: `Anderson trabalha na **Distribuidora Mais Saúde** desde **Jun/2026** (${exp.period.pt}), em regime **${exp.location.pt}**.`,
+                  en: `Anderson has worked at **Distribuidora Mais Saúde** since **Jun/2026** (${exp.period.en}), **${exp.location.en}**.`,
                 },
               }),
           ...(slug === '3coracoes'

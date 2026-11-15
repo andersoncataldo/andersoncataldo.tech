@@ -1,6 +1,6 @@
 {
   "version": "2.1.0",
-  "generatedAt": "2026-11-13T04:23:36.553Z",
+  "generatedAt": "2026-11-15T12:56:33.003Z",
   "embeddingModel": "hybrid-local-tfidf-bm25-v2.1",
   "totalChunks": 35,
   "canonicalMetrics": {
@@ -278,8 +278,8 @@
           "en": "**Anderson Cataldo’s First Job:** His first corporate position was at **Grupo 3corações** (**January 2025 to April 2026 — 1 year and 4 months**, in Eusébio/Fortaleza, CE) as **Apprentice — Tax Department (Systems & Projects)** (`RPA Robot Developer & Process Automation`), where he built **5 Python RPA robots** for automated **CND** renewals and processing **15,000+ monthly tax XMLs (NF-e/CT-e)** with **99.85% SEFAZ accuracy**, saving **200+ manual hours**."
         },
         "currentJob": {
-          "pt": "**Emprego atual de Anderson Cataldo:** Atualmente (**Jun/2026 – Presente**), Anderson trabalha na **Distribuidora Mais Saúde** (Fortaleza, CE — Híbrido/Presencial) como **Estagiário de T.I. — Full-Stack, Automação & IA**, liderando o desenvolvimento da **Central Grupo Mais (4 sistemas unificados com SSO JWT)**, **10 robôs RPA integrados ao ERP TOTVS WinThor (Oracle)** (incluindo o **FTP_SYNC com >99.9% de tempo**) e o **squad de 9 agentes de IA (Maker-Checker com Claude Code)**.",
-          "en": "**Anderson Cataldo’s Current Job:** Currently (**Jun/2026 – Present**), Anderson works at **Distribuidora Mais Saúde** (Fortaleza, CE — Hybrid/On-site) as **IT Intern — Full-Stack, Automation & AI**, leading the development of **Central Grupo Mais (4 unified SSO JWT systems)**, **10 Python RPA robots integrated with TOTVS WinThor ERP (Oracle)** (including **FTP_SYNC with >99.9% time**), and the **9-agent AI squad (Maker-Checker with Claude Code)**."
+          "pt": "**Emprego atual de Anderson Cataldo:** Atualmente (**Jun/2026 – Presente**), Anderson trabalha na **Distribuidora Mais Saúde** (Fortaleza, CE — **100% Presencial**) como **Estagiário de T.I. — Full-Stack, Automação & IA**, liderando o desenvolvimento da **Central Grupo Mais (4 sistemas unificados com SSO JWT)**, **10 robôs RPA integrados ao ERP TOTVS WinThor (Oracle)** (incluindo o **FTP_SYNC com >99.9% de tempo**) e o **squad de 9 agentes de IA (Maker-Checker com Claude Code)**.",
+          "en": "**Anderson Cataldo’s Current Job:** Currently (**Jun/2026 – Present**), Anderson works at **Distribuidora Mais Saúde** (Fortaleza, CE — **100% On-site**) as **IT Intern — Full-Stack, Automation & AI**, leading the development of **Central Grupo Mais (4 unified SSO JWT systems)**, **10 Python RPA robots integrated with TOTVS WinThor ERP (Oracle)** (including **FTP_SYNC with >99.9% time**), and the **9-agent AI squad (Maker-Checker with Claude Code)**."
         }
       },
       "keywords": [
@@ -722,16 +722,16 @@
         "en": "Interactive Portfolio Features"
       },
       "title": {
-        "pt": "Funcionalidades SaaS do Portfólio: Terminal CLI (sudo hire), Command Palette (Ctrl+K), Simulador de ROI e PWA",
-        "en": "Portfolio SaaS Features: Interactive CLI (sudo hire), Command Palette (Ctrl+K), ROI Simulator & PWA"
+        "pt": "Funcionalidades SaaS do Portfólio: Terminal CLI (sudo connect / sudo hire), Command Palette (Ctrl+K), Simulador de ROI e PWA",
+        "en": "Portfolio SaaS Features: Interactive CLI (sudo connect / sudo hire), Command Palette (Ctrl+K), ROI Simulator & PWA"
       },
       "shortAnswer": {
-        "pt": "Este portfólio (`andersoncataldo.tech`) foi construído como uma aplicação SaaS interativa contendo: **Command Palette Global (`Ctrl+K` / `Cmd+K`)**, **Terminal CLI Executável (`DevConsole`)** com comandos como `help`, `bio`, `stack`, `rpa`, `ai-agents`, `projects`, `cv` e o easter egg `sudo hire`, **Simulador Interativo de ROI de Automação RPA**, suporte **PWA Offline (`vite-plugin-pwa`)** e geração dinâmica de imagens **OpenGraph no Edge (`/api/og`)**.",
-        "en": "This portfolio (`andersoncataldo.tech`) is engineered as an interactive SaaS application featuring: **Global Command Palette (`Ctrl+K` / `Cmd+K`)**, **Executable CLI Terminal (`DevConsole`)** supporting commands like `help`, `bio`, `stack`, `rpa`, `ai-agents`, `projects`, `cv`, and the `sudo hire` easter egg, **Interactive RPA ROI Calculator**, **Offline PWA support (`vite-plugin-pwa`)**, and **Dynamic Edge OpenGraph generation (`/api/og`)**."
+        "pt": "Este portfólio (`andersoncataldo.tech`) foi construído como uma aplicação SaaS interativa contendo: **Command Palette Global (`Ctrl+K` / `Cmd+K`)**, **Terminal CLI Executável (`DevConsole`)** com comandos como `help`, `bio`, `stack`, `rpa`, `ai-agents`, `projects`, `cv` e o easter egg `sudo connect` (compatível também com `sudo hire`), **Simulador Interativo de ROI de Automação RPA**, suporte **PWA Offline (`vite-plugin-pwa`)** e geração dinâmica de imagens **OpenGraph no Edge (`/api/og`)**.",
+        "en": "This portfolio (`andersoncataldo.tech`) is engineered as an interactive SaaS application featuring: **Global Command Palette (`Ctrl+K` / `Cmd+K`)**, **Executable CLI Terminal (`DevConsole`)** supporting commands like `help`, `bio`, `stack`, `rpa`, `ai-agents`, `projects`, `cv`, and the `sudo connect` (and `sudo hire` alias) easter egg, **Interactive RPA ROI Calculator**, **Offline PWA support (`vite-plugin-pwa`)**, and **Dynamic Edge OpenGraph generation (`/api/og`)**."
       },
       "content": {
-        "pt": "Detalhes das features do site: (1) No Terminal CLI do topo (Hero), digitar \"sudo hire\" ativa um fast-track de contratação com link direto para o WhatsApp de Anderson, além de abas JSON copiáveis (profile.json, stack.json, metrics.json). (2) A Calculadora de ROI de RPA na seção Automação permite simular volume mensal de documentos, tempo manual por item e custo/hora para calcular horas poupadas e economia anual em R$. (3) O Command Palette (Ctrl+K) permite navegar por seções, baixar o currículo em PT ou EN, alternar tema claro/escuro, mudar idioma e abrir o Anderson AI.",
-        "en": "Site feature details: (1) In the Hero CLI Terminal, typing \"sudo hire\" triggers a hiring fast-track with a direct WhatsApp CTA, alongside copyable JSON tabs (profile.json, stack.json, metrics.json). (2) The RPA ROI Calculator in the Automation section lets visitors adjust sliders for monthly volume, manual time per item, and hourly rate to compute saved hours and annual savings. (3) The Command Palette (Ctrl+K) enables quick navigation, PT/EN resume downloads, theme/language toggling, and launching Anderson AI."
+        "pt": "Detalhes das features do site: (1) No Terminal CLI do topo (Hero), digitar \"sudo connect\" (ou o alias legado \"sudo hire\") ativa um atalho de networking e contato direto via WhatsApp de Anderson, além de abas JSON copiáveis (profile.json, stack.json, metrics.json). (2) A Calculadora de ROI de RPA na seção Automação permite simular volume mensal de documentos, tempo manual por item e custo/hora para calcular horas poupadas e economia anual em R$. (3) O Command Palette (Ctrl+K) permite navegar por seções, baixar o currículo em PT ou EN, alternar tema claro/escuro, mudar idioma e abrir o Anderson AI.",
+        "en": "Site feature details: (1) In the Hero CLI Terminal, typing \"sudo connect\" (or legacy alias \"sudo hire\") triggers a direct networking shortcut to Anderson's WhatsApp, alongside copyable JSON tabs (profile.json, stack.json, metrics.json). (2) The RPA ROI Calculator in the Automation section lets visitors adjust sliders for monthly volume, manual time per item, and hourly rate to compute saved hours and annual savings. (3) The Command Palette (Ctrl+K) enables quick navigation, PT/EN resume downloads, theme/language toggling, and launching Anderson AI."
       },
       "keywords": [
         "sudo hire",
@@ -767,25 +767,25 @@
       "category": "contact",
       "sectionAnchor": "#contato",
       "sectionLabel": {
-        "pt": "Contato & Oportunidades",
-        "en": "Contact & Inquiries"
+        "pt": "Contato & Networking",
+        "en": "Contact & Networking"
       },
       "title": {
-        "pt": "Canais de Contato Direto, Disponibilidade e Download de Currículo",
-        "en": "Direct Contact Channels, Availability & Resume Download"
+        "pt": "Canais de Contato Direto, Atuação Atual e Download de Currículo",
+        "en": "Direct Contact Channels, Current Role & Resume Download"
       },
       "shortAnswer": {
-        "pt": "Anderson reside em **Fortaleza, CE** e está disponível para oportunidades **Remotas, Híbridas ou Presenciais**. Você pode falar diretamente com ele pelo e-mail **[andersonvcataldo@gmail.com](mailto:andersonvcataldo@gmail.com)**, **[LinkedIn](https://linkedin.com/in/andersonnviana)**, **[WhatsApp (+55 85 99225-8794)](https://wa.me/5585992258794?text=Ol%C3%A1%20Anderson,%20vi%20seu%20portf%C3%B3lio%20e%20gostaria%20de%20conversar!)** ou **[GitHub](https://github.com/andersoncataldo)**, além de baixar o **Currículo em PDF (PT/EN)** no topo da página.",
-        "en": "Anderson is based in **Fortaleza, CE, Brazil** and is available for **Remote, Hybrid, or On-Site** roles. You can reach him directly via email at **[andersonvcataldo@gmail.com](mailto:andersonvcataldo@gmail.com)**, **[LinkedIn](https://linkedin.com/in/andersonnviana)**, **[WhatsApp (+55 85 99225-8794)](https://wa.me/5585992258794?text=Ol%C3%A1%20Anderson,%20vi%20seu%20portf%C3%B3lio%20e%20gostaria%20de%20conversar!)**, or **[GitHub](https://github.com/andersoncataldo)**, and download his **PDF Resume (PT/EN)** from the top navigation."
+        "pt": "Anderson atua atualmente **100% presencial na Distribuidora Mais Saúde** em **Fortaleza, CE** e mantém seus canais abertos para **networking técnico e troca de experiências em engenharia**. Você pode falar diretamente com ele pelo e-mail **[andersonvcataldo@gmail.com](mailto:andersonvcataldo@gmail.com)**, **[LinkedIn](https://linkedin.com/in/andersonnviana)**, **[WhatsApp (+55 85 99225-8794)](https://wa.me/5585992258794?text=Ol%C3%A1%20Anderson,%20vi%20seu%20portf%C3%B3lio%20e%20gostaria%20de%20conversar!)** ou **[GitHub](https://github.com/andersoncataldo)**, além de baixar o **Currículo em PDF (PT/EN)** no topo da página.",
+        "en": "Anderson currently works **100% On-site at Distribuidora Mais Saúde** in **Fortaleza, CE, Brazil** and shares his channels for **technical networking and software engineering exchange**. You can reach him directly via email at **[andersonvcataldo@gmail.com](mailto:andersonvcataldo@gmail.com)**, **[LinkedIn](https://linkedin.com/in/andersonnviana)**, **[WhatsApp (+55 85 99225-8794)](https://wa.me/5585992258794?text=Ol%C3%A1%20Anderson,%20vi%20seu%20portf%C3%B3lio%20e%20gostaria%20de%20conversar!)**, or **[GitHub](https://github.com/andersoncataldo)**, and download his **PDF Resume (PT/EN)** from the top navigation."
       },
       "content": {
-        "pt": "Canais oficiais verificados de Anderson Cataldo: E-mail: andersonvcataldo@gmail.com | LinkedIn: https://linkedin.com/in/andersonnviana | GitHub: https://github.com/andersoncataldo | WhatsApp: +55 85 99225-8794 | Localização: Fortaleza, CE - Brasil (Remoto / Híbrido). Para propostas de contratação, entrevistas técnicas ou projetos de Engenharia Full-Stack, Automação RPA e Agentes de IA, basta acionar qualquer um dos canais acima.",
-        "en": "Verified official contact channels for Anderson Cataldo: Email: andersonvcataldo@gmail.com | LinkedIn: https://linkedin.com/in/andersonnviana | GitHub: https://github.com/andersoncataldo | WhatsApp: +55 85 99225-8794 | Location: Fortaleza, CE - Brasil (Remoto / Híbrido). For hiring inquiries, technical interviews, or Full-Stack, RPA, and AI Engineering opportunities, reach out through any channel above."
+        "pt": "Canais oficiais verificados de Anderson Cataldo: E-mail: andersonvcataldo@gmail.com | LinkedIn: https://linkedin.com/in/andersonnviana | GitHub: https://github.com/andersoncataldo | WhatsApp: +55 85 99225-8794 | Localização: Fortaleza, CE - Brasil. Atualmente trabalha presencialmente na Distribuidora Mais Saúde. Aberto a networking técnico e discussões sobre Engenharia Full-Stack, Automação RPA e Agentes de IA pelos canais acima.",
+        "en": "Verified official contact channels for Anderson Cataldo: Email: andersonvcataldo@gmail.com | LinkedIn: https://linkedin.com/in/andersonnviana | GitHub: https://github.com/andersoncataldo | WhatsApp: +55 85 99225-8794 | Location: Fortaleza, CE - Brasil. Currently working 100% On-site at Distribuidora Mais Saúde. Open to technical networking and discussions on Full-Stack Engineering, RPA, and AI Agents through any channel above."
       },
       "facets": {
         "location_where": {
-          "pt": "Anderson mora em **Fortaleza, Ceará, Brasil**, e possui disponibilidade imediata para trabalho **Remoto, Híbrido ou Presencial**.",
-          "en": "Anderson is located in **Fortaleza, Ceará, Brazil**, with immediate availability for **Remote, Hybrid, or On-Site** work."
+          "pt": "Anderson mora em **Fortaleza, Ceará, Brasil**, onde atua atualmente em regime **100% presencial** na Distribuidora Mais Saúde.",
+          "en": "Anderson is located in **Fortaleza, Ceará, Brazil**, where he currently works **100% On-site** at Distribuidora Mais Saúde."
         }
       },
       "keywords": [
@@ -844,8 +844,8 @@
         "en": "Distribuidora Mais Saúde — IT Intern — Full-Stack, Automation & AI (Jun/2026 - Present)"
       },
       "shortAnswer": {
-        "pt": "Na **Distribuidora Mais Saúde** (Jun/2026 - Presente, Fortaleza, CE - Híbrido / Presencial), atuando como **Estagiário de T.I. — Full-Stack, Automação & IA**: Projeta e desenvolve a Central Grupo Mais (monorepo com SSO que unifica 4 sistemas internos), robôs de integração Python conectados ao ERP TOTVS WinThor (Oracle) e arquitetura de agentes de IA em modelo maker-checker com governança rigorosa.",
-        "en": "At **Distribuidora Mais Saúde** (Jun/2026 - Present, Fortaleza, CE - Hybrid / On-site), serving as **IT Intern — Full-Stack, Automation & AI**: Architects and builds Central Grupo Mais (corporate SSO monorepo unifying 4 internal systems), Python integration robots connected to TOTVS WinThor ERP (Oracle) and maker-checker AI multi-agent architecture with strict quality gates."
+        "pt": "Na **Distribuidora Mais Saúde** (Jun/2026 - Presente, Fortaleza, CE - 100% Presencial), atuando como **Estagiário de T.I. — Full-Stack, Automação & IA**: Projeta e desenvolve a Central Grupo Mais (monorepo com SSO que unifica 4 sistemas internos), robôs de integração Python conectados ao ERP TOTVS WinThor (Oracle) e arquitetura de agentes de IA em modelo maker-checker com governança rigorosa.",
+        "en": "At **Distribuidora Mais Saúde** (Jun/2026 - Present, Fortaleza, CE - 100% On-site), serving as **IT Intern — Full-Stack, Automation & AI**: Architects and builds Central Grupo Mais (corporate SSO monorepo unifying 4 internal systems), Python integration robots connected to TOTVS WinThor ERP (Oracle) and maker-checker AI multi-agent architecture with strict quality gates."
       },
       "content": {
         "pt": "Distribuidora Mais Saúde (Jun/2026 - Presente) — Engenharia de Software, Agentes de IA & Integrações WinThor.\nPrincipais entregas:\n- Projetou e desenvolve a Central Grupo Mais, monorepo corporativo com SSO (JWT) unificando 4 sistemas internos (Central, Chamados, Devolução e Ativos) em Next.js 16/React 19, Vite, Node.js/Express, Python/FastAPI, Supabase (RLS) e deploy Cloudflare Pages + Render.\n- Implementou escritório de 9 agentes de IA (orquestrador, 5 executores especialistas e 3 validadores independentes) no modelo maker-checker com Claude Code, menor privilégio, protocolo anti-alucinação e escalonamento para revisão humana.\n- Instituiu qualidade como gate de entrega: 58 testes Pytest (E2E, autenticação e LGPD) e 35 asserções Playwright de regressão visual, lint e checagem de drift do design system em 5 pacotes.\n- Desenvolveu 10 automações Python integradas ao WinThor (Oracle), incluindo 4 robôs de estoque EDI Pharma Link (Eurofarma, Eurofarma Genérico, Smartped, Momenta) via FTP/SFTP, empacotados com PyInstaller e agendados.\n- Criou o FTP_SYNC, ponte autônoma entre servidores FTP de parceiros e o SFTP do WinThor Cloud (TOTVS) com sincronização a cada 15 min, reduzindo o tempo de coleta e lançamento de 6 h para menos de 10 s por ciclo (mediana; redução superior a 99,9%).\n- Construiu motor de IA no Sistema de Devolução: diagnóstico executivo com LLM (Gemini/OpenAI), curva de Pareto de causas-raiz e detecção de anomalias com fallback local (< 1s), timeout de inferência e anonimização de dados (LGPD).\n- Entregou ferramentas internas estratégicas: painel de automações em Streamlit para monitoramento de robôs, controle de inventário de TI (Google Sheets + Apps Script) e atualizador de catálogo Tkinter com consulta em lote ao Oracle.\nStack utilizada: Next.js 16, React 19, Python, FastAPI, Node.js, Agentes de IA, Claude Code, Supabase, PostgreSQL, TOTVS WinThor (Oracle), Pytest, Playwright, Cloudflare Pages.",
@@ -853,8 +853,8 @@
       },
       "facets": {
         "role": {
-          "pt": "Na **Distribuidora Mais Saúde**, o cargo de Anderson é **Estagiário de T.I. — Full-Stack, Automação & IA** (Engenharia de Software, Agentes de IA & Integrações WinThor), atuando no período de **Jun/2026 - Presente** em formato **Fortaleza, CE - Híbrido / Presencial**.",
-          "en": "At **Distribuidora Mais Saúde**, Anderson's role is **IT Intern — Full-Stack, Automation & AI** (Software Engineering, AI Agents & WinThor Integrations), during **Jun/2026 - Present** (Fortaleza, CE - Hybrid / On-site)."
+          "pt": "Na **Distribuidora Mais Saúde**, o cargo de Anderson é **Estagiário de T.I. — Full-Stack, Automação & IA** (Engenharia de Software, Agentes de IA & Integrações WinThor), atuando no período de **Jun/2026 - Presente** em formato **Fortaleza, CE - 100% Presencial**.",
+          "en": "At **Distribuidora Mais Saúde**, Anderson's role is **IT Intern — Full-Stack, Automation & AI** (Software Engineering, AI Agents & WinThor Integrations), during **Jun/2026 - Present** (Fortaleza, CE - 100% On-site)."
         },
         "architecture": {
           "pt": "A stack tecnológica utilizada na **Distribuidora Mais Saúde** inclui: **Next.js 16, React 19, Python, FastAPI, Node.js, Agentes de IA, Claude Code, Supabase, PostgreSQL, TOTVS WinThor (Oracle), Pytest, Playwright, Cloudflare Pages**.",
@@ -869,8 +869,8 @@
           "en": "Highlight metrics at **Distribuidora Mais Saúde**: **FTP_SYNC Reduction: >99.9% (6h ➔ <10s)** • **WinThor Robots: 10 robôs** • **Test Suites: 58 Pytest + 35 E2E** • **Unified Systems: 4 em 1 (SSO)**."
         },
         "duration_when": {
-          "pt": "Anderson trabalha na **Distribuidora Mais Saúde** desde **Jun/2026** (Jun/2026 - Presente), em formato Fortaleza, CE - Híbrido / Presencial.",
-          "en": "Anderson has worked at **Distribuidora Mais Saúde** since **Jun/2026** (Jun/2026 - Present), Fortaleza, CE - Hybrid / On-site."
+          "pt": "Anderson trabalha na **Distribuidora Mais Saúde** desde **Jun/2026** (Jun/2026 - Presente), em regime **Fortaleza, CE - 100% Presencial**.",
+          "en": "Anderson has worked at **Distribuidora Mais Saúde** since **Jun/2026** (Jun/2026 - Present), **Fortaleza, CE - 100% On-site**."
         },
         "currentJob": {
           "pt": "**Emprego Atual — Distribuidora Mais Saúde (Jun/2026 - Presente):** Atualmente, Anderson trabalha na **Distribuidora Mais Saúde** como **Estagiário de T.I. — Full-Stack, Automação & IA** (Engenharia de Software, Agentes de IA & Integrações WinThor), onde projetou e desenvolve a **Central Grupo Mais (monorepo SSO com 4 sistemas internos)**, **10 robôs Python integrados ao ERP TOTVS WinThor (Oracle)** (incluindo o **FTP_SYNC com redução de 6h para <10s, >99.9%**), o **escritório de 9 agentes de IA (Maker-Checker com Claude Code)** e **58 testes Pytest + 35 asserções Playwright**.",
