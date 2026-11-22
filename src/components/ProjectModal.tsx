@@ -140,7 +140,7 @@ export const ProjectModal = ({
             <span className="px-3 py-1 rounded-full text-xs font-bold uppercase tracking-wider bg-indigo-50 dark:bg-indigo-950/60 text-indigo-600 dark:text-indigo-400 border border-indigo-200 dark:border-indigo-800/60">
               {project.categoryLabel[language]}
             </span>
-            {project.id.includes('grupo') || project.id.includes('mais-saude') || project.id.includes('winthor') || project.id.includes('3coracoes') || project.id.includes('ativos') ? (
+            {!project.github ? (
               <span className="inline-flex items-center gap-1 px-2.5 py-0.5 rounded-full text-[11px] font-mono font-medium bg-slate-100 dark:bg-slate-800 text-slate-600 dark:text-slate-300 border border-slate-200 dark:border-slate-700">
                 <Lock className="w-3 h-3 text-amber-500" />
                 <span>{language === 'pt' ? 'Corporativo • LGPD' : 'Enterprise • LGPD'}</span>

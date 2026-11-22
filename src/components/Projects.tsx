@@ -117,7 +117,7 @@ const Projects = () => {
         <div className="grid md:grid-cols-2 gap-6 sm:gap-8">
           {filteredProjects.map((project, index) => {
             const Icon = projectIcons[project.icon] || Layers;
-            const isCorporate = project.id.includes('grupo') || project.id.includes('mais-saude') || project.id.includes('winthor') || project.id.includes('3coracoes') || project.id.includes('ativos');
+            const isCorporate = !project.github;
 
             return (
               <motion.article

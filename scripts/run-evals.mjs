@@ -208,7 +208,7 @@ async function main() {
   const edgeContractOk =
     edgeGetRes.status === 405 &&
     edgePostRes.status === 200 &&
-    edgeStreamText.includes('-99%');
+    (edgeStreamText.includes('>99.9%') || edgeStreamText.includes('>99,9%') || edgeStreamText.includes('-99%'));
 
   const sortedLat = [...latenciesMs].sort((a, b) => a - b);
   const p50 = percentile(sortedLat, 50);

@@ -90,11 +90,11 @@ export const rpaHighlights: { title: LocalizedText; subtitle: LocalizedText; des
     },
   },
   {
-    title: { pt: '15.000+ XMLs com Zero Erro', en: '15,000+ XMLs with Zero Error' },
-    subtitle: { pt: 'Validação Oficial SEFAZ', en: 'Official SEFAZ Compliance' },
+    title: { pt: '15.000+ XMLs Validados/Mês', en: '15,000+ Validated XMLs/Mo' },
+    subtitle: { pt: '99,85% de Conformidade SEFAZ', en: '99.85% SEFAZ Compliance' },
     description: {
-      pt: 'Processamento massivo e contínuo com 99.85% de conformidade, economizando centenas de horas operacionais.',
-      en: 'Massive continuous processing with 99.85% compliance, saving hundreds of operational hours.',
+      pt: 'Processamento massivo e contínuo com validação contra schemas XSD da SEFAZ e tratamento automatizado de exceções, economizando 200+ horas operacionais.',
+      en: 'Massive continuous processing with SEFAZ XSD schema validation and automated exception handling, saving 200+ operational hours.',
     },
   },
 ];

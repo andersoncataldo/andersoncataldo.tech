@@ -26,7 +26,7 @@ export const keyMetrics: MetricItem[] = [
       pt: 'Documentos fiscais processados com 99.85% de conformidade com schemas oficiais da SEFAZ.',
       en: 'Tax documents processed with 99.85% compliance against official SEFAZ government schemas.',
     },
-    trend: { pt: 'Zero erro fiscal', en: 'Zero tax error' },
+    trend: { pt: '99,85% conformidade', en: '99.85% compliance' },
   },
   {
     value: '9 Agentes',

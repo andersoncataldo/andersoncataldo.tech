@@ -14,17 +14,17 @@ export const experiences: Experience[] = [
     period: { pt: 'Jun/2026 - Presente', en: 'Jun/2026 - Present' },
     location: { pt: 'Fortaleza, CE - 100% Presencial', en: 'Fortaleza, CE - 100% On-site' },
     summary: {
-      pt: 'Projeta e desenvolve a Central Grupo Mais (monorepo com SSO que unifica 4 sistemas internos), robôs de integração Python conectados ao ERP TOTVS WinThor (Oracle) e arquitetura de agentes de IA em modelo maker-checker com governança rigorosa.',
-      en: 'Architects and builds Central Grupo Mais (corporate SSO monorepo unifying 4 internal systems), Python integration robots connected to TOTVS WinThor ERP (Oracle) and maker-checker AI multi-agent architecture with strict quality gates.',
+      pt: 'Desenvolve funcionalidades na Central Grupo Mais (monorepo com SSO que unifica 4 sistemas internos), robôs de integração Python conectados ao ERP TOTVS WinThor (Oracle) e fluxos de engenharia assistida por agentes de IA no modelo maker-checker com governança rigorosa.',
+      en: 'Develops features across Central Grupo Mais (corporate SSO monorepo unifying 4 internal systems), Python integration robots connected to TOTVS WinThor ERP (Oracle), and maker-checker AI multi-agent engineering workflows with strict quality gates.',
     },
     results: [
       {
-        pt: 'Projetou e desenvolve a Central Grupo Mais, monorepo corporativo com SSO (JWT) unificando 4 sistemas internos (Central, Chamados, Devolução e Ativos) em Next.js 16/React 19, Vite, Node.js/Express, Python/FastAPI, Supabase (RLS) e deploy Cloudflare Pages + Render.',
-        en: 'Architected and develops Central Grupo Mais, a corporate monorepo with SSO (JWT) unifying 4 internal systems (Central, Service Desk, Returns, IT Assets) using Next.js 16/React 19, Vite, Node.js/Express, Python/FastAPI, Supabase (RLS), and Cloudflare Pages + Render deployment.',
+        pt: 'Desenvolve funcionalidades na Central Grupo Mais (arquitetura e requisitos definidos pela gestão), monorepo corporativo com SSO (JWT) unificando 4 sistemas internos (Central, Chamados, Devolução e Ativos) em Next.js 16/React 19, Vite, Node.js/Express, Python/FastAPI, Supabase (RLS) e deploy Cloudflare Pages + Render.',
+        en: 'Develops features for Central Grupo Mais (architecture and requirements defined by management), a corporate monorepo with SSO (JWT) unifying 4 internal systems (Central, Service Desk, Returns, IT Assets) using Next.js 16/React 19, Vite, Node.js/Express, Python/FastAPI, Supabase (RLS), and Cloudflare Pages + Render deployment.',
       },
       {
-        pt: 'Implementou escritório de 9 agentes de IA (orquestrador, 5 executores especialistas e 3 validadores independentes) no modelo maker-checker com Claude Code, menor privilégio, protocolo anti-alucinação e escalonamento para revisão humana.',
-        en: 'Implemented a 9 AI agent squad (orchestrator, 5 specialized implementers, 3 independent validators) in a maker-checker model with Claude Code: least privilege, anti-hallucination protocols, and human review escalation.',
+        pt: 'Estruturou fluxo de engenharia assistida por IA com 9 agentes (orquestrador, 5 executores especialistas e 3 validadores independentes) no modelo maker-checker (Claude Code, MCP e protocolos anti-alucinação) com revisão humana obrigatória.',
+        en: 'Structured an AI-assisted engineering workflow with 9 agents (orchestrator, 5 specialized implementers, 3 independent validators) in a maker-checker model (Claude Code, MCP, and anti-hallucination protocols) with mandatory human review.',
       },
       {
         pt: 'Instituiu qualidade como gate de entrega: 58 testes Pytest (E2E, autenticação e LGPD) e 35 asserções Playwright de regressão visual, lint e checagem de drift do design system em 5 pacotes.',
@@ -124,21 +124,21 @@ export const experiences: Experience[] = [
       en: "Bachelor's Degree in Computer Science",
     },
     company: 'Universidade de Fortaleza (UNIFOR)',
-    companyRole: { pt: 'Graduando — 6º Semestre', en: 'Undergraduate — 6th Semester' },
+    companyRole: { pt: 'Graduando — 6º Semestre (adiantando 7º)', en: 'Undergraduate — 6th Semester (taking 7th-sem courses)' },
     period: { pt: '2024 - Em andamento', en: '2024 - In progress' },
     location: { pt: 'Fortaleza, CE', en: 'Fortaleza, CE' },
     summary: {
-      pt: 'Formação acadêmica de excelência com ênfase em Fundamentos da Computação, Estruturas de Dados, Algoritmos, Análise de Complexidade, Engenharia de Software e Inteligência Artificial.',
-      en: 'Top-tier academic training focusing on Computer Science Fundamentals, Data Structures, Algorithms, Complexity Analysis, Software Engineering, and Artificial Intelligence.',
+      pt: 'Formação acadêmica com ênfase em Fundamentos da Computação, Estruturas de Dados, Algoritmos, Bancos de Dados (Relacional e NoSQL Grafos), Engenharia de Software e Inteligência Artificial.',
+      en: 'Academic training focusing on Computer Science Fundamentals, Data Structures, Algorithms, Databases (Relational & Graph NoSQL), Software Engineering, and Artificial Intelligence.',
     },
     results: [
       {
-        pt: 'Domínio de estruturas de dados avançadas, análise assintótica (Big-O), design patterns e arquitetura de software orientada a objetos.',
-        en: 'Mastery of advanced data structures, asymptotic complexity analysis (Big-O), software design patterns, and OOP architecture.',
+        pt: 'Implementação prática de fundamentos: Processador de Consultas SQL, Índice Hash Estático, Sistema de Recomendação em Grafos (Neo4j/Cypher), Máquina de Estados e algoritmos de Machine Learning do zero com NumPy.',
+        en: 'Hands-on implementation of CS fundamentals: SQL Query Processor, Static Hash Index, Graph Recommendation System (Neo4j/Cypher), Finite State Machine Simulator, and Machine Learning algorithms from scratch with NumPy.',
       },
       {
-        pt: 'Condução de projetos interdisciplinares com React, Java Spring Boot, Python FastAPI e modelagem relacional avançada com PostgreSQL e Oracle.',
-        en: 'Led interdisciplinary engineering projects utilizing React, Java Spring Boot, Python FastAPI, and relational modeling on PostgreSQL and Oracle.',
+        pt: 'Condução de projetos interdisciplinares com React, Java Spring Boot, Python FastAPI e modelagem relacional/NoSQL com PostgreSQL, Oracle e Neo4j.',
+        en: 'Built interdisciplinary engineering projects utilizing React, Java Spring Boot, Python FastAPI, and relational/NoSQL modeling on PostgreSQL, Oracle, and Neo4j.',
       },
       {
         pt: 'Aplicação contínua de boas práticas de Clean Code, Spec-Driven Development e testes automatizados em todo o ciclo acadêmico e profissional.',
@@ -149,7 +149,7 @@ export const experiences: Experience[] = [
       { label: { pt: 'Progresso', en: 'Progress' }, value: { pt: '6º Semestre', en: '6th Semester' } },
       { label: { pt: 'Foco de Pesquisa', en: 'Focus Area' }, value: { pt: 'IA & Engenharia', en: 'AI & Engineering' } },
     ],
-    stack: ['Estruturas de Dados', 'Algoritmos', 'Java', 'Spring Boot', 'PostgreSQL', 'TypeScript', 'Clean Code', 'IA Aplicada'],
+    stack: ['Estruturas de Dados', 'Algoritmos', 'Neo4j (Cypher)', 'NumPy (ML)', 'Java', 'PostgreSQL', 'TypeScript', 'Clean Code'],
     type: 'education',
     current: true,
   },

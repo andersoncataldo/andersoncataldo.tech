@@ -6,7 +6,7 @@
 [![Tailwind CSS](https://img.shields.io/badge/Tailwind_CSS-v4-06B6D4?logo=tailwindcss&logoColor=white)](https://tailwindcss.com/)
 [![License: MIT](https://img.shields.io/badge/License-MIT-green.svg)](LICENSE)
 
-> Portfólio de alta performance e vitrine técnica profissional de nível **SaaS** de **Anderson Cataldo**, Desenvolvedor Full-Stack | Automação & RPA | Agentes de IA (LLM) | Python · TypeScript.
+> Portfólio de alta performance e vitrine técnica profissional de **Anderson Cataldo**, Desenvolvedor Full-Stack (TypeScript · Python) | IA Aplicada & Automação/RPA.
 
 🔗 **Live Demo:** [https://andersoncataldotech.vercel.app](https://andersoncataldotech.vercel.app)  
 📁 **Repositório:** [https://github.com/andersoncataldo/andersoncataldo.tech](https://github.com/andersoncataldo/andersoncataldo.tech)
@@ -15,9 +15,9 @@
 
 ## 🎯 Sobre o Projeto & Posicionamento
 
-Este projeto foi concebido para apresentar Anderson Cataldo com o mais alto nível de maturidade, rigor de engenharia e foco em resultados de um **Desenvolvedor Full-Stack, Automação & IA**.
+Este projeto apresenta a trajetória, arquitetura e resultados de **Anderson Cataldo** em desenvolvimento **Full-Stack (TypeScript · Python)** com diferencial em **IA Aplicada / Orquestração de Agentes** e **Automação / RPA**.
 
-A aplicação foi desenvolvida no padrão de craft de produtos digitais Silicon Valley (estilo Linear, Raycast e Apple), operando como uma **Single Page Application (SPA)** ultra-rápida, acessível (WCAG 2.1 AA) e com profunda interatividade de software real.
+A aplicação opera como uma **Single Page Application (SPA)** rápida, acessível (WCAG 2.1 AA), PWA offline-first e com interatividade real de software.
 
 ---
 
@@ -91,11 +91,11 @@ A aplicação foi desenvolvida no padrão de craft de produtos digitais Silicon 
 | Camada                      | Tecnologias                                                                         |
 | :-------------------------- | :---------------------------------------------------------------------------------- |
 | **Front-End & UI SaaS**     | React 19 / 18, TypeScript 5, Next.js 16 (App Router), Vite 6, Tailwind CSS v4, Framer Motion, Recharts |
-| **IA & Sistemas Multiagente**| Claude Code, MCP (Model Context Protocol), Gemini API, OpenAI API, Maker-Checker, Guardrails |
-| **Automação & RPA**         | Python 3.11+, Paramiko (SFTP), ftplib, Playwright, Selenium, Pandas, lxml, BeautifulSoup, PyInstaller |
+| **IA & Orquestração de Agentes**| Claude Code, Antigravity CLI, MCP (Model Context Protocol), Gemini API, OpenAI API, Herdr, RTK, Maker-Checker, Guardrails, NumPy (ML) |
+| **Automação & RPA**         | Python 3.11+, Paramiko (SFTP), ftplib, Playwright, Selenium, pdfplumber, Pandas, lxml, BeautifulSoup, OpenPyXL, PyInstaller |
 | **Back-End & APIs**         | Node.js (Express), Python (FastAPI), SQLAlchemy, Alembic, Pydantic v2, Zod, JWT SSO |
-| **Bancos de Dados & Storage**| PostgreSQL, Supabase (RLS), Oracle SQL (TOTVS WinThor), Huawei HCIA-Storage, Neon  |
-| **DevOps & Qualidade**      | Pytest (58 testes), Playwright E2E (35 asserções), GitHub Actions, Cloudflare, Render, Vercel |
+| **Bancos de Dados & Storage**| PostgreSQL, Supabase (RLS), Oracle SQL (TOTVS WinThor), Neo4j (Cypher), Huawei HCIA-Storage, Neon |
+| **Linux, DevOps & Qualidade**| Linux (Ubuntu/WSL2), Git Worktree, Pytest (58+ testes), Playwright E2E (35 asserções), GitHub Actions, Cloudflare, Render, Vercel, Docker |
 
 ---
 

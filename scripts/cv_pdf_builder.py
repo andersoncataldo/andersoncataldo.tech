@@ -207,7 +207,130 @@ def format_header_links(portfolio_label: str) -> str:
 
 def format_portfolio_links(demo_label: str) -> str:
     """Format Demo/Live and GitHub links for the portfolio project bullet."""
-    return (
-        f"{_link('https://andersoncataldotech.vercel.app', demo_label)} | "
-        f"{_link('https://github.com/andersoncataldo/andersoncataldo.tech', 'GitHub')}"
+    return format_project_links(
+        "https://andersoncataldotech.vercel.app",
+        demo_label,
+        "https://github.com/andersoncataldo/andersoncataldo.tech",
     )
+
+
+def format_project_links(demo_url: str, demo_label: str, repo_url: str) -> str:
+    """Format clickable Demo/Live and GitHub links for any public project bullet."""
+    return f"{_link(demo_url, demo_label)} | {_link(repo_url, 'GitHub')}"
+
+
+def _strip_xml_tags(text: str) -> str:
+    import html
+    import re
+
+    # Preserve href URLs inline in plain DOCX text when links exist
+    text = re.sub(r'<a\s+href="([^"]+)">([^<]+)</a>', r'\2 (\1)', text)
+    text = re.sub(r'<[^>]+>', '', text)
+    return html.unescape(text)
+
+
+def render_cv_docx(data: ResumeData, output_path: Path) -> None:
+    """Render a clean ATS-friendly DOCX synchronized with ResumeData."""
+    from docx import Document
+    from docx.shared import Inches, Pt, RGBColor
+
+    output_path.parent.mkdir(parents=True, exist_ok=True)
+    doc = Document()
+
+    for section in doc.sections:
+        section.top_margin = Inches(0.45)
+        section.bottom_margin = Inches(0.45)
+        section.left_margin = Inches(0.5)
+        section.right_margin = Inches(0.5)
+
+    accent_rgb = RGBColor(0x0F, 0x4C, 0x81)
+    dark_rgb = RGBColor(0x1A, 0x1A, 0x1A)
+    muted_rgb = RGBColor(0x4A, 0x55, 0x68)
+
+    def add_p(space_before: float = 0, space_after: float = 1.5, left_indent: float = 0):
+        p = doc.add_paragraph()
+        p.paragraph_format.space_before = Pt(space_before)
+        p.paragraph_format.space_after = Pt(space_after)
+        if left_indent:
+            p.paragraph_format.left_indent = Inches(left_indent)
+        return p
+
+    def add_run(p, text: str, size: float = 9.0, bold: bool = False, color=dark_rgb):
+        r = p.add_run(text)
+        r.font.name = "Calibri"
+        r.font.size = Pt(size)
+        r.bold = bold
+        r.font.color.rgb = color
+        return r
+
+    # Header
+    p_name = add_p(space_after=1)
+    add_run(p_name, data.name, size=14, bold=True, color=dark_rgb)
+
+    p_head = add_p(space_after=1.5)
+    add_run(p_head, data.headline, size=10, bold=True, color=accent_rgb)
+
+    p_meta = add_p(space_after=1)
+    add_run(p_meta, data.location_contact_line, size=8.5, color=muted_rgb)
+
+    p_links = add_p(space_after=4)
+    add_run(
+        p_links,
+        "LinkedIn: https://linkedin.com/in/andersonnviana | "
+        "GitHub: https://github.com/andersoncataldo | "
+        "Portfólio: https://andersoncataldotech.vercel.app"
+        if "Portfólio" in data.links_line_xml
+        else "LinkedIn: https://linkedin.com/in/andersonnviana | "
+        "GitHub: https://github.com/andersoncataldo | "
+        "Portfolio: https://andersoncataldotech.vercel.app",
+        size=8.5,
+        color=muted_rgb,
+    )
+
+    def add_heading(title: str):
+        p = add_p(space_before=5, space_after=2)
+        add_run(p, title, size=9.5, bold=True, color=accent_rgb)
+
+    # Summary
+    add_heading(data.summary_heading)
+    add_run(add_p(space_after=2), data.summary_text, size=8.8)
+
+    # Skills
+    add_heading(data.skills_heading)
+    for label, value in data.skills:
+        p = add_p(space_after=1.2)
+        add_run(p, f"{label}: ", size=8.6, bold=True)
+        add_run(p, value, size=8.6)
+
+    # Experience
+    add_heading(data.experience_heading)
+    for exp in data.experiences:
+        add_run(add_p(space_before=2.5, space_after=1.2), exp.header, size=9.0, bold=True)
+        for b in exp.bullets:
+            p = add_p(space_after=1.0, left_indent=0.14)
+            add_run(p, f"- {b}", size=8.5)
+
+    # Projects
+    add_heading(data.projects_heading)
+    for proj in data.projects:
+        p = add_p(space_after=1.2, left_indent=0.14)
+        add_run(p, f"- {proj.title}: ", size=8.5, bold=True)
+        add_run(p, _strip_xml_tags(proj.description_xml), size=8.5)
+
+    # Education
+    add_heading(data.education_heading)
+    p_edu = add_p(space_after=1.5)
+    add_run(p_edu, data.education_title, size=8.6, bold=True)
+    add_run(p_edu, data.education_detail, size=8.6)
+
+    # Certifications
+    add_heading(data.certifications_heading)
+    p_cert = add_p(space_after=1.5)
+    add_run(p_cert, data.certification_title, size=8.6, bold=True)
+    add_run(p_cert, data.certification_detail, size=8.6)
+
+    # Languages
+    add_heading(data.languages_heading)
+    add_run(add_p(space_after=1), data.languages_text, size=8.6)
+
+    doc.save(str(output_path))

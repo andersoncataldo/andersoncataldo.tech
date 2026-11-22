@@ -11,23 +11,25 @@ from cv_pdf_builder import (
     ResumeData,
     format_header_links,
     format_portfolio_links,
+    format_project_links,
+    render_cv_docx,
     render_cv_pdf,
 )
 
 ROOT = Path(__file__).resolve().parent.parent
 
 DATA_EN = ResumeData(
-    doc_title="ANDERSON VIANA CATALDO - Full-Stack Developer | Automation & RPA | Applied AI (Python · TypeScript)",
+    doc_title="ANDERSON VIANA CATALDO - Full-Stack Developer (TypeScript · Python) | Applied AI & Automation/RPA",
     name="ANDERSON VIANA CATALDO",
-    headline="Full-Stack Developer | Automation & RPA | Applied AI (Python · TypeScript)",
+    headline="Full-Stack Developer (TypeScript · Python) | Applied AI & Automation/RPA",
     location_contact_line="Fortaleza, CE, Brazil | +55 85 99225-8794 | andersonvcataldo@gmail.com",
     links_line_xml=format_header_links("Portfolio"),
     summary_heading="PROFESSIONAL SUMMARY",
     summary_text=(
-        "Nearly 2 years of corporate experience in technology and process automation, with recent focus on Full-Stack development "
-        "(Next.js 16, React 19, TypeScript, JavaScript, Node.js, Python/FastAPI, SQL/PostgreSQL) and applied AI "
-        "(Google Gemini API, OpenAI API). Hands-on experience with TOTVS WinThor ERP (Enterprise Resource Planning) on Oracle, "
-        "RPA (Robotic Process Automation), automated testing (58 Pytest tests, 35 Playwright assertions), and agent-assisted workflows."
+        "Nearly 2 years of corporate experience in technology and process automation, focused on Full-Stack development "
+        "(TypeScript, Next.js 16, React 19, Node.js, Python/FastAPI, PostgreSQL/Supabase) with a strong edge in Applied AI "
+        "(Google Gemini API, OpenAI API, Linux/WSL2 agent orchestration) and RPA. Hands-on experience with TOTVS WinThor ERP "
+        "(Oracle), automated testing (58 Pytest tests, 35 Playwright assertions), and spec-driven delivery governance."
     ),
     skills_heading="TECHNICAL SKILLS",
     skills=[
@@ -39,27 +41,27 @@ DATA_EN = ResumeData(
         (
             "Backend & Databases",
             "Node.js, Express, Python, FastAPI, REST APIs, SQL, PostgreSQL (Supabase), Oracle (TOTVS WinThor), "
-            "SQLAlchemy, Alembic, Pydantic v2, RLS (Row Level Security), JWT (JSON Web Token), SSO (Single Sign-On), "
-            "RPCs (Remote Procedure Calls)",
+            "Neo4j (Cypher), SQLAlchemy, Alembic, Pydantic v2, RLS (Row Level Security), JWT, SSO, RPCs",
         ),
         (
-            "Quality, Cloud & Infrastructure",
-            "Pytest, Playwright, Vercel Edge, Cloudflare Pages, Render, PM2, Git/GitHub, Streamlit",
+            "Quality, Linux & Cloud",
+            "Linux (Ubuntu/WSL2), Git Worktree, Git/GitHub, GitHub Actions (CI/CD), Pytest, Playwright, "
+            "Vercel Edge, Cloudflare Pages, Render, Docker, Streamlit",
         ),
         (
-            "AI, LLMs (Large Language Models) & Agents",
-            "Google Gemini API (3.8 Flash / 3.5 Flash-Lite), OpenAI API, RAG / CRAG (Retrieval-Augmented Generation / "
-            "Corrective RAG), Prompt Engineering, Function Calling, MCP (Model Context Protocol), Claude Code, Automated Evals",
+            "AI, LLMs & Agent Orchestration",
+            "Google Gemini API (3.8 Flash / 3.5 Flash-Lite), OpenAI API, RAG / CRAG (Corrective RAG), Prompt Engineering, "
+            "Function Calling, MCP (Model Context Protocol), Claude Code, Antigravity CLI, Herdr, RTK, Automated Evals",
         ),
         (
             "Automation, RPA & Integration",
-            "EDI (Electronic Data Interchange) Pharma Link, FTP/SFTP (File Transfer Protocol / SSH File Transfer Protocol), "
-            "XML/XSD (Extensible Markup Language / XML Schema Definition), SEFAZ (State Treasury Department), PyInstaller, Google Apps Script",
+            "EDI Pharma Link, FTP/SFTP (Paramiko), XML/XSD (SEFAZ), pdfplumber, OpenPyXL, Pandas, "
+            "Selenium, PyInstaller, Google Apps Script",
         ),
         (
             "Academic & Complementary Knowledge",
-            "Java (Spring Boot), Django, Vue.js, MongoDB, SQLite, Power BI, Docker, Neon, n8n, Windows Task Scheduler, "
-            "ftplib, WinSCP, Selenium, PyAutoGUI, BDD (Behavior-Driven Development), Figma, Trello, Miro, Git Flow",
+            "Java (Spring Boot), Django, Vue.js, NumPy (Machine Learning), MongoDB, SQLite, Neon, "
+            "Power BI, n8n, BDD (Behavior-Driven Development), OpenSpec, Figma",
         ),
     ],
     experience_heading="WORK EXPERIENCE",
@@ -68,16 +70,16 @@ DATA_EN = ResumeData(
             header="IT Intern - Distribuidora Mais Saúde | Jun 2026 - Present (Fortaleza, CE, Brazil - 100% On-site)",
             bullets=[
                 "Developed features for the Central Grupo Mais monorepo (architecture and requirements defined by management) with JWT SSO, Next.js 16, React 19, FastAPI, Node.js, and Supabase with RLS, unifying 4 internal systems.",
-                "Implemented a quality suite with 58 Pytest tests (E2E - End-to-End, authentication, and data protection), 35 Playwright visual regression assertions, and design system drift checks across 5 packages.",
-                "Built a diagnostic engine in the Returns System using LLM calls via Google Gemini API and OpenAI API, Pareto analysis, heuristic fallback (< 1 s), and data anonymization aligned with LGPD (Brazilian General Data Protection Law) best practices.",
+                "Implemented a quality suite with 58 Pytest tests (E2E, authentication, and data protection), 35 Playwright visual regression assertions, and design system drift checks across 5 packages.",
+                "Built a diagnostic engine in the Returns System using LLM calls via Google Gemini API and OpenAI API, Pareto analysis, heuristic fallback (< 1 s), and data anonymization aligned with LGPD best practices.",
                 "Created 10 Python automations integrated with TOTVS WinThor ERP on Oracle, including 4 EDI Pharma Link bots and FTP_SYNC, reducing manual routines from 6 h to under 10 s per cycle (median; >99.9% reduction).",
-                "Structured an AI-assisted development workflow with 9 agents in a maker-checker model (Claude Code and MCP), accelerating deliveries with mandatory human review.",
+                "Structured an AI-assisted development workflow with 9 agents in a maker-checker model (Claude Code, MCP, and mandatory human review), accelerating deliveries with auditable quality.",
             ],
         ),
         ExperienceItem(
             header="Apprentice - Tax & Projects - Grupo 3corações | Jan 2025 - Apr 2026 (Eusébio, CE, Brazil - On-site)",
             bullets=[
-                "Implemented monthly validation and processing of over 15,000 NF-e (Electronic Invoice) XML files against SEFAZ XSD schemas, achieving a 99.85% success rate.",
+                "Implemented monthly validation and processing of over 15,000 NF-e XML files against SEFAZ XSD schemas, achieving 99.85% compliance with automated exception handling.",
                 "Developed 5 Python and RPA bots for automated CND (Tax Clearance Certificate) renewal and batch fiscal extraction.",
                 "Automated web portal queries and corporate spreadsheet generation in Python, saving over 200 cumulative hours of manual work.",
                 "Authored technical documentation and contingency playbooks for automation bots while handling operational support tickets for the tax team.",
@@ -102,9 +104,17 @@ DATA_EN = ResumeData(
             ),
         ),
         ProjectItem(
+            title="Bank Statement RPA Consolidation Engine",
+            description_xml=(
+                "Hybrid Python pipeline (pdfplumber, OpenPyXL, Gemini Vision + Pydantic) reconciling PDF/XLSX/PNG statements "
+                "with Decimal arithmetic, SHA-256 deduplication, 52+ Pytest tests, CI, and Streamlit dashboard. "
+                f"{format_project_links('https://case-rpa-consolidacao-extratos.streamlit.app/', 'Live', 'https://github.com/andersoncataldo/case-rpa-consolidacao-extratos')}"
+            ),
+        ),
+        ProjectItem(
             title="Corporate Service Desk System - Mais Saúde (Private code - company)",
             description_xml=(
-                "Internal platform with RBAC (Role-Based Access Control), SLA (Service Level Agreement) tracking, "
+                "Internal platform with RBAC (Role-Based Access Control), SLA tracking, "
                 "MTTR (Mean Time To Repair) metrics, and Recharts dashboards."
             ),
         ),
@@ -122,21 +132,14 @@ DATA_EN = ResumeData(
                 "in EDI Pharma Link layout."
             ),
         ),
-        ProjectItem(
-            title="Autonomous AI Agent Squad (Personal research project - local repo)",
-            description_xml=(
-                "Multi-agent orchestration in Node.js with Google Gemini API and PM2 process management."
-            ),
-        ),
     ],
     education_heading="EDUCATION",
     education_title="Bachelor of Science in Computer Science",
-    education_detail=" - University of Fortaleza (UNIFOR) | 2024 - Dec 2027 (expected; 6th semester)",
+    education_detail=" - University of Fortaleza (UNIFOR) | 2024 - Dec 2027 (finishing 6th semester; taking 7th-semester courses)",
     certifications_heading="CERTIFICATIONS",
     certification_title="Huawei HCIA-Storage V5.0",
     certification_detail=(
-        " - Huawei ICT Academy | Jun 2026 (Enterprise Storage, SAN/NAS - Storage Area Network / Network-Attached Storage, "
-        "RAID - Redundant Array of Independent Disks, Disaster Recovery)"
+        " - Huawei ICT Academy | Jun 2026 (Enterprise Storage, SAN/NAS, RAID, Virtualization, and Disaster Recovery)"
     ),
     languages_heading="LANGUAGES",
     languages_text="Portuguese (Native) | English (Advanced) | Spanish (Basic)",
@@ -149,7 +152,9 @@ def main() -> None:
         ROOT / "src" / "assets" / "Anderson_Viana_Curriculum_EN.pdf",
     ]
     render_cv_pdf(DATA_EN, targets)
-    for target in targets:
+    docx_target = ROOT / "curriculos_revisados" / "Anderson_Viana_Cataldo_EN.docx"
+    render_cv_docx(DATA_EN, docx_target)
+    for target in [*targets, docx_target]:
         print(f"Generated {target}")
 
 
